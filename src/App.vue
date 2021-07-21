@@ -1,101 +1,56 @@
-<template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated class="glossy">
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          @click="leftDrawerOpen = !leftDrawerOpen"
-          aria-label="Menu"
-          icon="mdi-menu"
-        />
+<template lang="pug">
+q-layout(view="hHh lpR fFf").test
+	q-header(reveal bordered class="bg-primary text-white")
+		q-toolbar
+			q-btn(dense flat round icon="mdi-menu" @click="toggleLeftDrawer") 
 
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
+			q-toolbar-title
+				q-avatar
+					img(src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg")
+				span Title
 
-        <div>Quasar v{{ $q.version }}</div>
-      </q-toolbar>
-    </q-header>
+			q-btn(dense flat round icon="mdi-menu" @click="toggleRightDrawer") 
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-      class="bg-grey-2"
-    >
-      <q-list>
-        <q-item-label header>Essential Links</q-item-label>
-        <q-item clickable tag="a" target="_blank" href="https://quasar.dev">
-          <q-item-section avatar>
-            <q-icon name="mdi-school" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Docs</q-item-label>
-            <q-item-label caption>quasar.dev</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item clickable tag="a" target="_blank" href="https://github.com/quasarframework/">
-          <q-item-section avatar>
-            <q-icon name="mdi-code-tags" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Github</q-item-label>
-            <q-item-label caption>github.com/quasarframework</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item clickable tag="a" target="_blank" href="https://chat.quasar.dev">
-          <q-item-section avatar>
-            <q-icon name="mdi-message-text" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Discord Chat Channel</q-item-label>
-            <q-item-label caption>chat.quasar.dev</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item clickable tag="a" target="_blank" href="https://forum.quasar.dev">
-          <q-item-section avatar>
-            <q-icon name="mdi-forum" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Forum</q-item-label>
-            <q-item-label caption>forum.quasar.dev</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item clickable tag="a" target="_blank" href="https://twitter.com/quasarframework">
-          <q-item-section avatar>
-            <q-icon name="mdi-twitter" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Twitter</q-item-label>
-            <q-item-label caption>@quasarframework</q-item-label>
-          </q-item-section>
-        </q-item>
-      </q-list>
-    </q-drawer>
+	q-drawer(show-if-above v-model="leftDrawer" side="left" bordered)
 
-    <q-page-container>
-      <HelloWorld />
-    </q-page-container>
-  </q-layout>
+	q-drawer(v-model="rightDrawer" side="right" bordered)
+
+	q-page-container
+		router-view 
+
+	q-footer( bordered class="bg-grey-8 text-white" )
+		q-toolbar
+			q-btn(dense flat round icon="mdi-menu" @click="toggleLeftDrawer") 
+
 </template>
 
 <script>
-import { ref } from 'vue'
-import HelloWorld from './components/HelloWorld.vue'
+	import { ref } from 'vue'
 
-export default {
-  name: 'LayoutDefault',
+	export default {
+		setup () {
+			const leftDrawer = ref(false)
+			const rightDrawer = ref(false)
 
-  components: {
-    HelloWorld
-  },
+			return {
+				leftDrawer,
+				toggleLeftDrawer () {
+					leftDrawer.value = !leftDrawer.value
+				},
 
-  setup () {
-    return {
-      leftDrawerOpen: ref(false)
-    }
-  }
-}
+				rightDrawer,
+				toggleRightDrawer () {
+					rightDrawer.value = !rightDrawer.value
+				}
+			}
+		}
+	}
 </script>
+
+<style scoped lang="scss">
+@import '@/styles/quasar.scss';
+
+.test {
+	background: $secondary;
+}
+</style>
