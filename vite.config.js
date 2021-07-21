@@ -13,5 +13,11 @@ export default defineConfig({
 			// Specify symbolId format
 			symbolId: 'icon-[dir]-[name]',
 		}),
-	]
+	],
+	resolve: {
+		alias: {
+			'@': path.resolve(__dirname, '/src')
+		},
+	}
+
 })
