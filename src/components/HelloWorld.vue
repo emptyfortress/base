@@ -1,5 +1,5 @@
 <template lang="pug">
-q-page( class="flex flex-center" )
+q-page( class="flex flex-center" ).ttt
 	img(alt="Quasar logo" src="../assets/logo.svg" style="width: 200px; height: 200px")
 	SvgIcon(name="bin")
 	q-icon(name="mdi-account")
@@ -15,3 +15,12 @@ export default {
 	components: { SvgIcon }
 }
 </script>
+
+<style scoped lang="scss">
+@import '@/styles/quasar.scss';
+
+.ttt {
+	/* background: var(--bg-dark); */
+	background: var(--q-whiteField);
+}
+</style>

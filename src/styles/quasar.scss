@@ -1,3 +1,12 @@
-@import './quasar.variables.scss';
+@import "./quasar.variables.scss";
 // @import '~quasar-styl';
 // @import '~quasar-addon-styl';
+
+:root {
+  --bg-light: #e2e2e2;
+  --bg-dark: #333;
+  --font-light: #333;
+}
+body.body--dark {
+  --font-light: yellow;
+}
