@@ -27,32 +27,32 @@ q-layout(view="hHh lpR fFf").test
 </template>
 
 <script>
-	import { ref } from 'vue'
+import { ref } from 'vue'
 
-	export default {
-		setup () {
-			const leftDrawer = ref(false)
-			const rightDrawer = ref(false)
+export default {
+	setup () {
+		const leftDrawer = ref(false)
+		const rightDrawer = ref(false)
 
-			return {
-				leftDrawer,
-				toggleLeftDrawer () {
-					leftDrawer.value = !leftDrawer.value
-				},
+		return {
+			leftDrawer,
+			toggleLeftDrawer () {
+				leftDrawer.value = !leftDrawer.value
+			},
 
-				rightDrawer,
-				toggleRightDrawer () {
-					rightDrawer.value = !rightDrawer.value
-				}
+			rightDrawer,
+			toggleRightDrawer () {
+				rightDrawer.value = !rightDrawer.value
 			}
 		}
 	}
+}
 </script>
 
 <style scoped lang="scss">
 @import '@/styles/quasar.scss';
 
 .test {
-	background: $secondary;
+	background: #e2e2e2;
 }
 </style>
