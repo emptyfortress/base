@@ -3,7 +3,7 @@ import "quasar/dist/quasar.prod.css";
 import iconSet from 'quasar/icon-set/mdi-v5.js'
 import '@quasar/extras/roboto-font/roboto-font.css'
 import '@quasar/extras/mdi-v5/mdi-v5.css'
-import '@/styles/quasar.scss'
+import './styles/quasar.scss'
 
 export function initQuasar(app) {
 	app.use(Quasar, {
