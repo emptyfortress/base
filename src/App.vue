@@ -12,6 +12,8 @@ q-layout(view="hHh lpR fFf").test
 			q-btn(dense flat round icon="mdi-menu" @click="toggleRightDrawer") 
 
 	q-drawer(show-if-above v-model="leftDrawer" side="left" bordered)
+		router-link(to="/") home
+		router-link(to="/hello") hello
 
 	q-drawer(v-model="rightDrawer" side="right" bordered)
 

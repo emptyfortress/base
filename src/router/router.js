@@ -10,6 +10,12 @@ export const router = createRouter({
 			name: 'home',
 			component: Home,
 		},
+		{
+			path: '/hello',
+			name: 'helloworld',
+			component: () => import('@/components/HelloWorld.vue')
+			
+		},
 	],
 })
 
