@@ -50,7 +50,7 @@ export default {
 			}
 		)
 
-		return {
+	return {
 			dark,
 			leftDrawer,
 			toggleLeftDrawer () {
