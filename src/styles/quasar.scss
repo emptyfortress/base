@@ -3,10 +3,10 @@
 // @import '~quasar-addon-styl';
 
 :root {
-  --bg-light: #f3f3f3;
-  --bg-dark: #333;
-  --font-light: #333;
+	--bg-light: #f3f3f3;
+	--bg-dark: #333;
+	--font-light: #333;
 }
 body.body--dark {
-  --font-light: yellow;
+	--font-light: yellow;
 }
