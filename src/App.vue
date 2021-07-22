@@ -1,12 +1,12 @@
 <template lang="pug">
-q-layout(view="hHh lpR fFf")
+q-layout(view="hHh lpR fFf").bg
 	q-header(reveal bordered).head
 		q-toolbar
 			q-btn(dense flat round icon="mdi-menu" @click="toggleLeftDrawer") 
 
 			q-toolbar-title
-				q-avatar
-					img(src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg")
+				q-avatar(square)
+					img(src="@/assets/nick.svg").q-mr-md
 				span Title
 
 			q-btn(dense flat round icon="mdi-menu" @click="toggleRightDrawer") 
@@ -68,6 +68,10 @@ export default {
 
 <style scoped lang="scss">
 @import '@/styles/quasar.scss';
+
+.bg {
+	background: var(--bg-light);
+}
 .head {
 	backdrop-filter: blur(7px);
 	background-color: #0000001a;
