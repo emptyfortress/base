@@ -10,6 +10,7 @@ $taskcolor: #6dae50;
 	--bg-light: #f3f3f3;
 	--bg-dark: #333;
 	--font-light: #333;
+	// --q-dark: #2c4159;
 }
 body.body--dark {
 	--font-light: yellow;
@@ -17,4 +18,53 @@ body.body--dark {
 
 .q-toolbar .q-avatar {
 	font-size: 36px;
+}
+.q-drawer {
+	color: #fff;
+	transition: 0.3s ease all;
+	.dark {
+		background: $dark;
+		.q-item--active,
+		.q-item.q-router-link--active {
+			color: #fff;
+			background: lighten($dark, 6%);
+		}
+	}
+	.doc {
+		background: $docolor;
+		.q-item--active,
+		.q-item.q-router-link--active {
+			color: #fff;
+			background: darken($docolor, 6%);
+		}
+	}
+	.task {
+		background: $taskcolor;
+		.q-item--active,
+		.q-item.q-router-link--active {
+			color: #fff;
+			background: darken($taskcolor, 6%);
+		}
+	}
+}
+
+.fade-enter-active,
+.fade-leave-active {
+	transition: opacity 0.5s ease;
+	position: absolute;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+	opacity: 0;
+}
+.slide-left-enter-active,
+.slide-left-leave-active {
+	transition: all 0.5s ease;
+	position: absolute;
+}
+.slide-left-enter-from,
+.slide-left-leave-to {
+	transform: translateX(30px);
+	opacity: 0;
 }

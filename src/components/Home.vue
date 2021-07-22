@@ -1,11 +1,14 @@
 <template lang="pug">
-h1 Hello
-q-avatar(square)
-	img(src="@/assets/nick.svg")
+.q-px-xl
+	h4 Home
 </template>
 
 <script>
-export default {}
+export default {
+	setup() {
+		return {}
+	},
+}
 </script>
 
 <style lang="scss"></style>

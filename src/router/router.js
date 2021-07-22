@@ -11,11 +11,26 @@ export const router = createRouter({
 			component: Home,
 		},
 		{
+			path: '/docs',
+			name: 'docs',
+			component: () => import('@/pages/Docs.vue'),
+			meta: { transition: 'slide-left' },
+		},
+		{
+			path: '/tasks',
+			name: 'tasks',
+			component: () => import('@/pages/Tasks.vue'),
+			meta: { transition: 'slide-left' },
+		},
+		{
+			path: '/folders',
+			name: 'folders',
+			component: () => import('@/pages/Folders.vue'),
+		},
+		{
 			path: '/hello',
 			name: 'helloworld',
-			component: () => import('@/components/HelloWorld.vue')
-			
+			component: () => import('../components/HelloWorld.vue'),
 		},
 	],
 })
-
