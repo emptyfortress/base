@@ -37,7 +37,7 @@ import { ref, watch } from 'vue'
 import { useQuasar } from 'quasar'
 
 export default {
-	setup () {
+	setup() {
 		const leftDrawer = ref(false)
 		const rightDrawer = ref(false)
 		const dark = ref(false)
@@ -45,32 +45,39 @@ export default {
 
 		watch(
 			() => dark.value,
-			(value, prev) => {
+			() => {
 				$q.dark.toggle()
 			}
 		)
 
-	return {
+		return {
 			dark,
 			leftDrawer,
-			toggleLeftDrawer () {
+			toggleLeftDrawer() {
 				leftDrawer.value = !leftDrawer.value
 			},
 
 			rightDrawer,
-			toggleRightDrawer () {
+			toggleRightDrawer() {
 				rightDrawer.value = !rightDrawer.value
-			}
+			},
 		}
-	}
+	},
 }
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/quasar.scss';
+@import '@/styles/theme.scss';
 
 .bg {
-	background: var(--bg-light);
+	background: linear-gradient(
+		to bottom,
+		var(--bg-light) 0%,
+		#fef1f1 50%,
+		var(--bg-light) 100%
+	);
+
+	/* background: var(--bg-light); */
 }
 .head {
 	backdrop-filter: blur(7px);

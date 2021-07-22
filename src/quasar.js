@@ -1,18 +1,18 @@
-import { Quasar, Notify } from "quasar";
-import "quasar/dist/quasar.prod.css";
+import { Quasar, Notify } from 'quasar'
+import 'quasar/dist/quasar.prod.css'
 import iconSet from 'quasar/icon-set/mdi-v5.js'
 import '@quasar/extras/roboto-font/roboto-font.css'
 import '@quasar/extras/mdi-v5/mdi-v5.css'
-import './styles/quasar.scss'
+import './styles/theme.scss'
 
 export function initQuasar(app) {
 	app.use(Quasar, {
 		config: {
 			brand: {
-				primary: "#1976d2",
-				sunshine: "#FEBE2A",
-				whiteField: "#E2E1E1",
-				darkBG: "#1D2F37"
+				primary: '#1976d2',
+				sunshine: '#FEBE2A',
+				whiteField: '#E2E1E1',
+				darkBG: '#1D2F37'
 			},
 			globalProperties: {},
 			// dark: true
@@ -21,5 +21,5 @@ export function initQuasar(app) {
 			Notify
 		},
 		iconSet: iconSet
-	});
+	})
 }

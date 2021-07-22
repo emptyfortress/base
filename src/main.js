@@ -9,4 +9,4 @@ import { router } from '@/router/router'
 const app = createApp(App)
 initQuasar(app)
 app.use(router)
-app.mount("#app")
+app.mount('#app')

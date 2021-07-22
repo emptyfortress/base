@@ -5,19 +5,18 @@ q-page( class="flex flex-center" ).ttt
 	q-icon(name="mdi-account")
 </template>
 
-<style>
-</style>
+<style></style>
 
 <script>
 import SvgIcon from '@/components/SvgIcon.vue'
 export default {
 	name: 'HelloWorld',
-	components: { SvgIcon }
+	components: { SvgIcon },
 }
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/quasar.scss';
+@import '@/styles/theme.scss';
 
 .ttt {
 	/* background: var(--bg-dark); */
