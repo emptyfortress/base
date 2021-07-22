@@ -1,6 +1,10 @@
-@import "./quasar.variables.scss";
+@import './quasar.variables.scss';
 // @import '~quasar-styl';
 // @import '~quasar-addon-styl';
+
+$dark: #2c4159;
+$docolor: #008ad1;
+$taskcolor: #6dae50;
 
 :root {
 	--bg-light: #f3f3f3;
@@ -9,4 +13,8 @@
 }
 body.body--dark {
 	--font-light: yellow;
+}
+
+.q-toolbar .q-avatar {
+	font-size: 36px;
 }

@@ -1,25 +1,19 @@
 <template lang="pug">
 q-layout(view="hHh lpR fFf").bg
-	q-header(reveal bordered).head
+	q-header(reveal).head
 		q-toolbar
 			q-btn(dense flat round icon="mdi-menu" @click="toggleLeftDrawer") 
 
 			q-toolbar-title
-				q-avatar(square)
-					img(src="@/assets/nick.svg").q-mr-md
-				span Title
+				span Docsvision
 
-			q-btn(dense flat round icon="mdi-menu" @click="toggleRightDrawer") 
+			q-btn(dense flat round icon="mdi-magnify")
+			q-btn(dense round color="light-blue-2").q-mx-md
+				q-avatar
+					img(src="@/assets/users/user0.svg")
+			q-btn(dense flat round icon="mdi-help-circle-outline")
 
-	q-drawer(show-if-above v-model="leftDrawer" side="left" bordered)
-		q-list(bordered separator)
-			q-item(clickable v-ripple to="/")
-				q-item-section Home
-
-			q-item(clickable v-ripple to="/hello")
-				q-item-section Hello
-
-		q-toggle( v-model="dark" )
+	Drawer(:show="leftDrawer")
 
 	q-drawer(v-model="rightDrawer" side="right" bordered)
 
@@ -29,29 +23,22 @@ q-layout(view="hHh lpR fFf").bg
 	q-footer( bordered class="bg-grey-8 text-white" )
 		q-toolbar
 			q-btn(dense flat round icon="mdi-menu" @click="toggleLeftDrawer") 
+			q-space
+			q-btn(dense flat round icon="mdi-menu" @click="toggleRightDrawer") 
 
 </template>
 
 <script>
-import { ref, watch } from 'vue'
-import { useQuasar } from 'quasar'
+import { ref } from 'vue'
+import Drawer from '@/components/Drawer.vue'
 
 export default {
+	components: { Drawer },
 	setup() {
 		const leftDrawer = ref(false)
 		const rightDrawer = ref(false)
-		const dark = ref(false)
-		const $q = useQuasar()
-
-		watch(
-			() => dark.value,
-			() => {
-				$q.dark.toggle()
-			}
-		)
 
 		return {
-			dark,
 			leftDrawer,
 			toggleLeftDrawer() {
 				leftDrawer.value = !leftDrawer.value
@@ -80,14 +67,15 @@ export default {
 	/* background: var(--bg-light); */
 }
 .head {
-	backdrop-filter: blur(7px);
-	background-color: #0000001a;
-	color: #333;
+	/* backdrop-filter: blur(7px); */
+	/* background-color: #0000001a; */
+	background: $dark;
+	color: #fff;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	height: 64px;
+	line-height: 64px;
 }
 .q-item {
-	color: var(--font-light);
-}
-.q-btn {
 	color: var(--font-light);
 }
 </style>

@@ -20,6 +20,6 @@ export default {
 
 .ttt {
 	/* background: var(--bg-dark); */
-	background: var(--q-whiteField);
+	/* background: var(--q-whiteField); */
 }
 </style>
