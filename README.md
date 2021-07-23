@@ -9,3 +9,11 @@
 - pug
 - scss
 - eslint + prettier (only emacs works, nvim partly, vim not working)
+
+## Ветки
+
+Проекты лежат в разных ветках
+
+- old - рыба старого мультицветного дизайна
+- current - текущая разработка
+- master - основная ветка
