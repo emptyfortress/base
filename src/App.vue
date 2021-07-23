@@ -19,7 +19,7 @@ q-layout(view="hHh lpR fFf").bg
 
 	q-page-container
 		router-view(v-slot="{ Component, route }")
-			transition(name="slide-left")
+			transition(name="slide-right")
 				component(:is="Component")
 
 	//- q-footer( bordered class="bg-grey-8 text-white" )
