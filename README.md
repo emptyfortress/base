@@ -10,7 +10,7 @@
 - scss
 - eslint + prettier (only emacs works, nvim partly, vim not working)
 
-### Ветки
+## Ветки
 
 Проекты лежат в разных ветках
 
