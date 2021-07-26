@@ -9,17 +9,18 @@ export function initQuasar(app) {
 	app.use(Quasar, {
 		config: {
 			brand: {
-				primary: '#1976d2',
-				sunshine: '#FEBE2A',
-				whiteField: '#E2E1E1',
-				darkBG: '#1D2F37'
+				// primary: '#2196f3',
+				// primary: 'red',
+				// sunshine: '#FEBE2A',
+				// whiteField: '#E2E1E1',
+				// darkBG: '#1D2F37',
 			},
 			globalProperties: {},
-			// dark: true
+			// dark: true,
 		},
 		plugins: {
-			Notify
+			Notify,
 		},
-		iconSet: iconSet
+		iconSet: iconSet,
 	})
 }

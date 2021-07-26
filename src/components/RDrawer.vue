@@ -1,6 +1,6 @@
 <template lang="pug">
 q-drawer(v-model="show" side="right" bordered)
-	q-toggle( v-model="dark" )
+	q-toggle( v-model="dark")
 </template>
 
 <script>

@@ -1,16 +1,19 @@
 <template lang="pug">
-q-drawer( v-model="show" side="left" bordered :mini="mini" :width="width" :class="maincolor")
-	.pos
-		q-list(bordered separator)
-			q-item(clickable v-ripple :to="page.url" v-for="page in pages" :key="page.id")
-				q-item-section(avatar)
-					q-icon(:name="page.icon")
-				q-item-section {{ page.title }}
-			//- q-item(clickable v-ripple to="/docs" )
-			//- 	q-item-section Docss
+q-drawer(v-model="show" side="left" :mini="mini" :width="width" bordered)
+	q-list
+		q-item(clickable v-ripple :to="page.url" v-for="page in pages" :key="page.id")
+			q-item-section(avatar)
+				q-icon(:name="page.icon")
+			q-item-section {{ page.title }}
+		//- q-item(clickable v-ripple to="/docs" )
+		//- 	q-item-section Docss
 
-		q-btn(round flat dense :icon="minitoogle" @click="mini = !mini").mini
-		
+	q-item(clickable v-ripple).bottom
+		q-item-section(avatar)
+			q-icon(name="mdi-puzzle-outline")
+		q-item-section Библиотека
+
+	q-btn(round flat dense :icon="minitoogle" @click="mini = !mini").mini
 
 </template>
 
@@ -62,16 +65,13 @@ export default {
 	bottom: 1rem;
 	left: 0.5rem;
 }
-.dark {
-	background: $dark;
-	color: #fff;
+.bottom {
+	position: absolute;
+	bottom: 3rem;
+	left: 0;
+	width: 100%;
 }
-.doc {
-	background: $docolor;
-	color: #fff;
-}
-.task {
-	background: $taskcolor;
-	color: #fff;
+.q-item:hover {
+	background: var(--color-primary-darken);
 }
 </style>
