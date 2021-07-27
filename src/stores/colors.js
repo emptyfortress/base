@@ -3,12 +3,8 @@ import { defineStore } from 'pinia'
 export const useColor = defineStore({
 	id: 'color',
 	state: () => ({
-		primary: '#2196f3',
+		primary: 'one',
 	}),
 	getters: {},
-	actions: {
-		setPrimary(e) {
-			this.primary = e
-		},
-	},
+	actions: {},
 })

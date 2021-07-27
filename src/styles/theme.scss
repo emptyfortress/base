@@ -8,18 +8,23 @@ $docolor: #008ad1;
 $taskcolor: #6dae50;
 
 :root {
-	--q-primary: #2196f3 !important;
+	// custom colors
+	--q-one: #2196f3;
+	--q-two: orange;
+	--q-three: purple;
+	--q-four: green;
+
+	--q-primary: var(--q-one);
 
 	// --bg-light: #f3f3f3;
 	--color-light: 0, 0%;
 	--l: 95%;
 
 	--bg-light: hsl(var(--color-light), var(--l));
-
 	--bg-lighter: hsl(0, 0%, 97%);
-
 	--bg-darken: darken(#f3f3f3, 5%);
 	--bg-dark: #333;
+
 	--font-light: #333;
 	--warm-light: #fef1f1;
 	--cool-light: #f1f9fe;
@@ -27,7 +32,6 @@ $taskcolor: #6dae50;
 	--bg-main: var(--bg-gradient);
 
 	--color: 0, 100%; /*the base color*/
-
 	--color-primary: hsl(var(--color), var(--l));
 	--color-primary-darker: hsl(var(--color), calc(var(--l) - 5%));
 	--color-primary-darkest: hsl(var(--color), calc(var(--l) - 10%));
@@ -43,6 +47,8 @@ $taskcolor: #6dae50;
 body {
 	transition: 0.3s ease all;
 }
+
+// Light theme ****************************************
 
 body.body--light {
 	background: var(--bg-light);
@@ -123,6 +129,28 @@ body.body--dark {
 	// background: var(--color-primary-darkest);
 }
 
+// my custom colors style
 .one {
-	--q-primary: green !important;
+	--q-primary: var(--q-one) !important;
+}
+.bg-one {
+	background: var(--q-one);
+}
+.two {
+	--q-primary: var(--q-two) !important;
+}
+.bg-two {
+	background: var(--q-two);
+}
+.three {
+	--q-primary: var(--q-three) !important;
+}
+.bg-three {
+	background: var(--q-three);
+}
+.four {
+	--q-primary: var(--q-four) !important;
+}
+.bg-four {
+	background: var(--q-four);
 }

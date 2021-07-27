@@ -1,38 +1,39 @@
 <template lang="pug">
-q-layout(view="hHh LpR fFf").bg.one
-	q-header(reveal).head
-		q-toolbar
-			q-btn(dense flat round icon="mdi-menu" @click="toggleLeftDrawer") 
+#col(:class="mycolor")
+	q-layout(view="hHh LpR fFf" ).bg
+		q-header(reveal).head
+			q-toolbar
+				q-btn(dense flat round icon="mdi-menu" @click="toggleLeftDrawer") 
 
-			q-toolbar-title
-				span Docsvision
-				span.q-ml-lg.text-caption {{ formattedString }}
+				q-toolbar-title
+					span Docsvision
+					span.q-ml-lg.text-caption {{ formattedString }}
 
-			q-btn(dense flat round icon="mdi-magnify")
-			q-btn(dense round unelevated color="light-blue-2").q-ml-sm
-				q-avatar
-					img(src="@/assets/users/user0.svg")
-			q-btn(dense flat round icon="mdi-help-circle-outline").q-ml-sm
-			q-btn(dense flat round icon="mdi-brightness-4" @click="toggleRightDrawer").q-mx-sm
+				q-btn(dense flat round icon="mdi-magnify")
+				q-btn(dense round unelevated color="light-blue-2").q-ml-sm
+					q-avatar
+						img(src="@/assets/users/user0.svg")
+				q-btn(dense flat round icon="mdi-help-circle-outline").q-ml-sm
+				q-btn(dense flat round icon="mdi-brightness-4" @click="toggleRightDrawer").q-mx-sm
 
-	Drawer(:show="leftDrawer")
-	RDrawer(:show="rightDrawer")
+		Drawer(:show="leftDrawer")
+		RDrawer(:show="rightDrawer")
 
-	q-page-container
-		router-view(v-slot="{ Component, route }")
-			transition(name="slide-right")
-				component(:is="Component")
+		q-page-container
+			router-view(v-slot="{ Component, route }")
+				transition(name="slide-right")
+					component(:is="Component")
 
-	//- q-footer( bordered class="bg-grey-8 text-white" )
-		q-toolbar
-			q-btn(dense flat round icon="mdi-menu" @click="toggleLeftDrawer") 
-			q-space
-			q-btn(dense flat round icon="mdi-menu" @click="toggleRightDrawer") 
+		//- q-footer( bordered class="bg-grey-8 text-white" )
+			q-toolbar
+				q-btn(dense flat round icon="mdi-menu" @click="toggleLeftDrawer") 
+				q-space
+				q-btn(dense flat round icon="mdi-menu" @click="toggleRightDrawer") 
 
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import Drawer from '@/components/Drawer.vue'
 import RDrawer from '@/components/RDrawer.vue'
 import { date } from 'quasar'
@@ -43,10 +44,15 @@ export default {
 		const leftDrawer = ref(true)
 		const rightDrawer = ref(true)
 
+		const mycolor = computed(() => {
+			return 'one'
+		})
+
 		const timeStamp = Date.now()
 		const formattedString = date.formatDate(timeStamp, 'dddd, D MMMM')
 
 		return {
+			mycolor,
 			formattedString,
 			leftDrawer,
 			toggleLeftDrawer() {

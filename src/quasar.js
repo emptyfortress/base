@@ -9,6 +9,7 @@ export function initQuasar(app) {
 	app.use(Quasar, {
 		config: {
 			brand: {
+				// two: 'red',
 				// primary: '#2196f3',
 				// primary: 'red',
 				// sunshine: '#FEBE2A',
