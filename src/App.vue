@@ -1,5 +1,5 @@
 <template lang="pug">
-q-layout(view="hHh LpR fFf").bg
+q-layout(view="hHh LpR fFf").bg.one
 	q-header(reveal).head
 		q-toolbar
 			q-btn(dense flat round icon="mdi-menu" @click="toggleLeftDrawer") 
@@ -9,10 +9,11 @@ q-layout(view="hHh LpR fFf").bg
 				span.q-ml-lg.text-caption {{ formattedString }}
 
 			q-btn(dense flat round icon="mdi-magnify")
-			q-btn(dense round unelevated color="light-blue-2").q-mx-md
+			q-btn(dense round unelevated color="light-blue-2").q-ml-sm
 				q-avatar
 					img(src="@/assets/users/user0.svg")
-			q-btn(dense flat round icon="mdi-help-circle-outline" @click="toggleRightDrawer")
+			q-btn(dense flat round icon="mdi-help-circle-outline").q-ml-sm
+			q-btn(dense flat round icon="mdi-brightness-4" @click="toggleRightDrawer").q-mx-sm
 
 	Drawer(:show="leftDrawer")
 	RDrawer(:show="rightDrawer")
@@ -40,7 +41,7 @@ export default {
 	components: { Drawer, RDrawer },
 	setup() {
 		const leftDrawer = ref(true)
-		const rightDrawer = ref(false)
+		const rightDrawer = ref(true)
 
 		const timeStamp = Date.now()
 		const formattedString = date.formatDate(timeStamp, 'dddd, D MMMM')

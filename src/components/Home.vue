@@ -1,7 +1,7 @@
 <template lang="pug">
 .q-px-xl
 	h4 Home
-	q-toggle(v-model="dark" color="primary")
+	q-toggle(v-model="dark" :color="colors.primary")
 	p Count: {{ counter.count }}
 	q-btn(@click="add" unelevated color="primary") Add
 	p Double: {{ counter.doubleCount }}
@@ -19,14 +19,23 @@
 
 <script>
 import { useCounter } from '@/stores/counter'
+import { useColor } from '@/stores/colors'
 import { ref } from 'vue'
 
 export default {
 	setup() {
 		const counter = useCounter()
-		const add = () => counter.increment()
+
+		const add = () => {
+			counter.increment()
+			colors.setPrimary('green')
+		}
 		const dark = ref(false)
+
+		const colors = useColor()
+
 		return {
+			colors,
 			add,
 			counter,
 			dark,
