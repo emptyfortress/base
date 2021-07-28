@@ -2,7 +2,7 @@
 .q-px-xl
 	h4 Home
 	div
-		router-link(to="/").link Это линк
+		router-link(to="/") Это линк
 	q-toggle(v-model="dark" :color="colors.primary")
 	p Count: {{ counter.count }}
 	q-btn(@click="add" unelevated color="primary") Add

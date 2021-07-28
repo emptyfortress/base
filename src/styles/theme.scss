@@ -14,7 +14,8 @@ $taskcolor: #6dae50;
 	--q-three: purple;
 	--q-four: green;
 
-	// --q-primary: var(--q-one);
+	--q-link: var(--q-one);
+
 	--q-primary-contrast: #ffffff;
 
 	// --bg-light: #f3f3f3;
@@ -26,9 +27,9 @@ $taskcolor: #6dae50;
 	--bg-darken: darken(#f3f3f3, 5%);
 	--bg-dark: #333;
 
-	--font-light: #333;
-	--warm-light: #fef1f1;
-	--cool-light: #f1f9fe;
+	// --font-light: #333;
+	// --warm-light: #fef1f1;
+	// --cool-light: #f1f9fe;
 
 	--bg-main: var(--bg-gradient);
 
@@ -50,11 +51,20 @@ body {
 	font-size: $body-font-size;
 }
 
+a:link:not(.q-link),
+a:visited:not(.q-link) {
+	text-decoration: none;
+	color: var(--q-link);
+}
+a:hover:not(.q-link) {
+	text-decoration: underline;
+}
 // Light theme ****************************************
 
 body.body--light {
 	background: var(--bg-light);
 	background-attachment: fixed;
+	--q-link: #288bdc;
 
 	--bg-drawer: hsl(var(--color-light), 97%);
 }
@@ -65,7 +75,7 @@ body.body--dark {
 	background: var(--my-bg-color--dark);
 	--bg-main: #333;
 	--bg-drawer: var(--my-color-step-100);
-	// --border-color: var(--my-color-step-200);
+	--q-link: var(--q-one);
 
 	--my-bg-color--dark: #0d0b09;
 
