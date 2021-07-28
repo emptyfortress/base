@@ -1,5 +1,6 @@
 import { Quasar, Notify } from 'quasar'
 import 'quasar/dist/quasar.prod.css'
+// import './styles/quasar.variables.scss'
 import iconSet from 'quasar/icon-set/mdi-v5.js'
 import '@quasar/extras/roboto-font/roboto-font.css'
 import '@quasar/extras/mdi-v5/mdi-v5.css'

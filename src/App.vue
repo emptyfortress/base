@@ -1,7 +1,7 @@
 <template lang="pug">
 #col(:class="mycolor")
-	q-layout(view="hHh LpR fFf" ).bg
-		q-header(reveal).head
+	q-layout(view="hHh LpR fFf" )
+		q-header(reveal :class="calcHeader")
 			q-toolbar
 				q-btn(dense flat round icon="mdi-menu" @click="toggleLeftDrawer") 
 
@@ -37,6 +37,7 @@ import { ref, computed } from 'vue'
 import Drawer from '@/components/Drawer.vue'
 import RDrawer from '@/components/RDrawer.vue'
 import { date } from 'quasar'
+import { useColor } from '@/stores/colors'
 
 export default {
 	components: { Drawer, RDrawer },
@@ -48,10 +49,18 @@ export default {
 			return 'one'
 		})
 
+		const color = useColor()
+		const calcHeader = computed(() => {
+			if (color.toolbar) {
+				return 'head-fill'
+			} else return 'head'
+		})
+
 		const timeStamp = Date.now()
 		const formattedString = date.formatDate(timeStamp, 'dddd, D MMMM')
 
 		return {
+			calcHeader,
 			mycolor,
 			formattedString,
 			leftDrawer,
@@ -71,17 +80,25 @@ export default {
 <style scoped lang="scss">
 @import '@/styles/theme.scss';
 
-.head {
-	backdrop-filter: blur(10px);
-	background-color: #0000001a;
-	border-bottom: 1px solid #ccc;
-	/* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); */
+.head,
+.head-fill {
 	height: 64px;
 	line-height: 64px;
 	transition: 0.3s ease all;
+	border-bottom: 1px solid #fff;
+}
+/* .head-fill { */
+/* 	color: var(--q-primary-contrast); */
+/* } */
+.head {
+	backdrop-filter: blur(10px);
+	background-color: #0000001a;
 	color: #333;
 }
 .q-item {
 	color: var(--font-light);
+}
+body.body--dark .head {
+	background: var(--bg-drawer);
 }
 </style>

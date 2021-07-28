@@ -14,7 +14,8 @@ $taskcolor: #6dae50;
 	--q-three: purple;
 	--q-four: green;
 
-	--q-primary: var(--q-one);
+	// --q-primary: var(--q-one);
+	--q-primary-contrast: #ffffff;
 
 	// --bg-light: #f3f3f3;
 	--color-light: 0, 0%;
@@ -46,6 +47,7 @@ $taskcolor: #6dae50;
 
 body {
 	transition: 0.3s ease all;
+	font-size: $body-font-size;
 }
 
 // Light theme ****************************************
@@ -101,6 +103,7 @@ body.body--dark {
 	.q-header {
 		border-color: var(--my-border-color);
 		color: var(--my-text-color);
+		// color: var(--q-primary-contrast);
 	}
 	.q-item {
 		color: var(--my-text-color);
@@ -153,4 +156,10 @@ body.body--dark {
 }
 .bg-four {
 	background: var(--q-four);
+}
+.fill {
+	background: var(--q-primary);
+	.q-item {
+		color: #fff;
+	}
 }

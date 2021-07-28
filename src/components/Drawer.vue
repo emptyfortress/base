@@ -1,5 +1,5 @@
 <template lang="pug">
-q-drawer(v-model="show" side="left" :mini="mini" :width="width" bordered)
+q-drawer(v-model="show" side="left" :mini="mini" :width="width" bordered :class="{ fill : color.panel }")
 	q-list
 		q-item(clickable v-ripple :to="page.url" v-for="page in pages" :key="page.id")
 			q-item-section(avatar)
@@ -20,10 +20,12 @@ q-drawer(v-model="show" side="left" :mini="mini" :width="width" bordered)
 <script>
 import { ref, computed } from 'vue'
 import { maincolor } from '@/utils/utils'
+import { useColor } from '@/stores/colors'
 
 export default {
 	props: ['show'],
 	setup() {
+		const color = useColor()
 		const pages = [
 			{ id: 1, title: 'Главная', icon: 'mdi-home-roof', url: '/' },
 			{ id: 2, title: 'Документы', icon: 'mdi-text-box-outline', url: '/docs' },
@@ -44,6 +46,7 @@ export default {
 		})
 
 		return {
+			color,
 			width,
 			maincolor,
 			mini,
@@ -70,8 +73,5 @@ export default {
 	bottom: 3rem;
 	left: 0;
 	width: 100%;
-}
-.q-item:hover {
-	background: var(--color-primary-darken);
 }
 </style>

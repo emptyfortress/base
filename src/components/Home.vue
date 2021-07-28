@@ -1,6 +1,8 @@
 <template lang="pug">
 .q-px-xl
 	h4 Home
+	div
+		router-link(to="/").link Это линк
 	q-toggle(v-model="dark" :color="colors.primary")
 	p Count: {{ counter.count }}
 	q-btn(@click="add" unelevated color="primary") Add
@@ -28,7 +30,6 @@ export default {
 
 		const add = () => {
 			counter.increment()
-			colors.setPrimary('green')
 		}
 		const dark = ref(false)
 
