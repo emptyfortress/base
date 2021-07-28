@@ -1,7 +1,7 @@
 <template lang="pug">
 #col(:class="mycolor")
 	q-layout(view="hHh LpR fFf" )
-		q-header(reveal :class="calcHeader")
+		q-header(:reveal="color.reveal" :class="calcHeader")
 			q-toolbar
 				q-btn(dense flat round icon="mdi-menu" @click="toggleLeftDrawer") 
 
@@ -50,6 +50,7 @@ export default {
 		})
 
 		const color = useColor()
+
 		const calcHeader = computed(() => {
 			if (color.toolbar) {
 				return 'head-fill'
@@ -60,6 +61,7 @@ export default {
 		const formattedString = date.formatDate(timeStamp, 'dddd, D MMMM')
 
 		return {
+			color,
 			calcHeader,
 			mycolor,
 			formattedString,

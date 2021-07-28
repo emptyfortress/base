@@ -4,6 +4,8 @@ q-drawer(v-model="show" side="right" bordered )
 	q-item
 		q-toggle( v-model="color.toolbar" label="Контрастный тулбар" color="primary")
 	q-item
+		q-toggle( v-model="color.reveal" label="Авто-скрытие тулбара" color="primary")
+	q-item
 		q-toggle( v-model="color.panel" label="Контрастная панель" color="primary")
 
 	q-separator
