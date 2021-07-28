@@ -37,6 +37,7 @@ $taskcolor: #6dae50;
 	--color-primary: hsl(var(--color), var(--l));
 	--color-primary-darker: hsl(var(--color), calc(var(--l) - 5%));
 	--color-primary-darkest: hsl(var(--color), calc(var(--l) - 10%));
+	--my-body-font-size: 14px;
 
 	--bg-gradient: linear-gradient(
 		to bottom,
@@ -48,7 +49,7 @@ $taskcolor: #6dae50;
 
 body {
 	transition: 0.3s ease all;
-	font-size: $body-font-size;
+	font-size: var(--my-body-font-size);
 }
 
 a:link:not(.q-link),
