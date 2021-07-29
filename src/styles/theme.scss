@@ -168,9 +168,16 @@ body.body--dark {
 .bg-four {
 	background: var(--q-four);
 }
-.fill {
-	background: var(--q-primary);
-	.q-item {
-		color: #fff;
-	}
-}
+// .fill {
+// 	--q-primary: 200, 0, 0;
+// 	--q-dark: 0, 0, 0;
+// 	background: rgb(var(--q-primary));
+// 	.q-item,
+// 	.q-btn {
+// 		color: #fff;
+// 	}
+// 	.q-item--active,
+// 	.q-item.q-router-link--active {
+// 		background: rgba(var(--q-dark), 0.2);
+// 	}
+// }
