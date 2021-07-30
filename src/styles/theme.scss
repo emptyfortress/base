@@ -28,7 +28,7 @@ $taskcolor: #6dae50;
 
 	// custom colors
 	--one: rgb(33, 150, 243);
-	--two: rgb(230, 0, 0);
+	--two: rgb(160, 0, 93);
 	--three: rgb(125, 0, 230);
 	--four: rgb(36, 106, 45);
 
@@ -55,6 +55,12 @@ body.body--light {
 	background: var(--bg-light);
 	background-attachment: fixed;
 	--q-selection: var(--q-primary-lighten-3);
+	.q-drawer {
+		.fill {
+			--q-selection: var(--q-primary-lighten-1);
+			color: #fff !important;
+		}
+	}
 }
 
 // Dark theme ****************************************
@@ -115,9 +121,12 @@ body.body--dark {
 	.q-drawer {
 		background: var(--bg-drawer);
 		.fill {
-			--q-selection: var(--q-primary-lighten-1);
+			--q-selection: var(--q-primary-darken-2);
 			background: var(--q-primary);
-			color: #fff !important;
+			.q-item--active,
+			.q-item.q-router-link--active {
+				color: #fff !important;
+			}
 		}
 	}
 	.q-toggle[aria-checked='false'] {
