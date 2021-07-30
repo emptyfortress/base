@@ -154,6 +154,7 @@ export default {
 		width: 50px;
 		height: 50px;
 		margin-left: 1rem;
+		background: var(--bg-drawer);
 	}
 }
 body.body--dark .q-item__label {

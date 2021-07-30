@@ -6,12 +6,11 @@ q-drawer(v-model="show" side="left" :mini="mini" :width="width" bordered :class=
 				q-icon(:name="page.icon")
 			q-item-section {{ page.title }}
 
-		q-item(clickable v-ripple).bottom
+		q-item(clickable v-ripple @click="goToLib" to="/docs").bottom
 			q-item-section(avatar)
 				q-icon(name="mdi-puzzle-outline")
 			q-item-section Библиотека
-	Lib(v-else)
-	
+	Lib(v-else @back="lib=false")
 
 	q-btn(round flat dense :icon="minitoogle" @click="mini = !mini").mini
 	
@@ -43,13 +42,19 @@ export default {
 		]
 		const mini = ref(false)
 		const width = 256
-		const lib = true
+		const lib = ref(false)
+
+		const goToLib = () => {
+			console.log('test')
+			lib.value = !lib.value
+		}
 
 		const minitoogle = computed(() => {
 			return mini.value ? 'mdi-forwardburger' : 'mdi-backburger'
 		})
 
 		return {
+			goToLib,
 			color,
 			width,
 			lib,

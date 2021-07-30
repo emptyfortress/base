@@ -6,8 +6,8 @@
 				q-btn(dense flat round icon="mdi-menu" @click="toggleLeftDrawer") 
 
 				q-toolbar-title
-					span Docsvision
-					span.q-ml-lg.text-caption {{ formattedString }}
+					span {{ formattedString }}
+					//- span.q-ml-lg.text-caption {{ formattedString }}
 
 				q-btn(dense flat round icon="mdi-magnify")
 				q-btn(dense round unelevated color="light-blue-2").q-ml-sm
