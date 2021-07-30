@@ -18,6 +18,7 @@ q-separator
 
 <script>
 import { ref } from 'vue'
+import { colors } from 'quasar'
 
 export default {
 	props: {
@@ -41,6 +42,24 @@ export default {
 			return '#' + r + g + b
 		}
 
+		function hexToRGB(h) {
+			let r = 0,
+				g = 0,
+				b = 0
+			// 3 digits
+			if (h.length == 4) {
+				r = '0x' + h[1] + h[1]
+				g = '0x' + h[2] + h[2]
+				b = '0x' + h[3] + h[3]
+				// 6 digits
+			} else if (h.length == 7) {
+				r = '0x' + h[1] + h[2]
+				g = '0x' + h[3] + h[4]
+				b = '0x' + h[5] + h[6]
+			}
+			return 'rgb(' + +r + ',' + +g + ',' + +b + ')'
+		}
+
 		const setColor = (id, e) => {
 			document.querySelector('#col').className = ''
 			document.querySelector('#col').classList.add(e)
@@ -54,8 +73,9 @@ export default {
 		const changeColor = () => {
 			let currentColorName = props.swatches.find((item) => item.icon).color
 			let newColor = document.getElementById('colorPatch').value
-			let combineName = '--q-' + currentColorName
-			document.body.style.setProperty(combineName, newColor)
+			let colorRgb = hexToRGB(newColor)
+			let combineName = '--' + currentColorName
+			document.body.style.setProperty(combineName, colorRgb)
 		}
 		const changeLinkColor = () => {
 			let newColor = document.getElementById('linkPatch').value

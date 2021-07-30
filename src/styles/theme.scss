@@ -29,10 +29,10 @@ $taskcolor: #6dae50;
 	--q-dark: #0d0b09;
 
 	// custom colors
-	--one: 33, 150, 243;
-	--two: 230, 0, 0;
-	--three: 125, 0, 230;
-	--four: 1, 82, 64;
+	--one: rgb(33, 150, 243);
+	--two: rgb(230, 0, 0);
+	--three: rgb(125, 0, 230);
+	--four: rgb(1, 82, 64);
 
 	// backgrounds
 	--bg-light: 237, 237, 237;
@@ -152,26 +152,49 @@ body.body--dark {
 
 // my custom colors style
 .one {
-	--q-primary: rgb(var(--one)) !important;
+	--q-primary: var(--one) !important;
 }
 .bg-one {
-	background: rgb(var(--one));
+	background: var(--one);
 }
 .two {
-	--q-primary: rgb(var(--two)) !important;
+	--q-primary: var(--two) !important;
 }
 .bg-two {
-	background: rgb(var(--two));
+	background: var(--two);
 }
 .three {
-	--q-primary: rgb(var(--three)) !important;
+	--q-primary: var(--three) !important;
 }
 .bg-three {
-	background: rgb(var(--three));
+	background: var(--three);
 }
 .four {
-	--q-primary: rgb(var(--four)) !important;
+	--q-primary: var(--four) !important;
 }
 .bg-four {
-	background: rgb(var(--four));
+	background: var(--four);
 }
+// .fill {
+// 	--bq-drawer: var(--q-primary);
+// 	// --q-primary: 200, 0, 0;
+// 	// --q-dark: 0, 0, 0;
+// 	// background: rgb(var(--q-primary));
+// 	.q-item,
+// 	.q-btn {
+// 		color: #fff;
+// 	}
+// 	.q-item--active,
+// 	.q-item.q-router-link--active {
+// 		background: rgba(var(--q-dark), 0.2);
+// 	}
+// }
+
+// --color-light: 0, 0%;
+// --l: 95%;
+// --bg-light: hsl(var(--color-light), var(--l));
+// --bg-lighter: hsl(0, 0%, 97%);
+// --bg-darken: darken(#f3f3f3, 5%);
+// --font-light: #333;
+// --warm-light: #fef1f1;
+// --cool-light: #f1f9fe;
