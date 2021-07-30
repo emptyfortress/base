@@ -48,7 +48,7 @@ $taskcolor: #6dae50;
 
 	// fonts
 	--my-body-font-size: 14px;
-	--font-color: rgba(0, 0, 0, 0.8);
+	--text-color: rgba(0, 0, 0, 0.8);
 	--q-link: #288bdc;
 }
 
@@ -80,7 +80,7 @@ body.body--dark {
 
 	background: var(--bg-dark);
 	color: var(--dark-text-color);
-	--my-text-color: var(--dark-text-color);
+	--text-color: var(--dark-text-color);
 
 	--my-color-selection: #5c4328;
 	--my-background-color-rgb: 13, 11, 9;
@@ -114,17 +114,25 @@ body.body--dark {
 	.q-drawer,
 	.q-header {
 		border-color: var(--my-border-color);
-		color: var(--my-text-color);
+		color: var(--text-color);
 	}
 	.q-item {
-		color: var(--my-text-color);
+		color: var(--text-color) !important;
 	}
 	--q-selection: var(--my-color-step-200);
 
 	.q-card {
 		background: var(--my-color-step-100);
 		// border: 1px solid var(--my-border-color);
-		color: var(--my-text-color);
+		color: var(--text-color);
+	}
+	.q-drawer {
+		background: var(--bg-drawer);
+		.fill {
+			--q-selection: var(--q-primary-lighten-1);
+			background: var(--q-primary);
+			color: #fff !important;
+		}
 	}
 }
 
@@ -135,6 +143,11 @@ body.body--dark {
 }
 .q-drawer {
 	background: var(--bg-drawer);
+	.fill {
+		--q-selection: var(--q-primary-lighten-1);
+		background: var(--q-primary);
+		color: #fff;
+	}
 }
 
 // my custom colors style
@@ -162,25 +175,3 @@ body.body--dark {
 .bg-four {
 	background: rgb(var(--four));
 }
-// .fill {
-// 	--q-primary: 200, 0, 0;
-// 	--q-dark: 0, 0, 0;
-// 	background: rgb(var(--q-primary));
-// 	.q-item,
-// 	.q-btn {
-// 		color: #fff;
-// 	}
-// 	.q-item--active,
-// 	.q-item.q-router-link--active {
-// 		background: rgba(var(--q-dark), 0.2);
-// 	}
-// }
-
-// --color-light: 0, 0%;
-// --l: 95%;
-// --bg-light: hsl(var(--color-light), var(--l));
-// --bg-lighter: hsl(0, 0%, 97%);
-// --bg-darken: darken(#f3f3f3, 5%);
-// --font-light: #333;
-// --warm-light: #fef1f1;
-// --cool-light: #f1f9fe;

@@ -74,11 +74,7 @@ export default {
 
 <style scoped lang="scss">
 @import '@/styles/theme.scss';
-.left {
-	background: $dark;
-	color: #fff;
-}
-.q-item__label {
-	color: var(--my-text-color);
+.q-item {
+	color: var(--text-color);
 }
 </style>

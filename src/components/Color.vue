@@ -84,6 +84,7 @@ export default {
 	align-items: center;
 	margin-left: 1rem;
 	margin-top: 1rem;
+	color: var(--text-color);
 	input {
 		width: 50px;
 		height: 50px;
@@ -91,6 +92,6 @@ export default {
 	}
 }
 body.body--dark .q-item__label {
-	color: var(--my-text-color);
+	color: var(--text-color);
 }
 </style>

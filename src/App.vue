@@ -88,9 +88,6 @@ export default {
 	line-height: 64px;
 	border-bottom: 1px solid #fff;
 }
-/* .head-fill { */
-/* 	color: var(--q-primary-contrast); */
-/* } */
 .head {
 	backdrop-filter: blur(10px);
 	background-color: #0000001a;
@@ -98,9 +95,6 @@ export default {
 }
 .head-fill {
 	color: #fff !important;
-}
-.q-item {
-	color: var(--font-light);
 }
 body.body--dark .head {
 	background: var(--bg-drawer);
