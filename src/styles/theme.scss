@@ -24,7 +24,7 @@ $taskcolor: #6dae50;
 	--q-accent: #9c27b0;
 	--q-positive: #4caf50;
 	--q-negative: #c10015;
-	--q-info: #31ccec;
+	--q-info: #7ea1f9;
 	--q-warning: #ffb029;
 	--q-dark: #0d0b09;
 
@@ -54,6 +54,7 @@ $taskcolor: #6dae50;
 
 body {
 	font-size: var(--my-body-font-size);
+	color: var(--text-color);
 }
 
 a:link:not(.q-link),

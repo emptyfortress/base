@@ -5,13 +5,13 @@
 		router-link(to="/") Это линк
 	q-toggle(v-model="dark" :color="colors.primary")
 	p Count: {{ counter.count }}
-	q-btn(@click="add" unelevated color="primary").q-mr-sm Add
-	q-btn(@click="add" unelevated color="secondary").q-mr-sm Add
-	q-btn(@click="add" unelevated color="positive").q-mr-sm Add
-	q-btn(@click="add" unelevated color="negative").q-mr-sm Add
-	q-btn(@click="add" unelevated color="info").q-mr-sm Add
-	q-btn(@click="add" unelevated color="warning").q-mr-sm Add
-	q-btn(@click="add" unelevated color="dark").q-mr-sm Add
+	q-btn(@click="add" unelevated color="primary").q-mr-sm primary
+	q-btn(@click="add" unelevated color="accent").q-mr-sm accent
+	q-btn(@click="add" unelevated color="positive").q-mr-sm positive
+	q-btn(@click="add" unelevated color="negative").q-mr-sm negative
+	q-btn(@click="add" unelevated color="info").q-mr-sm info
+	q-btn(@click="add" unelevated color="warning").q-mr-sm warn
+	q-btn(@click="add" unelevated color="dark").q-mr-sm dark
 
 	p Double: {{ counter.doubleCount }}
 	p plus: {{ counter.doublePlusOne }}

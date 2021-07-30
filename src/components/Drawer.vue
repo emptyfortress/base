@@ -5,13 +5,11 @@ q-drawer(v-model="show" side="left" :mini="mini" :width="width" bordered :class=
 			q-item-section(avatar)
 				q-icon(:name="page.icon")
 			q-item-section {{ page.title }}
-		//- q-item(clickable v-ripple to="/docs" )
-		//- 	q-item-section Docss
 
-	q-item(clickable v-ripple).bottom
-		q-item-section(avatar)
-			q-icon(name="mdi-puzzle-outline")
-		q-item-section Библиотека
+		q-item(clickable v-ripple).bottom
+			q-item-section(avatar)
+				q-icon(name="mdi-puzzle-outline")
+			q-item-section Библиотека
 
 	q-btn(round flat dense :icon="minitoogle" @click="mini = !mini").mini
 
@@ -59,20 +57,23 @@ export default {
 
 <style scoped lang="scss">
 @import '@/styles/theme.scss';
-.pos {
-	position: relative;
-	height: 100%;
-}
+/* .pos { */
+/* 	position: relative; */
+/* 	height: 100%; */
+/* } */
 .mini {
 	position: absolute;
 	bottom: 1rem;
 	left: 0.5rem;
+	overflow-x: hidden;
 }
 .bottom {
-	position: absolute;
-	bottom: 3rem;
-	left: 0;
-	width: 100%;
+	border-top: 1px solid var(--my-border-color);
+	margin-top: 3rem;
+	/* position: absolute; */
+	/* bottom: 3rem; */
+	/* left: 0; */
+	/* width: 100%; */
 }
 .fill {
 	color: #fff !important;
