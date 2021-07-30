@@ -5,7 +5,14 @@
 		router-link(to="/") Это линк
 	q-toggle(v-model="dark" :color="colors.primary")
 	p Count: {{ counter.count }}
-	q-btn(@click="add" unelevated color="primary") Add
+	q-btn(@click="add" unelevated color="primary").q-mr-sm Add
+	q-btn(@click="add" unelevated color="secondary").q-mr-sm Add
+	q-btn(@click="add" unelevated color="positive").q-mr-sm Add
+	q-btn(@click="add" unelevated color="negative").q-mr-sm Add
+	q-btn(@click="add" unelevated color="info").q-mr-sm Add
+	q-btn(@click="add" unelevated color="warning").q-mr-sm Add
+	q-btn(@click="add" unelevated color="dark").q-mr-sm Add
+
 	p Double: {{ counter.doubleCount }}
 	p plus: {{ counter.doublePlusOne }}
 	br

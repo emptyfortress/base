@@ -74,4 +74,13 @@ export default {
 	left: 0;
 	width: 100%;
 }
+.q-item,
+.q-item.q-router-link {
+	color: var(--my-text-color);
+}
+.q-item--active,
+.q-item.q-router-link--active {
+	background: var(--q-selection);
+	color: var(--q-primary-darken-2);
+}
 </style>

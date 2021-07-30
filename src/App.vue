@@ -24,7 +24,7 @@
 				transition(name="slide-right")
 					component(:is="Component")
 
-		//- q-footer( bordered class="bg-grey-8 text-white" )
+		//- q-footer(bordered).head
 			q-toolbar
 				q-btn(dense flat round icon="mdi-menu" @click="toggleLeftDrawer") 
 				q-space
@@ -86,7 +86,6 @@ export default {
 .head-fill {
 	height: 64px;
 	line-height: 64px;
-	transition: 0.3s ease all;
 	border-bottom: 1px solid #fff;
 }
 /* .head-fill { */
@@ -95,7 +94,10 @@ export default {
 .head {
 	backdrop-filter: blur(10px);
 	background-color: #0000001a;
-	color: #333;
+	color: var(--font-color);
+}
+.head-fill {
+	color: #fff !important;
 }
 .q-item {
 	color: var(--font-light);

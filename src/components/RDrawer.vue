@@ -1,5 +1,5 @@
 <template lang="pug">
-q-drawer(v-model="show" side="right" bordered )
+q-drawer(v-model="show" side="right" bordered)
 	Color(:swatches="maincolor")
 	q-item
 		q-item-section(avatar)
