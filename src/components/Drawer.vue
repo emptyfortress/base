@@ -90,6 +90,10 @@ export default {
 }
 .fill {
 	color: #fff !important;
+	.q-item--active,
+	.q-item.q-router-link--active {
+		color: #fff;
+	}
 }
 .body--dark {
 	.fill .q-item {

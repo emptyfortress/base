@@ -43,7 +43,7 @@ export default {
 	components: { Drawer, RDrawer },
 	setup() {
 		const leftDrawer = ref(true)
-		const rightDrawer = ref(false)
+		const rightDrawer = ref(true)
 
 		const mycolor = computed(() => {
 			return 'one'

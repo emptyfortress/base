@@ -10,9 +10,10 @@ $taskcolor: #6dae50;
 	// quasar colors
 	--q-primary: #2196f3;
 
-	--q-primary-lighten-1: hsl(207, 90%, 75%);
-	--q-primary-lighten-2: hsl(207, 90%, 84%);
-	--q-primary-lighten-3: hsl(207, 90%, 91%);
+	--q-primary-lighten-1: hsl(207, 90%, 65%);
+	--q-primary-lighten-2: hsl(207, 90%, 75%);
+	--q-primary-lighten-3: hsl(207, 90%, 85%);
+	--q-primary-selection: hsl(207, 90%, 91%);
 
 	--q-primary-darken-1: hsl(207, 90%, 45%);
 	--q-primary-darken-2: hsl(207, 90%, 35%);
@@ -28,7 +29,7 @@ $taskcolor: #6dae50;
 
 	// custom colors
 	--one: rgb(33, 150, 243);
-	--two: rgb(160, 0, 93);
+	--two: rgb(230, 55, 125);
 	--three: rgb(125, 0, 230);
 	--four: rgb(36, 106, 45);
 
@@ -54,7 +55,7 @@ $taskcolor: #6dae50;
 body.body--light {
 	background: var(--bg-light);
 	background-attachment: fixed;
-	--q-selection: var(--q-primary-lighten-3);
+	--q-selection: var(--q-primary-selection);
 	.q-drawer {
 		.fill {
 			--q-selection: var(--q-primary-lighten-1);
@@ -165,11 +166,23 @@ body.body--dark {
 }
 
 // primary styles
+.bg-primary-selection {
+	background: var(--q-primary-selection);
+}
+.text-primary-darken-1 {
+	color: var(--q-primary-darken-1);
+}
 .bg-primary-darken-1 {
 	background: var(--q-primary-darken-1);
 }
+.text-primary-darken-2 {
+	color: var(--q-primary-darken-2);
+}
 .bg-primary-darken-2 {
 	background: var(--q-primary-darken-2);
+}
+.text-primary-darken-3 {
+	color: var(--q-primary-darken-3);
 }
 .bg-primary-darken-3 {
 	background: var(--q-primary-darken-3);

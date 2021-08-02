@@ -1,5 +1,5 @@
 <template lang="pug">
-q-item-label(header) Выберите основной цвет:
+q-item-label(header) Выберите основной (primary) цвет:
 q-item
 	.q-mx-md
 		q-btn(round unelevated :color="swatch.color" v-for="swatch in swatches" :key="swatch.id" :id="swatch.id" @click="setColor(swatch.id, swatch.color)").swatch
@@ -86,17 +86,20 @@ export default {
 			s = +(s * 100).toFixed(1)
 			l = +(l * 100).toFixed(1)
 
+
 			// set lighten variables
-			let lighten1 = 'hsl(' + h + ',' + s + '%,' + '75%)'
-			let lighten2 = 'hsl(' + h + ',' + s + '%,' + '84%)'
-			let lighten3 = 'hsl(' + h + ',' + s + '%,' + '91%)'
+			let lighten1 = 'hsl(' + h + ',' + s + '%,' + (l + 10) + '%)'
+			let lighten2 = 'hsl(' + h + ',' + s + '%,' + (l + 20) + '%)'
+			let lighten3 = 'hsl(' + h + ',' + s + '%,' + (l + 30) + '%)'
+			let selection = 'hsl(' + h + ',' + s + '%,' + '91%)'
 			document.body.style.setProperty('--q-primary-lighten-1', lighten1)
 			document.body.style.setProperty('--q-primary-lighten-2', lighten2)
 			document.body.style.setProperty('--q-primary-lighten-3', lighten3)
+			document.body.style.setProperty('--q-primary-selection', selection)
 			// set darken variables
-			let darken1 = 'hsl(' + h + ',' + s + '%,' + '45%)'
-			let darken2 = 'hsl(' + h + ',' + s + '%,' + '35%)'
-			let darken3 = 'hsl(' + h + ',' + s + '%,' + '25%)'
+			let darken1 = 'hsl(' + h + ',' + s + '%,' + (l - 9) + '%)'
+			let darken2 = 'hsl(' + h + ',' + s + '%,'  + (l - 15) + '%)'
+			let darken3 = 'hsl(' + h + ',' + s + '%,'   + (l - 23) + '%)'
 			document.body.style.setProperty('--q-primary-darken-1', darken1)
 			document.body.style.setProperty('--q-primary-darken-2', darken2)
 			document.body.style.setProperty('--q-primary-darken-3', darken3)
