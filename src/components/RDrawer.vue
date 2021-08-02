@@ -8,11 +8,11 @@ q-drawer(v-model="show" side="right" bordered)
 			q-slider(v-model="size" :min="11" :max="18" label color="primary" @change="setSize")
 	q-separator
 	q-item
-		q-toggle( v-model="color.toolbar" label="Контрастный тулбар" color="primary")
+		q-toggle( v-model="color.toolbar" label="Color header" color="primary")
 	q-item
-		q-toggle( v-model="color.reveal" label="Авто-скрытие тулбара" color="primary")
+		q-toggle( v-model="color.panel" label="Color panel" color="primary")
 	q-item
-		q-toggle( v-model="color.panel" label="Контрастная панель" color="primary")
+		q-toggle( v-model="color.reveal" label="Auto-hide header" color="primary")
 
 	q-separator
 	q-item

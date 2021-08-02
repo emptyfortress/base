@@ -1,20 +1,40 @@
 <template lang="pug">
 .q-px-xl
-	h4 Home
-	div
-		router-link(to="/") Это линк
-	q-toggle(v-model="dark" :color="colors.primary")
-	p Count: {{ counter.count }}
-	q-btn(@click="add" unelevated color="primary").q-mr-sm primary
+	h4 Палитра цветов
+	.palitra
+		div
+			q-btn(unelevated color="primary").full-width primary
+			q-btn(unelevated color="primary-lighten-1" text-color="primary-darken-2").full-width lighten-1
+			q-btn(unelevated color="primary-lighten-2" text-color="primary-darken-2").full-width lighten-2
+			q-btn(unelevated color="primary-lighten-3" text-color="primary-darken-2").full-width lighten-3
+		div
+			q-btn(unelevated color="primary").full-width primary
+			q-btn(unelevated color="primary-darken-1" ).full-width darken-1
+			q-btn(unelevated color="primary-darken-2" ).full-width darken-2
+			q-btn(unelevated color="primary-darken-3" ).full-width darken-3
+
+
+	p
+		span.q-mr-md Основной цвет
+		q-btn(@click="add" unelevated color="primary") primary
+	p
+		span.q-mr-md Темный вариант
+		q-btn(@click="add" unelevated color="primary-darken-1" ).q-mr-sm darken-1
+		q-btn(@click="add" unelevated color="primary-darken-2" ).q-mr-sm darken-2
+		q-btn(@click="add" unelevated color="primary-darken-3" ).q-mr-sm darken-3
 	q-btn(@click="add" unelevated color="accent").q-mr-sm accent
 	q-btn(@click="add" unelevated color="positive").q-mr-sm positive
 	q-btn(@click="add" unelevated color="negative").q-mr-sm negative
 	q-btn(@click="add" unelevated color="info").q-mr-sm info
 	q-btn(@click="add" unelevated color="warning").q-mr-sm warn
 	q-btn(@click="add" unelevated color="dark").q-mr-sm dark
+	div
+		router-link(to="/") Это линк
+		q-toggle(v-model="dark" :color="colors.primary")
 
-	p Double: {{ counter.doubleCount }}
-	p plus: {{ counter.doublePlusOne }}
+	//- p Count: {{ counter.count }}
+	//- p Double: {{ counter.doubleCount }}
+	//- p plus: {{ counter.doublePlusOne }}
 	br
 	br
 	q-card.test
@@ -53,6 +73,16 @@ export default {
 </script>
 
 <style lang="scss">
+.palitra {
+	display: grid;
+	grid-template-columns: repeat(2, 200px);
+	gap: 1rem;
+	margin-bottom: 2rem;
+	.color {
+		height: 50px;
+		width: 100%;
+	}
+}
 .test {
 	height: 300px;
 	width: 50%;

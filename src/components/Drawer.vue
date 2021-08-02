@@ -29,9 +29,10 @@ export default {
 	setup() {
 		const color = useColor()
 		const pages = [
-			{ id: 1, title: 'Главная', icon: 'mdi-home-roof', url: '/' },
-			{ id: 2, title: 'Документы', icon: 'mdi-text-box-outline', url: '/docs' },
-			{ id: 3, title: 'Задания', icon: 'mdi-check', url: '/tasks' },
+			{ id: 1, title: 'Цвета', icon: 'mdi-palette', url: '/' },
+			{ id: 2, title: 'Дашборд', icon: 'mdi-home-roof', url: '/dash' },
+			{ id: 3, title: 'Документы', icon: 'mdi-text-box-outline', url: '/docs' },
+			{ id: 4, title: 'Задания', icon: 'mdi-check', url: '/tasks' },
 			{
 				id: 4,
 				title: 'Папки',
