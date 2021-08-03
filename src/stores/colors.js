@@ -6,7 +6,7 @@ export const useColor = defineStore({
 		toolbar: false,
 		panel: false,
 		reveal: false,
-		// primary: 'one',
+		mini: false,
 	}),
 	getters: {},
 	actions: {},

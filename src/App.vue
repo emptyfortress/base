@@ -1,7 +1,7 @@
 <template lang="pug">
 #col(:class="mycolor")
 	q-layout(view="hHh LpR fFf" )
-		q-header(:reveal="color.reveal" :class="calcHeader")
+		q-header(:reveal="colors.reveal" :class="calcHeader")
 			q-toolbar
 				q-btn(dense flat round icon="mdi-menu" @click="toggleLeftDrawer") 
 
@@ -13,8 +13,20 @@
 				q-btn(dense round unelevated color="light-blue-2").q-ml-sm
 					q-avatar
 						img(src="@/assets/users/user0.svg")
+						.mybadge
 				q-btn(dense flat round icon="mdi-help-circle-outline").q-ml-sm
 				q-btn(dense flat round icon="mdi-brightness-4" @click="toggleRightDrawer").q-mx-sm
+
+			.subbar
+				.left( v-show="leftDrawer" :class="calcClass")
+					q-btn(v-if="!colors.mini" dense flat round size="sm" icon="mdi-cog-outline")
+					q-btn(v-if="!colors.mini" dense flat round size="sm" icon="mdi-reload")
+					q-btn(v-if="!colors.mini" dense flat round size="sm" icon="mdi-pin-off-outline")
+					q-btn(v-if="colors.mini" flat icon="mdi-reload").full-width
+				.right
+					q-btn(unelevated icon="mdi-plus" color="primary-darken-2") Создать
+					q-btn(unelevated)
+						svgIcon(name="search-scan" :color="iconColor")
 
 		Drawer(:show="leftDrawer")
 		RDrawer(:show="rightDrawer")
@@ -38,9 +50,10 @@ import Drawer from '@/components/Drawer.vue'
 import RDrawer from '@/components/RDrawer.vue'
 import { date } from 'quasar'
 import { useColor } from '@/stores/colors'
+import svgIcon from '@/components/svgIcon.vue'
 
 export default {
-	components: { Drawer, RDrawer },
+	components: { Drawer, RDrawer, svgIcon },
 	setup() {
 		const leftDrawer = ref(true)
 		const rightDrawer = ref(true)
@@ -49,19 +62,37 @@ export default {
 			return 'one'
 		})
 
-		const color = useColor()
+		const colors = useColor()
 
 		const calcHeader = computed(() => {
-			if (color.toolbar) {
+			if (colors.toolbar) {
 				return 'head-fill'
 			} else return 'head'
+		})
+
+		const calcClass = computed(() => {
+			if (colors.panel && colors.mini) {
+				return 'fill mini'
+			} else if (colors.mini) {
+				return 'mini'
+			} else if (colors.panel) {
+				return 'fill'
+			} else return ''
+		})
+
+		const iconColor = computed(() => {
+			if (colors.toolbar) {
+				return 'white'
+			} else return '#666'
 		})
 
 		const timeStamp = Date.now()
 		const formattedString = date.formatDate(timeStamp, 'dddd, D MMMM')
 
 		return {
-			color,
+			calcClass,
+			iconColor,
+			colors,
 			calcHeader,
 			mycolor,
 			formattedString,
@@ -84,9 +115,9 @@ export default {
 
 .head,
 .head-fill {
-	height: 64px;
+	height: 100px;
 	line-height: 64px;
-	border-bottom: 1px solid #fff;
+	/* border-bottom: 1px solid #fff; */
 }
 .head {
 	backdrop-filter: blur(10px);
@@ -98,5 +129,51 @@ export default {
 }
 body.body--dark .head {
 	background: var(--bg-drawer);
+}
+.subbar {
+	background-color: #cccccc1c;
+	color: var(--font-color);
+	height: 36px;
+	display: flex;
+	line-height: 36px;
+	.left,
+	.right {
+		padding: 0 0.5rem;
+		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.2);
+	}
+	.left {
+		width: 256px;
+		background: var(--bg-drawer);
+		text-align: right;
+		color: var(--q-primary);
+		color: var(--text-color);
+		&.fill {
+			background: var(--q-primary);
+			color: var(--q-primary-lighten-3);
+		}
+		&.mini {
+			width: 58px;
+			text-align: center;
+		}
+	}
+	.right {
+		flex-grow: 1;
+		padding-left: 0;
+		svg.icon {
+			width: 1.7rem;
+			height: 1.7rem;
+		}
+	}
+}
+
+.mybadge {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	left: -3px;
+	bottom: -2px;
+	background: green;
+	border: 1px solid #fff;
 }
 </style>

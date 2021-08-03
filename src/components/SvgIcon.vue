@@ -29,7 +29,7 @@ export default defineComponent({
 	},
 	setup(props) {
 		const symbolId = computed(() => `#${props.prefix}-${props.name}`)
-		return { symbolId };
+		return { symbolId }
 	},
 })
 </script>

@@ -14,7 +14,8 @@
 			q-btn(unelevated color="primary-darken-2" ).full-width darken-2
 			q-btn(unelevated color="primary-darken-3" ).full-width darken-3
 
-
+	q-separator
+	br
 	p Кнопки:
 	p
 		q-btn(unelevated ).q-mr-sm default

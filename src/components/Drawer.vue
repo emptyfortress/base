@@ -1,5 +1,5 @@
 <template lang="pug">
-q-drawer(v-model="show" side="left" :mini="mini" :width="width" bordered :class="{ fill : color.panel }")
+q-drawer(v-model="show" side="left" :mini="colors.mini" :width="width" bordered :class="{ fill : colors.panel }")
 	q-list(v-if="!lib")
 		q-item(show-if-above clickable v-ripple :to="page.url" v-for="page in pages" :key="page.id")
 			q-item-section(avatar)
@@ -12,14 +12,13 @@ q-drawer(v-model="show" side="left" :mini="mini" :width="width" bordered :class=
 			q-item-section Библиотека
 	Lib(v-else @back="lib=false")
 
-	q-btn(round flat dense :icon="minitoogle" @click="mini = !mini").mini
+	q-btn(round flat dense :icon="minitoogle" @click="colors.mini = !colors.mini").mini
 	
 
 </template>
 
 <script>
 import { ref, computed } from 'vue'
-import { maincolor } from '@/utils/utils'
 import { useColor } from '@/stores/colors'
 import Lib from '@/components/Lib.vue'
 
@@ -27,7 +26,7 @@ export default {
 	props: ['show'],
 	components: {Lib},
 	setup() {
-		const color = useColor()
+		const colors = useColor()
 		const pages = [
 			{ id: 1, title: 'Цвета', icon: 'mdi-palette', url: '/' },
 			{ id: 2, title: 'Дашборд', icon: 'mdi-home-roof', url: '/dash' },
@@ -41,7 +40,7 @@ export default {
 			},
 			// { id: 5, title: 'Hello', icon: 'mdi-folder-outline', url: '/hello' },
 		]
-		const mini = ref(false)
+		// const mini = ref(false)
 		const width = 256
 		const lib = ref(false)
 
@@ -51,16 +50,14 @@ export default {
 		}
 
 		const minitoogle = computed(() => {
-			return mini.value ? 'mdi-forwardburger' : 'mdi-backburger'
+			return colors.mini ? 'mdi-forwardburger' : 'mdi-backburger'
 		})
 
 		return {
 			goToLib,
-			color,
+			colors,
 			width,
 			lib,
-			maincolor,
-			mini,
 			pages,
 			minitoogle,
 		}
