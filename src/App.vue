@@ -12,7 +12,7 @@
 				q-btn(dense flat round icon="mdi-magnify")
 				q-btn(dense round unelevated color="light-blue-2").q-ml-sm
 					q-avatar
-						img(src="@/assets/users/user0.svg")
+						img(src="@/assets/img/users/user0.svg")
 						.mybadge
 				q-btn(dense flat round icon="mdi-help-circle-outline").q-ml-sm
 				q-btn(dense flat round icon="mdi-brightness-4" @click="toggleRightDrawer").q-mx-sm
@@ -111,7 +111,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/theme.scss';
+@import '@/assets/styles/theme.scss';
 
 .head,
 .head-fill {

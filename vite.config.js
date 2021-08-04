@@ -9,7 +9,7 @@ export default defineConfig({
 		vue(),
 		viteSvgIcons({
 			// Specify the icon folder to be cached
-			iconDirs: [path.resolve(process.cwd(), 'src/assets/icons')],
+			iconDirs: [path.resolve(process.cwd(), 'src/assets/img/icons')],
 			// Specify symbolId format
 			symbolId: 'icon-[dir]-[name]',
 		}),

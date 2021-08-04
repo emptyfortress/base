@@ -1,10 +1,10 @@
 import { Quasar, Notify } from 'quasar'
 import 'quasar/dist/quasar.prod.css'
-// import './styles/quasar.variables.scss'
+// import './assets/styles/quasar.variables.scss'
 import iconSet from 'quasar/icon-set/mdi-v5.js'
 import '@quasar/extras/roboto-font/roboto-font.css'
 import '@quasar/extras/mdi-v5/mdi-v5.css'
-import './styles/theme.scss'
+import './assets/styles/theme.scss'
 
 export function initQuasar(app) {
 	app.use(Quasar, {

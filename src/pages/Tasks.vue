@@ -8,5 +8,5 @@ export default {}
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/theme.scss';
+@import '@/assets/styles/theme.scss';
 </style>
