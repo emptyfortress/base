@@ -56,7 +56,7 @@ export default {
 	components: { Drawer, RDrawer, svgIcon },
 	setup() {
 		const leftDrawer = ref(true)
-		const rightDrawer = ref(true)
+		const rightDrawer = ref(false)
 
 		const mycolor = computed(() => {
 			return 'one'
