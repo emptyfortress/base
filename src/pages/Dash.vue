@@ -4,6 +4,7 @@
 		DashBlock(:items="inbox")
 		DashBlock(:items="outbox")
 		DashBlock(:items="mydoc")
+	br
 	Lastcards.q-mt-lg
 </template>
 

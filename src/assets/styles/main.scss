@@ -22,3 +22,25 @@ a:hover:not(.q-link) {
 		color: #fff;
 	}
 }
+// body.body--dark .q-table__card {
+// 	background: var(--my-card-background);
+// 	border-color: var(--my-border-color);
+// }
+.q-table--dark,
+.q-table--dark .q-table__bottom,
+.q-table--dark td,
+.q-table--dark th,
+.q-table--dark thead,
+.q-table--dark tr,
+.q-table__card--dark {
+	border-color: var(--my-border-color);
+	background: var(--my-card-background);
+	color: var(--my-text-color);
+
+	th {
+		background: var(--my-color-step-150);
+	}
+	th:last-child {
+		border-right: 1px solid var(--my-border-color);
+	}
+}
