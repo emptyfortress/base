@@ -3,6 +3,16 @@ body {
 	color: var(--text-color);
 }
 
+.container {
+	padding-top: 1rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	@media screen and (max-width: 1900px) {
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+}
+
 a:link:not(.q-link),
 a:visited:not(.q-link) {
 	text-decoration: none;
@@ -93,4 +103,18 @@ a:hover:not(.q-link) {
 	td.small {
 		border-bottom-color: var(--my-border-color);
 	}
+}
+.q-splitter--vertical > .q-splitter__separator {
+	width: 2px;
+	background: transparent;
+}
+.q-splitter__separator:hover,
+.q-splitter__separator:active {
+	border-left: 2px dotted black;
+	// background: red;
+}
+.zag {
+	color: black;
+	text-align: left;
+	font-size: 1.4rem;
 }
