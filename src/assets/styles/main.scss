@@ -23,12 +23,18 @@ a:hover:not(.q-link) {
 	}
 }
 
+// table styles **************************************
+.q-table tbody .link td {
+	color: var(--q-link);
+	cursor: pointer;
+}
 // q-markup-table style - this is simple table
 .q-table {
 	tbody td {
 		font-size: 0.9rem;
 		position: relative;
 		color: var(--text-color);
+		white-space: normal;
 	}
 	thead {
 		background-color: #0000001a;
@@ -37,6 +43,7 @@ a:hover:not(.q-link) {
 			text-align: left;
 			border: 1px solid #fff;
 			border-right: none;
+			font-weight: 400;
 		}
 		th:first-child {
 			border-right: none;
@@ -57,6 +64,7 @@ a:hover:not(.q-link) {
 		background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAABtJREFUGFdjXLt27f/g4GBGBiiAM2ASjARVAAAxbBAFP9yoPgAAAABJRU5ErkJggg==)
 			repeat;
 		cursor: pointer;
+		border-bottom-color: #fff;
 	}
 	.new td {
 		font-weight: 600;
@@ -81,5 +89,8 @@ a:hover:not(.q-link) {
 	}
 	th:last-child {
 		border-right: 1px solid var(--my-border-color);
+	}
+	td.small {
+		border-bottom-color: var(--my-border-color);
 	}
 }

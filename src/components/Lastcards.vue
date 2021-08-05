@@ -1,36 +1,45 @@
 <template lang="pug">
 .zag Последние карточки
 	.group
-		q-btn(outline color="primary")
+		q-btn(flat )
 			svgIcon(name="1-line" color="grey" )
-		q-btn(flat)
+		q-btn(outline color="primary")
 			svgIcon(name="2-line" color="grey" )
-q-markup-table(flat).shadow-1
+SimpleTable
 	thead
 		th.small
-		th Название
-		th Создан
-		th Дата изменения
+		th(v-for="head in headers") {{ head.title }}
 	tbody
-		tr.new.link
+		//- tr(v-for="item in items").new.link
+		tr(v-for="item in items" :class="{ 'new' : item.unread }").link
 			td.small
-			td laksj
-			td laksj
-			td laksj
-		tr
-			td.small
-			td laksj
-			td laksj
-			td laksj
+			td {{ item.title }}
+			td {{ item.created }}
+			td {{ item.changed }}
 </template>
 
 <script>
 import svgIcon from '@/components/svgIcon.vue'
+import SimpleTable from '@/components/SimpleTable.vue'
 
 export default {
-	components: { svgIcon },
+	components: { svgIcon, SimpleTable },
 	data() {
-		return {}
+		return {
+			headers: [
+				{ id: 0, title: 'Название' },
+				{ id: 1, title: 'Создан' },
+				{ id: 2, title: 'Дата изменения' },
+			],
+			items: [
+				{id: 0, unread: true, title: 'Об эксплуатации автоматизированной информационной системы государственного заказа Санкт-Петербурга', created: '20.08.2021', changed: '22.08.2021' },
+				{id: 1, unread: true, title: 'О вводе в действие Перечня товаров, работ, услуг закупки которых осуществляются только у субъектов малого и среднего предпринимательства', created: '20.08.2021', changed: '22.08.2021' },
+				{id: 2, title: 'О согласовании финансового плана Автобазы на 2019 год', created: '20.08.2021', changed: '22.08.2021' },
+				{id: 3, title: 'Протокол совещания по вопросу выполнения третьей очереди работ по созданию ГИС СПб 27.09.2018 № ***', created: '20.08.2021', changed: '22.08.2021' },
+				{id: 4, title: 'О восстановлении работоспособности системы подогрева приточной вентиляции', created: '20.08.2021', changed: '22.08.2021' },
+				{id: 5, title: 'О вызове представителя', created: '20.08.2021', changed: '22.08.2021' },
+			]
+		}
 	},
 }
 </script>
@@ -58,9 +67,5 @@ export default {
 		width: 2rem;
 		height: 2rem;
 	}
-}
-.q-table tbody .link td {
-	color: var(--q-link);
-	cursor: pointer;
 }
 </style>
