@@ -22,14 +22,53 @@ a:hover:not(.q-link) {
 		color: #fff;
 	}
 }
-// body.body--dark .q-table__card {
-// 	background: var(--my-card-background);
-// 	border-color: var(--my-border-color);
-// }
+
+// q-markup-table style - this is simple table
+.q-table {
+	tbody td {
+		font-size: 0.9rem;
+		position: relative;
+		color: var(--text-color);
+	}
+	thead {
+		background-color: #0000001a;
+		th {
+			font-size: 0.7rem;
+			text-align: left;
+			border: 1px solid #fff;
+			border-right: none;
+		}
+		th:first-child {
+			border-right: none;
+		}
+		th:nth-child(2) {
+			border-left: none;
+		}
+		th:last-child {
+			border-right: 1px solid #fff;
+		}
+	}
+	.small {
+		margin: 0;
+		padding: 0;
+		width: 5px;
+	}
+	td.small {
+		background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAABtJREFUGFdjXLt27f/g4GBGBiiAM2ASjARVAAAxbBAFP9yoPgAAAABJRU5ErkJggg==)
+			repeat;
+		cursor: pointer;
+	}
+	.new td {
+		font-weight: 600;
+	}
+	.new td.small {
+		background: var(--q-primary);
+	}
+}
 .q-table--dark,
 .q-table--dark .q-table__bottom,
 .q-table--dark td,
-.q-table--dark th,
+.q-table--dark thead th,
 .q-table--dark thead,
 .q-table--dark tr,
 .q-table__card--dark {

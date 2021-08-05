@@ -20,7 +20,8 @@ export default defineComponent({
 		},
 		color: {
 			type: String,
-			default: '#666',
+			required: false,
+			// default: '#666',
 		},
 		spin: {
 			type: Boolean,
