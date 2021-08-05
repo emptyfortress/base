@@ -13,9 +13,30 @@
 				br
 				.zag.q-mb-md {{ item[0].title }}
 				.btgroup
-					q-btn(unelevated color="primary") Зарегистрировать
+					q-btn( color="primary") Зарегистрировать
 					q-btn(unelevated color="primary") Действует
 					q-btn(outline icon="mdi-dots-horizontal" color="primary")
+
+				q-tabs(v-model="tab" align="left" inline-label switch-indicator indicator-color="primary" :breakpoint="500")
+					q-tab(name="main" label="Главная")
+					q-tab(name="hod" label="Ход согласования")
+
+				q-tab-panels(v-model="tab" animated )
+					q-tab-panel(name="main")
+						q-list
+							.pos
+								q-expansion-item(switch-toggle-side label="Информация" )
+									q-card
+										q-card-section
+											Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste eveniet doloribus ullam aliquid.
+								q-btn(round flat dense icon="mdi-close").my
+							q-expansion-item(switch-toggle-side label="Информация")
+								q-card
+									q-card-section
+										Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste eveniet doloribus ullam aliquid.
+
+					q-tab-panel(name="hod")
+						p hod
 
 </template>
 
@@ -47,6 +68,7 @@ export default {
 		return {
 			splitterModel: ref(50),
 			item,
+			tab: ref('main'),
 		}
 	},
 }
@@ -84,5 +106,17 @@ export default {
 	}
 	padding-bottom: 1rem;
 	border-bottom: 1px solid var(--my-border-color);
+}
+.q-expansion-item--expanded {
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+	border: 1px solid #ccc;
+}
+	.pos {
+		position: relative;
+	}
+	.my {
+		position: absolute;
+		top: 0px;
+		right: 0;
 }
 </style>

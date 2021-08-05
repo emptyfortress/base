@@ -118,3 +118,34 @@ a:hover:not(.q-link) {
 	text-align: left;
 	font-size: 1.4rem;
 }
+.q-tab-panels {
+	background: transparent;
+}
+.q-tab-panel {
+	padding: 1rem 0;
+}
+.q-expansion-item__container {
+	border-bottom: 1px solid #ccc;
+	.q-card {
+		background: transparent;
+	}
+}
+.q-expansion-item {
+	transition: 0.3s ease all;
+	.q-item__label {
+		color: var(--q-primary-darken-1);
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		font-weight: 500;
+		transform: translateX(-13px);
+	}
+}
+.q-expansion-item--expanded {
+	background: #fff;
+	border-radius: 6px;
+	margin: 0.5rem;
+	border: 1px solid var(--my-border-color);
+	.q-expansion-item__container {
+		border-bottom: none;
+	}
+}
