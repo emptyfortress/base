@@ -1,7 +1,7 @@
 <template lang="pug">
-q-expansion-item(switch-toggle-side :label="mainFile").inside
+q-expansion-item(switch-toggle-side :label="mainFile" default-opened).inside
 	q-card
-		q-card-section
+		q-card-section.q-pt-none
 			table
 				tr(v-for="file in files")
 					td.sml
@@ -16,7 +16,10 @@ q-expansion-item(switch-toggle-side :label="mainFile").inside
 										q-item-section {{ item }}
 q-expansion-item(switch-toggle-side label="Дополнительные файлы").inside
 	q-card
-		q-card-section
+		q-card-section.q-pt-none
+			.text-overline.disabled
+				q-icon(name="mdi-cancel").q-mr-sm
+				span Дополнительные файлы не найдены.
 
 </template>
 
@@ -67,9 +70,10 @@ table {
 td {
 	/* background: #eee; */
 	color: var(--q-link);
-	font-size: 1rem;
+	font-size: .9rem;
 	border-top: 1px solid var(--my-border-color);
 	border-bottom: 1px solid var(--my-border-color);
+	line-height: 100%;
 }
 img {
 	width: 20px;

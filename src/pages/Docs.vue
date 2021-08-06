@@ -1,6 +1,6 @@
 <template lang="pug">
 .container
-	q-splitter(v-model="splitterModel" :limits="[0, 100]")
+	q-splitter(v-model="splitterModel" :limits="[0, 100]" :style="hei")
 		template(v-slot:before)
 			.preview
 				.pdf
@@ -30,26 +30,9 @@
 				q-tab-panels(v-model="tab" animated )
 					q-tab-panel(name="main")
 						q-list
-							.pos
-								q-expansion-item(v-model='panels.info' switch-toggle-side label="Информация")
-									q-card
-										q-card-section Детальный план ввода в эксплуатацию автоматизированной информационной системы государственного заказа Санкт-Петербурга на периода март-май 2020 г.
-										q-card-section.q-pt-none laksjd
-
-								.actionBt
-									q-btn(round flat dense icon="mdi-unfold-more-horizontal" @click="expandAll")
-							.pos
-								q-expansion-item(v-model="panels.file" switch-toggle-side label="Файлы" )
-									q-card
-										q-card-section
-											FileTable(:files="files")
-								.actionBt.gr
-									q-btn(round flat dense )
-										SvgIcon(name="sign")
-									q-btn(round flat dense )
-										SvgIcon(name="scan")
-									q-btn(round flat dense)
-										SvgIcon(name="folder-open-outline")
+							InfoPanel(:panels="panels" @toggle="expandAll")
+							FilePanel(:panels="panels" :files="files")
+							FilePanel(:panels="panels" :files="files")
 
 					q-tab-panel(name="hod")
 						p lakjsdlkj
@@ -59,23 +42,25 @@
 <script>
 import { ref, reactive, computed } from 'vue'
 import Status from '@/components/Status.vue'
-import FileTable from '@/components/common/FileTable.vue'
 import SvgIcon from '@/components/SvgIcon.vue'
+import FilePanel from '@/components/common/FilePanel.vue'
+import InfoPanel from '@/components/common/InfoPanel.vue'
 
 export default {
 	components: {
 		Status,
 		SvgIcon,
-		FileTable,
+		FilePanel,
+		InfoPanel,
 	},
 	setup() {
-		const test = computed(() => {
-			return 'fuck'
-		})
 		const panels = reactive({
 			all: null,
 			info: false,
 			file: false,
+		})
+		const hei = computed(() => {
+			return 'height: ' + (window.innerHeight - 145) + 'px;'
 		})
 		const expandAll = () => {
 			if (!panels.all) {
@@ -94,6 +79,7 @@ export default {
 			{ id: 1, icon: 'pdf', name: 'Файл номер 2', version: 'в.1' },
 			{ id: 2, icon: 'xls', name: 'Файл номер 3', version: 'в.1' },
 		]
+
 		const item = [
 			{
 				id: 0,
@@ -117,7 +103,7 @@ export default {
 			panels,
 			expandAll,
 			files,
-			test,
+			hei,
 		}
 	},
 }
@@ -161,26 +147,5 @@ body.body--dark .preview .pdf {
 	}
 	padding-bottom: 1rem;
 	border-bottom: 1px solid var(--my-border-color);
-}
-.q-expansion-item--expanded {
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-	border: 1px solid var(--my-border-color);
-}
-.pos {
-	position: relative;
-}
-.actionBt {
-	position: absolute;
-	top: 7px;
-	right: 16px;
-	body.body--dark & {
-		color: var(--dark-text-color);
-	}
-	&.gr svg {
-		opacity: 0.7;
-		&:hover {
-			opacity: 1;
-		}
-	}
 }
 </style>
