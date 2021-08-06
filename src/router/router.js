@@ -30,12 +30,7 @@ export const router = createRouter({
 		{
 			path: '/lib',
 			name: 'lib',
-			component: () => import('@/pages/Lib.vue'),
-		},
-		{
-			path: '/hello',
-			name: 'helloworld',
-			component: () => import('../components/HelloWorld.vue'),
+			component: () => import('@/components/Lib.vue'),
 		},
 	],
 })
