@@ -2,9 +2,9 @@
 .zag Последние карточки
 	.group
 		q-btn(flat )
-			svgIcon(name="1-line" color="grey" )
+			SvgIcon(name="1-line" color="grey" )
 		q-btn(outline color="primary")
-			svgIcon(name="2-line" color="grey" )
+			SvgIcon(name="2-line" color="grey" )
 SimpleTable
 	thead
 		th.small
@@ -19,11 +19,11 @@ SimpleTable
 </template>
 
 <script>
-import svgIcon from '@/components/svgIcon.vue'
+import SvgIcon from '@/components/SvgIcon.vue'
 import SimpleTable from '@/components/common/SimpleTable.vue'
 
 export default {
-	components: { svgIcon, SimpleTable },
+	components: { SvgIcon, SimpleTable },
 	data() {
 		return {
 			headers: [

@@ -21,11 +21,11 @@ q-drawer(v-model="show" side="left" :mini="colors.mini" :width="width" bordered 
 import { ref, computed } from 'vue'
 import { useColor } from '@/stores/colors'
 import Lib from '@/components/Lib.vue'
-import svgIcon from '@/components/svgIcon.vue'
+import SvgIcon from '@/components/SvgIcon.vue'
 
 export default {
 	props: ['show'],
-	components: {Lib, svgIcon},
+	components: {Lib, SvgIcon},
 	setup() {
 		const colors = useColor()
 		const pages = [

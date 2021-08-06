@@ -20,7 +20,7 @@
 
 ### Иконки
 
-использование custom icons - svgIcon(name="name" color="color" spin)
+использование custom icons - SvgIcon(name="name" color="color" spin)
 - положить иконку в папку
 - запустить gulp
 - напрямую назначить атрибут color="var(--q-primary)", color="red" или

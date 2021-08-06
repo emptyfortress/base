@@ -14,9 +14,9 @@
 				.zag.q-mb-md 
 					|{{ item[0].title }}
 					span.q-ml-lg
-						svgIcon(name="pencil")
-						svgIcon(name="refresh")
-						svgIcon(name="bin")
+						SvgIcon(name="pencil")
+						SvgIcon(name="refresh")
+						SvgIcon(name="bin")
 				.btgroup
 					q-btn( color="primary") Зарегистрировать
 					q-btn(unelevated color="primary") Действует
@@ -45,11 +45,11 @@
 											FileTable(:files="files")
 								.actionBt.gr
 									q-btn(round flat dense )
-										svgIcon(name="sign")
+										SvgIcon(name="sign")
 									q-btn(round flat dense )
-										svgIcon(name="scan")
+										SvgIcon(name="scan")
 									q-btn(round flat dense)
-										svgIcon(name="folder-open-outline")
+										SvgIcon(name="folder-open-outline")
 
 					q-tab-panel(name="hod")
 						p lakjsdlkj
@@ -60,12 +60,12 @@
 import { ref, reactive } from 'vue'
 import Status from '@/components/Status.vue'
 import FileTable from '@/components/common/FileTable.vue'
-import svgIcon from '@/components/svgIcon.vue'
+import SvgIcon from '@/components/SvgIcon.vue'
 
 export default {
 	components: {
 		Status,
-		svgIcon,
+		SvgIcon,
 		FileTable,
 	},
 	setup() {

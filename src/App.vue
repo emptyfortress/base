@@ -26,8 +26,7 @@
 				.right
 					q-btn(unelevated icon="mdi-plus" color="primary-darken-2") Создать
 					q-btn(unelevated)
-						svgIcon(name="search-scan")
-						//- svgIcon(name="search-scan" :color="iconColor")
+						SvgIcon(name="search-scan")
 
 		Drawer(:show="leftDrawer")
 		RDrawer(:show="rightDrawer")
@@ -51,10 +50,10 @@ import Drawer from '@/components/Drawer.vue'
 import RDrawer from '@/components/RDrawer.vue'
 import { date } from 'quasar'
 import { useColor } from '@/stores/colors'
-import svgIcon from '@/components/svgIcon.vue'
+import SvgIcon from '@/components/SvgIcon.vue'
 
 export default {
-	components: { Drawer, RDrawer, svgIcon },
+	components: { Drawer, RDrawer, SvgIcon },
 	setup() {
 		const leftDrawer = ref(true)
 		const rightDrawer = ref(false)
