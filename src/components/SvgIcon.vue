@@ -20,7 +20,8 @@ export default defineComponent({
 		},
 		color: {
 			type: String,
-			default: '#666',
+			reqired: false
+			// default: '#666',
 		},
 		spin: {
 			type: Boolean,
@@ -41,6 +42,10 @@ svg.icon {
 	vertical-align: middle;
 	margin-bottom: 0.125em;
 	margin-right: .5em;
+	fill: #666;
+}
+body.body--dark svg.icon {
+	fill: #ab9073;
 }
 
 svg.icon-spin {

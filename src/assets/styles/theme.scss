@@ -42,6 +42,7 @@ $taskcolor: #6dae50;
 		rgb(var(--bg-light)) 80%
 	);
 	--bg-drawer: hsl(0, 0%, 96%);
+	--bg-card: #fff;
 	--my-border-color: #0000001f;
 
 	// fonts
@@ -69,6 +70,7 @@ body.body--light {
 body.body--dark {
 	--bg-dark: #0d0b09;
 	--bg-drawer: var(--my-color-step-100);
+	--bg-card: var(--bg-drawer);
 
 	background: var(--bg-dark);
 	color: var(--dark-text-color);

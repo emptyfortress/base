@@ -125,7 +125,7 @@ a:hover:not(.q-link) {
 	padding: 1rem 0;
 }
 .q-expansion-item__container {
-	border-bottom: 1px solid #ccc;
+	border-bottom: 1px solid var(--my-border-color);
 	.q-card {
 		background: transparent;
 	}
@@ -141,9 +141,9 @@ a:hover:not(.q-link) {
 	}
 }
 .q-expansion-item--expanded {
-	background: #fff;
+	background: var(--bg-card);
 	border-radius: 6px;
-	margin: 0.5rem;
+	margin: 0.8rem;
 	border: 1px solid var(--my-border-color);
 	.q-expansion-item__container {
 		border-bottom: none;

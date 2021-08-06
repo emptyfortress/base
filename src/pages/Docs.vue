@@ -25,7 +25,14 @@
 					q-tab-panel(name="main")
 						q-list
 							.pos
-								q-expansion-item(switch-toggle-side label="Информация" )
+								q-expansion-item(v-model='panels.info' switch-toggle-side label="Информация")
+									q-card
+										q-card-section
+											p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste eveniet doloribus ullam aliquid.
+								.actionBt
+									q-btn(round flat dense icon="mdi-unfold-more-horizontal" @click="expandAll")
+							.pos
+								q-expansion-item(v-model="panels.file" switch-toggle-side label="Файлы" )
 									q-card
 										q-card-section
 											Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste eveniet doloribus ullam aliquid.
@@ -33,16 +40,12 @@
 									q-btn(round flat dense )
 										svgIcon(name="scan")
 									q-btn(round flat dense)
-										svgIcon(name="folder-open-outline" color="primary")
-							q-expansion-item(switch-toggle-side label="Информация")
-								q-card
-									q-card-section
-										p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste eveniet doloribus ullam aliquid.
+										svgIcon(name="folder-open-outline")
 
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import Status from '@/components/Status.vue'
 import svgIcon from '@/components/svgIcon.vue'
 
@@ -52,6 +55,23 @@ export default {
 		svgIcon,
 	},
 	setup() {
+		const panels = reactive({
+			all: null,
+			info: false,
+			file: false,
+		})
+		const expandAll = () => {
+			if (!panels.all) {
+				Object.keys(panels).map((key,) => {
+					return (panels[key] = true)
+				})
+			} else {
+				Object.keys(panels).map((key,) => {
+					return (panels[key] = false)
+				})
+			}
+		}
+
 		const item = [
 			{
 				id: 0,
@@ -72,6 +92,8 @@ export default {
 			splitterModel: ref(50),
 			item,
 			tab: ref('main'),
+			panels,
+			expandAll,
 		}
 	},
 }
@@ -88,7 +110,7 @@ export default {
 	padding-right: 0.5rem;
 	.pdf {
 		background: var(--bg-drawer);
-		border: 1px solid var(--actionBt-border-color);
+		border: 1px solid var(--my-border-color);
 		width: 100%;
 		height: 100%;
 		display: flex;
@@ -108,11 +130,11 @@ export default {
 		margin-right: 4px;
 	}
 	padding-bottom: 1rem;
-	border-bottom: 1px solid var(--actionBt-border-color);
+	border-bottom: 1px solid var(--my-border-color);
 }
 .q-expansion-item--expanded {
 	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
-	border: 1px solid #ccc;
+	border: 1px solid var(--my-border-color);
 }
 .pos {
 	position: relative;
@@ -120,7 +142,6 @@ export default {
 .actionBt {
 	position: absolute;
 	top: 7px;
-	right: 13px;
+	right: 16px;
 }
-
 </style>
