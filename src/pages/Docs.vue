@@ -29,24 +29,27 @@
 									q-card
 										q-card-section
 											Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste eveniet doloribus ullam aliquid.
-								q-btn(round flat dense icon="mdi-close").my
+								.actionBt
+									q-btn(round flat dense )
+										svgIcon(name="scan")
+									q-btn(round flat dense)
+										svgIcon(name="folder-open-outline" color="primary")
 							q-expansion-item(switch-toggle-side label="Информация")
 								q-card
 									q-card-section
-										Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste eveniet doloribus ullam aliquid.
-
-					q-tab-panel(name="hod")
-						p hod
+										p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste eveniet doloribus ullam aliquid.
 
 </template>
 
 <script>
 import { ref } from 'vue'
 import Status from '@/components/Status.vue'
+import svgIcon from '@/components/svgIcon.vue'
 
 export default {
 	components: {
 		Status,
+		svgIcon,
 	},
 	setup() {
 		const item = [
@@ -85,7 +88,7 @@ export default {
 	padding-right: 0.5rem;
 	.pdf {
 		background: var(--bg-drawer);
-		border: 1px solid var(--my-border-color);
+		border: 1px solid var(--actionBt-border-color);
 		width: 100%;
 		height: 100%;
 		display: flex;
@@ -105,18 +108,19 @@ export default {
 		margin-right: 4px;
 	}
 	padding-bottom: 1rem;
-	border-bottom: 1px solid var(--my-border-color);
+	border-bottom: 1px solid var(--actionBt-border-color);
 }
 .q-expansion-item--expanded {
 	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
 	border: 1px solid #ccc;
 }
-	.pos {
-		position: relative;
-	}
-	.my {
-		position: absolute;
-		top: 0px;
-		right: 0;
+.pos {
+	position: relative;
 }
+.actionBt {
+	position: absolute;
+	top: 7px;
+	right: 13px;
+}
+
 </style>

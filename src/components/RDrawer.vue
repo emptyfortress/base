@@ -17,6 +17,7 @@ q-drawer(v-model="show" side="right" bordered)
 	q-separator
 	q-item
 		q-toggle( v-model="dark" label="Темная тема" color="primary")
+
 </template>
 
 <script>
@@ -27,7 +28,7 @@ import Color from '@/components/Color.vue'
 
 export default {
 	props: ['show'],
-	components: { Color },
+	components: { Color, },
 	setup(props) {
 		const dark = ref(false)
 		const toolbar = ref(false)

@@ -14,7 +14,6 @@ q-drawer(v-model="show" side="left" :mini="colors.mini" :width="width" bordered 
 	Lib(v-else @back="lib=false")
 
 	q-btn(round flat dense :icon="minitoogle" @click="colors.mini = !colors.mini").mini
-	
 
 </template>
 
@@ -22,10 +21,11 @@ q-drawer(v-model="show" side="left" :mini="colors.mini" :width="width" bordered 
 import { ref, computed } from 'vue'
 import { useColor } from '@/stores/colors'
 import Lib from '@/components/Lib.vue'
+import svgIcon from '@/components/svgIcon.vue'
 
 export default {
 	props: ['show'],
-	components: {Lib},
+	components: {Lib, svgIcon},
 	setup() {
 		const colors = useColor()
 		const pages = [
