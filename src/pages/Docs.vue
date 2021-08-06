@@ -42,8 +42,8 @@
 								q-expansion-item(v-model="panels.file" switch-toggle-side label="Файлы" )
 									q-card
 										q-card-section
-											Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste eveniet doloribus ullam aliquid.
-								.actionBt
+											FileTable(:files="files")
+								.actionBt.gr
 									q-btn(round flat dense )
 										svgIcon(name="sign")
 									q-btn(round flat dense )
@@ -59,12 +59,14 @@
 <script>
 import { ref, reactive } from 'vue'
 import Status from '@/components/Status.vue'
+import FileTable from '@/components/common/FileTable.vue'
 import svgIcon from '@/components/svgIcon.vue'
 
 export default {
 	components: {
 		Status,
 		svgIcon,
+		FileTable,
 	},
 	setup() {
 		const panels = reactive({
@@ -84,6 +86,11 @@ export default {
 			}
 		}
 
+		const files = [
+			{id: 0, icon: 'doc', name: 'Name of the file', version: 'в.1'},
+			{id: 1, icon: 'pdf', name: 'Name of the file', version: 'в.1'},
+			{id: 2, icon: 'xls', name: 'Name of the file', version: 'в.1'},
+		]
 		const item = [
 			{
 				id: 0,
@@ -106,6 +113,7 @@ export default {
 			tab: ref('main'),
 			panels,
 			expandAll,
+			files,
 		}
 	},
 }
@@ -163,6 +171,12 @@ body.body--dark .preview .pdf {
 	right: 16px;
 	body.body--dark & {
 		color: var(--dark-text-color);
+	}
+	&.gr svg {
+		opacity: 0.7;
+		&:hover {
+			opacity: 1;
+		}
 	}
 }
 </style>

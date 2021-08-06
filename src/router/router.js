@@ -28,6 +28,11 @@ export const router = createRouter({
 			component: () => import('@/pages/Grid.vue'),
 		},
 		{
+			path: '/lib',
+			name: 'lib',
+			component: () => import('@/pages/Lib.vue'),
+		},
+		{
 			path: '/hello',
 			name: 'helloworld',
 			component: () => import('../components/HelloWorld.vue'),
