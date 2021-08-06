@@ -26,7 +26,8 @@
 				.right
 					q-btn(unelevated icon="mdi-plus" color="primary-darken-2") Создать
 					q-btn(unelevated)
-						svgIcon(name="search-scan" :color="iconColor")
+						svgIcon(name="search-scan")
+						//- svgIcon(name="search-scan" :color="iconColor")
 
 		Drawer(:show="leftDrawer")
 		RDrawer(:show="rightDrawer")
@@ -164,6 +165,9 @@ body.body--dark .head {
 			height: 1.7rem;
 		}
 	}
+}
+.head-fill .right svg.icon {
+	fill: #fff;
 }
 
 .mybadge {

@@ -117,6 +117,15 @@ a:hover:not(.q-link) {
 	color: black;
 	text-align: left;
 	font-size: 1.4rem;
+	span {
+		font-size: 0.9rem;
+		opacity: 0.6;
+		cursor: pointer;
+		vertical-align: middle;
+	}
+	body.body--dark & {
+		color: var(--dark-text-color);
+	}
 }
 .q-tab-panels {
 	background: transparent;

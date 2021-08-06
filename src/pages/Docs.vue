@@ -11,11 +11,17 @@
 					.num Вх-123/3055
 					Status(title="Подготовка")
 				br
-				.zag.q-mb-md {{ item[0].title }}
+				.zag.q-mb-md 
+					|{{ item[0].title }}
+					span.q-ml-lg
+						svgIcon(name="pencil")
+						svgIcon(name="refresh")
+						svgIcon(name="bin")
 				.btgroup
 					q-btn( color="primary") Зарегистрировать
 					q-btn(unelevated color="primary") Действует
 					q-btn(outline icon="mdi-dots-horizontal" color="primary")
+					q-btn(unelevated ) История
 
 				q-tabs(v-model="tab" align="left" inline-label switch-indicator indicator-color="primary" :breakpoint="500")
 					q-tab(name="main" label="Главная")
@@ -27,8 +33,9 @@
 							.pos
 								q-expansion-item(v-model='panels.info' switch-toggle-side label="Информация")
 									q-card
-										q-card-section
-											p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste eveniet doloribus ullam aliquid.
+										q-card-section Детальный план ввода в эксплуатацию автоматизированной информационной системы государственного заказа Санкт-Петербурга на периода март-май 2020 г.
+										q-card-section.q-pt-none laksjd
+
 								.actionBt
 									q-btn(round flat dense icon="mdi-unfold-more-horizontal" @click="expandAll")
 							.pos
@@ -38,9 +45,14 @@
 											Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste eveniet doloribus ullam aliquid.
 								.actionBt
 									q-btn(round flat dense )
+										svgIcon(name="sign")
+									q-btn(round flat dense )
 										svgIcon(name="scan")
 									q-btn(round flat dense)
 										svgIcon(name="folder-open-outline")
+
+					q-tab-panel(name="hod")
+						p lakjsdlkj
 
 </template>
 
@@ -62,11 +74,11 @@ export default {
 		})
 		const expandAll = () => {
 			if (!panels.all) {
-				Object.keys(panels).map((key,) => {
+				Object.keys(panels).map((key) => {
 					return (panels[key] = true)
 				})
 			} else {
-				Object.keys(panels).map((key,) => {
+				Object.keys(panels).map((key) => {
 					return (panels[key] = false)
 				})
 			}
@@ -119,6 +131,12 @@ export default {
 		color: #aaa;
 	}
 }
+body.body--dark .preview .pdf {
+	color: var(--dark-text-color);
+	h4 {
+		opacity: 0.5;
+	}
+}
 .num {
 	font-size: 1.1rem;
 }
@@ -133,7 +151,7 @@ export default {
 	border-bottom: 1px solid var(--my-border-color);
 }
 .q-expansion-item--expanded {
-	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 	border: 1px solid var(--my-border-color);
 }
 .pos {
@@ -143,5 +161,8 @@ export default {
 	position: absolute;
 	top: 7px;
 	right: 16px;
+	body.body--dark & {
+		color: var(--dark-text-color);
+	}
 }
 </style>

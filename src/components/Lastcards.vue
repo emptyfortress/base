@@ -20,7 +20,7 @@ SimpleTable
 
 <script>
 import svgIcon from '@/components/svgIcon.vue'
-import SimpleTable from '@/components/SimpleTable.vue'
+import SimpleTable from '@/components/common/SimpleTable.vue'
 
 export default {
 	components: { svgIcon, SimpleTable },
