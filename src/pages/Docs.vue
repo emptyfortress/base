@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import Status from '@/components/Status.vue'
 import FileTable from '@/components/common/FileTable.vue'
 import SvgIcon from '@/components/SvgIcon.vue'
@@ -69,6 +69,9 @@ export default {
 		FileTable,
 	},
 	setup() {
+		const test = computed(() => {
+			return 'fuck'
+		})
 		const panels = reactive({
 			all: null,
 			info: false,
@@ -87,9 +90,9 @@ export default {
 		}
 
 		const files = [
-			{id: 0, icon: 'doc', name: 'Name of the file', version: 'в.1'},
-			{id: 1, icon: 'pdf', name: 'Name of the file', version: 'в.1'},
-			{id: 2, icon: 'xls', name: 'Name of the file', version: 'в.1'},
+			{ id: 0, icon: 'doc', name: 'Файл номер 1', version: 'в.1' },
+			{ id: 1, icon: 'pdf', name: 'Файл номер 2', version: 'в.1' },
+			{ id: 2, icon: 'xls', name: 'Файл номер 3', version: 'в.1' },
 		]
 		const item = [
 			{
@@ -114,6 +117,7 @@ export default {
 			panels,
 			expandAll,
 			files,
+			test,
 		}
 	},
 }
