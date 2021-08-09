@@ -16,4 +16,13 @@ const maincolor = computed(() => {
 	}
 })
 
-export { maincolor }
+const setMinWidth = (elClass) => {
+	const nodeList = document.querySelectorAll(elClass)
+	const listToArray = [...nodeList]
+	const widthArray = listToArray.map( el => el.clientWidth ) 
+	console.log(widthArray)
+	const maxWidth = Math.max.apply(null, widthArray)
+	nodeList.forEach( el => el.style = `min-width: ${maxWidth + 1}px;` )
+}
+
+export { maincolor, setMinWidth }

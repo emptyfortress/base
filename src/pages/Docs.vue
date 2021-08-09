@@ -32,7 +32,6 @@
 						q-list
 							InfoPanel(:panels="panels" @toggle="expandAll")
 							FilePanel(:panels="panels" :files="files")
-							FilePanel(:panels="panels" :files="files")
 
 					q-tab-panel(name="hod")
 						p lakjsdlkj
@@ -56,7 +55,7 @@ export default {
 	setup() {
 		const panels = reactive({
 			all: null,
-			info: false,
+			info: true,
 			file: false,
 		})
 		const hei = computed(() => {
