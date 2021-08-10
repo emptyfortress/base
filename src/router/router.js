@@ -32,5 +32,10 @@ export const router = createRouter({
 			name: 'lib',
 			component: () => import('@/components/Lib.vue'),
 		},
+		{
+			path: '/albatros',
+			name: 'albatros',
+			component: () => import('@/components/Albatros.vue'),
+		},
 	],
 })

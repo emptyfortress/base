@@ -37,8 +37,8 @@ export default {
 				{ id: 0, label: 'Вид', value: ['Входящий'] },
 				{ id: 1, label: 'Состояние', value: ['Подготовка'] },
 				{ id: 2, label: 'Подготовил', value: ['Порхачева Н.'] },
-				{ id: 3, label: 'Рег.№', value: ['длфоы'] },
-				{ id: 4, label: 'Дата регистрации', value: ['длфоы'] },
+				{ id: 3, label: 'Рег.№', value: ['______'] },
+				{ id: 4, label: 'Дата регистрации', value: [' '] },
 				{ id: 5, label: 'Согласующие', value: ['Волков А.', 'Карачева О.', 'Скворцов Г.'] },
 				{ id: 6, label: 'Подписывает', value: ['Воробьев С.'] },
 				{ id: 7, label: 'Получатели', value: ['Гусев П.', 'Уткин А.', 'Скворцов Г.', 'Смирнов С.'] },
@@ -76,7 +76,7 @@ export default {
 	display: flex;
 	align-items: flex-start;
 	gap: 10px;
-	margin-bottom: 7px;
+	margin-bottom: 10px;
 	line-height: 100%;
 	.label {
 		white-space: nowrap;
