@@ -37,11 +37,19 @@ export default {
 				{ id: 0, label: 'Вид', value: ['Входящий'] },
 				{ id: 1, label: 'Состояние', value: ['Подготовка'] },
 				{ id: 2, label: 'Подготовил', value: ['Порхачева Н.'] },
-				{ id: 3, label: 'Рег.№', value: ['______'] },
-				{ id: 4, label: 'Дата регистрации', value: [' '] },
-				{ id: 5, label: 'Согласующие', value: ['Волков А.', 'Карачева О.', 'Скворцов Г.'] },
+				{ id: 3, label: 'Рег.№', value: ['Вх-1234'] },
+				{ id: 4, label: 'Дата регистрации', value: ['19.08.2021'] },
+				{
+					id: 5,
+					label: 'Согласующие',
+					value: ['Волков А.', 'Карачева О.', 'Скворцов Г.'],
+				},
 				{ id: 6, label: 'Подписывает', value: ['Воробьев С.'] },
-				{ id: 7, label: 'Получатели', value: ['Гусев П.', 'Уткин А.', 'Скворцов Г.', 'Смирнов С.'] },
+				{
+					id: 7,
+					label: 'Получатели',
+					value: ['Гусев П.', 'Уткин А.', 'Скворцов Г.', 'Смирнов С.'],
+				},
 			],
 		}
 	},
@@ -68,26 +76,30 @@ export default {
 .attr {
 	display: flex;
 	flex-wrap: wrap;
-	/* justify-content: flex-start; */
-	/* justify-content: space-around; */
-	/* align-items: flex-start; */
-	gap: 0 3rem;
+	justify-content: space-between;
+	justify-content: flex-start;
+	gap: 0 1rem;
 }
 .attribute {
 	display: flex;
 	align-items: flex-start;
 	gap: 10px;
-	margin-bottom: 10px;
+	padding-bottom: 10px;
+	/* margin-bottom: 10px; */
 	line-height: 100%;
-	flex-basis: calc(calc(280px - 100%) * 999);
-	flex-grow: 1;
-	/* background: yellow; */
+	/* flex-basis: calc(calc(280px - 100%) * 999); */
+	/* flex-grow: 0; */
+	border-right: 1px dotted var(--my-border-color);
+	/* padding: 10px 0; */
 	.label {
 		white-space: nowrap;
-		opacity: .8;
+		opacity: 0.8;
+		/* background: yellow; */
 	}
 	.value {
+		/* background: green; */
 		white-space: normal;
+		/* padding-right: 1rem; */
 	}
 }
 </style>
