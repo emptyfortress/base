@@ -9,6 +9,7 @@
 						.label {{ attribute.label }}:
 						.value
 							div(v-for='el in attribute.value').q-mr-sm {{ el }}
+				.prim Ознакомьтесь с приложенным документом.
 
 
 	.actionBt
@@ -102,4 +103,14 @@ export default {
 		/* padding-right: 1rem; */
 	}
 }
+	.prim {
+		border: 1px solid var(--my-border-color);
+		background: #eee;
+		margin-top: 1rem;
+		&::before {
+			content: 'Примечание: ';
+			font-weight: bold;
+			padding-left: 1rem;
+		}
+	}
 </style>
