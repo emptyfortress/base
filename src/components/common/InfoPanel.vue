@@ -68,8 +68,9 @@ export default {
 .attr {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: flex-start;
-	align-items: flex-start;
+	/* justify-content: flex-start; */
+	/* justify-content: space-around; */
+	/* align-items: flex-start; */
 	gap: 0 3rem;
 }
 .attribute {
@@ -78,6 +79,9 @@ export default {
 	gap: 10px;
 	margin-bottom: 10px;
 	line-height: 100%;
+	flex-basis: calc(calc(280px - 100%) * 999);
+	flex-grow: 1;
+	/* background: yellow; */
 	.label {
 		white-space: nowrap;
 		opacity: .8;

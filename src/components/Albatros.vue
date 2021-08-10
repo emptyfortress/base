@@ -15,23 +15,28 @@
 						p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 					.card.flow
 						.text-bold head
-						p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+					.card.flow
+						.text-bold head
+						p Lorem ipsum dolor sit amet,
 					.card.flow
 						.text-bold head
 						p Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+					.card.flow
+						.text-bold head
+						p Lorem ipsum dolor sit amet, 
 						 
 </template>
 
 <script>
-import { ref, computed, onUpdated, onMounted } from 'vue'
+import { ref, computed, onUpdated } from 'vue'
 
 export default {
 	setup() {
-
 		let width = ref(null)
-		onUpdated( () => {
+		onUpdated(() => {
 			width.value = document.querySelector('#columns').clientWidth
-		}) 
+		})
 
 		const hei = computed(() => {
 			return 'height: ' + (window.innerHeight - 145) + 'px;'
@@ -43,15 +48,14 @@ export default {
 			width,
 		}
 	},
-
 }
 </script>
 
 <style scoped lang="scss">
 @import '@/assets/styles/theme.scss';
-	.container {
-		background: #fff;
-	}
+.container {
+	background: #fff;
+}
 .preview {
 	width: 100%;
 	height: 600px;
@@ -66,19 +70,19 @@ export default {
 		align-items: center;
 	}
 }
-	.card {
-		border: 1px solid #ccc;
-		padding: 1rem;
+.card {
+	border: 1px solid #ccc;
+	padding: 1rem;
+}
+#columns {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	.flow {
+		/* flex-basis: calc(500px - 100%); */
+		flex-basis: calc(calc(800px - 100%) * 999);
+		flex-shrink: 1;
+		flex-grow: 1;
 	}
-	#columns {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 1rem;
-		.flow {
-			flex-basis: calc(500px - 100%);
-			flex-basis: calc(calc(500px - 100%) * 999);
-			flex-shrink: 1;
-			flex-grow: 1;
-		}
-	}
+}
 </style>
