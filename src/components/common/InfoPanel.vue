@@ -4,7 +4,7 @@
 		q-card
 			q-card-section Детальный план ввода в эксплуатацию автоматизированной информационной системы государственного заказа Санкт-Петербурга на периода март-май 2020 г.
 			q-card-section.q-pt-none
-				.attr
+				.flex
 					.attribute(v-for='attribute in attributes' :key="attribute.id")
 						.label {{ attribute.label }}:
 						.value
@@ -74,7 +74,7 @@ export default {
 		}
 	}
 }
-.attr {
+.flex {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
