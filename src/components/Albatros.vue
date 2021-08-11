@@ -10,15 +10,10 @@
 
 
 				#columns
-					div
-						.card.flow(v-for="n in 5")
-							.text-bold head {{ n }}
-							.value Lorem ipsum dolor
-					div
-						.card.flow(v-for="n in 5")
-							.text-bold head {{ n }}
-							.value Lorem ipsum dolor
-						 
+					.card.flow(v-for="attribute in attributes")
+						.text-bold {{ attribute.label }}
+						.value {{ attribute.value }}
+					 
 </template>
 
 <script>
@@ -39,6 +34,25 @@ export default {
 			splitter: ref(50),
 			hei,
 			width,
+			attributes: [
+				{ id: 0, label: 'Вид', value: ['Входящий'] },
+				{ id: 1, label: 'Состояние', value: ['Подготовка'] },
+				{ id: 2, label: 'Подготовил', value: ['Константинопольский А.'] },
+				{ id: 3, label: 'Рег.№', value: ['Вх-1234'] },
+				{ id: 4, label: 'Дата регистрации', value: ['19.08.2021'] },
+				{
+					id: 5,
+					label: 'Согласующие',
+					value: ['Волков А.', 'Карачева О.', 'Скворцов Г.'],
+				},
+				{ id: 6, label: 'Подписывает', value: ['Воробьев С.'] },
+				{
+					id: 7,
+					label: 'Получатели',
+					value: ['Гусев П.', 'Уткин А.', 'Скворцов Г.', 'Смирнов С.'],
+				},
+				{ id: 8, label: 'Метка', value: ['значение'] },
+			],
 		}
 	},
 }
@@ -68,16 +82,15 @@ export default {
 	padding: .5rem;
 }
 #columns {
-	display: grid;
-	grid-template-columns: repeat(2, auto-fill);
-	/* grid-auto-flow: column; */
-	grid-gap: 1rem;
-	> * {
-		background: pink;
-	}
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
 	.flow {
+		flex-basis: 300px;
+		flex-grow: 1;
 		display: flex;
 		gap: 1rem;
+
 	}
 }
 </style>

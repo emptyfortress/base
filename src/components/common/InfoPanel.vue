@@ -9,7 +9,7 @@
 						template(v-for='attribute in attributes' :key="attribute.id")
 							.label {{ attribute.label }}:
 							.value
-								div(v-for='el in attribute.value').q-mr-sm {{ el }}
+								div(v-for='el in attribute.value') {{ el }}
 
 				.prim Ознакомьтесь с приложенным документом.
 
@@ -71,28 +71,33 @@ export default {
 }
 .columns {
 	columns: 34ch auto;
+	column-gap: 1rem;
+	position: relative;
 }
 .attribute {
 	display: grid;
-	grid-template-columns: [labels] auto [value] 1fr;
-	grid-auto-flow: column;
-	grid-gap: 0.5rem;
+	grid-template-columns: [labels] auto [value] auto;
+	grid-gap: 3px 15px;
+	height: 100%;
 }
-.attribute > .label {
+.attribute .label {
 	grid-column: labels;
-	grid-row: auto;
-	line-height: 100%;
-	opacity: .7;
+	opacity: 0.7;
+	break-inside: avoid;
 }
-.attribute > .value {
+.attribute .value {
 	grid-column: value;
 	grid-row: auto;
-	line-height: 100%;
+	column-break-before: avoid;
+  column-break-inside: avoid;
+  column-break-after: always;
 	div {
 		display: inline-block;
+		white-space: nowrap;
+		margin-right: 8px;
 	}
 	div:not(:last-child)::after {
-		content: ','
+		content: ',';
 	}
 }
 .prim {
