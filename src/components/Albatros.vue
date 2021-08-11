@@ -10,22 +10,8 @@
 
 
 				#columns
-					.card.flow
-						.text-bold head
-						p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-					.card.flow
-						.text-bold head
-						p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-					.card.flow
-						.text-bold head
-						p Lorem ipsum dolor sit amet,
-					.card.flow
-						.text-bold head
-						p Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-					.card.flow
-						.text-bold head
-						p Lorem ipsum dolor sit amet, 
-						 
+					.card.flow(v-for="n in 3")
+					 
 </template>
 
 <script>
@@ -53,6 +39,21 @@ export default {
 
 <style scoped lang="scss">
 @import '@/assets/styles/theme.scss';
+.flow {
+	flex-basis: calc(calc(500px - 100%) * 999);
+	flex-grow: 1;
+}
+.card {
+	border: 1px solid #ccc;
+	padding: 0.5rem;
+	background: pink;
+	height: 100px;
+}
+#columns {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+}
 .container {
 	background: #fff;
 }
@@ -68,21 +69,6 @@ export default {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-	}
-}
-.card {
-	border: 1px solid #ccc;
-	padding: 1rem;
-}
-#columns {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 1rem;
-	.flow {
-		/* flex-basis: calc(500px - 100%); */
-		flex-basis: calc(calc(800px - 100%) * 999);
-		flex-shrink: 1;
-		flex-grow: 1;
 	}
 }
 </style>

@@ -4,13 +4,14 @@
 		q-card
 			q-card-section Детальный план ввода в эксплуатацию автоматизированной информационной системы государственного заказа Санкт-Петербурга на периода март-май 2020 г.
 			q-card-section.q-pt-none
-				.flex
-					.attribute(v-for='attribute in attributes' :key="attribute.id")
-						.label {{ attribute.label }}:
-						.value
-							div(v-for='el in attribute.value').q-mr-sm {{ el }}
-				.prim Ознакомьтесь с приложенным документом.
+				.columns
+					.attribute
+						template(v-for='attribute in attributes' :key="attribute.id")
+							.label {{ attribute.label }}:
+							.value
+								div(v-for='el in attribute.value') {{ el }}
 
+				.prim Ознакомьтесь с приложенным документом.
 
 	.actionBt
 		q-btn(round flat dense icon="mdi-unfold-more-horizontal" @click="$emit('toggle')")
@@ -18,8 +19,6 @@
 
 <script>
 import SvgIcon from '@/components/SvgIcon.vue'
-import { onMounted } from 'vue'
-import { setMinWidth } from '@/utils/utils'
 
 export default {
 	props: ['panels'],
@@ -28,16 +27,11 @@ export default {
 		SvgIcon,
 	},
 	setup() {
-		onMounted(() => {
-			setMinWidth('.label')
-			setMinWidth('.value')
-		})
-
 		return {
 			attributes: [
 				{ id: 0, label: 'Вид', value: ['Входящий'] },
 				{ id: 1, label: 'Состояние', value: ['Подготовка'] },
-				{ id: 2, label: 'Подготовил', value: ['Порхачева Н.'] },
+				{ id: 2, label: 'Подготовил', value: ['Константинопольский А.'] },
 				{ id: 3, label: 'Рег.№', value: ['Вх-1234'] },
 				{ id: 4, label: 'Дата регистрации', value: ['19.08.2021'] },
 				{
@@ -51,6 +45,7 @@ export default {
 					label: 'Получатели',
 					value: ['Гусев П.', 'Уткин А.', 'Скворцов Г.', 'Смирнов С.'],
 				},
+				{ id: 8, label: 'Метка', value: ['значение'] },
 			],
 		}
 	},
@@ -74,43 +69,39 @@ export default {
 		}
 	}
 }
-.flex {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	justify-content: flex-start;
-	gap: 0 1rem;
+.columns {
+	columns: 34ch auto;
+	column-gap: 1rem;
 }
 .attribute {
-	display: flex;
-	align-items: flex-start;
-	gap: 10px;
-	padding-bottom: 10px;
-	/* margin-bottom: 10px; */
-	line-height: 100%;
-	/* flex-basis: calc(calc(280px - 100%) * 999); */
-	/* flex-grow: 0; */
-	border-right: 1px dotted var(--my-border-color);
-	/* padding: 10px 0; */
-	.label {
+	display: grid;
+	grid-template-columns: [labels] auto [value] 1fr;
+	grid-gap: 3px 15px;
+}
+.attribute .label {
+	grid-column: labels;
+	opacity: 0.7;
+	/* background: pink; */
+}
+.attribute .value {
+	grid-column: value;
+	div {
+		display: inline-block;
 		white-space: nowrap;
-		opacity: 0.8;
-		/* background: yellow; */
+		margin-right: 8px;
 	}
-	.value {
-		/* background: green; */
-		white-space: normal;
-		/* padding-right: 1rem; */
+	div:not(:last-child)::after {
+		content: ',';
 	}
 }
-	.prim {
-		border: 1px solid var(--my-border-color);
-		background: #eee;
-		margin-top: 1rem;
-		&::before {
-			content: 'Примечание: ';
-			font-weight: bold;
-			padding-left: 1rem;
-		}
+.prim {
+	border: 1px solid var(--my-border-color);
+	background: #eee;
+	margin-top: 1rem;
+	&::before {
+		content: 'Примечание: ';
+		font-weight: bold;
+		padding-left: 1rem;
 	}
+}
 </style>
