@@ -10,21 +10,14 @@
 
 
 				#columns
-					.card.flow
-						.text-bold head
-						p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-					.card.flow
-						.text-bold head
-						p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-					.card.flow
-						.text-bold head
-						p Lorem ipsum dolor sit amet,
-					.card.flow
-						.text-bold head
-						p Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-					.card.flow
-						.text-bold head
-						p Lorem ipsum dolor sit amet, 
+					div
+						.card.flow(v-for="n in 5")
+							.text-bold head {{ n }}
+							.value Lorem ipsum dolor
+					div
+						.card.flow(v-for="n in 5")
+							.text-bold head {{ n }}
+							.value Lorem ipsum dolor
 						 
 </template>
 
@@ -72,17 +65,19 @@ export default {
 }
 .card {
 	border: 1px solid #ccc;
-	padding: 1rem;
+	padding: .5rem;
 }
 #columns {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 1rem;
+	display: grid;
+	grid-template-columns: repeat(2, auto-fill);
+	/* grid-auto-flow: column; */
+	grid-gap: 1rem;
+	> * {
+		background: pink;
+	}
 	.flow {
-		/* flex-basis: calc(500px - 100%); */
-		flex-basis: calc(calc(800px - 100%) * 999);
-		flex-shrink: 1;
-		flex-grow: 1;
+		display: flex;
+		gap: 1rem;
 	}
 }
 </style>
