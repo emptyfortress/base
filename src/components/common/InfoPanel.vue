@@ -4,18 +4,12 @@
 		q-card
 			q-card-section Детальный план ввода в эксплуатацию автоматизированной информационной системы государственного заказа Санкт-Петербурга на периода март-май 2020 г.
 			q-card-section.q-pt-none
-				.grid
-					.attr
+				.columns
+					.attribute
 						template(v-for='attribute in attributes' :key="attribute.id")
 							.label {{ attribute.label }}:
 							.value
-								span(v-for='el in attribute.value').q-mr-sm {{ el }}
-					div
-						//- .attr
-							template(v-for='attribute in attributes' :key="attribute.id")
-								.label {{ attribute.label }}:
-								.value
-									span(v-for='el in attribute.value').q-mr-sm {{ el }}
+								div(v-for='el in attribute.value').q-mr-sm {{ el }}
 
 				.prim Ознакомьтесь с приложенным документом.
 
@@ -25,8 +19,6 @@
 
 <script>
 import SvgIcon from '@/components/SvgIcon.vue'
-// import { onMounted } from 'vue'
-// import { setMinWidth } from '@/utils/utils'
 
 export default {
 	props: ['panels'],
@@ -35,16 +27,11 @@ export default {
 		SvgIcon,
 	},
 	setup() {
-		// onMounted(() => {
-		// 	setMinWidth('.label')
-		// 	setMinWidth('.value')
-		// })
-
 		return {
 			attributes: [
 				{ id: 0, label: 'Вид', value: ['Входящий'] },
 				{ id: 1, label: 'Состояние', value: ['Подготовка'] },
-				{ id: 2, label: 'Подготовил', value: ['Порхачева Н.'] },
+				{ id: 2, label: 'Подготовил', value: ['Константинопольский А.'] },
 				{ id: 3, label: 'Рег.№', value: ['Вх-1234'] },
 				{ id: 4, label: 'Дата регистрации', value: ['19.08.2021'] },
 				{
@@ -58,7 +45,7 @@ export default {
 					label: 'Получатели',
 					value: ['Гусев П.', 'Уткин А.', 'Скворцов Г.', 'Смирнов С.'],
 				},
-				{ id: 8, label: 'Label', value: ['something'] },
+				{ id: 8, label: 'Метка', value: ['значение'] },
 			],
 		}
 	},
@@ -82,43 +69,31 @@ export default {
 		}
 	}
 }
-.grid {
-	display: grid;
-	grid-template-columns: auto 1fr;
-	grid-gap: 1rem;
-	> div {
-		background: pink;
-		width: 100%;
-	}
+.columns {
+	columns: 34ch auto;
 }
-.one {
-	line-height: 100%;
-	background: green;
-	flex-basis: calc(calc(500px - 100%) * 999);
-}
-.attr {
+.attribute {
 	display: grid;
 	grid-template-columns: [labels] auto [value] 1fr;
 	grid-auto-flow: column;
-	grid-gap: 0.5rem 1rem;
+	grid-gap: 0.5rem;
 }
-.attr > .label {
+.attribute > .label {
 	grid-column: labels;
 	grid-row: auto;
 	line-height: 100%;
-	background: yellow;
+	opacity: .7;
 }
-.attr > .value {
+.attribute > .value {
 	grid-column: value;
 	grid-row: auto;
 	line-height: 100%;
-	background: #ccc;
-}
-.attr > .tes {
-	grid-column: tes;
-	grid-row: auto;
-	line-height: 100%;
-	background: blue;
+	div {
+		display: inline-block;
+	}
+	div:not(:last-child)::after {
+		content: ','
+	}
 }
 .prim {
 	border: 1px solid var(--my-border-color);
