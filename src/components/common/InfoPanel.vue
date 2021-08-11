@@ -81,17 +81,10 @@ export default {
 .attribute .label {
 	grid-column: labels;
 	opacity: 0.7;
-<<<<<<< HEAD
+	/* background: pink; */
 }
 .attribute .value {
 	grid-column: value;
-	grid-row: auto;
-=======
-	background: pink;
-}
-.attribute .value {
-	grid-column: value;
->>>>>>> grid1
 	div {
 		display: inline-block;
 		white-space: nowrap;
