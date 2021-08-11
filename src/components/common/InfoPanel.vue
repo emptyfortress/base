@@ -72,25 +72,18 @@ export default {
 .columns {
 	columns: 34ch auto;
 	column-gap: 1rem;
-	position: relative;
 }
 .attribute {
 	display: grid;
 	grid-template-columns: [labels] auto [value] auto;
 	grid-gap: 3px 15px;
-	height: 100%;
 }
 .attribute .label {
 	grid-column: labels;
 	opacity: 0.7;
-	break-inside: avoid;
 }
 .attribute .value {
 	grid-column: value;
-	grid-row: auto;
-	column-break-before: avoid;
-  column-break-inside: avoid;
-  column-break-after: always;
 	div {
 		display: inline-block;
 		white-space: nowrap;
