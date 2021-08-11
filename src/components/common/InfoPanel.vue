@@ -75,12 +75,13 @@ export default {
 }
 .attribute {
 	display: grid;
-	grid-template-columns: [labels] auto [value] auto;
+	grid-template-columns: [labels] auto [value] 1fr;
 	grid-gap: 3px 15px;
 }
 .attribute .label {
 	grid-column: labels;
 	opacity: 0.7;
+	background: pink;
 }
 .attribute .value {
 	grid-column: value;

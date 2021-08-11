@@ -10,9 +10,7 @@
 
 
 				#columns
-					.card.flow(v-for="attribute in attributes")
-						.text-bold {{ attribute.label }}
-						.value {{ attribute.value }}
+					.card.flow(v-for="n in 3")
 					 
 </template>
 
@@ -34,25 +32,6 @@ export default {
 			splitter: ref(50),
 			hei,
 			width,
-			attributes: [
-				{ id: 0, label: 'Вид', value: ['Входящий'] },
-				{ id: 1, label: 'Состояние', value: ['Подготовка'] },
-				{ id: 2, label: 'Подготовил', value: ['Константинопольский А.'] },
-				{ id: 3, label: 'Рег.№', value: ['Вх-1234'] },
-				{ id: 4, label: 'Дата регистрации', value: ['19.08.2021'] },
-				{
-					id: 5,
-					label: 'Согласующие',
-					value: ['Волков А.', 'Карачева О.', 'Скворцов Г.'],
-				},
-				{ id: 6, label: 'Подписывает', value: ['Воробьев С.'] },
-				{
-					id: 7,
-					label: 'Получатели',
-					value: ['Гусев П.', 'Уткин А.', 'Скворцов Г.', 'Смирнов С.'],
-				},
-				{ id: 8, label: 'Метка', value: ['значение'] },
-			],
 		}
 	},
 }
@@ -60,6 +39,21 @@ export default {
 
 <style scoped lang="scss">
 @import '@/assets/styles/theme.scss';
+.flow {
+	flex-basis: calc(calc(500px - 100%) * 999);
+	flex-grow: 1;
+}
+.card {
+	border: 1px solid #ccc;
+	padding: 0.5rem;
+	background: pink;
+	height: 100px;
+}
+#columns {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+}
 .container {
 	background: #fff;
 }
@@ -75,22 +69,6 @@ export default {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-	}
-}
-.card {
-	border: 1px solid #ccc;
-	padding: .5rem;
-}
-#columns {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 1rem;
-	.flow {
-		flex-basis: 300px;
-		flex-grow: 1;
-		display: flex;
-		gap: 1rem;
-
 	}
 }
 </style>
