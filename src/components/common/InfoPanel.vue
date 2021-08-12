@@ -13,7 +13,7 @@
 								div(v-for='el in attribute.value') {{ el }}
 
 				.prim Ознакомьтесь с приложенным документом.
-	//- anoter comment
+
 	.actionBt
 		q-btn(round flat dense icon="mdi-unfold-more-horizontal" @click="$emit('toggle')")
 </template>
@@ -49,7 +49,6 @@ export default {
 		}
 	},
 }
-// add some comments master
 </script>
 
 <style scoped lang="scss">
