@@ -32,7 +32,7 @@
 						q-list
 							InfoPanel(:panels="panels" @toggle="expandAll")
 							FilePanel(:panels="panels" :files="files")
-							LinkPanel(:panels="panels")
+							LinkPanel(:panels="panels" :links="links")
 
 					q-tab-panel(name="hod")
 						p lakjsdlkj
@@ -77,6 +77,10 @@ export default {
 			}
 		}
 
+		const links = [
+			{ id: 0, icon: 'cardv', name: 'Исходящее письмо №364-3(3), Иванов Г.И. О пряниках', type: 'В ответ на' },
+			{ id: 1, icon: 'cardv', name: 'Входящее письмо №098(45.3), отправитель: ООО Лучик', type: 'Входящий' },
+		]
 		const files = [
 			{ id: 0, icon: 'doc', name: 'Файл номер 1', version: 'в.1' },
 			{ id: 1, icon: 'pdf', name: 'Файл номер 2', version: 'в.1' },
@@ -106,6 +110,7 @@ export default {
 			panels,
 			expandAll,
 			files,
+			links,
 			hei,
 		}
 	},

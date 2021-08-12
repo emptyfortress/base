@@ -56,21 +56,6 @@ export default {
 <style scoped lang="scss">
 @import '@/assets/styles/theme.scss';
 
-.actionBt {
-	position: absolute;
-	top: 7px;
-	right: 16px;
-	body.body--dark & {
-		color: var(--dark-text-color);
-	}
-	&.gr svg {
-		opacity: 0.7;
-		&:hover {
-			opacity: 1;
-		}
-	}
-}
-
 .columns {
 	columns: 34ch auto;
 	column-gap: 1rem;

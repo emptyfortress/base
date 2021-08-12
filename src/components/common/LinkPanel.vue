@@ -1,8 +1,9 @@
 <template lang="pug">
 .relative-position
-	q-expansion-item(v-model='panels.link' switch-toggle-side label='Ссылки')
+	q-expansion-item(v-model='panels.link' switch-toggle-side :label='`Ссылки (${links.length})`')
 		q-card
-			q-card-section laksjd
+			q-card-section.q-pt-none
+				LinkTable(:links="links")
 
 	.actionBt.gr
 		q-btn(round flat dense )
@@ -12,12 +13,14 @@
 </template>
 
 <script>
+import LinkTable from '@/components/common/LinkTable.vue'
 import SvgIcon from '@/components/SvgIcon.vue'
 
 export default {
-	props: ['panels'],
+	props: ['panels', 'links'],
 	components: {
 		SvgIcon,
+		LinkTable,
 	},
 	setup() {
 		return {}
@@ -27,18 +30,4 @@ export default {
 
 <style scoped lang="scss">
 @import '@/assets/styles/theme.scss';
-.actionBt {
-	position: absolute;
-	top: 7px;
-	right: 16px;
-	body.body--dark & {
-		color: var(--dark-text-color);
-	}
-	&.gr svg {
-		opacity: 0.7;
-		&:hover {
-			opacity: 1;
-		}
-	}
-}
 </style>
