@@ -5,6 +5,8 @@
 			.preview
 				.pdf
 					h4 Preview
+					q-btn(flat round dense)
+						SvgIcon(name="bin")
 		template(v-slot:after)
 			.q-ml-md
 				.row.justify-between.items-baseline
