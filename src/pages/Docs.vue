@@ -32,6 +32,7 @@
 						q-list
 							InfoPanel(:panels="panels" @toggle="expandAll")
 							FilePanel(:panels="panels" :files="files")
+							LinkPanel(:panels="panels")
 
 					q-tab-panel(name="hod")
 						p lakjsdlkj
@@ -44,6 +45,7 @@ import Status from '@/components/Status.vue'
 import SvgIcon from '@/components/SvgIcon.vue'
 import FilePanel from '@/components/common/FilePanel.vue'
 import InfoPanel from '@/components/common/InfoPanel.vue'
+import LinkPanel from '@/components/common/LinkPanel.vue'
 
 export default {
 	components: {
@@ -51,12 +53,14 @@ export default {
 		SvgIcon,
 		FilePanel,
 		InfoPanel,
+		LinkPanel,
 	},
 	setup() {
 		const panels = reactive({
 			all: null,
-			info: true,
+			info: false,
 			file: false,
+			link: true,
 		})
 		const hei = computed(() => {
 			return 'height: ' + (window.innerHeight - 145) + 'px;'
