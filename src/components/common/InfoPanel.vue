@@ -49,7 +49,7 @@ export default {
 		}
 	},
 }
-// add some comments
+// add some comments master
 </script>
 
 <style scoped lang="scss">
