@@ -1,10 +1,18 @@
 <template lang="pug">
 table
+	thead
+		th Вид
+		th Имя
+		th Тип
+		th
+		th
 	tr(v-for="link in links")
+		td
+			SvgIcon(name="cardv")
+		td.name {{ link.name }}
+		td.text-center {{ link.type }}
 		td.sml
-			img(:src="`/${link.icon}.svg`")
-		td.cursor-pointer {{ link.name }}
-		td.cursor-pointer.text-center lkasj
+			q-btn(flat round dense icon="mdi-information" color="primary")
 		td.sml
 			q-btn(dense flat icon='mdi-dots-vertical')
 				q-menu(transition-show="jump-down" transition-hide="jump-up" dense)
@@ -15,7 +23,7 @@ table
 </template>
 
 <script>
-import { computed } from 'vue'
+import SvgIcon from '@/components/SvgIcon.vue'
 
 export default {
 	props: {
@@ -23,12 +31,14 @@ export default {
 			type: Array,
 		},
 	},
+	components: {
+		SvgIcon,
+	},
 
 	setup() {
 		const menu = [
-			'Добавить комментарий', 'Заблокировать',
-			'Открыть', 'Загрузить версию',
-			'Удалить', 'Скачать',
+			'Action 1', 'Action 2',
+			'Action 3'
 		]
 
 		return {
@@ -48,20 +58,21 @@ table {
 	width: 100%;
 	border-collapse: collapse;
 	.sml {
-		width: 32px;
+		width: 28px;
 	}
 }
 td {
-	/* background: #eee; */
-	color: var(--q-link);
-	font-size: .9rem;
+	font-size: .85rem;
 	border-top: 1px solid var(--my-border-color);
 	border-bottom: 1px solid var(--my-border-color);
 	line-height: 100%;
 }
-img {
-	width: 20px;
-	margin-top: 6px;
-	margin-bottom: 0;
+th {
+	font-size: 0.7rem;
+	text-align: left;
+}
+.name {
+	cursor: pointer;
+	color: var(--q-link);
 }
 </style>

@@ -1,5 +1,7 @@
 <template lang="pug">
-h1 Grid
+.container
+	h4 Grid
+	p new text
 </template>
 
 <script>
