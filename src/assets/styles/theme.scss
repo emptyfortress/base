@@ -45,6 +45,7 @@ $taskcolor: #6dae50;
 	--bg-card: #fff;
 	--my-border-color: #0000001f;
 	--bg-hover: #f2f2f2;
+	--btn-group: #666;
 
 	// fonts
 	--my-body-font-size: 14px;
@@ -144,6 +145,9 @@ body.body--dark {
 // End Dark theme ****************************************
 
 // my custom colors style
+.bg-btn-group {
+	background: var(--btn-group) !important;
+}
 .one {
 	--q-primary: var(--one) !important;
 }

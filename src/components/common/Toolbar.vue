@@ -9,9 +9,9 @@
 		q-btn(unelevated size="12px") Показать все
 	.center()
 		q-btn-group(unelevated).group
-			q-btn(flat round dense icon="mdi-table" size="12px")
+			q-btn(:flat="!grid.view" dense color="btn-group" icon="mdi-table" size="10px" @click="grid.view = !grid.view")
 				q-tooltip(:delay="600" anchor="top middle" self="center middle") Грид
-			q-btn(color="primary" dense icon="mdi-format-list-bulleted" size="12px")
+			q-btn(:flat="grid.view" dense color="btn-group" icon="mdi-format-list-bulleted" size="10px" @click="grid.view = !grid.view")
 				q-tooltip(:delay="600" anchor="top middle" self="center middle") Лента
 	.right
 		q-btn(flat round dense v-for="button in buttons")
@@ -71,6 +71,6 @@ export default {
 	}
 }
 .group {
-	border: 1px solid var(--q-primary);
+	border: 1px solid var(--my-border-color);
 }
 </style>
