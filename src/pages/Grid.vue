@@ -1,11 +1,10 @@
 <template lang="pug">
-h1 Grid
+.container
+	h4 Grid
 </template>
 
 <script>
-export default {
-
-}
+export default {}
 </script>
 
 <style scoped lang="scss">
