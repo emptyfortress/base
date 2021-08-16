@@ -46,6 +46,7 @@ $taskcolor: #6dae50;
 	--my-border-color: #0000001f;
 	--bg-hover: #f2f2f2;
 	--btn-group: #666;
+	--main-bg: var(--bg-light);
 
 	// fonts
 	--my-body-font-size: 14px;
@@ -74,6 +75,7 @@ body.body--dark {
 	--bg-drawer: var(--my-color-step-100);
 	--bg-card: var(--bg-drawer);
 	--bg-hover: #38312b;
+	--main-bg: var(--bg-dark);
 
 	background: var(--bg-dark);
 	color: var(--dark-text-color);

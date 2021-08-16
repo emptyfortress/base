@@ -5,6 +5,7 @@ export const useGrid = defineStore({
 	state: () => ({
 		sidebar: true,
 		view: true,
+		fullscreen: false,
 	}),
 	getters: {},
 	actions: {
@@ -13,6 +14,10 @@ export const useGrid = defineStore({
 		},
 		switchView() {
 			this.view === 'grid' ? this.view = 'lenta' : this.view = 'grid'
+			
+		},
+		switchFullscreen() {
+			this.fullscreen = !this.fullscreen
 			
 		}
 	},

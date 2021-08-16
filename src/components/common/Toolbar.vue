@@ -17,6 +17,12 @@
 		q-btn(flat round dense v-for="button in buttons")
 			q-tooltip(:delay="600" anchor="top middle" self="center middle") {{ button.tooltip}}
 			SvgIcon(:name="button.icon")
+		q-btn(flat round dense v-if="!grid.fullscreen" @click="grid.switchFullscreen")
+			q-tooltip(:delay="600" anchor="top middle" self="center middle") Полный экран
+			SvgIcon(name="expand")
+		q-btn(flat round dense v-else @click="grid.switchFullscreen")
+			q-tooltip(:delay="600" anchor="top middle" self="center middle") Полный экран
+			SvgIcon(name="collapse")
 </template>
 
 <script>
@@ -54,7 +60,7 @@ export default {
 .toolbar {
 	border-top: 1px solid var(--my-border-color);
 	border-bottom: 1px solid var(--my-border-color);
-	/* background: #fff; */
+	background: var(--bg-card);
 	height: 42px;
 	display: flex;
 	justify-content: space-between;
@@ -71,6 +77,7 @@ export default {
 	}
 }
 .group {
+	/* border: 1px solid var(--my-border-color); */
 	border: 1px solid var(--my-border-color);
 }
 </style>

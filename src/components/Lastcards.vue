@@ -12,7 +12,7 @@ SimpleTable
 	tbody
 		//- tr(v-for="item in items").new.link
 		tr(v-for="item in items" :class="{ 'new' : item.unread }").link
-			td.small
+			td(@click="item.unread = !item.unread").small
 			td {{ item.title }}
 			td {{ item.created }}
 			td {{ item.changed }}

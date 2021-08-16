@@ -38,8 +38,22 @@ a:hover:not(.q-link) {
 	color: var(--q-link);
 	cursor: pointer;
 }
-// q-markup-table style - this is simple table
+
 .q-table {
+	border-collapse: separate;
+	border-spacing: 2px;
+	thead {
+		background-color: #0000001a;
+	}
+	thead tr {
+		height: 32px !important;
+	}
+}
+
+// q-markup-table style - this is simple table
+.q-markup-table .q-table {
+	border-collapse: collapse;
+	border-spacing: 0;
 	tbody td {
 		font-size: 0.9rem;
 		position: relative;
@@ -51,7 +65,7 @@ a:hover:not(.q-link) {
 		th {
 			font-size: 0.7rem;
 			text-align: left;
-			border: 1px solid #fff;
+			border: 1px solid var(--my-border-color);
 			border-right: none;
 			font-weight: 400;
 		}
@@ -62,7 +76,7 @@ a:hover:not(.q-link) {
 			border-left: none;
 		}
 		th:last-child {
-			border-right: 1px solid #fff;
+			border-right: 1px solid var(--my-border-color);
 		}
 	}
 	.small {
@@ -74,7 +88,7 @@ a:hover:not(.q-link) {
 		background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAABtJREFUGFdjXLt27f/g4GBGBiiAM2ASjARVAAAxbBAFP9yoPgAAAABJRU5ErkJggg==)
 			repeat;
 		cursor: pointer;
-		border-bottom-color: #fff;
+		border-bottom-color: var(--my-border-color);
 	}
 	.new td {
 		font-weight: 600;
@@ -83,6 +97,7 @@ a:hover:not(.q-link) {
 		background: var(--q-primary);
 	}
 }
+
 .q-table--dark,
 .q-table--dark .q-table__bottom,
 .q-table--dark td,
