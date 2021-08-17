@@ -61,7 +61,7 @@ a:hover:not(.q-link) {
 		white-space: normal;
 	}
 	thead {
-		background-color: #0000001a;
+		background-color: #e5e5e5;
 		th {
 			font-size: 0.7rem;
 			text-align: left;
@@ -85,7 +85,8 @@ a:hover:not(.q-link) {
 		width: 5px;
 	}
 	td.small {
-		background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAABtJREFUGFdjXLt27f/g4GBGBiiAM2ASjARVAAAxbBAFP9yoPgAAAABJRU5ErkJggg==)
+		// background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAABtJREFUGFdjXLt27f/g4GBGBiiAM2ASjARVAAAxbBAFP9yoPgAAAABJRU5ErkJggg==)
+		background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAAXNSR0IArs4c6QAAABpJREFUGFdjZEACjCD2jh07/nt4eDCCOTAAAEsRBAT/WuYQAAAAAElFTkSuQmCC)
 			repeat;
 		cursor: pointer;
 		border-bottom-color: var(--my-border-color);
@@ -201,6 +202,22 @@ a:hover:not(.q-link) {
 		opacity: 0.7;
 		&:hover {
 			opacity: 1;
+		}
+	}
+}
+.fixhd {
+	height: calc(100vh - 210px);
+	thead tr th {
+		background-color: #e5e5e5;
+		position: sticky;
+		z-index: 1;
+	}
+	thead tr:first-child th {
+		top: 0;
+	}
+	body.body--dark & {
+		thead tr th {
+			background: var(--my-color-step-150);
 		}
 	}
 }

@@ -1,6 +1,6 @@
 <template lang="pug">
 .grid
-	q-table(:rows="rows" :fullscreen="fullscreen" :columns="columns" row-key="name" :pagination="pagination" hide-bottom flat)
+	q-table(:rows="rows" :columns="columns" row-key="name" :pagination="pagination" hide-bottom flat).fixhd
 </template>
 
 <script>
@@ -30,12 +30,70 @@ export default {
 			{ name: 'laksjd', two: 8, three: 34 },
 			{ name: 'laksjd', two: 9, three: 34 },
 			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
+			{ name: 'laksjd', two: 10, three: 34 },
 		]
 
 		return {
 			columns,
 			rows,
-			fullscreen: ref(false),
 			pagination,
 		}
 	},
@@ -44,4 +102,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.full .fixhd {
+	height: 100vh;
+}
 </style>

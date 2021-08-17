@@ -1,5 +1,5 @@
 <template lang="pug">
-q-markup-table(flat).shadow-1
+q-markup-table(flat square).shadow-1
 	slot
 
 </template>

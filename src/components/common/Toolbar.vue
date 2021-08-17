@@ -15,14 +15,12 @@
 				q-tooltip(:delay="600" anchor="top middle" self="center middle") Лента
 	.right
 		q-btn(flat round dense v-for="button in buttons")
-			q-tooltip(:delay="600" anchor="top middle" self="center middle") {{ button.tooltip}}
+			q-tooltip(:delay="600" anchor="bottom middle" self="center middle") {{ button.tooltip}}
 			SvgIcon(:name="button.icon")
-		q-btn(flat round dense v-if="!grid.fullscreen" @click="grid.switchFullscreen")
-			q-tooltip(:delay="600" anchor="top middle" self="center middle") Полный экран
-			SvgIcon(name="expand")
-		q-btn(flat round dense v-else @click="grid.switchFullscreen")
-			q-tooltip(:delay="600" anchor="top middle" self="center middle") Полный экран
-			SvgIcon(name="collapse")
+		q-btn(flat round dense v-if="!grid.fullscreen" icon="mdi-fullscreen" @click="grid.switchFullscreen")
+			q-tooltip(:delay="600" anchor="bottom middle" self="center middle") Вернуть
+		q-btn(flat round dense v-else icon="mdi-fullscreen-exit" @click="grid.switchFullscreen")
+			q-tooltip(:delay="600" anchor="bottom middle" self="center middle") Вернуть
 </template>
 
 <script>
