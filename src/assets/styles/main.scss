@@ -41,7 +41,8 @@ a:hover:not(.q-link) {
 
 .q-table {
 	border-collapse: separate;
-	border-spacing: 2px;
+	border-spacing: 1px;
+	color: var(--text-color);
 	thead {
 		background-color: #0000001a;
 	}

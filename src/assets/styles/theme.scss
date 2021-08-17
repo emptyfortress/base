@@ -51,6 +51,7 @@ $taskcolor: #6dae50;
 	// fonts
 	--my-body-font-size: 14px;
 	--text-color: rgba(0, 0, 0, 0.7);
+	--text-color-bright: #000;
 	--q-link: #1b73bb;
 }
 
@@ -79,11 +80,13 @@ body.body--dark {
 
 	background: var(--bg-dark);
 	color: var(--dark-text-color);
-	--text-color: var(--dark-text-color);
+	--text-color: var(--dark-text-color-bright);
+	--text-color-bright: #000;
 
 	// --my-color-selection: #5c4328;
 	// --my-background-color-rgb: 13, 11, 9;
 	--dark-text-color: #ab9073;
+	--text-color-bright: #cca985;
 	--my-border-color: var(--my-color-step-200);
 
 	--my-color-step-50: #1e1915;
