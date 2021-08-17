@@ -16,7 +16,8 @@
 					q-checkbox(v-model="props.selected")
 				q-th(v-for="col in props.cols" :props="props" :key="col.name").hov {{ col.label }}
 					.sort
-						q-btn(v-if="col.sortable" dense flat round icon="mdi-arrow-down" @click.stop="mysort(col.name)")
+						q-btn(v-if="col.sortable" dense flat round @click.stop="mysort(col.name, $event)")
+							q-icon(name="mdi-arrow-down")
 						q-btn(dense flat round icon="mdi-filter-outline")
 		template(v-slot:body="props")
 			q-tr(:props="props" :key="props.row.id" :class="{ 'bold' : props.row.unread }")
@@ -28,7 +29,7 @@
 </template>
 
 <script>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive } from 'vue'
 export default {
 	setup() {
 		const pagination = {
@@ -40,19 +41,46 @@ export default {
 
 		const toggle = (e) => {
 			console.log(e)
-			const current = rows.find( (b) => b.id === e )
+			const current = rows.find((b) => b.id === e)
 			console.log(current)
 			current.unread = !current.unread
 		}
 
-		const mysort = (e) => {
+		const mysort = (e, event) => {
 			itemTable.value.sort(e)
+			let classes = event.target.classList
+			if (classes.length === 3) {
+				classes.add('up')
+			} else if (classes.length === 4) {
+				classes.add('down')
+			} else if (classes.length === 5) {
+				classes.remove('up')
+				classes.remove('down')
+			} 
 		}
 
 		const columns = [
-			{ name: 'one', label: 'Первый', field: 'one', align: 'left', sortable: false, },
-			{ name: 'two', label: 'Второй', field: 'two', align: 'left', sortable: true, },
-			{ name: 'three', label: 'Третий', field: 'three', align: 'left', sortable: true, },
+			{
+				name: 'one',
+				label: 'Первый',
+				field: 'one',
+				align: 'left',
+				sortable: false,
+			},
+			{
+				name: 'two',
+				label: 'Второй',
+				field: 'two',
+				align: 'left',
+				sortable: true,
+			},
+			{
+				name: 'three',
+				label: 'Третий',
+				field: 'three',
+				align: 'left',
+				sortable: true,
+			},
 		]
 
 		const rows = reactive([
@@ -111,12 +139,21 @@ td.small {
 	position: relative;
 	.sort {
 		position: absolute;
-		top:0;
+		top: 0;
 		left: 0;
 		right: 0;
 		bottom: 0;
 		background: #fff;
-		display: none;;
+		display: none;
+		.q-icon {
+			transition: .3s ease all;
+			&.up {
+				transform: rotate(180deg);
+			}
+			&.down {
+				transform: rotate(0deg);
+			}
+		}
 	}
 	&:hover {
 		.sort {
@@ -124,7 +161,6 @@ td.small {
 			z-index: 2;
 			justify-content: flex-end;
 			align-items: center;
-			/* transform: translateY(32px); */
 			padding-right: 3px;
 		}
 	}
