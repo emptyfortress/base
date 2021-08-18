@@ -17,6 +17,7 @@
 <script>
 export default {
 	props: ['total'],
+
 	data() {
 		return {
 			big: false,

@@ -5,7 +5,7 @@
 		:columns="columns"
 		row-key="id"
 		:pagination="pagination"
-		hide-bottom flat
+		flat
 		selection="multiple"
 		v-model:selected="selected"
 		).fixhd
@@ -25,21 +25,23 @@
 				q-td(auto-width)
 					q-checkbox(v-model="props.selected")
 				q-td(v-for="col in props.cols" :key="col.name") {{ props.row[col.name] }}
-	transition(name="bottom")
-		Total(:total="total" v-show="total" @clear="clear").tot
+		template(v-slot:bottom)
+			//- div bottom
+
 
 </template>
 
 <script>
 import { ref, reactive } from 'vue'
-import Total from '@/components/common/Total.vue'
+// import Total from '@/components/common/Total.vue'
 
 export default {
 	components: {
-		Total,
+		// Total,
 	},
 	setup() {
 		const pagination = {
+			page: 1,
 			rowsPerPage: 0,
 		}
 
@@ -128,7 +130,6 @@ td.small {
 	color: var(--text-color-bright);
 }
 .hov {
-	position: relative;
 	.sort {
 		position: absolute;
 		top: 0;
