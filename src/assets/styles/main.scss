@@ -208,8 +208,9 @@ a:hover:not(.q-link) {
 }
 .fixhd {
 	height: calc(100vh - 210px);
+	overflow: hidden;
 	thead th {
-		// background-color: #e5e5e5;
+		background-color: #e5e5e5;
 		position: sticky;
 		z-index: 1;
 	}
@@ -234,6 +235,7 @@ a:hover:not(.q-link) {
 .q-table__bottom {
 	transition: 0.3s ease all;
 	background: #e5e5e5;
+	background: pink;
 	border-radius: 8px 8px 0px 0px;
 	body.body--dark & {
 		background: var(--my-color-step-150);

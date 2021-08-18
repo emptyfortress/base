@@ -26,7 +26,8 @@
 					q-checkbox(v-model="props.selected")
 				q-td(v-for="col in props.cols" :key="col.name") {{ props.row[col.name] }}
 		template(v-slot:bottom)
-			//- div bottom
+			p Selected: {{ selected.length }}
+			p total {{ rows.length }}
 
 
 </template>
@@ -38,6 +39,10 @@ import { ref, reactive } from 'vue'
 export default {
 	components: {
 		// Total,
+	},
+	props: {
+		columns: Array,
+		rows: Array
 	},
 	setup() {
 		const pagination = {
@@ -70,28 +75,8 @@ export default {
 			} 
 		}
 
-		const columns = [
-			{ name: 'one', label: 'Первый', field: 'one', align: 'left', sortable: false, },
-			{ name: 'two', label: 'Второй', field: 'two', align: 'left', sortable: true, },
-			{ name: 'three', label: 'Третий', field: 'three', align: 'left', sortable: true, },
-		]
-
-		const rows = reactive([
-			{ id: 0, unread: false, one: 'fuuuu', two: 0, three: 0 },
-			{ id: 1, unread: true, one: 'fuuuu', two: 1, three: 34 },
-			{ id: 2, unread: false, one: 'fuuuu', two: 2, three: 34 },
-			{ id: 3, unread: false, one: 'fuuuu', two: 3, three: 34 },
-			{ id: 4, unread: false, one: 'fuuuu', two: 4, three: 34 },
-			{ id: 5, unread: false, one: 'fuuuu', two: 5, three: 34 },
-			{ id: 6, unread: false, one: 'fuuuu', two: 6, three: 38 },
-			{ id: 7, unread: false, one: 'fuuuu', two: 7, three: 34 },
-			{ id: 8, unread: false, one: 'fuuuu', two: 8, three: 34 },
-			{ id: 9, unread: false, one: 'fuuuu', two: 9, three: 34 },
-		])
 
 		return {
-			columns,
-			rows,
 			pagination,
 			selected,
 			toggle,
@@ -105,7 +90,7 @@ export default {
 
 <style scoped lang="scss">
 .full .fixhd {
-	height: 100vh;
+	height: calc(100vh - 42px);
 }
 .q-table.fixhd th {
 	padding: 4px !important;
