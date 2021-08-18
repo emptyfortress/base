@@ -48,3 +48,12 @@
 	transform: translateY(30px);
 	opacity: 0;
 }
+// this is animation for total in grid **********************************
+.bottom-enter-active,
+.bottom-leave-active {
+	transition: all 0.3s;
+}
+.bottom-enter, .bottom-leave-to /* .list-leave-active below version 2.1.8 */ {
+	opacity: 0;
+	transform: translateY(100px);
+}

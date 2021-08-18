@@ -25,16 +25,25 @@
 				q-td(auto-width)
 					q-checkbox(v-model="props.selected")
 				q-td(v-for="col in props.cols" :key="col.name") {{ props.row[col.name] }}
+	transition(name="bottom")
+		Total(:total="total" v-show="total" @clear="clear").tot
 
 </template>
 
 <script>
 import { ref, reactive } from 'vue'
+import Total from '@/components/common/Total.vue'
+
 export default {
+	components: {
+		Total,
+	},
 	setup() {
 		const pagination = {
 			rowsPerPage: 0,
 		}
+
+		const total = ref(null)
 
 		const selected = ref([])
 		const itemTable = ref(null)
@@ -60,27 +69,9 @@ export default {
 		}
 
 		const columns = [
-			{
-				name: 'one',
-				label: 'Первый',
-				field: 'one',
-				align: 'left',
-				sortable: false,
-			},
-			{
-				name: 'two',
-				label: 'Второй',
-				field: 'two',
-				align: 'left',
-				sortable: true,
-			},
-			{
-				name: 'three',
-				label: 'Третий',
-				field: 'three',
-				align: 'left',
-				sortable: true,
-			},
+			{ name: 'one', label: 'Первый', field: 'one', align: 'left', sortable: false, },
+			{ name: 'two', label: 'Второй', field: 'two', align: 'left', sortable: true, },
+			{ name: 'three', label: 'Третий', field: 'three', align: 'left', sortable: true, },
 		]
 
 		const rows = reactive([
@@ -104,6 +95,7 @@ export default {
 			toggle,
 			mysort,
 			itemTable,
+			total,
 		}
 	},
 }
