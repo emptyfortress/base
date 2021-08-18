@@ -25,26 +25,31 @@
 				q-td(auto-width)
 					q-checkbox(v-model="props.selected")
 				q-td(v-for="col in props.cols" :key="col.name") {{ props.row[col.name] }}
+		template(v-slot:top)
+			Toolbar(:total="rows.length" :selected="selected")
 		template(v-slot:bottom)
-			p Selected: {{ selected.length }}
-			p total {{ rows.length }}
+			Total(:selected="selected.length")
+			//- p Selected: {{ selected.length }}
+			//- p total {{ rows.length }}
 
 
 </template>
 
 <script>
-import { ref, reactive } from 'vue'
-// import Total from '@/components/common/Total.vue'
+import { ref } from 'vue'
+import Toolbar from '@/components/common/Toolbar.vue'
+import Total from '@/components/common/Total.vue'
 
 export default {
 	components: {
-		// Total,
+		Toolbar,
+		Total,
 	},
 	props: {
 		columns: Array,
 		rows: Array
 	},
-	setup() {
+	setup(props) {
 		const pagination = {
 			page: 1,
 			rowsPerPage: 0,
@@ -57,7 +62,7 @@ export default {
 
 		const toggle = (e) => {
 			console.log(e)
-			const current = rows.find((b) => b.id === e)
+			const current = props.rows.find((b) => b.id === e)
 			console.log(current)
 			current.unread = !current.unread
 		}

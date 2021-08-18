@@ -5,9 +5,9 @@
 			q-icon(name="mdi-backburger" v-if="grid.sidebar")
 			q-icon(name="mdi-forwardburger" v-else)
 		.total Всего:
-			span 43
+			span {{ total }}
 		q-btn(unelevated size="12px") Показать все
-	.center()
+	.center
 		q-btn-group(unelevated).group
 			q-btn(:flat="!grid.view" dense color="btn-group" icon="mdi-table" size="10px" @click="grid.view = !grid.view")
 				q-tooltip(:delay="600" anchor="top middle" self="center middle") Грид
@@ -28,11 +28,15 @@ import { useGrid } from '@/stores/grid'
 import SvgIcon from '@/components/SvgIcon.vue'
 
 export default {
+	props: {
+		total: Number,
+		selected: Number
+	},
 	components: {
 		SvgIcon,
 	},
 
-	setup() {
+	setup(props) {
 		const grid = useGrid()
 
 		const buttons = [
@@ -47,6 +51,7 @@ export default {
 		return {
 			grid,
 			buttons,
+			props,
 		}
 	},
 }
@@ -59,6 +64,7 @@ export default {
 	border-top: 1px solid var(--my-border-color);
 	border-bottom: 1px solid var(--my-border-color);
 	background: var(--bg-card);
+	width: 100%;
 	height: 42px;
 	display: flex;
 	justify-content: space-between;

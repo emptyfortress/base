@@ -1,22 +1,20 @@
 <template lang="pug">
 .multi(:class="{ big : big }")
-	.row
-		v-btn(icon @click="clear")
-			v-icon mdi-close
-		.tot {{ total }}
+	.ro
+		q-btn(flat round dense icon="mdi-close" @click="clear")
+		.tot {{ selected }}
 		.arr &rarr;
-		v-btn(v-for="bt in btn" depressed small color="#fff" @click="bt.action" :key="bt.label").action {{ bt.label }}
+		q-btn(v-for="bt in btn" unelevated color="primary" size="12px"  @click="bt.action" :key="bt.label").action {{ bt.label }}
 		.up
-		v-btn(icon @click="setbig").chev
-			v-icon mdi-chevron-up
-	.row.bottom
-		v-btn( depressed small v-for="n in 4" v-show="!delegation" :key="n").action Кнопка действий
+		q-btn(round flat dense icon="mdi-chevron-up" @click="setbig").chev
+	.ro.bottom
+		q-btn(unelevated size="12px" v-for="n in 4" v-show="!delegation" :key="n").action Кнопка действий
 		p(v-show="delegation") здесь выбор из справочника сотрудников
 </template>
 
 <script>
 export default {
-	props: ['total'],
+	props: ['selected'],
 
 	data() {
 		return {
@@ -50,29 +48,22 @@ export default {
 
 <style scoped lang="scss">
 .multi {
-	position: absolute;
-	bottom: 0;
-	left: 0;
 	height: 50px;
 	width: 100%;
-	background: #e4e4e0;
-	padding: 0 .5rem;
 	transition: .3s ease all;
-	.row {
+	.ro {
+		width: 100%;
 		padding: .5rem;
+		padding-bottom: 0;
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
 		&.bottom {
-			margin-left: 84px;
+			margin-left: 96px;
 		}
 	}
-	border-radius: 15px 15px 0 0;
-	box-shadow: 0 -2px 6px rgba(0, 0, 0, .2);
-	border: 1px solid #ccc;
-	border-bottom: none;
 	&.big {
-		height: 150px;
+		height: 100px;
 	}
 }
 .tot {
@@ -80,6 +71,7 @@ export default {
 	font-weight: bold;
 }
 .arr {
+	font-size: 1.2rem;
 	margin: 0 1rem;
 }
 .action {
