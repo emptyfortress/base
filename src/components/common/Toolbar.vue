@@ -14,11 +14,11 @@
 			q-btn(:flat="grid.view" dense color="btn-group" icon="mdi-format-list-bulleted" size="10px" @click="grid.view = !grid.view")
 				q-tooltip(:delay="600" anchor="top middle" self="center middle") Лента
 	.right
-		q-btn(flat round dense v-for="button in buttons")
+		q-btn(flat round dense v-for="button in buttons" @click="callback(button.action)")
 			q-tooltip(:delay="600" anchor="bottom middle" self="center middle") {{ button.tooltip}}
 			SvgIcon(:name="button.icon")
 		q-btn(flat round dense v-if="!grid.fullscreen" icon="mdi-fullscreen" @click="grid.switchFullscreen")
-			q-tooltip(:delay="600" anchor="bottom middle" self="center middle") Вернуть
+			q-tooltip(:delay="600" anchor="bottom middle" self="center middle") Полный экран
 		q-btn(flat round dense v-else icon="mdi-fullscreen-exit" @click="grid.switchFullscreen")
 			q-tooltip(:delay="600" anchor="bottom middle" self="center middle") Вернуть
 </template>
@@ -30,18 +30,24 @@ import SvgIcon from '@/components/SvgIcon.vue'
 export default {
 	props: {
 		total: Number,
-		selected: Number
 	},
+	emits: ['readAll'],
 	components: {
 		SvgIcon,
 	},
 
-	setup(props) {
+	setup(props, context) {
 		const grid = useGrid()
+
+		const callback = (e) => {
+			if (e === 'clear') {
+				context.emit('readAll')
+			}
+		}
 
 		const buttons = [
 			{ id: 0, icon: 'sort-variant', tooltip: 'Сортировка', action: '' },
-			{ id: 1, icon: 'readAll', tooltip: 'Прочитать все', action: '' },
+			{ id: 1, icon: 'readAll', tooltip: 'Прочитать все', action: 'clear' },
 			{ id: 2, icon: 'refresh', tooltip: 'Обновить', action: '' },
 			{ id: 3, icon: 'xls-export', tooltip: 'Экспорт', action: '' },
 			{ id: 4, icon: 'sliders-reload', tooltip: 'Сброс настроек', action: '' },
@@ -52,6 +58,7 @@ export default {
 			grid,
 			buttons,
 			props,
+			callback,
 		}
 	},
 }

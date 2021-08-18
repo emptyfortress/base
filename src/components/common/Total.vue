@@ -8,7 +8,7 @@
 		.up
 		q-btn(round flat dense icon="mdi-chevron-up" @click="setbig").chev
 	.ro.bottom
-		q-btn(unelevated size="12px" v-for="n in 4" v-show="!delegation" :key="n").action Кнопка действий
+		q-btn(unelevated size="12px" v-for="n in 4" color="grey" v-show="!delegation" :key="n").action Кнопка действий
 		p(v-show="delegation") здесь выбор из справочника сотрудников
 </template>
 
