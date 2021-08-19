@@ -73,7 +73,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .palitra {
 	display: grid;
 	grid-template-columns: repeat(3, 200px);

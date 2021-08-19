@@ -32,10 +32,10 @@ export default {
 		const shown = ref(0)
 
 		const columns = [
-			{ name: 'typ', label: 'Тип', field: 'typ', align: 'left', sortable: true, },
-			{ name: 'title', label: 'Название', field: 'title', align: 'left', sortable: true, },
-			{ name: 'author', label: 'Автор', field: 'author', align: 'left', sortable: true, },
-			{ name: 'changed', label: 'Изменено', field: 'changed', align: 'left', sortable: true, },
+			{ id: 0, name: 'typ', label: 'Тип', field: 'typ', align: 'left', sortable: true, },
+			{ id: 1, name: 'title', label: 'Название', field: 'title', align: 'left', sortable: true, },
+			{ id: 2, name: 'author', label: 'Автор', field: 'author', align: 'left', sortable: true, },
+			{ id: 3, name: 'changed', label: 'Изменено', field: 'changed', align: 'left', sortable: true, },
 		]
 
 		return {

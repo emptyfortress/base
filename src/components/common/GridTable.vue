@@ -18,10 +18,19 @@
 				q-th(auto-width)
 					q-checkbox(v-model="props.selected")
 				q-th(v-for="col in props.cols" :props="props" :key="col.name").hov {{ col.label }}
-					.sort
+					.sort(@click.stop)
 						q-btn(v-if="col.sortable" dense flat round @click.stop="mysort(col.name, $event)")
 							q-icon(name="mdi-arrow-down")
-						q-btn(dense flat round icon="mdi-filter-outline")
+						q-btn(dense flat round icon="mdi-filter-outline" @click.stop="filterByIndex = col.id")
+					
+					transition(name="slide-top")
+						q-card.quick.shadow-3(v-show="filterByIndex === col.id" @click.stop)
+							q-card-section.q-pb-none.q-pt-xs
+								q-input(dense square input-class="filter-input")
+							q-card-actions(align="between")
+								q-btn(flat round size="12px" icon="mdi-trash-can-outline" color="negative")
+								q-btn(flat size="12px" color="primary") Применить
+
 		template(v-slot:loading)
 			.ld
 				.track
@@ -75,6 +84,9 @@ export default {
 			props.rows.map( (row) => row.unread = false )
 		}
 
+		const doNothing = () => {
+			return
+		}
 		const mysort = (e, event) => {
 			itemTable.value.sort(e)
 			let classes = event.target.classList
@@ -88,6 +100,8 @@ export default {
 			} 
 		}
 
+		const filterByIndex = ref(null)
+
 
 		return {
 			pagination,
@@ -99,6 +113,8 @@ export default {
 			clearSelected,
 			readAll,
 			loading,
+			filterByIndex,
+			doNothing,
 		}
 	},
 }
@@ -131,6 +147,7 @@ td.small {
 	color: var(--text-color-bright);
 }
 .hov {
+	position: relative;
 	.sort {
 		position: absolute;
 		top: 0;
@@ -171,10 +188,23 @@ td.small {
 		top:0;
 		right:100%;
 		bottom:0;
-		left:0;
+		/* left:0; */
 		background: var(--q-primary);
 		width:0;
 		animation:borealisBar 1.2s linear infinite;
 	}
+}
+.fixhd thead tr:first-child th:last-child .quick {
+	left: initial;
+	right: 0;
+}
+.quick {
+	position: absolute;
+	top: 36px;
+	left: 0;
+	width: 100%;
+	min-width: 230px;
+	padding: .5rem .25rem 0;
+	border-radius: 0 0 6px 6px;
 }
 </style>

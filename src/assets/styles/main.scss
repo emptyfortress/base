@@ -250,3 +250,10 @@ a:hover:not(.q-link) {
 .q-table__top {
 	padding: 0;
 }
+.filter-input {
+	font-size: 1rem;
+}
+.quick .q-field--dense .q-field__control,
+.q-field--dense .q-field__marginal {
+	height: 28px !important;
+}
