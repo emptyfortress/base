@@ -21,6 +21,7 @@ SimpleTable
 <script>
 import SvgIcon from '@/components/SvgIcon.vue'
 import SimpleTable from '@/components/common/SimpleTable.vue'
+import items from '@/stores/dataHome'
 
 export default {
 	components: { SvgIcon, SimpleTable },
@@ -31,14 +32,7 @@ export default {
 				{ id: 1, title: 'Создан' },
 				{ id: 2, title: 'Дата изменения' },
 			],
-			items: [
-				{id: 0, unread: true, title: 'Об эксплуатации автоматизированной информационной системы государственного заказа Санкт-Петербурга', created: '20.08.2021', changed: '22.08.2021' },
-				{id: 1, unread: true, title: 'О вводе в действие Перечня товаров, работ, услуг закупки которых осуществляются только у субъектов малого и среднего предпринимательства', created: '20.08.2021', changed: '22.08.2021' },
-				{id: 2, title: 'О согласовании финансового плана Автобазы на 2019 год', created: '20.08.2021', changed: '22.08.2021' },
-				{id: 3, title: 'Протокол совещания по вопросу выполнения третьей очереди работ по созданию ГИС СПб 27.09.2018 № ***', created: '20.08.2021', changed: '22.08.2021' },
-				{id: 4, title: 'О восстановлении работоспособности системы подогрева приточной вентиляции', created: '20.08.2021', changed: '22.08.2021' },
-				{id: 5, title: 'О вызове представителя', created: '20.08.2021', changed: '22.08.2021' },
-			]
+			items: items
 		}
 	},
 }

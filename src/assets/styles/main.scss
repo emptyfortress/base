@@ -66,7 +66,7 @@ a:hover:not(.q-link) {
 		th {
 			font-size: 0.7rem;
 			text-align: left;
-			border: 1px solid var(--my-border-color);
+			border: 1px solid var(--th-border-color);
 			border-right: none;
 			font-weight: 400;
 		}
@@ -77,7 +77,7 @@ a:hover:not(.q-link) {
 			border-left: none;
 		}
 		th:last-child {
-			border-right: 1px solid var(--my-border-color);
+			border-right: 1px solid var(--th-border-color);
 		}
 	}
 	.small {
@@ -249,8 +249,4 @@ a:hover:not(.q-link) {
 }
 .q-table__top {
 	padding: 0;
-}
-.q-table thead tr.q-table__progress {
-	background: pink;
-	// height: 0px !important;
 }

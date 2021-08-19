@@ -53,6 +53,8 @@ $taskcolor: #6dae50;
 	--text-color: rgba(0, 0, 0, 0.7);
 	--text-color-bright: #000;
 	--q-link: #1b73bb;
+
+	--th-border-color: #fff;
 }
 
 // Light theme ****************************************
@@ -88,6 +90,7 @@ body.body--dark {
 	--dark-text-color: #ab9073;
 	--text-color-bright: #cca985;
 	--my-border-color: var(--my-color-step-200);
+	--th-border-color: var(--my-border-color);
 
 	--my-color-step-50: #1e1915;
 	--my-color-step-100: #29221c;
