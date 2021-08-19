@@ -250,3 +250,7 @@ a:hover:not(.q-link) {
 .q-table__top {
 	padding: 0;
 }
+.q-table thead tr.q-table__progress {
+	background: pink;
+	// height: 0px !important;
+}

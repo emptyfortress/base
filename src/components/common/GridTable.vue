@@ -8,6 +8,8 @@
 		flat
 		:hide-pagination="true"
 		selection="multiple"
+		color="primary"
+		:loading="loading"
 		v-model:selected="selected"
 		).fixhd
 		template(v-slot:header="props")
@@ -20,6 +22,9 @@
 						q-btn(v-if="col.sortable" dense flat round @click.stop="mysort(col.name, $event)")
 							q-icon(name="mdi-arrow-down")
 						q-btn(dense flat round icon="mdi-filter-outline")
+		template(v-slot:loading)
+			.ld
+				.track
 		template(v-slot:body="props")
 			q-tr(:props="props" :key="props.row.id" :class="{ 'bold' : props.row.unread }")
 				q-td(key="read" :class="{ 'unread' : props.row.unread }" @click="toggle(props.row.id)").small
@@ -27,7 +32,7 @@
 					q-checkbox(v-model="props.selected")
 				q-td(v-for="col in props.cols" :key="col.name") {{ props.row[col.name] }}
 		template(v-slot:top)
-			Toolbar(:total="rows.length" :shown="shown" @readAll="readAll")
+			Toolbar(:total="rows.length" :shown="shown" @readAll="readAll" @toggleLoad="loading = !loading")
 		template(v-slot:bottom v-if="selected.length")
 			Total(:selected="selected.length" @clear="clearSelected")
 
@@ -46,7 +51,7 @@ export default {
 	props: {
 		columns: Array,
 		rows: Array,
-		shown: Number
+		shown: Number,
 	},
 	setup(props) {
 		const pagination = {
@@ -57,6 +62,7 @@ export default {
 		const total = ref(null)
 		const selected = ref([])
 		const itemTable = ref(null)
+		const loading = ref(false)
 
 		const toggle = (e) => {
 			const current = props.rows.find((b) => b.id === e)
@@ -92,6 +98,7 @@ export default {
 			total,
 			clearSelected,
 			readAll,
+			loading,
 		}
 	},
 }
@@ -150,6 +157,24 @@ td.small {
 			align-items: center;
 			padding-right: 3px;
 		}
+	}
+}
+.ld {
+	position: absolute;
+	top: 76px;
+	width: 100%;
+	left: 0;
+	height: 3px;
+	z-index: 2;
+	.track {
+		position:absolute;
+		top:0;
+		right:100%;
+		bottom:0;
+		left:0;
+		background: var(--q-primary);
+		width:0;
+		animation:borealisBar 1.2s linear infinite;
 	}
 }
 </style>

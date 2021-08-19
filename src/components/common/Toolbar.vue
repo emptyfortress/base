@@ -13,13 +13,13 @@
 	.center
 		q-btn-group(unelevated).group
 			q-btn(:flat="grid.lenta" dense color="btn-group" icon="mdi-table" size="10px" @click="grid.showGrid")
-				q-tooltip(:delay="600" anchor="top middle" self="center middle") Грид
+				q-tooltip(:delay="600" anchor="bottom middle" self="center middle") Грид
 			q-btn(:flat="!grid.lenta" dense color="btn-group" icon="mdi-format-list-bulleted" size="10px" @click="grid.showLenta")
-				q-tooltip(:delay="600" anchor="top middle" self="center middle") Лента
+				q-tooltip(:delay="600" anchor="bottom middle" self="center middle") Лента
 	.right
-		q-btn(flat round dense v-for="button in buttons" @click="callback(button.action)")
+		q-btn(flat round dense v-for="button in buttons" @click="callback(button)")
 			q-tooltip(:delay="600" anchor="bottom middle" self="center middle") {{ button.tooltip}}
-			SvgIcon(:name="button.icon")
+			SvgIcon(:name="button.icon" :spin="button.spin")
 		q-btn(flat round dense v-if="!grid.fullscreen" icon="mdi-fullscreen" @click="grid.switchFullscreen")
 			q-tooltip(:delay="600" anchor="bottom middle" self="center middle") Полный экран
 		q-btn(flat round dense v-else icon="mdi-fullscreen-exit" @click="grid.switchFullscreen")
@@ -29,6 +29,7 @@
 <script>
 import { useGrid } from '@/stores/grid'
 import SvgIcon from '@/components/SvgIcon.vue'
+import { reactive, ref } from 'vue'
 
 export default {
 	props: {
@@ -44,29 +45,38 @@ export default {
 		const grid = useGrid()
 
 		const callback = (e) => {
-			if (e === 'clear') {
+			if (e.id === 1) {
 				context.emit('readAll')
 			}
+			if (e.id === 2) {
+				context.emit('toggleLoad')
+				e.spin = true
+				setTimeout(() => {
+					context.emit('toggleLoad')
+					e.spin = false
+				},3000)
+			}
 		}
+
 		const showAll = () => {
 			context.emit('showAll')
 		}
 
-		const buttons = [
+		const buttons = reactive([
 			{ id: 0, icon: 'sort-variant', tooltip: 'Сортировка', action: '' },
 			{ id: 1, icon: 'readAll', tooltip: 'Прочитать все', action: 'clear' },
-			{ id: 2, icon: 'refresh', tooltip: 'Обновить', action: '' },
+			{ id: 2, icon: 'refresh', tooltip: 'Обновить', action: 'refresh', spin: false },
 			{ id: 3, icon: 'xls-export', tooltip: 'Экспорт', action: '' },
 			{ id: 4, icon: 'sliders-reload', tooltip: 'Сброс настроек', action: '' },
 			{ id: 5, icon: 'sliders-vertical', tooltip: 'Настройки', action: '' },
-		]
+		])
 
 		return {
 			grid,
 			buttons,
 			props,
 			callback,
-			showAll
+			showAll,
 		}
 	},
 }
