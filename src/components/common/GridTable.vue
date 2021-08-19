@@ -24,12 +24,7 @@
 						q-btn(dense flat round icon="mdi-filter-outline" @click.stop="filterByIndex = col.id")
 					
 					transition(name="slide-top")
-						q-card.quick.shadow-3(v-show="filterByIndex === col.id" @click.stop)
-							q-card-section.q-pb-none.q-pt-xs
-								q-input(dense square input-class="filter-input")
-							q-card-actions(align="between")
-								q-btn(flat round size="12px" icon="mdi-trash-can-outline" color="negative")
-								q-btn(flat size="12px" color="primary") Применить
+						Filter(:filterByIndex="filterByIndex" :col="col.id" @close="filterByIndex = null")
 
 		template(v-slot:loading)
 			.ld
@@ -51,11 +46,13 @@
 import { ref } from 'vue'
 import Toolbar from '@/components/common/Toolbar.vue'
 import Total from '@/components/common/Total.vue'
+import Filter from '@/components/common/Filter.vue'
 
 export default {
 	components: {
 		Toolbar,
 		Total,
+		Filter,
 	},
 	props: {
 		columns: Array,
@@ -194,17 +191,17 @@ td.small {
 		animation:borealisBar 1.2s linear infinite;
 	}
 }
-.fixhd thead tr:first-child th:last-child .quick {
-	left: initial;
-	right: 0;
-}
-.quick {
-	position: absolute;
-	top: 36px;
-	left: 0;
-	width: 100%;
-	min-width: 230px;
-	padding: .5rem .25rem 0;
-	border-radius: 0 0 6px 6px;
-}
+/* .fixhd thead tr:first-child th:last-child .quick { */
+/* 	left: initial; */
+/* 	right: 0; */
+/* } */
+/* .quick { */
+/* 	position: absolute; */
+/* 	top: 36px; */
+/* 	left: 0; */
+/* 	width: 100%; */
+/* 	min-width: 230px; */
+/* 	padding: .5rem .25rem 0; */
+/* 	border-radius: 0 0 6px 6px; */
+/* } */
 </style>
