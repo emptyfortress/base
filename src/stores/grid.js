@@ -6,6 +6,7 @@ export const useGrid = defineStore({
 		sidebar: true,
 		view: true,
 		fullscreen: false,
+		items: [],
 	}),
 	getters: {},
 	actions: {

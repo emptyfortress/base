@@ -4,10 +4,14 @@
 		q-btn(flat round dense @click="grid.switchSidebar")
 			q-icon(name="mdi-backburger" v-if="grid.sidebar")
 			q-icon(name="mdi-forwardburger" v-else)
-		.total Всего:
-			span {{ total }}
-		q-btn(unelevated size="12px") Показать все
+		transition(name="slide-top" mode="out-in")
+			.total(v-if="shown") Показано:
+				span {{ shown }}
+				q-btn(unelevated size="12px" @click="showAll") Показать все
+			.total(v-else) Всего:
+				span {{ total }}
 	.center
+		q-btn(@click="shown = 5") ll
 		q-btn-group(unelevated).group
 			q-btn(:flat="!grid.view" dense color="btn-group" icon="mdi-table" size="10px" @click="grid.view = !grid.view")
 				q-tooltip(:delay="600" anchor="top middle" self="center middle") Грид
@@ -30,6 +34,7 @@ import SvgIcon from '@/components/SvgIcon.vue'
 export default {
 	props: {
 		total: Number,
+		shown: Number,
 	},
 	emits: ['readAll'],
 	components: {
@@ -43,6 +48,9 @@ export default {
 			if (e === 'clear') {
 				context.emit('readAll')
 			}
+		}
+		const showAll = () => {
+			context.emit('showAll')
 		}
 
 		const buttons = [
@@ -59,6 +67,7 @@ export default {
 			buttons,
 			props,
 			callback,
+			showAll
 		}
 	},
 }

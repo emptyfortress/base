@@ -207,8 +207,9 @@ a:hover:not(.q-link) {
 	}
 }
 .fixhd {
-	height: calc(100vh - 210px);
+	height: calc(100vh - 160px);
 	overflow: hidden;
+	font-size: var(--my-body-font-size);
 	thead th {
 		background-color: #e5e5e5;
 		position: sticky;
@@ -222,6 +223,9 @@ a:hover:not(.q-link) {
 		&.q-table--col-auto-width {
 			padding: 0 4px;
 		}
+	}
+	tbody td {
+		font-size: 0.9rem;
 	}
 	body.body--dark & {
 		thead tr th {

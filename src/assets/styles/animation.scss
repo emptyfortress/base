@@ -18,20 +18,22 @@
 	transform: translateX(30px);
 	opacity: 0;
 }
+
 .slide-left-enter-active,
 .slide-left-leave-active {
-	transition: all 0.5s ease;
-	position: absolute;
+	transition: all 0.3s ease;
+	// position: absolute;
 }
 .slide-left-enter-from,
 .slide-left-leave-to {
 	transform: translateX(-30px);
 	opacity: 0;
 }
+
 .slide-top-enter-active,
 .slide-top-leave-active {
-	transition: all 0.5s ease;
-	position: absolute;
+	transition: all 0.3s ease;
+	// position: absolute;
 }
 .slide-top-enter-from,
 .slide-top-leave-to {

@@ -27,7 +27,7 @@
 					q-checkbox(v-model="props.selected")
 				q-td(v-for="col in props.cols" :key="col.name") {{ props.row[col.name] }}
 		template(v-slot:top)
-			Toolbar(:total="rows.length" @readAll="readAll")
+			Toolbar(:total="rows.length" :shown="shown" @readAll="readAll")
 		template(v-slot:bottom v-if="selected.length")
 			Total(:selected="selected.length" @clear="clearSelected")
 
@@ -45,7 +45,8 @@ export default {
 	},
 	props: {
 		columns: Array,
-		rows: Array
+		rows: Array,
+		shown: Number
 	},
 	setup(props) {
 		const pagination = {
@@ -98,7 +99,7 @@ export default {
 
 <style scoped lang="scss">
 .full .fixhd {
-	height: calc(100vh - 42px);
+	height: 100vh;
 }
 .q-table.fixhd th {
 	padding: 4px !important;
