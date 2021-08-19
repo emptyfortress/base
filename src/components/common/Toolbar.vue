@@ -11,11 +11,10 @@
 			.total(v-else) Всего:
 				span {{ total }}
 	.center
-		q-btn(@click="shown = 5") ll
 		q-btn-group(unelevated).group
-			q-btn(:flat="!grid.view" dense color="btn-group" icon="mdi-table" size="10px" @click="grid.view = !grid.view")
+			q-btn(:flat="!grid.view" dense color="btn-group" icon="mdi-table" size="10px" @click="grid.view = false")
 				q-tooltip(:delay="600" anchor="top middle" self="center middle") Грид
-			q-btn(:flat="grid.view" dense color="btn-group" icon="mdi-format-list-bulleted" size="10px" @click="grid.view = !grid.view")
+			q-btn(:flat="grid.view" dense color="btn-group" icon="mdi-format-list-bulleted" size="10px" @click="grid.view = true")
 				q-tooltip(:delay="600" anchor="top middle" self="center middle") Лента
 	.right
 		q-btn(flat round dense v-for="button in buttons" @click="callback(button.action)")
