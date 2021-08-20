@@ -15,8 +15,8 @@ q-card.quick.shadow-3(v-show="filterByIndex === col" @click.stop)
 				q-checkbox(v-model="all" @update:model-value="toggle" color="grey")
 			q-item-section
 				q-item-label
-					|Выбрать все
-					span.q-ml-md ({{ checked.length }} / {{ data.length }})
+					|Выбрано
+					span.q-ml-md ({{ checked.length }} / {{ filteredItems.length }})
 
 		q-item(v-for="(dat, index) in filteredItems" :key="index" tag="label" v-ripple ).q-pa-none
 			q-item-section(side top)
@@ -50,8 +50,8 @@ export default {
 		const all = ref(false)
 
 		const toggle = () => {
-			if (checked.value.length < props.data.length) {
-				checked.value = [...props.data]
+			if (checked.value.length < filteredItems.value.length) {
+				checked.value = filteredItems.value
 			} else checked.value = []
 		}
 		const clearAll = () => {
