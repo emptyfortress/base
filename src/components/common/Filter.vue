@@ -7,6 +7,8 @@ q-card.quick.shadow-3(v-show="filterByIndex === col" @click.stop)
 			autofocus
 			clearable
 			)
+			template(v-slot:prepend)
+				q-icon(name="mdi-magnify")
 	q-list(v-if="filteredItems.length")
 		q-item(tag="label" v-ripple)
 			q-item-section(side top)
@@ -67,6 +69,12 @@ export default {
 		watchEffect(() => {
 			if (checked.value.length < props.data.length && checked.value.length !== 0) {
 				all.value = null
+			}
+			if (checked.value.length === props.data.length) {
+				all.value === true
+			}
+			if (checked.value.length === 0) {
+				all.value = false
 			}
 		})
 
