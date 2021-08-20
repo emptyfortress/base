@@ -21,10 +21,10 @@
 					.sort(@click.stop)
 						q-btn(v-if="col.sortable" dense flat round @click.stop="mysort(col.name, $event)")
 							q-icon(name="mdi-arrow-down")
-						q-btn(dense flat round icon="mdi-filter-outline" @click.stop="filterByIndex = col.id")
+						q-btn(dense flat round icon="mdi-filter-outline" @click.stop="toggleFilter(col.id)")
 					
 					transition(name="slide-top")
-						Filter(:filterByIndex="filterByIndex" :col="col.id" @close="filterByIndex = null")
+						Filter(:filterByIndex="filterByIndex" :col="col.id" @close="filterByIndex = null" :data="colData(col)")
 
 		template(v-slot:loading)
 			.ld
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import Toolbar from '@/components/common/Toolbar.vue'
 import Total from '@/components/common/Total.vue'
 import Filter from '@/components/common/Filter.vue'
@@ -81,9 +81,10 @@ export default {
 			props.rows.map( (row) => row.unread = false )
 		}
 
-		const doNothing = () => {
-			return
+		const colData = (col) => {
+			return [...new Set(props.rows.map( item => item[col.name] ))]
 		}
+
 		const mysort = (e, event) => {
 			itemTable.value.sort(e)
 			let classes = event.target.classList
@@ -99,6 +100,10 @@ export default {
 
 		const filterByIndex = ref(null)
 
+		const toggleFilter = (e) => {
+			filterByIndex.value ? filterByIndex.value = null : filterByIndex.value = e
+		}
+
 
 		return {
 			pagination,
@@ -111,7 +116,8 @@ export default {
 			readAll,
 			loading,
 			filterByIndex,
-			doNothing,
+			toggleFilter,
+			colData,
 		}
 	},
 }
@@ -144,7 +150,7 @@ td.small {
 	color: var(--text-color-bright);
 }
 .hov {
-	position: relative;
+	position: sticky;
 	.sort {
 		position: absolute;
 		top: 0;
