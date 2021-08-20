@@ -11,7 +11,8 @@
     "pinia": "^2.0.0-beta.5",
     "quasar": "^2.0.0",
     "vue": "^3.0.5",
-    "vue-router": "^4.0.10"
+    "vue-router": "^4.0.10",
+    "vue-word-highlighter": "^1.0.4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.2.5",
