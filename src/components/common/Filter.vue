@@ -10,7 +10,7 @@ q-card.quick.shadow-3(v-show="filterByIndex === col" @click.stop)
 	q-list(v-if="filteredItems.length")
 		q-item(tag="label" v-ripple)
 			q-item-section(side top)
-				q-checkbox(v-model="all" @update:model-value="toggle")
+				q-checkbox(v-model="all" @update:model-value="toggle" color="grey")
 			q-item-section
 				q-item-label
 					|Выбрать все
@@ -34,40 +34,52 @@ q-card.quick.shadow-3(v-show="filterByIndex === col" @click.stop)
 
 <script>
 import WordHighlighter from 'vue-word-highlighter'
+import { ref, computed, watchEffect } from 'vue'
 
 export default {
 	props: ['filterByIndex', 'col', 'data' ],
 	components: {
 		WordHighlighter,
 	},
-	data() {
-		return {
-			checked: [],
-			filter: '',
-			all: false,
+	setup(props, context) {
+
+		let checked = ref([])
+		const filter = ref('')
+		const all = ref(false)
+
+		const toggle = () => {
+			if (checked.value.length < props.data.length) {
+				checked.value = [...props.data]
+			} else checked.value = []
 		}
-	},
-	methods: {
-		toggle() {
-			if (this.checked.length < this.data.length) {
-				this.checked = [...this.data]
-			} else this.checked = []
-		},
-		clearAll() {
-			this.checked = []
-			this.$emit('close')
+		const clearAll = () => {
+			checked.value = []
+			context.emit('close')
 		}
-	},
-	computed: {
-		filteredItems() {
-			return this.data.filter( row => {
-				if (this.filter) {
-					return row.toLowerCase().includes(this.filter.toLowerCase())
+		const filteredItems = computed( () => {
+			return props.data.filter( row => {
+				if (filter.value) {
+					return row.toLowerCase().includes(filter.value.toLowerCase())
 				}
-				return this.data
+				return props.data
 			})
+		})
+		watchEffect(() => {
+			if (checked.value.length < props.data.length && checked.value.length !== 0) {
+				all.value = null
+			}
+		})
+
+		return {
+			checked,
+			filter,
+			all,
+			toggle,
+			clearAll,
+			filteredItems
 		}
-	}
+	},
+
 }
 </script>
 
