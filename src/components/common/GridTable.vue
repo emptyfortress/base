@@ -6,6 +6,7 @@
 		row-key="id"
 		:pagination="pagination"
 		flat
+		binary-state-sort
 		:hide-pagination="true"
 		selection="multiple"
 		color="primary"
@@ -13,7 +14,7 @@
 		v-model:selected="selected"
 		).fixhd
 		template(v-slot:header="props")
-			q-tr(:props="props")
+			q-tr(:props="props" v-click-away="toggleFilter")
 				q-th(auto-width :key="props.read").small
 				q-th(auto-width)
 					q-checkbox(v-model="props.selected")
@@ -88,20 +89,13 @@ export default {
 		const mysort = (e, event) => {
 			itemTable.value.sort(e)
 			let classes = event.target.classList
-			if (classes.length === 3) {
-				classes.add('up')
-			} else if (classes.length === 4) {
-				classes.add('down')
-			} else if (classes.length === 5) {
-				classes.remove('up')
-				classes.remove('down')
-			} 
+			classes.toggle('up')
 		}
 
 		const filterByIndex = ref(null)
 
 		const toggleFilter = (e) => {
-			filterByIndex.value ? filterByIndex.value = null : filterByIndex.value = e
+			filterByIndex.value === e ? filterByIndex.value = null : filterByIndex.value = e
 		}
 
 

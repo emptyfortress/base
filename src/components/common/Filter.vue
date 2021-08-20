@@ -1,5 +1,5 @@
 <template lang="pug">
-q-card.quick.shadow-3(v-show="filterByIndex === col" @click.stop )
+q-card.quick.shadow-3(v-show="filterByIndex === col" @click.stop)
 	q-card-section.q-pb-none.q-pt-xs
 		q-input(dense square
 			input-class="filter-input"
@@ -8,6 +8,14 @@ q-card.quick.shadow-3(v-show="filterByIndex === col" @click.stop )
 			clearable
 			)
 	q-list(v-if="filteredItems.length")
+		q-item(tag="label" v-ripple)
+			q-item-section(side top)
+				q-checkbox(v-model="all" @update:model-value="toggle")
+			q-item-section
+				q-item-label
+					|Выбрать все
+					span.q-ml-md ({{ checked.length }} / {{ data.length }})
+
 		q-item(v-for="(dat, index) in filteredItems" :key="index" tag="label" v-ripple ).q-pa-none
 			q-item-section(side top)
 				q-checkbox(v-model="checked" :val="dat")
@@ -19,7 +27,8 @@ q-card.quick.shadow-3(v-show="filterByIndex === col" @click.stop )
 		span Нет совпадений
 	q-separator
 	q-card-actions(align="between")
-		q-btn(flat round size="12px" icon="mdi-trash-can-outline" color="negative" @click="$emit('close')")
+		q-btn(flat round size="12px" icon="mdi-trash-can-outline" color="negative" @click="clearAll")
+			q-tooltip Очистить и закрыть
 		q-btn(flat size="12px" color="primary" @click="$emit('close')") Применить
 </template>
 
@@ -35,6 +44,18 @@ export default {
 		return {
 			checked: [],
 			filter: '',
+			all: false,
+		}
+	},
+	methods: {
+		toggle() {
+			if (this.checked.length < this.data.length) {
+				this.checked = [...this.data]
+			} else this.checked = []
+		},
+		clearAll() {
+			this.checked = []
+			this.$emit('close')
 		}
 	},
 	computed: {

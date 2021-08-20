@@ -13,17 +13,17 @@
 	.center
 		q-btn-group(unelevated).group
 			q-btn(:flat="grid.lenta" dense color="btn-group" icon="mdi-table" size="10px" @click="grid.showGrid")
-				q-tooltip(:delay="600" anchor="bottom middle" self="center middle") Грид
+				q-tooltip(:delay="600") Грид
 			q-btn(:flat="!grid.lenta" dense color="btn-group" icon="mdi-format-list-bulleted" size="10px" @click="grid.showLenta")
-				q-tooltip(:delay="600" anchor="bottom middle" self="center middle") Лента
+				q-tooltip(:delay="600") Лента
 	.right
 		q-btn(flat round dense v-for="button in buttons" @click="callback(button)")
-			q-tooltip(:delay="600" anchor="bottom middle" self="center middle") {{ button.tooltip}}
+			q-tooltip(:delay="600") {{ button.tooltip}}
 			SvgIcon(:name="button.icon" :spin="button.spin")
 		q-btn(flat round dense v-if="!grid.fullscreen" icon="mdi-fullscreen" @click="grid.switchFullscreen")
-			q-tooltip(:delay="600" anchor="bottom middle" self="center middle") Полный экран
+			q-tooltip(:delay="600") Полный экран
 		q-btn(flat round dense v-else icon="mdi-fullscreen-exit" @click="grid.switchFullscreen")
-			q-tooltip(:delay="600" anchor="bottom middle" self="center middle") Вернуть
+			q-tooltip(:delay="600") Вернуть
 </template>
 
 <script>
