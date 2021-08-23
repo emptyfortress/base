@@ -1,9 +1,8 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '@/components/Home.vue'
-import Grid from '@/pages/Grid.vue'
 
 export const router = createRouter({
-	history: createWebHistory(),
+	history: createWebHashHistory(),
 
 	routes: [
 		{
@@ -26,8 +25,7 @@ export const router = createRouter({
 		{
 			path: '/grid',
 			name: 'grid',
-			component: Grid
-			// component: () => import('@/pages/Grid.vue'),
+			component: () => import('@/pages/Grid.vue'),
 		},
 		{
 			path: '/lib',
