@@ -29,7 +29,7 @@
 
 		template(v-slot:loading)
 			.ld
-				.track
+				q-linear-progress(indeterminate)
 		template(v-slot:body="props")
 			q-tr(:props="props" :key="props.row.id" :class="{ 'bold' : props.row.unread }")
 				q-td(key="read" :class="{ 'unread' : props.row.unread }" @click="toggle(props.row.id)").small
@@ -92,7 +92,7 @@ export default {
 			classes.toggle('up')
 		}
 
-		const filterByIndex = ref(null)
+		const filterByIndex = ref(3)
 
 		const toggleFilter = (e) => {
 			filterByIndex.value === e ? filterByIndex.value = null : filterByIndex.value = e
@@ -180,15 +180,5 @@ td.small {
 	left: 0;
 	height: 3px;
 	z-index: 2;
-	.track {
-		position:absolute;
-		top:0;
-		right:100%;
-		bottom:0;
-		/* left:0; */
-		background: var(--q-primary);
-		width:0;
-		animation:borealisBar 1.2s linear infinite;
-	}
 }
 </style>

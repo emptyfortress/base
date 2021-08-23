@@ -1,9 +1,14 @@
 <template lang="pug">
 q-card.quick.shadow-3(v-show="filterByIndex === col" @click.stop)
 	template(v-if="datum")
-		q-btn(icon="mdi-event" round color="primary")
-			q-popup-proxy(transition-show="scale" transition-hide="scale")
-				q-date(v-model="proxyDate")
+		.q-pa-sm
+			.q-gutter-sm
+				q-radio(v-model="selectionDate" val="shab" label="Шаблон")
+				q-radio(v-model="selectionDate" val="jur" label="Журнал")
+				q-radio(v-model="selectionDate" val="dat" label="Дата")
+		q-separator
+		.cal
+			q-date(v-model="date" flat range)
 	template(v-else)
 		q-card-section.q-pb-none.q-pt-xs
 			q-input(dense square
@@ -54,8 +59,8 @@ export default {
 		const filter = ref('')
 		const all = ref(false)
 
-		const date = ref('2019/03/01')
-		const proxyDate = ref('2019/03/01')
+		const date = ref({from: '2019/03/01', to: '2019/03/02'})
+		const selectionDate = ref('shab')
 
 		const toggle = () => {
 			if (checked.value.length < filteredItems.value.length) {
@@ -94,7 +99,7 @@ export default {
 			clearAll,
 			filteredItems,
 			date,
-			proxyDate,
+			selectionDate,
 		}
 	},
 
@@ -112,7 +117,7 @@ export default {
 	position: absolute;
 	top: 36px;
 	left: 0;
-	width: 100%;
+	/* width: 100%; */
 	min-width: 230px;
 	padding: .5rem .25rem 0;
 	border-radius: 0 0 6px 6px;
@@ -139,5 +144,8 @@ export default {
 		font-size: 1.0rem;
 		margin-right: .5rem;
 	}
+}
+.cal {
+	white-space: normal;
 }
 </style>
