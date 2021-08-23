@@ -1,32 +1,35 @@
 <template lang="pug">
 q-card.quick.shadow-3(v-show="filterByIndex === col" @click.stop)
-	q-card-section.q-pb-none.q-pt-xs
-		q-input(dense square
-			input-class="filter-input"
-			v-model="filter"
-			autofocus
-			clearable
-			)
-			template(v-slot:prepend)
-				q-icon(name="mdi-magnify")
-	q-list(v-if="filteredItems.length")
-		q-item(tag="label" v-ripple)
-			q-item-section(side top)
-				q-checkbox(v-model="all" @update:model-value="toggle" color="grey")
-			q-item-section
-				q-item-label
-					|Выбрано
-					span.q-ml-md ({{ checked.length }} / {{ filteredItems.length }})
+	template(v-if="datum")
+		p fucke
+	template(v-else)
+		q-card-section.q-pb-none.q-pt-xs
+			q-input(dense square
+				input-class="filter-input"
+				v-model="filter"
+				autofocus
+				clearable
+				)
+				template(v-slot:prepend)
+					q-icon(name="mdi-magnify")
+		q-list(v-if="filteredItems.length")
+			q-item(tag="label" v-ripple)
+				q-item-section(side top)
+					q-checkbox(v-model="all" @update:model-value="toggle" color="grey")
+				q-item-section
+					q-item-label
+						|Выбрано
+						span.q-ml-md ({{ checked.length }} / {{ filteredItems.length }})
 
-		q-item(v-for="(dat, index) in filteredItems" :key="index" tag="label" v-ripple ).q-pa-none
-			q-item-section(side top)
-				q-checkbox(v-model="checked" :val="dat")
-			q-item-section
-				q-item-label
-					WordHighlighter(:query="filter") {{ dat }}
-	.empty(v-else)
-		q-icon(name="mdi-circle-off-outline")
-		span Нет совпадений
+			q-item(v-for="(dat, index) in filteredItems" :key="index" tag="label" v-ripple ).q-pa-none
+				q-item-section(side top)
+					q-checkbox(v-model="checked" :val="dat")
+				q-item-section
+					q-item-label
+						WordHighlighter(:query="filter") {{ dat }}
+		.empty(v-else)
+			q-icon(name="mdi-circle-off-outline")
+			span Нет совпадений
 	q-separator
 	q-card-actions(align="between")
 		q-btn(flat round size="12px" icon="mdi-trash-can-outline" color="negative" @click="clearAll")
@@ -39,7 +42,7 @@ import WordHighlighter from 'vue-word-highlighter'
 import { ref, computed, watchEffect } from 'vue'
 
 export default {
-	props: ['filterByIndex', 'col', 'data' ],
+	props: ['filterByIndex', 'col', 'data', 'datum' ],
 	components: {
 		WordHighlighter,
 	},

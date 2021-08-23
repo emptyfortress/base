@@ -25,7 +25,7 @@
 						q-btn(dense flat round icon="mdi-filter-outline" @click.stop="toggleFilter(col.id)")
 					
 					transition(name="slide-top")
-						Filter(:filterByIndex="filterByIndex" :col="col.id" @close="filterByIndex = null" :data="colData(col)")
+						Filter(:filterByIndex="filterByIndex" :col="col.id" @close="filterByIndex = null" :data="colData(col)" :datum="col.datum")
 
 		template(v-slot:loading)
 			.ld
@@ -191,17 +191,4 @@ td.small {
 		animation:borealisBar 1.2s linear infinite;
 	}
 }
-/* .fixhd thead tr:first-child th:last-child .quick { */
-/* 	left: initial; */
-/* 	right: 0; */
-/* } */
-/* .quick { */
-/* 	position: absolute; */
-/* 	top: 36px; */
-/* 	left: 0; */
-/* 	width: 100%; */
-/* 	min-width: 230px; */
-/* 	padding: .5rem .25rem 0; */
-/* 	border-radius: 0 0 6px 6px; */
-/* } */
 </style>
