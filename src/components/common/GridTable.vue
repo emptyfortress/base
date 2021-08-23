@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import Toolbar from '@/components/common/Toolbar.vue'
 import Total from '@/components/common/Total.vue'
 import Filter from '@/components/common/Filter.vue'
@@ -92,7 +92,7 @@ export default {
 			classes.toggle('up')
 		}
 
-		const filterByIndex = ref(3)
+		const filterByIndex = ref(null)
 
 		const toggleFilter = (e) => {
 			filterByIndex.value === e ? filterByIndex.value = null : filterByIndex.value = e

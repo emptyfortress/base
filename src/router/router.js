@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/components/Home.vue'
+import Grid from '@/pages/Grid.vue'
 
 export const router = createRouter({
 	history: createWebHistory(),
@@ -25,7 +26,8 @@ export const router = createRouter({
 		{
 			path: '/grid',
 			name: 'grid',
-			component: () => import('@/pages/Grid.vue'),
+			component: Grid
+			// component: () => import('@/pages/Grid.vue'),
 		},
 		{
 			path: '/lib',
