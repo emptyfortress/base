@@ -17,7 +17,7 @@
 			q-btn(:flat="!grid.lenta" dense color="btn-group" icon="mdi-format-list-bulleted" size="10px" @click="grid.showLenta")
 				q-tooltip(:delay="600") Лента
 	.right
-		q-btn(flat round dense v-for="button in buttons" @click="callback(button)")
+		q-btn(flat round dense v-for="button in buttons" @click="callback(button)" :key="button.id")
 			q-tooltip(:delay="600") {{ button.tooltip}}
 			SvgIcon(:name="button.icon" :spin="button.spin")
 		q-btn(flat round dense v-if="!grid.fullscreen" icon="mdi-fullscreen" @click="grid.switchFullscreen")
@@ -29,7 +29,7 @@
 <script>
 import { useGrid } from '@/stores/grid'
 import SvgIcon from '@/components/SvgIcon.vue'
-import { reactive, ref } from 'vue'
+import { reactive } from 'vue'
 
 export default {
 	props: {
@@ -63,7 +63,7 @@ export default {
 		}
 
 		const buttons = reactive([
-			{ id: 0, icon: 'sort-variant', tooltip: 'Сортировка', action: '' },
+			// { id: 0, icon: 'sort-variant', tooltip: 'Сортировка', action: '', grid: false },
 			{ id: 1, icon: 'readAll', tooltip: 'Прочитать все', action: 'clear' },
 			{ id: 2, icon: 'refresh', tooltip: 'Обновить', action: 'refresh', spin: false },
 			{ id: 3, icon: 'xls-export', tooltip: 'Экспорт', action: '' },

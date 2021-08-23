@@ -7,11 +7,11 @@ q-card.quick.shadow-3(v-show="filterByIndex === col" @click.stop)
 				q-radio(v-model="dateView" val="jur" label="Журнал")
 				q-radio(v-model="dateView" val="cal" label="Дата")
 		q-separator
-		q-tab-panels(v-model="dateView" animated)
+		q-tab-panels(v-model="dateView")
 			q-tab-panel(name="shab")
-				p laksjd
+				q-option-group(:options="shablonOptions" type="checkbox" v-model="shablon").opList
 			q-tab-panel(name="jur")
-				p laksj
+				Journal(:data="data")
 			q-tab-panel(name="cal")
 				.cal
 					q-date(v-model="mydate" flat range today-btn)
@@ -36,12 +36,22 @@ export default {
 	setup() {
 
 		const mydate = ref({from: '2021/08/01', to: '2021/08/07'})
+		const shablon = ref(['2'])
 
 		const dateView = ref('shab')
 
 		return {
 			mydate,
 			dateView,
+			shablon,
+			shablonOptions: [
+				{ label: 'Прошлый месяц', value: '0' },
+				{ label: 'Текущий месяц', value: '3', },
+				{ label: 'Прошлая неделя', value: '1', },
+				{ label: 'Текущая неделя', value: '2', },
+				{ label: 'Вчера', value: '4', },
+				{ label: 'Сегодня', value: '5', },
+			]
 		}
 	},
 
@@ -65,5 +75,8 @@ export default {
 }
 .cal {
 	white-space: normal;
+}
+.opList {
+	margin-left: 0.25rem;
 }
 </style>
