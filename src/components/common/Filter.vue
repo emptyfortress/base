@@ -1,7 +1,9 @@
 <template lang="pug">
 q-card.quick.shadow-3(v-show="filterByIndex === col" @click.stop)
 	template(v-if="datum")
-		p fucke
+		q-btn(icon="mdi-event" round color="primary")
+			q-popup-proxy(transition-show="scale" transition-hide="scale")
+				q-date(v-model="proxyDate")
 	template(v-else)
 		q-card-section.q-pb-none.q-pt-xs
 			q-input(dense square
@@ -52,6 +54,9 @@ export default {
 		const filter = ref('')
 		const all = ref(false)
 
+		const date = ref('2019/03/01')
+		const proxyDate = ref('2019/03/01')
+
 		const toggle = () => {
 			if (checked.value.length < filteredItems.value.length) {
 				checked.value = filteredItems.value
@@ -87,7 +92,9 @@ export default {
 			all,
 			toggle,
 			clearAll,
-			filteredItems
+			filteredItems,
+			date,
+			proxyDate,
 		}
 	},
 
