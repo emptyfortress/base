@@ -25,7 +25,7 @@
 						q-btn(dense flat round icon="mdi-filter-outline" @click.stop="toggleFilter(col.id)")
 					
 					transition(name="slide-top")
-						Filter(:filterByIndex="filterByIndex" :col="col.id" @close="filterByIndex = null" :data="colData(col)" :datum="col.datum")
+						Filter(:filterByIndex="filterByIndex" :col="col" @close="filterByIndex = null" :data="colData(col)" :datum="col.datum")
 
 		template(v-slot:loading)
 			.ld

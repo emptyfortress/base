@@ -1,5 +1,5 @@
 <template lang="pug">
-q-card.quick.shadow-3(v-show="filterByIndex === col" @click.stop)
+q-card.quick.shadow-3(v-show="filterByIndex === col.id" @click.stop)
 	template(v-if="datum")
 		.q-pa-sm
 			.q-gutter-sm
@@ -16,12 +16,12 @@ q-card.quick.shadow-3(v-show="filterByIndex === col" @click.stop)
 				.cal
 					q-date(v-model="mydate" flat range today-btn)
 	template(v-else)
-		Journal(:data="data" :trigger="trigger" @reset="trigger = false; $emit('close')")
+		Journal(:data="data" :trigger="trigger" @close="trigger = false; $emit('close')")
 	q-separator
 	q-card-actions(align="between")
 		q-btn(flat round size="12px" icon="mdi-trash-can-outline" color="negative" @click="clearAll")
 			q-tooltip Очистить и закрыть
-		q-btn(flat size="12px" color="primary" @click="$emit('close')") Применить
+		q-btn(flat size="12px" color="primary" @click="applyFilter") Применить
 </template>
 
 <script>
@@ -30,10 +30,11 @@ import Journal from '@/components/common/Journal.vue'
 
 export default {
 	props: ['filterByIndex', 'col', 'data', 'datum' ],
+	emits: ['close'],
 	components: {
 		Journal,
 	},
-	setup() {
+	setup(props, context) {
 
 		const mydate = ref({from: '2021/08/01', to: '2021/08/07'})
 		const shablon = ref(['2'])
@@ -42,10 +43,15 @@ export default {
 
 		const trigger = ref(false)
 		const clearAll = () => {
-			trigger.value = true
+			trigger.value = !trigger.value
+		}
+		const applyFilter = () => {
+			console.log(props.col.name)
+			context.emit('close')
 		}
 		
 		return {
+			applyFilter,
 			trigger,
 			mydate,
 			dateView,

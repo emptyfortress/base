@@ -2,7 +2,7 @@
 q-card-section.q-pb-none.q-pt-xs
 	q-input(dense square
 		input-class="filter-input"
-		v-model="filter"
+		v-model="query"
 		autofocus
 		clearable
 		)
@@ -22,31 +22,36 @@ q-list(v-if="filteredItems.length")
 			q-checkbox(v-model="checked" :val="dat")
 		q-item-section
 			q-item-label
-				WordHighlighter(:query="filter") {{ dat }}
+				WordHighlighter(:query="query") {{ dat }}
 .empty(v-else)
 	q-icon(name="mdi-circle-off-outline")
 	span Нет совпадений
 </template>
 
 <script>
-import { ref, computed, watchEffect } from 'vue'
+import { ref, computed, watchEffect, watch } from 'vue'
 import WordHighlighter from 'vue-word-highlighter'
+// import { useGrid } from '@/stores/grid'
 
 export default {
 	props: ['data', 'trigger'],
+	emits: ['close'],
 	components: {
 		WordHighlighter,
 	},
 
 	setup(props, context) {
+		// const grid = useGrid()
+
 		const all = ref(false)
-		const filter = ref('')
+		const query = ref('')
+		// const checked = grid.checkedHeaderItems
 		let checked = ref([])
 
 		const filteredItems = computed( () => {
 			return props.data.filter( row => {
-				if (filter.value) {
-					return row.toLowerCase().includes(filter.value.toLowerCase())
+				if (query.value) {
+					return row.toLowerCase().includes(query.value.toLowerCase())
 				}
 				return props.data
 			})
@@ -72,8 +77,8 @@ export default {
 				all.value = false
 			}
 			if (props.trigger === true) {
-				clearAll()
-				context.emit('reset')
+				checked.value = []
+				context.emit('close')
 			}
 		})
 
@@ -81,7 +86,7 @@ export default {
 			filteredItems,
 			toggle,
 			clearAll,
-			filter,
+			query,
 			checked,
 			all,
 			
