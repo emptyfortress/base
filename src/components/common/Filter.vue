@@ -34,7 +34,7 @@ export default {
 	components: {
 		Journal,
 	},
-	setup(props, context) {
+	setup(props) {
 
 		const mydate = ref({from: '2021/08/01', to: '2021/08/07'})
 		const shablon = ref(['2'])
@@ -47,7 +47,8 @@ export default {
 		}
 		const applyFilter = () => {
 			console.log(props.col.name)
-			context.emit('close')
+			// console.log(checked)
+			// context.emit('close')
 		}
 		
 		return {

@@ -29,7 +29,7 @@ q-list(v-if="filteredItems.length")
 </template>
 
 <script>
-import { ref, computed, watchEffect, watch } from 'vue'
+import { ref, computed, watchEffect } from 'vue'
 import WordHighlighter from 'vue-word-highlighter'
 // import { useGrid } from '@/stores/grid'
 
@@ -45,7 +45,6 @@ export default {
 
 		const all = ref(false)
 		const query = ref('')
-		// const checked = grid.checkedHeaderItems
 		let checked = ref([])
 
 		const filteredItems = computed( () => {
@@ -60,10 +59,6 @@ export default {
 			if (checked.value.length < filteredItems.value.length) {
 				checked.value = filteredItems.value
 			} else checked.value = []
-		}
-		const clearAll = () => {
-			checked.value = []
-			context.emit('close')
 		}
 
 		watchEffect(() => {
@@ -85,7 +80,6 @@ export default {
 		return {
 			filteredItems,
 			toggle,
-			clearAll,
 			query,
 			checked,
 			all,
