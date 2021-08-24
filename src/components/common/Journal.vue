@@ -33,7 +33,7 @@ import { ref, computed, watchEffect } from 'vue'
 import WordHighlighter from 'vue-word-highlighter'
 
 export default {
-	props: ['data'],
+	props: ['data', 'trigger'],
 	components: {
 		WordHighlighter,
 	},
@@ -70,6 +70,10 @@ export default {
 			}
 			if (checked.value.length === 0) {
 				all.value = false
+			}
+			if (props.trigger === true) {
+				clearAll()
+				context.emit('reset')
 			}
 		})
 

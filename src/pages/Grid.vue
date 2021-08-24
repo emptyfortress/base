@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import { useGrid } from '@/stores/grid'
 import { items } from '@/stores/data'
 import GridTable from '@/components/common/GridTable.vue'
@@ -28,7 +28,12 @@ export default {
 		const grid = useGrid()
 		grid.items = [...items]
 		const rows = reactive(grid.items)
-		const filteredRows = rows.filter( (item) => item.type === 'task' )
+		const filteredRows = computed( () => {
+			if (grid.filter) {
+				return rows.filter( (item) => item.type === 'task' )
+			}
+			return rows
+		})
 
 		const shown = ref(0)
 

@@ -16,7 +16,7 @@ q-card.quick.shadow-3(v-show="filterByIndex === col" @click.stop)
 				.cal
 					q-date(v-model="mydate" flat range today-btn)
 	template(v-else)
-		Journal(:data="data")
+		Journal(:data="data" :trigger="trigger" @reset="trigger = false; $emit('close')")
 	q-separator
 	q-card-actions(align="between")
 		q-btn(flat round size="12px" icon="mdi-trash-can-outline" color="negative" @click="clearAll")
@@ -40,10 +40,17 @@ export default {
 
 		const dateView = ref('shab')
 
+		const trigger = ref(false)
+		const clearAll = () => {
+			trigger.value = true
+		}
+		
 		return {
+			trigger,
 			mydate,
 			dateView,
 			shablon,
+			clearAll,
 			shablonOptions: [
 				{ label: 'Прошлый месяц', value: '0' },
 				{ label: 'Текущий месяц', value: '3', },

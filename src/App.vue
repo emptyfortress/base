@@ -32,8 +32,9 @@
 		RDrawer(:show="rightDrawer")
 
 		q-page-container
-			router-view(v-slot="{ Component, route }")
-				transition(name="slide-right")
+			router-view
+			//- router-view(v-slot="{ Component, route }")
+				transition(name="fade")
 					component(:is="Component")
 
 		//- q-footer(bordered).head
