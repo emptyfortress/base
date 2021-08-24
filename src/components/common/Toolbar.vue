@@ -4,7 +4,7 @@
 		q-btn(flat round dense @click="grid.switchSidebar")
 			q-icon(name="mdi-backburger" v-if="grid.sidebar")
 			q-icon(name="mdi-forwardburger" v-else)
-		transition(name="slide-top" mode="out-in")
+		transition(name="slide-left")
 			.total(v-if="shown === total") Всего:
 				span {{ total }}
 			.total(v-else) Показано:
@@ -60,7 +60,7 @@ export default {
 		}
 
 		const showAll = () => {
-			context.emit('showAll')
+			grid.clearCheckedItems()
 		}
 
 		const buttons = reactive([

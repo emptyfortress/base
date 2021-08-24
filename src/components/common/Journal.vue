@@ -34,7 +34,7 @@ q-card-actions(align="between")
 </template>
 
 <script>
-import { ref, computed, watchEffect } from 'vue'
+import { ref, computed, watchEffect, } from 'vue'
 import WordHighlighter from 'vue-word-highlighter'
 import { useGrid } from '@/stores/grid'
 

@@ -22,10 +22,10 @@
 .slide-left-enter-active,
 .slide-left-leave-active {
 	transition: all 0.3s ease;
-	// position: absolute;
 }
 .slide-left-enter-from,
 .slide-left-leave-to {
+	position: absolute;
 	transform: translateX(-30px);
 	opacity: 0;
 }
@@ -33,10 +33,10 @@
 .slide-top-enter-active,
 .slide-top-leave-active {
 	transition: all 0.3s ease;
-	// position: absolute;
 }
 .slide-top-enter-from,
 .slide-top-leave-to {
+	position: absolute;
 	transform: translateY(-30px);
 	opacity: 0;
 }
