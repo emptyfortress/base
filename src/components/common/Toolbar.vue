@@ -5,11 +5,12 @@
 			q-icon(name="mdi-backburger" v-if="grid.sidebar")
 			q-icon(name="mdi-forwardburger" v-else)
 		transition(name="slide-top" mode="out-in")
-			.total(v-if="shown") Показано:
-				span {{ shown }}
-				q-btn(unelevated size="12px" @click="showAll") Показать все
-			.total(v-else) Всего:
+			.total(v-if="shown === total") Всего:
 				span {{ total }}
+			.total(v-else) Показано:
+				span {{ shown }}
+				span.iz ({{ total }})
+				q-btn(unelevated size="12px" @click="showAll").q-ml-sm Показать все
 	.center
 		q-btn-group(unelevated).group
 			q-btn(:flat="grid.lenta" dense color="btn-group" icon="mdi-table" size="10px" @click="grid.showGrid")
@@ -96,17 +97,18 @@ export default {
 	align-items: center;
 }
 .total {
-	/* font-size: 1.0rem; */
 	display: inline-block;
 	line-height: 42px;
 	margin: 0 1rem;
 	span {
 		font-weight: 600;
 		margin-left: 0.5rem;
+		&.iz {
+			font-weight: 300;
+		}
 	}
 }
 .group {
-	/* border: 1px solid var(--my-border-color); */
 	border: 1px solid var(--my-border-color);
 }
 </style>

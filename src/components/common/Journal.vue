@@ -68,12 +68,14 @@ export default {
 
 		const clearAll = () => {
 			checked.value = []
+			grid.clearCheckedItems()
 			context.emit('close')
 		}
 		const applyFilter = () => {
-			grid.addHeadItem(props.col.name, checked.value)
-			// console.log(checked.value)
-			console.log(props.col.name)
+			if (checked.value.length === 0) {
+				grid.clearCheckedItems()
+			} else grid.addHeadItem(props.col.name, checked.value)
+			context.emit('close')
 		}
 
 		watchEffect(() => {

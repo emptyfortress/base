@@ -37,7 +37,7 @@
 					q-checkbox(v-model="props.selected")
 				q-td(v-for="col in props.cols" :key="col.name") {{ props.row[col.name] }}
 		template(v-slot:top)
-			Toolbar(:total="rows.length" :shown="shown" @readAll="readAll" @toggleLoad="loading = !loading")
+			Toolbar(:total="total" :shown="shown" @readAll="readAll" @toggleLoad="loading = !loading")
 		template(v-slot:bottom v-if="selected.length")
 			Total(:selected="selected.length" @clear="clearSelected")
 
@@ -59,7 +59,8 @@ export default {
 		columns: Array,
 		rows: Array,
 		shown: Number,
-		colData: Array,
+		colData: Function,
+		total: Number,
 	},
 	setup(props) {
 		const pagination = {
@@ -67,7 +68,7 @@ export default {
 			rowsPerPage: 0,
 		}
 
-		const total = ref(null)
+		// const total = ref(null)
 		const selected = ref([])
 		const itemTable = ref(null)
 		const loading = ref(false)
@@ -82,10 +83,6 @@ export default {
 		const readAll = () => {
 			props.rows.map( (row) => row.unread = false )
 		}
-
-		// const colData = (col) => {
-		// 	return [...new Set(props.rows.map( item => item[col.name] ))]
-		// }
 
 		const mysort = (e, event) => {
 			itemTable.value.sort(e)
@@ -105,12 +102,12 @@ export default {
 			toggle,
 			mysort,
 			itemTable,
-			total,
 			clearSelected,
 			readAll,
 			loading,
 			filterByIndex,
 			toggleFilter,
+			props,
 		}
 	},
 }

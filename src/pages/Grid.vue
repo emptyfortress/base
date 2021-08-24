@@ -4,16 +4,16 @@
 	.gridtotal(:class="{ full : grid.fullscreen }")
 		.sidebar(v-show="grid.sidebar") sidebar
 		.main(:class="{ 'fill' : !grid.sidebar }").shadow-1
-			GridTable(v-if="!grid.lenta" :columns="columns" :colData="colData" :rows="filteredRows" :shown="shown" )
+			GridTable(v-if="!grid.lenta" :columns="columns" :colData="colData" :rows="filteredRows" :total="items.length" :shown="filteredRows.length" )
 			div(v-else)
-				Toolbar(:total="rows.length" :shown="shown" @readAll="readAll")
+				Toolbar(:total="items.length" :shown="shown" @readAll="readAll")
 				p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 			
 	
 </template>
 
 <script>
-import { ref, reactive, computed } from 'vue'
+import { ref, computed } from 'vue'
 import { useGrid } from '@/stores/grid'
 import { items } from '@/stores/data'
 import GridTable from '@/components/common/GridTable.vue'
@@ -31,7 +31,9 @@ export default {
 
 		const filteredRows = computed( () => {
 			if (grid.checkedHeadItems.length) {
-				return rows.filter( (item) => item.type === 'task' )
+				return rows.filter( item => {
+					return grid.checkedHeadItems[0].items.some( el => item[grid.checkedHeadItems[0].col].includes(el) )
+				})
 			}
 			return rows
 		})
@@ -39,8 +41,6 @@ export default {
 		const colData = (col) => {
 			return [...new Set(rows.map( item => item[col.name] ))]
 		}
-
-		const shown = ref(0)
 
 		const columns = [
 			{ id: 0, name: 'typ', label: 'Тип', field: 'typ', align: 'left', sortable: true, },
@@ -53,8 +53,8 @@ export default {
 			colData,
 			grid,
 			columns,
-			shown,
 			rows,
+			items,
 			filteredRows,
 		}
 	},

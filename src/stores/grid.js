@@ -30,6 +30,9 @@ export const useGrid = defineStore({
 				col: col,
 				items: items
 			})
+		},
+		clearCheckedItems() {
+			this.checkedHeadItems = []
 		}
 	},
 })
