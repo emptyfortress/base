@@ -25,11 +25,16 @@ export const useGrid = defineStore({
 			this.lenta = true
 		},
 		addHeadItem(col,items) {
-			this.checkedHeadItems = []
-			this.checkedHeadItems.push({
-				col: col,
-				items: items
-			})
+			let temp = this.checkedHeadItems.find( item => item.col === col )
+			if (temp) {
+				temp.items.push(items)
+			} else {
+				this.checkedHeadItems.push({
+					col: col,
+					items: items
+				})
+			}
+
 		},
 		clearCheckedItems() {
 			this.checkedHeadItems = []

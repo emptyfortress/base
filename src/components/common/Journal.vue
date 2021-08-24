@@ -34,7 +34,7 @@ q-card-actions(align="between")
 </template>
 
 <script>
-import { ref, computed, watchEffect, } from 'vue'
+import { ref, computed, watchEffect, onMounted } from 'vue'
 import WordHighlighter from 'vue-word-highlighter'
 import { useGrid } from '@/stores/grid'
 
@@ -50,7 +50,9 @@ export default {
 
 		const all = ref(false)
 		const query = ref('')
-		let checked = ref([])
+		const checked = ref([])
+
+		// let checked = grid.checkedHeadItems[props.col.name].items
 
 		const filteredItems = computed( () => {
 			return props.data.filter( row => {
@@ -60,6 +62,7 @@ export default {
 				return props.data
 			})
 		})
+
 		const toggle = () => {
 			if (checked.value.length < filteredItems.value.length) {
 				checked.value = filteredItems.value
