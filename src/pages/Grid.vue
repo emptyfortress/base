@@ -30,10 +30,22 @@ export default {
 		const rows = grid.items
 
 		const filteredRows = computed( () => {
-			if (grid.checkedHeadItems.length) {
+			if (grid.checked.length) {
 				return rows.filter( item => {
-					return grid.checkedHeadItems[0].items.some( el => item[grid.checkedHeadItems[0].col].includes(el) )
+					return grid.checked.some( el => {
+						console.log(el.col)
+						console.log(el.items)
+						console.log(item)
+						console.log(item[el.col])
+						return  el.items.forEach( (ol) => item[el.col].includes(ol)  ) 
+						// return el.items.includes( () => item[el.col]  ) 
+						// el.items.some( () => item[el.col].includes(item))
+					} )
 				})
+
+				// return rows.filter( item => {
+				// 	return grid.checked[0].items.some( el => item[grid.checked[0].col].includes(el) )
+				// })
 			}
 			return rows
 		})
