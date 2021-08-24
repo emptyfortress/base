@@ -59,7 +59,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/styles/theme.scss';
 
 .fixhd thead tr:first-child th:last-child .quick {
 	left: initial;
