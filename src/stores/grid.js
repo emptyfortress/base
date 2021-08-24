@@ -7,7 +7,8 @@ export const useGrid = defineStore({
 		lenta: false,
 		fullscreen: false,
 		items: [],
-		filter: null,
+		filter: true,
+		checkedHeadItems: [],
 	}),
 	getters: {},
 	actions: {
@@ -22,6 +23,13 @@ export const useGrid = defineStore({
 		},
 		showLenta() {
 			this.lenta = true
+		},
+		addHeadItem(col,items) {
+			this.checkedHeadItems = []
+			this.checkedHeadItems.push({
+				col: col,
+				items: items
+			})
 		}
 	},
 })

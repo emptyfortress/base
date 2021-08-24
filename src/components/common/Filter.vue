@@ -10,18 +10,23 @@ q-card.quick.shadow-3(v-show="filterByIndex === col.id" @click.stop)
 		q-tab-panels(v-model="dateView")
 			q-tab-panel(name="shab")
 				q-option-group(:options="shablonOptions" type="checkbox" v-model="shablon").opList
+				q-separator
+				q-card-actions(align="between")
+					q-btn(flat round size="12px" icon="mdi-trash-can-outline" color="negative" @click="clearAll")
+						q-tooltip Очистить и закрыть
+					q-btn(flat size="12px" color="primary" @click="applyFilter") Применить
 			q-tab-panel(name="jur")
-				Journal(:data="data")
+				Journal(:data="data" :col="col" @close="$emit('close')")
 			q-tab-panel(name="cal")
 				.cal
 					q-date(v-model="mydate" flat range today-btn)
+					q-separator
+					q-card-actions(align="between")
+						q-btn(flat round size="12px" icon="mdi-trash-can-outline" color="negative" @click="clearAll")
+							q-tooltip Очистить и закрыть
+						q-btn(flat size="12px" color="primary" @click="applyFilter") Применить
 	template(v-else)
-		Journal(:data="data" :trigger="trigger" @close="trigger = false; $emit('close')")
-	q-separator
-	q-card-actions(align="between")
-		q-btn(flat round size="12px" icon="mdi-trash-can-outline" color="negative" @click="clearAll")
-			q-tooltip Очистить и закрыть
-		q-btn(flat size="12px" color="primary" @click="applyFilter") Применить
+		Journal(:data="data" :col="col" @close="$emit('close')")
 </template>
 
 <script>
@@ -41,23 +46,19 @@ export default {
 
 		const dateView = ref('shab')
 
-		const trigger = ref(false)
-		const clearAll = () => {
-			trigger.value = !trigger.value
-		}
 		const applyFilter = () => {
 			console.log(props.col.name)
-			// console.log(checked)
-			// context.emit('close')
+		}
+		const clearAll = () => {
+			console.log('test')
 		}
 		
 		return {
+			clearAll,
 			applyFilter,
-			trigger,
 			mydate,
 			dateView,
 			shablon,
-			clearAll,
 			shablonOptions: [
 				{ label: 'Прошлый месяц', value: '0' },
 				{ label: 'Текущий месяц', value: '3', },
@@ -91,5 +92,8 @@ export default {
 }
 .opList {
 	margin-left: 0.25rem;
+}
+.q-tab-panel {
+	padding-bottom: 0;
 }
 </style>

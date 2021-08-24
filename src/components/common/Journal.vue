@@ -26,22 +26,27 @@ q-list(v-if="filteredItems.length")
 .empty(v-else)
 	q-icon(name="mdi-circle-off-outline")
 	span Нет совпадений
+q-separator
+q-card-actions(align="between")
+	q-btn(flat round size="12px" icon="mdi-trash-can-outline" color="negative" @click="clearAll")
+		q-tooltip Очистить и закрыть
+	q-btn(flat size="12px" color="primary" @click="applyFilter") Применить
 </template>
 
 <script>
 import { ref, computed, watchEffect } from 'vue'
 import WordHighlighter from 'vue-word-highlighter'
-// import { useGrid } from '@/stores/grid'
+import { useGrid } from '@/stores/grid'
 
 export default {
-	props: ['data', 'trigger'],
+	props: ['data', 'col'],
 	emits: ['close'],
 	components: {
 		WordHighlighter,
 	},
 
 	setup(props, context) {
-		// const grid = useGrid()
+		const grid = useGrid()
 
 		const all = ref(false)
 		const query = ref('')
@@ -61,6 +66,16 @@ export default {
 			} else checked.value = []
 		}
 
+		const clearAll = () => {
+			checked.value = []
+			context.emit('close')
+		}
+		const applyFilter = () => {
+			grid.addHeadItem(props.col.name, checked.value)
+			// console.log(checked.value)
+			console.log(props.col.name)
+		}
+
 		watchEffect(() => {
 			if (checked.value.length < props.data.length && checked.value.length !== 0) {
 				all.value = null
@@ -71,13 +86,11 @@ export default {
 			if (checked.value.length === 0) {
 				all.value = false
 			}
-			if (props.trigger === true) {
-				checked.value = []
-				context.emit('close')
-			}
 		})
 
 		return {
+			applyFilter,
+			clearAll,
 			filteredItems,
 			toggle,
 			query,
@@ -91,7 +104,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/styles/theme.scss';
 
 .q-list {
 	max-height: 300px;

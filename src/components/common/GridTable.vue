@@ -59,6 +59,7 @@ export default {
 		columns: Array,
 		rows: Array,
 		shown: Number,
+		colData: Array,
 	},
 	setup(props) {
 		const pagination = {
@@ -82,9 +83,9 @@ export default {
 			props.rows.map( (row) => row.unread = false )
 		}
 
-		const colData = (col) => {
-			return [...new Set(props.rows.map( item => item[col.name] ))]
-		}
+		// const colData = (col) => {
+		// 	return [...new Set(props.rows.map( item => item[col.name] ))]
+		// }
 
 		const mysort = (e, event) => {
 			itemTable.value.sort(e)
@@ -98,7 +99,6 @@ export default {
 			filterByIndex.value === e ? filterByIndex.value = null : filterByIndex.value = e
 		}
 
-
 		return {
 			pagination,
 			selected,
@@ -111,7 +111,6 @@ export default {
 			loading,
 			filterByIndex,
 			toggleFilter,
-			colData,
 		}
 	},
 }

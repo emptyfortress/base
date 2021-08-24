@@ -4,7 +4,7 @@
 	.gridtotal(:class="{ full : grid.fullscreen }")
 		.sidebar(v-show="grid.sidebar") sidebar
 		.main(:class="{ 'fill' : !grid.sidebar }").shadow-1
-			GridTable(v-if="!grid.lenta" :columns="columns" :rows="filteredRows" :shown="shown" )
+			GridTable(v-if="!grid.lenta" :columns="columns" :colData="colData" :rows="filteredRows" :shown="shown" )
 			div(v-else)
 				Toolbar(:total="rows.length" :shown="shown" @readAll="readAll")
 				p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -27,13 +27,18 @@ export default {
 	setup() {
 		const grid = useGrid()
 		grid.items = [...items]
-		const rows = reactive(grid.items)
+		const rows = grid.items
+
 		const filteredRows = computed( () => {
-			if (grid.filter) {
+			if (grid.checkedHeadItems.length) {
 				return rows.filter( (item) => item.type === 'task' )
 			}
 			return rows
 		})
+
+		const colData = (col) => {
+			return [...new Set(rows.map( item => item[col.name] ))]
+		}
 
 		const shown = ref(0)
 
@@ -45,6 +50,7 @@ export default {
 		]
 
 		return {
+			colData,
 			grid,
 			columns,
 			shown,
