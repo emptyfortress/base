@@ -22,9 +22,9 @@
 					span {{ col.label }}
 					q-icon(name="mdi-filter" color="negative" v-if="showFilt(col)").filt
 					.sort(@click.stop)
-						q-btn(v-if="col.sortable" dense flat round @click.stop="mysort(col.name, $event)")
+						q-btn(v-if="col.sortable" unelevated dense size="sm" color="primary" round @click.stop="mysort(col.name, $event)")
 							q-icon(name="mdi-arrow-down")
-						q-btn(dense flat round icon="mdi-filter-outline" @click.stop="toggleFilter(col.id)")
+						q-btn( unelevated dense color="primary" round size="sm" icon="mdi-filter-outline" @click.stop="toggleFilter(col.id)")
 					
 					transition(name="slide-top")
 						Filter(:filterByIndex="filterByIndex" :col="col" @close="filterByIndex = null" :data="colData(col)" :datum="col.datum")
@@ -167,8 +167,14 @@ td.small {
 		left: 0;
 		right: 0;
 		bottom: 0;
-		background: #fff;
+		background: #ffffffaa;
 		display: none;
+		body.body--dark & {
+			background: var(--bg-dark);
+		}
+		.q-btn:first-child {
+			margin-right: 3px;
+		}
 		.q-icon {
 			transition: .3s ease all;
 			&.up {
@@ -196,5 +202,24 @@ td.small {
 	left: 0;
 	height: 3px;
 	z-index: 2;
+}
+/* .test-enter-active, .test-leave-active { */
+/* 	transition: all 0.3s ease; */
+/* } */
+/* .test-enter-from, .test-leave-to { */
+/* 	opacity: 0; */
+/* 	transform: translateX(30px); */
+/* } */
+/* .test-move { */
+/* 	transition: transform .4s ease; */
+/* } */
+.list-complete-enter-from,
+.list-complete-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.list-complete-leave-active {
+  position: absolute;
 }
 </style>

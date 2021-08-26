@@ -2,7 +2,7 @@
 .fade-enter-active,
 .fade-leave-active {
 	transition: opacity 0.5s ease;
-	position: absolute;
+	// position: absolute;
 }
 .fade-leave-to {
 	opacity: 0;
@@ -11,7 +11,7 @@
 .slide-right-enter-active,
 .slide-right-leave-active {
 	transition: all 0.5s ease;
-	position: absolute;
+	// position: absolute;
 }
 .slide-right-enter-from,
 .slide-right-leave-to {
