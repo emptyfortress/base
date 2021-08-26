@@ -29,60 +29,18 @@ export default {
 		grid.items = [...items]
 		const rows = grid.items
 
-		// function uniqueKeepLast(data, key) {
-		// 	return [
-		// 		...new Map(
-		// 			 data.map(x => [key(x), x])
-		// 		).values()
-		// 	]
-		// }
-
 		const filteredRows = computed( () => {
 			if (grid.checked.length) {
 
+				let filter = { typ: [ 'Задание', 'Документ' ] }
 
-				// let users = [
-				// 	{ name: 'Loh', gender: 'male', age: 32 },
-				// 	{ name: 'John', gender: 'male', age: 4 },
-				// 	{ name: 'John', gender: 'male', age: 5 },
-				// 	{ name: 'John', gender: 'male', age: 8 },
-				// 	{ name: 'John', gender: 'male', age: 8 },
-				// 	{ name: 'John', gender: 'male', age: 9 },
-				// 	{ name: 'John', gender: 'female', age: 3 },
-				// 	{ name: 'Sara', gender: 'female', age: 2 },
-				// ]
-
-				// let temp = uniqueKeepLast(users, it => it.gender)
-				// console.log(users)
-				// console.log(temp)
-
-
-				// users = users.filter(item => {
-				// 	for (let key in filter) {
-				// 		if (item[key] === undefined || item[key] != filter[key])
-				// 			return false
-				// 	}
-				// 	return true
-				// })
-
-				return rows
-
-
-				// return rows.filter( item => {
-				// 	grid.checked.forEach( column => {
-				// 		console.log(column)
-				// 		console.log('column.col: ' + column.col)
-				// 		console.log(typeof(column.items))
-				// 		console.log(column.items.some( (el) => el === 'Задание' ))
-				// 		return  column.items.some( (el) =>  el.includes(item[column.col]))
-				// 		return el.items.includes( () => item[el.col]  ) 
-				// 		el.items.some( () => item[el.col].includes(item))
-				// 	} )
-				// })
-
-				// return rows.filter( item => {
-				// 	return grid.checked[0].items.some( el => item[grid.checked[0].col].includes(el) )
-				// })
+				return rows.filter( item => {
+					for (let [key, value] of Object.entries(filter)) {
+						if (item[key] === undefined || item[key] !==  'Задание' ) 
+							return false
+					}
+					return true
+				})
 			}
 			return rows
 		})
