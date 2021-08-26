@@ -28,7 +28,7 @@ q-list(v-if="filteredItems.length")
 	span Нет совпадений
 q-separator
 q-card-actions(align="between")
-	q-btn(flat round size="12px" icon="mdi-trash-can-outline" color="negative" @click="clearAll")
+	q-btn(flat round size="12px" icon="mdi-trash-can-outline" color="negative" @click="clearCheckedColumn")
 		q-tooltip Очистить и закрыть
 	q-btn(flat size="12px" color="primary" @click="applyFilter") Применить
 </template>
@@ -67,16 +67,16 @@ export default {
 			} else checked.value = []
 		}
 
-		const clearAll = () => {
+		const clearCheckedColumn = () => {
 			checked.value = []
-			grid.clearCheckedItems()
+			grid.clearCheckedColumn(props.col.id)
 			context.emit('close')
 		}
 		const applyFilter = () => {
 			if (checked.value.length === 0) {
 				grid.clearCheckedItems()
 			} else {
-				grid.addChecked(props.col.name, checked.value )
+				grid.addChecked(props.col, checked.value )
 			}
 			// context.emit('close')
 		}
@@ -95,7 +95,7 @@ export default {
 
 		return {
 			applyFilter,
-			clearAll,
+			clearCheckedColumn,
 			filteredItems,
 			toggle,
 			query,

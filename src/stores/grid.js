@@ -34,10 +34,11 @@ export const useGrid = defineStore({
 			this.lenta = true
 		},
 		addChecked(col, items) {
-			let temp = this.checked.find( item => item.col === col )
+			let temp = this.checked.find( item => item.id === col.id )
 			if (!temp) {
 				this.checked.push({
-					col: col,
+					id: col.id,
+					col: col.name,
 					items: items
 				})
 			} else {
@@ -47,7 +48,10 @@ export const useGrid = defineStore({
 				} )
 			}
 		},
-		clearCheckedItems() {
+		clearCheckedColumn(id) {
+			this.checked = this.checked.filter( item => item.id !== id )
+		},
+		clearCheckedAll() {
 			this.checked = []
 		}
 	},
