@@ -2,7 +2,8 @@
 .container
 	.zag Входящие
 	.gridtotal(:class="{ full : grid.fullscreen }")
-		.sidebar(v-show="grid.sidebar") sidebar
+		.sidebar(v-show="grid.sidebar")
+			Aggregates
 		.main(:class="{ 'fill' : !grid.sidebar }").shadow-1
 			GridTable(v-if="!grid.lenta" :columns="columns" :colData="colData" :rows="filteredRows" :total="items.length" :shown="filteredRows.length" )
 			div(v-else)
@@ -18,11 +19,13 @@ import { useGrid } from '@/stores/grid'
 import { items } from '@/stores/data'
 import GridTable from '@/components/common/GridTable.vue'
 import Toolbar from '@/components/common/Toolbar.vue'
+import Aggregates from '@/components/common/Aggregates.vue'
 
 export default {
 	components: {
 		GridTable,
 		Toolbar,
+		Aggregates,
 	},
 	setup() {
 		const grid = useGrid()

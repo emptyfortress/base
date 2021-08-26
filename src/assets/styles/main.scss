@@ -156,7 +156,7 @@ a:hover:not(.q-link) {
 		background: transparent;
 	}
 }
-.q-expansion-item {
+.relative-position .q-expansion-item {
 	transition: 0.3s ease all;
 	.q-item__label {
 		color: var(--q-primary-darken-1);
@@ -166,7 +166,7 @@ a:hover:not(.q-link) {
 		transform: translateX(-13px);
 	}
 }
-.q-expansion-item--expanded {
+.relative-position .q-expansion-item--expanded {
 	background: var(--bg-card);
 	border-radius: 6px;
 	margin: 0.8rem;
@@ -176,7 +176,7 @@ a:hover:not(.q-link) {
 		border-bottom: none;
 	}
 }
-.q-expansion-item.inside {
+.relative-position .q-expansion-item.inside {
 	border: none;
 	box-shadow: none;
 	margin: 0;
