@@ -32,11 +32,14 @@ export default {
 		const filteredRows = computed( () => {
 			if (grid.checked.length) {
 
-				let filter = { typ: [ 'Задание', 'Документ' ] }
+				let filter = { typ: [ 'Задание', ] }
 
 				return rows.filter( item => {
 					for (let [key, value] of Object.entries(filter)) {
-						if (item[key] === undefined || item[key] !==  'Задание' ) 
+						const cool = (element) => element === item[key]
+						if (item[key] === undefined) 
+							return false
+						if (!value.some(cool))
 							return false
 					}
 					return true
