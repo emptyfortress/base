@@ -69,16 +69,17 @@ export default {
 
 		const clearCheckedColumn = () => {
 			checked.value = []
-			grid.clearCheckedColumn(props.col.id)
+			grid.clearCheckedColumn(props.col)
 			context.emit('close')
 		}
+
 		const applyFilter = () => {
 			if (checked.value.length === 0) {
-				grid.clearCheckedItems()
+				grid.clearCheckedColumn(props.col)
 			} else {
 				grid.addChecked(props.col, checked.value )
 			}
-			// context.emit('close')
+			context.emit('close')
 		}
 
 		watchEffect(() => {
@@ -90,6 +91,12 @@ export default {
 			}
 			if (checked.value.length === 0) {
 				all.value = false
+			}
+			if (grid.reset) {
+				checked.value = [] 
+				setTimeout( () => {
+					grid.reset = false
+				}, 1000 )
 			}
 		})
 

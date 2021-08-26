@@ -32,21 +32,11 @@ export default {
 		const filteredRows = computed( () => {
 			if (grid.checked.length) {
 
-				// let test = {'id':0,'col':'typ','items':['Задание']}
-				// console.log(Object.values(test)[1])
-
-				// let filter1 = { typ: [ 'Задание'], author: ['Иванов И.К.'] }
-
 				let filter = {}
 				let temp = Object.values(grid.checked)
-				console.log(temp)
 				for (let el of temp) {
 					filter[el.col] = el.items
 				}
-
-
-				// {"id":0,"col":"typ","items":["Задание"]}
-				// {"id":1,"col":"title","items":["Заказ канцелярии для отдела закупок"]}
 
 				return rows.filter( item => {
 					for (let [key, value] of Object.entries(filter)) {
@@ -63,7 +53,7 @@ export default {
 		})
 
 		const colData = (col) => {
-			return [...new Set(rows.map( item => item[col.name] ))]
+			return [...new Set(filteredRows.value.map( item => item[col.name] ))]
 		}
 
 		const columns = [

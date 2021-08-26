@@ -60,7 +60,8 @@ export default {
 		}
 
 		const showAll = () => {
-			grid.clearCheckedItems()
+			grid.clearCheckedAll()
+			grid.reset = true
 		}
 
 		const buttons = reactive([

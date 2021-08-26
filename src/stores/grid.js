@@ -17,6 +17,7 @@ export const useGrid = defineStore({
 		items: [],
 		filter: true,
 		checked: [],
+		reset: false,
 	}),
 	getters: {},
 
@@ -48,8 +49,9 @@ export const useGrid = defineStore({
 				} )
 			}
 		},
-		clearCheckedColumn(id) {
-			this.checked = this.checked.filter( item => item.id !== id )
+		clearCheckedColumn(col) {
+			let temp = this.checked.indexOf( (el) => el.id === col.id )
+			this.checked.splice(temp, 1)
 		},
 		clearCheckedAll() {
 			this.checked = []
