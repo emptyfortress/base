@@ -14,6 +14,9 @@
 import {ref, reactive, computed} from 'vue'
 import Aggregat from '@/components/common/Aggregat.vue'
 export default {
+	props: {
+		data: Array
+	},
 	components: {
 		Aggregat,
 	},

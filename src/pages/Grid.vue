@@ -3,7 +3,7 @@
 	.zag Входящие
 	.gridtotal(:class="{ full : grid.fullscreen }")
 		.sidebar(v-show="grid.sidebar")
-			Aggregates
+			Aggregates(:data="aggregateData")
 		.main(:class="{ 'fill' : !grid.sidebar }").shadow-1
 			GridTable(v-if="!grid.lenta" :columns="columns" :colData="colData" :rows="filteredRows" :total="items.length" :shown="filteredRows.length" )
 			div(v-else)
@@ -59,6 +59,27 @@ export default {
 			return [...new Set(filteredRows.value.map( item => item[col.name] ))]
 		}
 
+		const aggregateData = computed( () => {
+			return [
+				{
+				 name: 'Тип карточки',
+					typ: [
+						{ Документ: 6 },
+						{ Задание: 5 },
+						{ Файл: 9 },
+					],
+				},
+				{
+					name: 'Вид документа',
+					viddoc: [
+						{ Приказ: 6 },
+						{ Договор: 6 },
+					],
+				}
+			]
+		})
+
+
 		const columns = [
 			{ id: 0, name: 'typ', label: 'Тип', field: 'typ', align: 'left', sortable: true, },
 			{ id: 1, name: 'title', label: 'Название', field: 'title', align: 'left', sortable: true, },
@@ -73,6 +94,7 @@ export default {
 			rows,
 			items,
 			filteredRows,
+			aggregateData,
 		}
 	},
 }
