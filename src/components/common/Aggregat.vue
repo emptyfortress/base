@@ -1,20 +1,28 @@
 <template lang="pug">
-q-card()
-	q-card-section
-		q-list
-			p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+q-list(dense)
+	q-item(v-for="item in list" v-ripple tag="label")
+		q-item-section(side)
+			q-checkbox(dense v-model="item.value")
+		q-item-section {{ item.label }}
+		q-item-section(avatar) {{ item.badge }}
 			
 </template>
 
 <script>
 export default {
+	props: {
+		list: Array,
+	},
+
+	setup() {
+		return {
+			
+		}
+	},
 
 }
 </script>
 
 <style scoped lang="scss">
 @import '@/assets/styles/theme.scss';
-.q-card__section {
-	background: pink;
-}
 </style>

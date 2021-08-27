@@ -7,7 +7,7 @@
 			span(v-else) Свернуть все
 	q-scroll-area.scroll
 		q-expansion-item(v-model="item.model" v-for="item in items" :label="item.label")
-			Aggregat()
+			Aggregat(:list="item.list")
 </template>
 
 <script>
@@ -22,10 +22,31 @@ export default {
 		const panel = ref([])
 
 		const items = reactive([
-			{id: 0, label: 'Тип карточки', model: false},
-			{id: 1, label: 'Вид документа', model: true},
-			{id: 2, label: 'Вид задания', model: false},
-			{id: 3, label: 'Дата регистрации', model: false},
+			{id: 0, label: 'Тип карточки', model: true,
+				list: [
+					{label: 'Документ', value: false, badge: ''},
+					{label: 'Задание', value: false, badge: ''},
+					{label: 'Группа заданий', value: false, badge: ''},
+				]
+			},
+			{id: 1, label: 'Вид документа', model: true,
+				list: [
+					{label: 'Приказ', value: false, badge: ''},
+					{label: 'Договор', value: false, badge: ''},
+					{label: 'Служебная записка', value: false, badge: ''},
+					{label: 'Заявление', value: false, badge: ''},
+				]
+			},
+			{id: 2, label: 'Вид задания', model: false,
+				list: [
+					{label: '', value: false, badge: ''},
+				]
+			},
+			{id: 3, label: 'Дата регистрации', model: false,
+				list: [
+					{label: '', value: false, badge: ''}
+				]
+			},
 		])
 
 		const expanded = computed( () => items.filter( el => el.model ).length <= 1 )
