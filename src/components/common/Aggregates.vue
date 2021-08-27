@@ -6,8 +6,8 @@
 			span(v-if="expanded") Распахнуть все
 			span(v-else) Свернуть все
 	q-scroll-area.scroll
-		q-expansion-item(v-model="item.model" v-for="item in items" :label="item.label")
-			Aggregat(:list="item.list")
+		q-expansion-item(v-model="item.model" v-for="item in items" :label="item.label" :header-style="{ fontWeight: 'bold' }")
+			Aggregat(:list="item.list" :block="item.id")
 </template>
 
 <script>
@@ -39,12 +39,17 @@ export default {
 			},
 			{id: 2, label: 'Вид задания', model: false,
 				list: [
-					{label: '', value: false, badge: ''},
+					{label: 'На согласование', value: false, badge: ''},
+					{label: 'На исполнение', value: false, badge: ''},
+					{label: 'На ознакомление', value: false, badge: ''},
 				]
 			},
 			{id: 3, label: 'Дата регистрации', model: false,
 				list: [
-					{label: '', value: false, badge: ''}
+					{label: 'Прошлый месяц', value: false, badge: ''},
+					{label: 'Прошлая неделя', value: false, badge: ''},
+					{label: 'Текущая неделя', value: false, badge: ''},
+					{label: 'Текущий месяц', value: false, badge: ''},
 				]
 			},
 		])
