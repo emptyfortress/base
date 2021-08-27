@@ -1,10 +1,14 @@
 <template lang="pug">
 q-list(dense).q-mb-sm
-	q-item(v-for="item in list" v-ripple tag="label")
+	q-item(v-for="( item, index ) in list" v-ripple tag="label" v-show="show(index, more)")
 		q-item-section(side)
 			q-checkbox(dense v-model="item.value")
 		q-item-section {{ item.title }}
 		q-item-section(avatar) {{ item.badge }}
+
+	.more(v-if="list.length > 4" @click="more = !more")
+		span(v-if="more") Меньше
+		span(v-else) Еще
 	//- .q-px-md.q-pb-md
 		q-input(v-if="block === 3" placeholder="Период" v-model="period" clearable) 
 			template(v-slot:prepend)
@@ -19,13 +23,22 @@ export default {
 	props: {
 		list: Array,
 	},
-
-	setup() {
-		const period = ref('')
+	data() {
 		return {
-			period
+			more: false
 		}
 	},
+	methods: {
+		show (e) {
+			if (e < 4 && !this.more) {
+				return true
+			}
+			if (this.more) {
+				return true
+			}
+		}
+	}
+
 
 }
 </script>
@@ -34,5 +47,11 @@ export default {
 @import '@/assets/styles/theme.scss';
 .q-icon {
 	/* transform: translateY(7px); */
+}
+.more {
+	font-size: 0.8rem;
+	color: var(--q-link);
+	cursor: pointer;
+	margin: 4px 15px;
 }
 </style>

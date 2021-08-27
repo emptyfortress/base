@@ -61,9 +61,7 @@ export default {
 
 		const aggregateData = computed( () => {
 			let agg = []
-
 			const iteration = [ 'typ', 'vid', 'author' ]
-
 			iteration.forEach( it => {
 				const block = [...new Set(items.map( item => item[it] ))]
 				const blockname = ( (it) => {
@@ -74,7 +72,7 @@ export default {
 							return 'Вид документа'
 						case 'author':
 							return 'Автор'
-						default: return 'test'
+						default: return 'Остальное'
 					}
 				} )
 
@@ -86,41 +84,19 @@ export default {
 						badge: length
 					}
 				})
+
+				list.sort( (a,b) => b.badge - a.badge )
+
 				const blocks = {}
 				blocks.name = blockname(it)
 				blocks.model = true
 				blocks.list = list
 
 				agg.push(blocks)
-			} )
-
-			console.log(agg)
-
+			})
 
 			return agg
-
-			// return [
-			// 	{
-			// 		name: 'Тип карточки',
-			// 		model: true,
-			// 		list: [
-			// 			{ title: 'Документ', badge: 6 },
-			// 			{ title: 'Задание', badge: 5 },
-			// 			{ title: 'Файл', badge: 9 },
-			// 		],
-			// 	},
-			// 	{
-			// 		name: 'Вид документа',
-			// 		model: true,
-			// 		list: [
-			// 			{ title: 'Приказ', badge: 6 },
-			// 			{ title: 'Договор', badge: 5 },
-			// 		],
-			// 	}
-			// ]
-
 		})
-
 
 		const columns = [
 			{ id: 0, name: 'typ', label: 'Тип', field: 'typ', align: 'left', sortable: true, },
