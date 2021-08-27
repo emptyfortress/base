@@ -60,23 +60,65 @@ export default {
 		}
 
 		const aggregateData = computed( () => {
-			return [
-				{
-				 name: 'Тип карточки',
-					typ: [
-						{ Документ: 6 },
-						{ Задание: 5 },
-						{ Файл: 9 },
-					],
-				},
-				{
-					name: 'Вид документа',
-					viddoc: [
-						{ Приказ: 6 },
-						{ Договор: 6 },
-					],
-				}
-			]
+			let agg = []
+
+			const iteration = [ 'typ', 'vid', 'author' ]
+
+			iteration.forEach( it => {
+				const block = [...new Set(items.map( item => item[it] ))]
+				const blockname = ( (it) => {
+					switch (it) {
+						case 'typ':
+							return 'Тип карточки'
+						case 'vid':
+							return 'Вид документа'
+						case 'author':
+							return 'Автор'
+						default: return 'test'
+					}
+				} )
+
+				const list = block.map( el => {
+					const length = items.filter( item => item[it] === el ).length
+					return {
+						title: el,
+						value: false,
+						badge: length
+					}
+				})
+				const blocks = {}
+				blocks.name = blockname(it)
+				blocks.model = true
+				blocks.list = list
+
+				agg.push(blocks)
+			} )
+
+			console.log(agg)
+
+
+			return agg
+
+			// return [
+			// 	{
+			// 		name: 'Тип карточки',
+			// 		model: true,
+			// 		list: [
+			// 			{ title: 'Документ', badge: 6 },
+			// 			{ title: 'Задание', badge: 5 },
+			// 			{ title: 'Файл', badge: 9 },
+			// 		],
+			// 	},
+			// 	{
+			// 		name: 'Вид документа',
+			// 		model: true,
+			// 		list: [
+			// 			{ title: 'Приказ', badge: 6 },
+			// 			{ title: 'Договор', badge: 5 },
+			// 		],
+			// 	}
+			// ]
+
 		})
 
 
