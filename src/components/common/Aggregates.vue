@@ -1,26 +1,48 @@
 <template lang="pug">
-.zg
-	.lin(@click="reset") Сбросить все
-	.lin(@click="expand")
-		span(v-show="panel.length <= 1") Распахнуть все
-		span(v-show="panel.length > 1") Свернуть все
-.common
-	section
-		q-expansion-item(label="Тип карточки" :header-class="hd")
-			q-card
-				q-card-section Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-				
+.fixheight
+	.zg
+		.lin(@click="reset") Сбросить все
+		.lin(@click="expand")
+			span(v-if="expanded") Распахнуть все
+			span(v-else) Свернуть все
+	.common
+		section
+			q-expansion-item(v-model="item.model" v-for="item in items" :label="item.label")
+				Aggregat()
 </template>
 
 <script>
-import {ref} from 'vue'
+import {ref, reactive, computed} from 'vue'
+import Aggregat from '@/components/common/Aggregat.vue'
 export default {
+	components: {
+		Aggregat,
+	},
 
 	setup() {
 		const panel = ref([])
 
+		const items = reactive([
+			{id: 0, label: 'Тип карточки', model: false},
+			{id: 1, label: 'Вид документа', model: true},
+			{id: 2, label: 'Вид задания', model: false},
+			{id: 3, label: 'Дата регистрации', model: false},
+		])
+
+		const expanded = computed( () => items.filter( el => el.model ).length <= 1 )
+
+		const expand = () => {
+			if (expanded.value) {
+				items.map( el => el.model = true )
+			} else items.map( item => item.model = false )
+		}
+
+
 		return {
 			panel,
+			items,
+			expand,
+			expanded,
 		}
 	},
 
@@ -43,8 +65,7 @@ export default {
 	cursor: pointer;
 }
 .common {
-	background: #fff;
-	height: calc(100vh - 260px);
+	height: calc(100vh - 200px);
 	border-right: 1px solid silver;
 	overflow-y: scroll;
 	overflow-x: hidden;
@@ -61,7 +82,10 @@ export default {
 		-webkit-mask-position: left top;
 	}
 }
-.hd {
-	color: red !important;
+section {
+	.q-card__section {
+		padding-top: 0;
+		padding-right: 5px;
+	}
 }
 </style>

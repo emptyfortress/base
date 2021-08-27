@@ -98,8 +98,6 @@ export default {
 .sidebar {
 	background: var(--bg-card);
 }
-.main {
-}
 .fill {
 	grid-column: 1/3;
 }
