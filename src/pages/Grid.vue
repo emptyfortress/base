@@ -61,7 +61,7 @@ export default {
 
 		const aggregateData = computed( () => {
 			let agg = []
-			const iteration = [ 'typ', 'vid', 'author' ]
+			const iteration = [ 'typ', 'vid', 'status', 'author' ]
 			iteration.forEach( it => {
 				const block = [...new Set(items.map( item => item[it] ))]
 				const blockname = ( (it) => {
@@ -72,6 +72,8 @@ export default {
 							return 'Вид документа'
 						case 'author':
 							return 'Автор'
+						case 'status':
+							return 'Состояние'
 						default: return 'Остальное'
 					}
 				} )
@@ -86,11 +88,12 @@ export default {
 				})
 
 				list.sort( (a,b) => b.badge - a.badge )
+				const list1 = list.filter( item => item.title !== undefined )
 
 				const blocks = {}
 				blocks.name = blockname(it)
 				blocks.model = true
-				blocks.list = list
+				blocks.list = list1
 
 				agg.push(blocks)
 			})
