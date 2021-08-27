@@ -156,7 +156,10 @@ a:hover:not(.q-link) {
 		background: transparent;
 	}
 }
-.relative-position .q-expansion-item {
+.custom-expansions-item {
+	position: relative;
+}
+.custom-expansions-item .q-expansion-item {
 	transition: 0.3s ease all;
 	.q-item__label {
 		color: var(--q-primary-darken-1);
@@ -166,7 +169,7 @@ a:hover:not(.q-link) {
 		transform: translateX(-13px);
 	}
 }
-.relative-position .q-expansion-item--expanded {
+.custom-expansions-item .q-expansion-item--expanded {
 	background: var(--bg-card);
 	border-radius: 6px;
 	margin: 0.8rem;
@@ -176,7 +179,7 @@ a:hover:not(.q-link) {
 		border-bottom: none;
 	}
 }
-.relative-position .q-expansion-item.inside {
+.custom-expansions-item .q-expansion-item.inside {
 	border: none;
 	box-shadow: none;
 	margin: 0;

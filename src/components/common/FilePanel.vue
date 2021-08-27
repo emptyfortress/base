@@ -1,5 +1,5 @@
 <template lang="pug">
-.relative-position
+.custom-expansions-item
 	q-expansion-item(v-model="panels.file" switch-toggle-side :label="`Файлы (${files.length})`" )
 		q-card
 			q-card-section.q-pt-none

@@ -1,5 +1,5 @@
 <template lang="pug">
-.relative-position
+.custom-expansions-item
 	q-expansion-item(v-model='panels.info' switch-toggle-side label="Информация")
 		q-card
 			q-card-section Детальный план ввода в эксплуатацию автоматизированной информационной системы государственного заказа Санкт-Петербурга на периода март-май 2020 г.

@@ -5,10 +5,9 @@
 		.lin(@click="expand")
 			span(v-if="expanded") Распахнуть все
 			span(v-else) Свернуть все
-	.common
-		section
-			q-expansion-item(v-model="item.model" v-for="item in items" :label="item.label")
-				Aggregat()
+	q-scroll-area.scroll
+		q-expansion-item(v-model="item.model" v-for="item in items" :label="item.label")
+			Aggregat()
 </template>
 
 <script>
@@ -37,7 +36,6 @@ export default {
 			} else items.map( item => item.model = false )
 		}
 
-
 		return {
 			panel,
 			items,
@@ -64,28 +62,13 @@ export default {
 	color: var(--q-link);
 	cursor: pointer;
 }
-.common {
-	height: calc(100vh - 200px);
-	border-right: 1px solid silver;
-	overflow-y: scroll;
-	overflow-x: hidden;
-	mask-image: linear-gradient(to top, transparent, black),
-		linear-gradient(to left, transparent 17px, black 17px);
-	mask-size: 100% 20000px;
-	mask-position: left bottom;
-	-webkit-mask-image: linear-gradient(to top, transparent, black),
-		linear-gradient(to left, transparent 17px, black 17px);
-	-webkit-mask-size: 100% 20000px;
-	-webkit-mask-position: left bottom;
-	transition: mask-position 0.3s, -webkit-mask-position 0.3s;
-	&:hover {
-		-webkit-mask-position: left top;
-	}
-}
 section {
 	.q-card__section {
 		padding-top: 0;
 		padding-right: 5px;
 	}
+}
+.scroll {
+	height: calc(100vh - 200px);
 }
 </style>

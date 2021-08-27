@@ -1,5 +1,5 @@
 <template lang="pug">
-.relative-position
+.custom-expansions-item
 	q-expansion-item(v-model='panels.link' switch-toggle-side :label='`Ссылки (${links.length})`')
 		q-card
 			q-card-section.q-pt-none
