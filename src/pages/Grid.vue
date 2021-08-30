@@ -41,7 +41,21 @@ export default {
 					filter[el.col] = el.items
 				}
 
-				console.log(filter)
+				// let filter = { typ: ['Задание'], vid: ['Приказ'],  }
+
+				// for (let [key, value] of Object.entries(filter)) {
+				// 	console.log(key)
+				// 	console.log(value)
+				// }
+
+				// return rows.filter( item => {
+				// 	for (let [key, value] of Object.entries(filter)) {
+				// 		if (item[key] === value[0]) {
+				// 			return true
+				// 		}
+				// 		return false
+				// 	}
+				// } )
 
 				return rows.filter( item => {
 					for (let [key, value] of Object.entries(filter)) {
@@ -53,6 +67,7 @@ export default {
 					}
 					return true
 				})
+
 			}
 			return rows
 		})
@@ -77,7 +92,7 @@ export default {
 				} )
 
 				const list = block.map( el => {
-					const length = filteredRows.value.filter( item => item[it] === el ).length
+					const length = items.filter( item => item[it] === el ).length
 					return {
 						title: el,
 						value: false,
