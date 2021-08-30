@@ -7,7 +7,7 @@
 			span(v-else) Свернуть все
 	q-scroll-area.scroll
 		q-expansion-item(v-model="item.model" v-for="item in items" :label="item.name" :header-style="{ fontWeight: 'bold' }")
-			Aggregat(:list="item.list")
+			Aggregat(:list="item.list" :col="item.col")
 </template>
 
 <script>

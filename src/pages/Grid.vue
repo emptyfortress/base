@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import {computed } from 'vue'
 import { useGrid } from '@/stores/grid'
 import { items } from '@/stores/data'
 import GridTable from '@/components/common/GridTable.vue'
@@ -41,6 +41,8 @@ export default {
 					filter[el.col] = el.items
 				}
 
+				console.log(filter)
+
 				return rows.filter( item => {
 					for (let [key, value] of Object.entries(filter)) {
 						const cool = (element) => element === item[key]
@@ -63,23 +65,19 @@ export default {
 			let agg = []
 			const iteration = [ 'typ', 'vid', 'status', 'author' ]
 			iteration.forEach( it => {
-				const block = [...new Set(items.map( item => item[it] ))]
+				const block = [...new Set(filteredRows.value.map( item => item[it] ))]
 				const blockname = ( (it) => {
 					switch (it) {
-						case 'typ':
-							return 'Тип карточки'
-						case 'vid':
-							return 'Вид документа'
-						case 'author':
-							return 'Автор'
-						case 'status':
-							return 'Состояние'
+						case 'typ': return 'Тип карточки'
+						case 'vid': return 'Вид документа'
+						case 'author': return 'Автор'
+						case 'status': return 'Состояние'
 						default: return 'Остальное'
 					}
 				} )
 
 				const list = block.map( el => {
-					const length = items.filter( item => item[it] === el ).length
+					const length = filteredRows.value.filter( item => item[it] === el ).length
 					return {
 						title: el,
 						value: false,
@@ -91,6 +89,7 @@ export default {
 				const list1 = list.filter( item => item.title !== undefined )
 
 				const blocks = {}
+				blocks.col = it
 				blocks.name = blockname(it)
 				blocks.model = true
 				blocks.list = list1

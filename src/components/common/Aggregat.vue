@@ -1,8 +1,8 @@
 <template lang="pug">
 q-list(dense).q-mb-sm
-	q-item(v-for="( item, index ) in list" v-ripple tag="label" v-show="show(index, more)")
+	q-item(v-for="( item, index ) in props.list" v-ripple tag="label" v-show="show(index, more)" :disable="calcDisable")
 		q-item-section(side)
-			q-checkbox(dense v-model="item.value")
+			q-checkbox(dense v-model="item.value" @update:model-value="addAggregat(item.value,item.title)" )
 		q-item-section {{ item.title }}
 		q-item-section(avatar) {{ item.badge }}
 
@@ -18,27 +18,66 @@ q-list(dense).q-mb-sm
 </template>
 
 <script>
-import {ref} from 'vue'
+import {ref, computed} from 'vue'
+import { useGrid } from '@/stores/grid'
 export default {
 	props: {
 		list: Array,
+		col: String,
 	},
-	data() {
-		return {
-			more: false
-		}
-	},
-	methods: {
-		show (e) {
-			if (e < 4 && !this.more) {
-				return true
-			}
-			if (this.more) {
-				return true
-			}
-		}
-	}
+	setup(props) {
 
+		const grid = useGrid()
+		const more = ref(false)
+
+		const addAggregat = (value, title) => {
+			if (value) {
+				grid.addAggregat(props.col, title)
+			} else {
+				grid.removeAggregat(props.col, title)
+			}
+		}
+
+		const show = (e) => {
+			if (e < 4 && !more.value) { return true }
+			if (more.value) { return true }
+			return false
+		}
+
+		const calcDisable = computed(() => {
+			return false
+			// console.log('test')
+		})
+
+		return {
+			more,
+			show,
+			props,
+			addAggregat,
+			calcDisable,
+		}
+	},
+
+
+	// data() {
+	// 	return {
+	// 		more: false
+	// 	}
+	// },
+	// methods: {
+	// 	addChecked (e) {
+	// 		console.log(e)
+	// 		console.log(this.col)
+	// 	},
+	// 	show (e) {
+	// 		if (e < 4 && !this.more) {
+	// 			return true
+	// 		}
+	// 		if (this.more) {
+	// 			return true
+	// 		}
+	// 	}
+	// }
 
 }
 </script>
