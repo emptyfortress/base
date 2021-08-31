@@ -12,7 +12,9 @@
 
 <script>
 import {ref, reactive, computed} from 'vue'
+import { useGrid } from '@/stores/grid'
 import Aggregat from '@/components/common/Aggregat.vue'
+
 export default {
 	props: {
 		data: Array
@@ -22,6 +24,7 @@ export default {
 	},
 
 	setup(props) {
+		const grid = useGrid()
 		const items = reactive(props.data)
 
 		const expanded = computed( () => items.filter( el => el.model ).length <= 1 )
@@ -32,7 +35,18 @@ export default {
 			} else items.map( item => item.model = false )
 		}
 
+		const reset = () => {
+			let list = document.querySelectorAll('.reset > .q-checkbox__inner--truthy')
+			console.log(list)
+			list.forEach( el => {
+				el.classList.remove('q-checkbox__inner--truthy')
+				el.classList.add('q-checkbox__inner--falsy')
+			})
+			grid.clearCheckedAll()
+		}
+
 		return {
+			reset,
 			items,
 			expand,
 			expanded,

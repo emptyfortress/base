@@ -1,8 +1,8 @@
 <template lang="pug">
 q-list(dense).q-mb-sm
-	q-item(v-for="( item, index ) in props.list" v-ripple tag="label" v-show="show(index, more)" :disable="calcDisable")
+	q-item(v-for="( item, index ) in props.list" v-ripple tag="label" v-show="show(index, more)" )
 		q-item-section(side)
-			q-checkbox(dense v-model="item.value" @update:model-value="addAggregat(item.value,item.title)" )
+			q-checkbox(dense v-model="item.value" @update:model-value="addAggregat(item.value,item.title)" ).reset
 		q-item-section {{ item.title }}
 		q-item-section(avatar) {{ item.badge }}
 
@@ -18,7 +18,7 @@ q-list(dense).q-mb-sm
 </template>
 
 <script>
-import {ref, computed} from 'vue'
+import {ref} from 'vue'
 import { useGrid } from '@/stores/grid'
 export default {
 	props: {
@@ -44,17 +44,11 @@ export default {
 			return false
 		}
 
-		const calcDisable = computed(() => {
-			return false
-			// console.log('test')
-		})
-
 		return {
 			more,
 			show,
 			props,
 			addAggregat,
-			calcDisable,
 		}
 	},
 

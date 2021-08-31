@@ -41,32 +41,33 @@ export default {
 					filter[el.col] = el.items
 				}
 
-				// let filter = { typ: ['Задание'], vid: ['Приказ'],  }
+				// let filter = { typ: ['Задание', 'Документ']   }
 
 				// for (let [key, value] of Object.entries(filter)) {
 				// 	console.log(key)
 				// 	console.log(value)
 				// }
 
-				// return rows.filter( item => {
-				// 	for (let [key, value] of Object.entries(filter)) {
-				// 		if (item[key] === value[0]) {
-				// 			return true
-				// 		}
-				// 		return false
-				// 	}
-				// } )
-
 				return rows.filter( item => {
 					for (let [key, value] of Object.entries(filter)) {
-						const cool = (element) => element === item[key]
-						if (item[key] === undefined) 
-							return false
-						if (!value.some(cool))
-							return false
+						const cool = (element) => item[key] === element
+						if (value.some(cool)) {
+							return true
+						}
 					}
-					return true
-				})
+					return false
+				} )
+
+				// return rows.filter( item => {
+				// 	for (let [key, value] of Object.entries(filter)) {
+				// 		const cool = (element) => element === item[key]
+				// 		if (item[key] === undefined) 
+				// 			return false
+				// 		if (!value.some(cool))
+				// 			return false
+				// 	}
+				// 	return true
+				// })
 
 			}
 			return rows
@@ -115,6 +116,15 @@ export default {
 			return agg
 		})
 
+		// const reset = () => {
+		// 	let list = document.querySelectorAll('.reset > .q-checkbox__inner--truthy')
+		// 	list.forEach( el => {
+		// 		el.classList.remove('q-checkbox__inner--truthy')
+		// 		el.classList.add('q-checkbox__inner--falsy')
+		// 	})
+		// 	grid.clearCheckedAll()
+		// }
+
 		const columns = [
 			{ id: 0, name: 'typ', label: 'Тип', field: 'typ', align: 'left', sortable: true, },
 			{ id: 1, name: 'title', label: 'Название', field: 'title', align: 'left', sortable: true, },
@@ -123,6 +133,7 @@ export default {
 		]
 
 		return {
+			// reset,
 			colData,
 			grid,
 			columns,
