@@ -6,7 +6,7 @@ q-drawer(v-model="show" side="left" :mini="colors.mini" :width="width" bordered 
 				q-icon(:name="page.icon")
 			q-item-section {{ page.title }}
 
-		q-item(clickable v-ripple @click="goToLib" to="/lib").bottom
+		//- q-item(clickable v-ripple @click="goToLib" to="/lib").bottom
 			q-item-section(avatar)
 				q-icon(name="mdi-bookshelf")
 				//- q-icon(name="mdi-puzzle-outline")
@@ -29,9 +29,9 @@ export default {
 	setup() {
 		const colors = useColor()
 		const pages = [
-			{ id: 1, title: 'Цвета', icon: 'mdi-palette', url: '/' },
-			{ id: 2, title: 'Главная', icon: 'mdi-home-roof', url: '/dash' },
-			{ id: 3, title: 'Документ', icon: 'mdi-text-box-outline', url: '/doc' },
+			// { id: 1, title: 'Цвета', icon: 'mdi-palette', url: '/' },
+			// { id: 2, title: 'Главная', icon: 'mdi-home-roof', url: '/dash' },
+			// { id: 3, title: 'Документ', icon: 'mdi-text-box-outline', url: '/doc' },
 			{ id: 4, title: 'Грид', icon: 'mdi-file-table-box-outline', url: '/grid' },
 			// { id: 4, title: 'Папки', icon: 'mdi-folder-outline', url: '/folders', },
 			// { id: 5, title: 'Hello', icon: 'mdi-folder-outline', url: '/hello' },
