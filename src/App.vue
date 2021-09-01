@@ -121,8 +121,10 @@ export default {
 	/* border-bottom: 1px solid #fff; */
 }
 .head {
-	backdrop-filter: blur(10px);
-	background-color: #0000001a;
+	/* backdrop-filter: blur(10px); */
+	/* -webkit-backdrop-filter: blur(10px); */
+	/* background-color: #0000001a; */
+	background-color: #d2d2d2;
 	color: var(--font-color);
 }
 .head-fill {

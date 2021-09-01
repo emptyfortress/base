@@ -61,7 +61,6 @@ export default {
 
 		const showAll = () => {
 			let list = document.querySelectorAll('.reset > .q-checkbox__inner--truthy')
-			console.log(list)
 			list.forEach( el => {
 				el.classList.remove('q-checkbox__inner--truthy')
 				el.classList.add('q-checkbox__inner--falsy')
