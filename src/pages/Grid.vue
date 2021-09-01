@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import {computed } from 'vue'
+import {computed, provide } from 'vue'
 import { useGrid } from '@/stores/grid'
 import { items } from '@/stores/data'
 import GridTable from '@/components/common/GridTable.vue'
@@ -41,37 +41,32 @@ export default {
 					filter[el.col] = el.items
 				}
 
-				// let filter = { typ: ['Задание', 'Документ']   }
-
-				// for (let [key, value] of Object.entries(filter)) {
-				// 	console.log(key)
-				// 	console.log(value)
-				// }
+				// return rows.filter( item => {
+				// 	for (let [key, value] of Object.entries(filter)) {
+				// 		const cool = (element) => item[key] === element
+				// 		if (value.some(cool)) {
+				// 			return true
+				// 		}
+				// 	}
+				// 	return false
+				// } )
 
 				return rows.filter( item => {
 					for (let [key, value] of Object.entries(filter)) {
-						const cool = (element) => item[key] === element
-						if (value.some(cool)) {
-							return true
-						}
+						const cool = (element) => element === item[key]
+						if (item[key] === undefined) 
+							return false
+						if (!value.some(cool))
+							return false
 					}
-					return false
-				} )
-
-				// return rows.filter( item => {
-				// 	for (let [key, value] of Object.entries(filter)) {
-				// 		const cool = (element) => element === item[key]
-				// 		if (item[key] === undefined) 
-				// 			return false
-				// 		if (!value.some(cool))
-				// 			return false
-				// 	}
-				// 	return true
-				// })
+					return true
+				})
 
 			}
 			return rows
 		})
+
+		provide('filteredRows', filteredRows)
 
 		const colData = (col) => {
 			return [...new Set(filteredRows.value.map( item => item[col.name] ))]

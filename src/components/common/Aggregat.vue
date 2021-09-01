@@ -1,6 +1,6 @@
 <template lang="pug">
 q-list(dense).q-mb-sm
-	q-item(v-for="( item, index ) in props.list" v-ripple tag="label" v-show="show(index, more)" )
+	q-item(v-for="( item, index ) in props.list" v-ripple tag="label" v-show="show(index, more)" :disable="disable(item)")
 		q-item-section(side)
 			q-checkbox(dense v-model="item.value" @update:model-value="addAggregat(item.value,item.title)" ).reset
 		q-item-section {{ item.title }}
@@ -9,16 +9,11 @@ q-list(dense).q-mb-sm
 	.more(v-if="list.length > 4" @click="more = !more")
 		span(v-if="more") Меньше
 		span(v-else) Еще
-	//- .q-px-md.q-pb-md
-		q-input(v-if="block === 3" placeholder="Период" v-model="period" clearable) 
-			template(v-slot:prepend)
-				q-icon(name="mdi-calendar-range")
-		
 			
 </template>
 
 <script>
-import {ref} from 'vue'
+import {ref, inject} from 'vue'
 import { useGrid } from '@/stores/grid'
 export default {
 	props: {
@@ -29,6 +24,8 @@ export default {
 
 		const grid = useGrid()
 		const more = ref(false)
+
+		const filteredRows = inject('filteredRows')
 
 		const addAggregat = (value, title) => {
 			if (value) {
@@ -44,34 +41,21 @@ export default {
 			return false
 		}
 
+		const disable = (el) => {
+			const length = filteredRows.value.filter( item => item[props.col] === el.title ).length
+			if (length) return false
+			return true
+		}
+
 		return {
 			more,
 			show,
 			props,
 			addAggregat,
+			filteredRows,
+			disable,
 		}
 	},
-
-
-	// data() {
-	// 	return {
-	// 		more: false
-	// 	}
-	// },
-	// methods: {
-	// 	addChecked (e) {
-	// 		console.log(e)
-	// 		console.log(this.col)
-	// 	},
-	// 	show (e) {
-	// 		if (e < 4 && !this.more) {
-	// 			return true
-	// 		}
-	// 		if (this.more) {
-	// 			return true
-	// 		}
-	// 	}
-	// }
 
 }
 </script>
