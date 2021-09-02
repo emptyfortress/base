@@ -36,7 +36,6 @@ export default {
 			// { id: 4, title: 'Папки', icon: 'mdi-folder-outline', url: '/folders', },
 			// { id: 5, title: 'Hello', icon: 'mdi-folder-outline', url: '/hello' },
 		]
-		// const mini = ref(false)
 		const width = 256
 		const lib = ref(false)
 
