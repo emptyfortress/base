@@ -66,6 +66,7 @@ export default {
 				el.classList.add('q-checkbox__inner--falsy')
 			})
 			grid.clearCheckedAll()
+			grid.disable = 0
 		}
 
 		const buttons = reactive([

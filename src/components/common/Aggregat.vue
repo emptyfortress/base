@@ -1,6 +1,6 @@
 <template lang="pug">
 q-list(dense).q-mb-sm
-	q-item(v-for="( item, index ) in props.list" v-ripple tag="label" v-show="show(index, more)" :disable="disable(item)")
+	q-item(v-for="( item, index ) in props.list" v-ripple tag="label" v-show="show(index, more)" :class="disable(item)")
 		q-item-section(side)
 			q-checkbox(dense v-model="item.value" @update:model-value="addAggregat(item.value,item.title)" ).reset
 		q-item-section {{ item.title }}
@@ -24,14 +24,19 @@ export default {
 
 		const grid = useGrid()
 		const more = ref(false)
+		const temp = ref(0)
 
 		const filteredRows = inject('filteredRows')
 
 		const addAggregat = (value, title) => {
 			if (value) {
 				grid.addAggregat(props.col, title)
+				grid.disable++
+				temp.value++
 			} else {
 				grid.removeAggregat(props.col, title)
+				grid.disable--
+				temp.value--
 			}
 		}
 
@@ -43,8 +48,8 @@ export default {
 
 		const disable = (el) => {
 			const length = filteredRows.value.filter( item => item[props.col] === el.title ).length
-			if (length) return false
-			return true
+			if (length || ( grid.disable <= 1 && temp.value > 0)) return ''
+			return 'dis'
 		}
 
 		return {
@@ -61,14 +66,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/styles/theme.scss';
-.q-icon {
-	/* transform: translateY(7px); */
-}
 .more {
 	font-size: 0.8rem;
 	color: var(--q-link);
 	cursor: pointer;
 	margin: 4px 15px;
+}
+.dis {
+	opacity: .6;
 }
 </style>

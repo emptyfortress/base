@@ -9,6 +9,7 @@ export const useGrid = defineStore({
 		items: [],
 		filter: true,
 		checked: [],
+		disable: 0,
 	}),
 	getters: {},
 

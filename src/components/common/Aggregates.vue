@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import {ref, reactive, computed} from 'vue'
+import {reactive, computed} from 'vue'
 import { useGrid } from '@/stores/grid'
 import Aggregat from '@/components/common/Aggregat.vue'
 
@@ -42,6 +42,7 @@ export default {
 				el.classList.add('q-checkbox__inner--falsy')
 			})
 			grid.clearCheckedAll()
+			grid.disable = 0
 			items.forEach( el => el.list.forEach( item => item.value = false ) )
 		}
 
