@@ -46,11 +46,10 @@
 					q-btn(unelevated color="primary" style="width: 200px;")
 						.ellipsis Очень длинный, длинный, длинный текст
 		div
-			.lab Обрезка:
+			.lab Loading:
 			.bl
 				div
-					q-btn(unelevated color="primary" style="width: 200px;")
-						.ellipsis Очень длинный, длинный, длинный текст
+					q-btn(unelevated color="primary" :loading="loading" @click="simulateProgress") Кнопка
 	.lab Размер:
 	.bl
 		div
@@ -69,6 +68,20 @@
 
 <script>
 export default {
+	data() {
+		return {
+			loading: false
+		}
+	},
+	methods: {
+		simulateProgress() {
+			this.loading = true
+			setTimeout( () => {
+				this.loading = false
+			},3000 )
+			
+		}
+	}
 
 }
 </script>
