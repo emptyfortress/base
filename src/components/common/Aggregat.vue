@@ -13,7 +13,7 @@ q-list(dense).q-mb-sm
 </template>
 
 <script>
-import {ref, inject} from 'vue'
+import {ref, inject, watchEffect} from 'vue'
 import { useGrid } from '@/stores/grid'
 export default {
 	props: {
@@ -51,6 +51,12 @@ export default {
 			if (length || ( grid.disable <= 1 && temp.value > 0)) return ''
 			return 'dis'
 		}
+
+		watchEffect( () => {
+			if (grid.disable === 0) {
+				temp.value = 0
+			}
+		})
 
 		return {
 			more,
