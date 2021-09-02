@@ -7,7 +7,6 @@ export const router = createRouter({
 	routes: [
 		{
 			path: '/',
-			redirect: '/grid',
 			name: 'home',
 			component: Home,
 		},
@@ -29,9 +28,9 @@ export const router = createRouter({
 			component: () => import('@/pages/Grid.vue'),
 		},
 		{
-			path: '/lib',
-			name: 'lib',
-			component: () => import('@/components/Lib.vue'),
+			path: '/btn',
+			name: 'btn',
+			component: () => import('@/components/common/Btn.vue'),
 		},
 		{
 			path: '/albatros',

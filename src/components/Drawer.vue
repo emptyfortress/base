@@ -1,55 +1,50 @@
 <template lang="pug">
 q-drawer(v-model="show" side="left" :mini="colors.mini" :width="width" bordered :class="{ fill : colors.panel }")
-	q-list(v-if="!lib")
-		q-item(show-if-above clickable v-ripple :to="page.url" v-for="page in pages" :key="page.id")
+	q-list
+		q-item(clickable v-ripple :to="page.url" v-for="page in pages" :key="page.id")
 			q-item-section(avatar)
 				q-icon(:name="page.icon")
 			q-item-section {{ page.title }}
 
-		//- q-item(clickable v-ripple @click="goToLib" to="/lib").bottom
+		q-item.bottom
 			q-item-section(avatar)
 				q-icon(name="mdi-bookshelf")
-				//- q-icon(name="mdi-puzzle-outline")
-			q-item-section Библиотека
-	Lib(v-else @back="lib=false")
+			q-item-section БИБЛИОТЕКА
+		q-item(v-for="item in lib" :key="item.id" :to="item.url" clickable v-ripple)
+			q-item-section(avatar)
+				q-icon(:name="item.icon")
+			q-item-section {{ item.title }}
 
 	q-btn(round flat dense :icon="minitoogle" @click="colors.mini = !colors.mini").mini
 
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { useColor } from '@/stores/colors'
-import Lib from '@/components/Lib.vue'
 import SvgIcon from '@/components/SvgIcon.vue'
 
 export default {
 	props: ['show'],
-	components: {Lib, SvgIcon},
+	components: {SvgIcon},
 	setup() {
 		const colors = useColor()
 		const pages = [
-			// { id: 1, title: 'Цвета', icon: 'mdi-palette', url: '/' },
-			// { id: 2, title: 'Главная', icon: 'mdi-home-roof', url: '/dash' },
-			// { id: 3, title: 'Документ', icon: 'mdi-text-box-outline', url: '/doc' },
+			{ id: 1, title: 'Цвета', icon: 'mdi-palette', url: '/' },
+			{ id: 2, title: 'Главная', icon: 'mdi-home-roof', url: '/dash' },
+			{ id: 3, title: 'Документ', icon: 'mdi-text-box-outline', url: '/doc' },
 			{ id: 4, title: 'Грид', icon: 'mdi-file-table-box-outline', url: '/grid' },
-			// { id: 4, title: 'Папки', icon: 'mdi-folder-outline', url: '/folders', },
-			// { id: 5, title: 'Hello', icon: 'mdi-folder-outline', url: '/hello' },
+		]
+		const lib = [
+			{ id: 1, title: 'Кнопки', icon: 'mdi-puzzle-outline', url: '/btn' },
 		]
 		const width = 256
-		const lib = ref(false)
-
-		const goToLib = () => {
-			console.log('test')
-			lib.value = !lib.value
-		}
 
 		const minitoogle = computed(() => {
 			return colors.mini ? 'mdi-forwardburger' : 'mdi-backburger'
 		})
 
 		return {
-			goToLib,
 			colors,
 			width,
 			lib,
