@@ -1,13 +1,15 @@
 <template lang="pug">
-q-card-section.q-pb-none.q-pt-xs
-	q-input(dense square
-		input-class="filter-input"
-		v-model="query"
-		autofocus
-		clearable
-		)
-		template(v-slot:prepend)
-			q-icon(name="mdi-magnify")
+q-form
+	q-card-section.q-pb-none.q-pt-xs
+		q-input(dense square
+			input-class="filter-input"
+			v-model="query"
+			autofocus
+			clearable
+			placeholder="искать"
+			).query
+			template(v-slot:prepend)
+				q-icon(name="mdi-magnify")
 q-list(v-if="filteredItems.length")
 	q-item(tag="label" v-ripple)
 		q-item-section(side top)

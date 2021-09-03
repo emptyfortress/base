@@ -264,3 +264,6 @@ a:hover:not(.q-link) {
 	padding-bottom: 0 !important;
 	min-height: 100px !important;
 }
+.query .q-placeholder::placeholder {
+	opacity: 0.3;
+}

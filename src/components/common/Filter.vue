@@ -1,5 +1,5 @@
 <template lang="pug">
-q-card.quick.shadow-3(v-show="filterByIndex === col.id" @click.stop)
+q-card.quick.shadow-3(v-if="filterByIndex === col.id" @click.stop)
 	template(v-if="datum")
 		.q-pa-sm
 			.q-gutter-sm
