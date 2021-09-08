@@ -37,6 +37,7 @@ export default {
 		]
 		const lib = [
 			{ id: 1, title: 'Кнопки', icon: 'mdi-puzzle-outline', url: '/btn' },
+			{ id: 2, title: 'Меню', icon: 'mdi-puzzle-outline', url: '/menu' },
 		]
 		const width = 256
 

@@ -33,6 +33,11 @@ export const router = createRouter({
 			component: () => import('@/components/common/Btn.vue'),
 		},
 		{
+			path: '/menu',
+			name: 'menu',
+			component: () => import('@/components/common/Menu.vue'),
+		},
+		{
 			path: '/albatros',
 			name: 'albatros',
 			component: () => import('@/components/Albatros.vue'),

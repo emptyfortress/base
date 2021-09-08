@@ -7,6 +7,7 @@ body {
 	padding-top: 1rem;
 	padding-left: 1rem;
 	padding-right: 1rem;
+	padding-bottom: 2rem;
 	@media screen and (max-width: 1900px) {
 		max-width: 1200px;
 		margin: 0 auto;
@@ -266,4 +267,26 @@ a:hover:not(.q-link) {
 }
 .query .q-placeholder::placeholder {
 	opacity: 0.3;
+}
+// items style
+.container {
+	.bl {
+		border: 1px solid var(--my-border-color);
+		justify-content: flex-start;
+		padding: 1rem;
+		background: var(--bg-drawer);
+	}
+	.lab {
+		font-size: 1rem;
+		margin-top: 2rem;
+		font-weight: bold;
+	}
+	.flexi {
+		width: 100%;
+		display: flex;
+		gap: 3rem;
+		& > div {
+			width: 36%;
+		}
+	}
 }
