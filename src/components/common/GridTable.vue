@@ -16,7 +16,6 @@
 			q-tr(:props="props" v-click-away="toggleFilter")
 				q-th(auto-width :key="props.read").small
 				q-th(auto-width)
-					//- q-checkbox(model-value="selected" @update:model-value="setSel" false-value="[]")
 					q-checkbox(v-model="all" @update:model-value="toggleSel")
 				q-th(v-for="col in props.cols" :props="props" :key="col.name").hov
 					span {{ col.label }}
@@ -40,8 +39,8 @@
 				q-td(v-for="col in props.cols" :key="col.name") {{ props.row[col.name] }}
 		template(v-slot:top)
 			Toolbar(:total="total" :shown="shown" @readAll="readAll" @toggleLoad="loading = !loading")
-		template(v-slot:bottom v-if="checked.length")
-			Total(:selected="checked.length" @clear="clearSelected")
+		template(v-slot:bottom v-if="selected.length")
+			Total(:selected="selected.length" @clear="clearSelected")
 
 </template>
 
@@ -75,7 +74,7 @@ export default {
 
 		// const total = ref(null)
 		const all = ref(false)
-		const checked = computed(() => {
+		const selected = computed(() => {
 			return props.rows.filter((item) => item.selected)
 		})
 
@@ -84,8 +83,8 @@ export default {
 
 		watchEffect(() => {
 			if (
-				checked.value.length < props.rows.length &&
-				checked.value.length !== 0
+				selected.value.length < props.rows.length &&
+				selected.value.length !== 0
 			) {
 				all.value = null
 			}
@@ -133,7 +132,7 @@ export default {
 		return {
 			pagination,
 			all,
-			checked,
+			selected,
 			toggleSel,
 			toggle,
 			mysort,
