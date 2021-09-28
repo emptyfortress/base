@@ -39,7 +39,7 @@ export default {
 		shown: Number,
 		lenta: Boolean,
 	},
-	emits: ['readAll', 'selNone', 'selAll'],
+	emits: ['readAll', 'selNone', 'selAll', 'toggleLoad'],
 	components: {
 		SvgIcon,
 	},
