@@ -82,10 +82,9 @@ export default {
 		const loading = ref(false)
 
 		watchEffect(() => {
-			if (
-				selected.value.length < props.rows.length &&
-				selected.value.length !== 0
-			) {
+			if (selected.value.length === 0) {
+				all.value = false
+			} else if (selected.value.length < props.rows.length) {
 				all.value = null
 			}
 		})
