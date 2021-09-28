@@ -22,38 +22,38 @@ export default {
 			delegation: false,
 			btn: [
 				{ label: 'Делегировать', action: this.deleg },
-				{ label: 'Прочитать', action: this.clear},
+				{ label: 'Прочитать', action: this.clear },
 				{ label: 'Завершить', action: this.clear },
-			]
+			],
 		}
 	},
 	methods: {
-		setbig () {
+		setbig() {
 			this.delegation = false
 			this.big = !this.big
 		},
-		empty () {
+		empty() {
 			return
 		},
-		deleg () {
+		deleg() {
 			this.big = !this.big
 			this.delegation = !this.delegation
 		},
 		clear() {
 			this.$emit('clear')
-		}
-	}
+		},
+	},
 }
 </script>
 
 <style scoped lang="scss">
 .multi {
-	height: 50px;
+	height: 48px;
 	width: 100%;
-	transition: .3s ease all;
+	transition: 0.3s ease all;
 	.ro {
 		width: 100%;
-		padding: .5rem;
+		padding: 0.5rem;
 		padding-bottom: 0;
 		display: flex;
 		justify-content: flex-start;
@@ -75,13 +75,13 @@ export default {
 	margin: 0 1rem;
 }
 .action {
-	margin: 0 .25rem;
+	margin: 0 0.25rem;
 }
 .up {
 	flex-grow: 1;
 }
 .chev {
-	transition: .2s ease all;
+	transition: 0.2s ease all;
 	.big & {
 		transform: rotate(180deg);
 	}
