@@ -7,7 +7,7 @@
 		.main(:class="{ 'fill' : !grid.sidebar }")
 			GridTable(v-if="!grid.lenta" :columns="columns" :colData="colData" :rows="filteredRows" :total="items.length" :shown="filteredRows.length" )
 			div(v-else)
-				Toolbar(:total="items.length" :lenta="grid.lenta" :shown="filteredRows.length" @readAll="readAll" @toggleLoad="loading = !loading")
+				Toolbar(:total="items.length" :lenta="grid.lenta" :shown="filteredRows.length" @readAll="readAll" @toggleLoad="loading = !loading" :selected="false")
 				Lenta(:items="filteredRows" :total="items.length")
 
 </template>
@@ -41,15 +41,6 @@ export default {
 					filter[el.col] = el.items
 				}
 
-				// return rows.filter( item => {
-				// 	for (let [key, value] of Object.entries(filter)) {
-				// 		const cool = (element) => item[key] === element
-				// 		if (value.some(cool)) {
-				// 			return true
-				// 		}
-				// 	}
-				// 	return false
-				// } )
 
 				return rows.filter((item) => {
 					for (let [key, value] of Object.entries(filter)) {
@@ -113,15 +104,6 @@ export default {
 			return agg
 		})
 
-		// const reset = () => {
-		// 	let list = document.querySelectorAll('.reset > .q-checkbox__inner--truthy')
-		// 	list.forEach( el => {
-		// 		el.classList.remove('q-checkbox__inner--truthy')
-		// 		el.classList.add('q-checkbox__inner--falsy')
-		// 	})
-		// 	grid.clearCheckedAll()
-		// }
-
 		const columns = [
 			{
 				id: 0,
@@ -179,6 +161,10 @@ export default {
 
 <style scoped lang="scss">
 @import '@/assets/styles/theme.scss';
+.main {
+	/* height: calc(100vh - 300px); */
+	/* overflow: auto; */
+}
 
 .gridtotal {
 	display: grid;

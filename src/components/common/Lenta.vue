@@ -1,19 +1,20 @@
 <template lang="pug">
-q-card(v-for="item in items" flat square bordered :key="item.id" :class="{ 'unread' : item.unread}").listitem
-	.read(@click="toggle(item.id)")
-	.flex
-		q-checkbox(v-model="item.selected")
-		div
-			.top
-				.typ {{ item.typ}}
-				.status {{ item.status}}
-			.title
-				span {{ item.title}}
-			.top
-				.autor Автор: {{ item.author}}
-				.srok Дата: {{ item.changed }}
-				.srok(v-if="item.num") Вложения: {{ item.num }}
-			.descr {{ item.digest}}
+.lenta
+	q-card(v-for="item in items" flat square bordered :key="item.id" :class="{ 'unread' : item.unread}").listitem
+		.read(@click="toggle(item.id)")
+		.flex
+			q-checkbox(v-model="item.selected")
+			div
+				.top
+					.typ {{ item.typ}}
+					.status {{ item.status}}
+				.title
+					span {{ item.title}}
+				.top
+					.autor Автор: {{ item.author}}
+					.srok Дата: {{ item.changed }}
+					.srok(v-if="item.num") Вложения: {{ item.num }}
+				.descr {{ item.digest}}
 </template>
 
 <script>
@@ -44,6 +45,11 @@ export default {
 
 <style scoped lang="scss">
 @import '@/assets/styles/theme.scss';
+
+.lenta {
+	height: calc(100vh - 200px);
+	overflow: auto;
+}
 .listitem {
 	margin: 0.5rem 0;
 	position: relative;

@@ -35,7 +35,7 @@ export const useGrid = defineStore({
 					items: [ el ]
 				})
 			} else {
-				temp.items.push(el)  
+				temp.items.push(el)
 			}
 		},
 		removeAggregat( col, el ) {
@@ -57,7 +57,7 @@ export const useGrid = defineStore({
 			} else {
 				temp.items = []
 				items.forEach( el => {
-					temp.items.push(el)  
+					temp.items.push(el)
 				} )
 			}
 		},

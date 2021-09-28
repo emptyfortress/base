@@ -4,7 +4,7 @@
 		q-btn(flat round dense @click="grid.switchSidebar")
 			q-icon(name="mdi-backburger" v-if="grid.sidebar")
 			q-icon(name="mdi-forwardburger" v-else)
-		q-checkbox(dense v-if="lenta")
+		q-checkbox(dense v-if="lenta" v-model="selected")
 		transition(name="slide-left")
 			.total(v-if="shown === total") Всего:
 				span {{ total }}
@@ -38,6 +38,7 @@ export default {
 		total: Number,
 		shown: Number,
 		lenta: Boolean,
+		selected: Boolean,
 	},
 	emits: ['readAll'],
 	components: {
