@@ -19,8 +19,6 @@ q-card(v-for="item in items" flat square bordered :key="item.id" :class="{ 'unre
 <script>
 export default {
 	components: [],
-	emits: [],
-
 	props: {
 		items: {
 			type: Array,
