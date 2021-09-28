@@ -7,8 +7,7 @@ export const router = createRouter({
 	routes: [
 		{
 			path: '/',
-			name: 'home',
-			component: Home,
+			redirect: '/grid'
 		},
 		{
 			path: '/doc',
