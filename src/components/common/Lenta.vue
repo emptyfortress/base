@@ -71,6 +71,9 @@ export default {
 .lenta {
 	height: calc(100vh - 200px);
 	overflow: auto;
+	.full & {
+		height: calc(100vh - 42px);
+	}
 }
 .listitem {
 	margin: 0.5rem 0;

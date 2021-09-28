@@ -159,7 +159,10 @@ export default {
 		const selectAll = () => {
 			filteredRows.value.map((row) => (row.selected = true))
 		}
-
+		const clearSelected = () => {
+			filteredRows.value.map((item) => (item.selected = false))
+			grid.selected = false
+		}
 
 		return {
 			// reset,
@@ -174,6 +177,7 @@ export default {
 			selectNone,
 			selectAll,
 			selected,
+			clearSelected,
 		}
 	},
 }
@@ -208,6 +212,7 @@ export default {
 }
 .rel {
 	position: relative;
+	overflow: hidden;
 }
 .total {
 	position: absolute;

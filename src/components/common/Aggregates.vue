@@ -11,13 +11,13 @@
 </template>
 
 <script>
-import {reactive, computed} from 'vue'
+import { reactive, computed } from 'vue'
 import { useGrid } from '@/stores/grid'
 import Aggregat from '@/components/common/Aggregat.vue'
 
 export default {
 	props: {
-		data: Array
+		data: Array,
 	},
 	components: {
 		Aggregat,
@@ -27,23 +27,25 @@ export default {
 		const grid = useGrid()
 		const items = reactive(props.data)
 
-		const expanded = computed( () => items.filter( el => el.model ).length <= 1 )
+		const expanded = computed(() => items.filter((el) => el.model).length <= 1)
 
 		const expand = () => {
 			if (expanded.value) {
-				items.map( el => el.model = true )
-			} else items.map( item => item.model = false )
+				items.map((el) => (el.model = true))
+			} else items.map((item) => (item.model = false))
 		}
 
 		const reset = () => {
-			let list = document.querySelectorAll('.reset > .q-checkbox__inner--truthy')
-			list.forEach( el => {
+			let list = document.querySelectorAll(
+				'.reset > .q-checkbox__inner--truthy'
+			)
+			list.forEach((el) => {
 				el.classList.remove('q-checkbox__inner--truthy')
 				el.classList.add('q-checkbox__inner--falsy')
 			})
 			grid.clearCheckedAll()
 			grid.disable = 0
-			items.forEach( el => el.list.forEach( item => item.value = false ) )
+			items.forEach((el) => el.list.forEach((item) => (item.value = false)))
 		}
 
 		return {
@@ -53,7 +55,6 @@ export default {
 			expanded,
 		}
 	},
-
 }
 </script>
 
@@ -74,5 +75,8 @@ export default {
 }
 .scroll {
 	height: calc(100vh - 200px);
+	.full & {
+		height: calc(100vh - 42px);
+	}
 }
 </style>
