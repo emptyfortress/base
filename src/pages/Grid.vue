@@ -4,37 +4,37 @@
 	.gridtotal(:class="{ full : grid.fullscreen }")
 		.sidebar(v-show="grid.sidebar")
 			Aggregates(:data="aggregateData")
-		.main(:class="{ 'fill' : !grid.sidebar }").shadow-1
+		.main(:class="{ 'fill' : !grid.sidebar }")
 			GridTable(v-if="!grid.lenta" :columns="columns" :colData="colData" :rows="filteredRows" :total="items.length" :shown="filteredRows.length" )
 			div(v-else)
-				Toolbar(:total="items.length" :shown="shown" @readAll="readAll")
-				p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-			
-	
+				Toolbar(:total="items.length" :shown="filteredRows.length" @readAll="readAll" @toggleLoad="loading = !loading")
+				Lenta(:items="filteredRows" :total="items.length")
+
 </template>
 
 <script>
-import {computed, provide } from 'vue'
+import { computed, provide } from 'vue'
 import { useGrid } from '@/stores/grid'
 import { items } from '@/stores/data'
 import GridTable from '@/components/common/GridTable.vue'
 import Toolbar from '@/components/common/Toolbar.vue'
 import Aggregates from '@/components/common/Aggregates.vue'
+import Lenta from '@/components/common/Lenta.vue'
 
 export default {
 	components: {
 		GridTable,
 		Toolbar,
 		Aggregates,
+		Lenta,
 	},
 	setup() {
 		const grid = useGrid()
 		grid.items = [...items]
 		const rows = grid.items
 
-		const filteredRows = computed( () => {
+		const filteredRows = computed(() => {
 			if (grid.checked.length) {
-
 				let filter = {}
 				let temp = Object.values(grid.checked)
 				for (let el of temp) {
@@ -51,17 +51,14 @@ export default {
 				// 	return false
 				// } )
 
-				return rows.filter( item => {
+				return rows.filter((item) => {
 					for (let [key, value] of Object.entries(filter)) {
 						const cool = (element) => element === item[key]
-						if (item[key] === undefined) 
-							return false
-						if (!value.some(cool))
-							return false
+						if (item[key] === undefined) return false
+						if (!value.some(cool)) return false
 					}
 					return true
 				})
-
 			}
 			return rows
 		})
@@ -69,35 +66,40 @@ export default {
 		provide('filteredRows', filteredRows)
 
 		const colData = (col) => {
-			return [...new Set(filteredRows.value.map( item => item[col.name] ))]
+			return [...new Set(filteredRows.value.map((item) => item[col.name]))]
 		}
 
-		const aggregateData = computed( () => {
+		const aggregateData = computed(() => {
 			let agg = []
-			const iteration = [ 'typ', 'vid', 'status', 'author' ]
-			iteration.forEach( it => {
-				const block = [...new Set(filteredRows.value.map( item => item[it] ))]
-				const blockname = ( (it) => {
+			const iteration = ['typ', 'vid', 'status', 'author']
+			iteration.forEach((it) => {
+				const block = [...new Set(filteredRows.value.map((item) => item[it]))]
+				const blockname = (it) => {
 					switch (it) {
-						case 'typ': return 'Тип карточки'
-						case 'vid': return 'Вид документа'
-						case 'author': return 'Автор'
-						case 'status': return 'Состояние'
-						default: return 'Остальное'
+						case 'typ':
+							return 'Тип карточки'
+						case 'vid':
+							return 'Вид документа'
+						case 'author':
+							return 'Автор'
+						case 'status':
+							return 'Состояние'
+						default:
+							return 'Остальное'
 					}
-				} )
+				}
 
-				const list = block.map( el => {
-					const length = items.filter( item => item[it] === el ).length
+				const list = block.map((el) => {
+					const length = items.filter((item) => item[it] === el).length
 					return {
 						title: el,
 						value: false,
-						badge: length
+						badge: length,
 					}
 				})
 
-				list.sort( (a,b) => b.badge - a.badge )
-				const list1 = list.filter( item => item.title !== undefined )
+				list.sort((a, b) => b.badge - a.badge)
+				const list1 = list.filter((item) => item.title !== undefined)
 
 				const blocks = {}
 				blocks.col = it
@@ -121,11 +123,44 @@ export default {
 		// }
 
 		const columns = [
-			{ id: 0, name: 'typ', label: 'Тип', field: 'typ', align: 'left', sortable: true, },
-			{ id: 1, name: 'title', label: 'Название', field: 'title', align: 'left', sortable: true, },
-			{ id: 2, name: 'author', label: 'Автор', field: 'author', align: 'left', sortable: true, },
-			{ id: 3, name: 'changed', label: 'Изменено', field: 'changed', align: 'left', sortable: true, datum: true },
+			{
+				id: 0,
+				name: 'typ',
+				label: 'Тип',
+				field: 'typ',
+				align: 'left',
+				sortable: true,
+			},
+			{
+				id: 1,
+				name: 'title',
+				label: 'Название',
+				field: 'title',
+				align: 'left',
+				sortable: true,
+			},
+			{
+				id: 2,
+				name: 'author',
+				label: 'Автор',
+				field: 'author',
+				align: 'left',
+				sortable: true,
+			},
+			{
+				id: 3,
+				name: 'changed',
+				label: 'Изменено',
+				field: 'changed',
+				align: 'left',
+				sortable: true,
+				datum: true,
+			},
 		]
+
+		const readAll = () => {
+			filteredRows.value.map((row) => (row.unread = false))
+		}
 
 		return {
 			// reset,
@@ -136,6 +171,7 @@ export default {
 			items,
 			filteredRows,
 			aggregateData,
+			readAll,
 		}
 	},
 }
