@@ -11,13 +11,13 @@
 		selection="multiple"
 		color="primary"
 		:loading="loading"
-		v-model:selected="selected"
 		).fixhd
 		template(v-slot:header="props")
 			q-tr(:props="props" v-click-away="toggleFilter")
 				q-th(auto-width :key="props.read").small
 				q-th(auto-width)
-					q-checkbox(v-model="props.selected")
+					//- q-checkbox(model-value="selected" @update:model-value="setSel" false-value="[]")
+					q-checkbox(v-model="all" @update:model-value="toggleSel")
 				q-th(v-for="col in props.cols" :props="props" :key="col.name").hov
 					span {{ col.label }}
 					q-icon(name="mdi-filter" color="negative" v-if="showFilt(col)").filt
@@ -25,7 +25,7 @@
 						q-btn(v-if="col.sortable" unelevated dense size="sm" color="primary" round @click.stop="mysort(col.name, $event)")
 							q-icon(name="mdi-arrow-down")
 						q-btn( unelevated dense color="primary" round size="sm" icon="mdi-filter-outline" @click.stop="toggleFilter(col.id)")
-					
+
 					transition(name="slide-top")
 						Filter(:filterByIndex="filterByIndex" :col="col" @close="filterByIndex = null" :data="colData(col)" :datum="col.datum")
 
@@ -36,17 +36,17 @@
 			q-tr(:props="props" :key="props.row.id" :class="{ 'bold' : props.row.unread }")
 				q-td(key="read" :class="{ 'unread' : props.row.unread }" @click="toggle(props.row.id)").small
 				q-td(auto-width)
-					q-checkbox(v-model="props.selected")
+					q-checkbox(v-model="props.row.selected" :val="props.row.id")
 				q-td(v-for="col in props.cols" :key="col.name") {{ props.row[col.name] }}
 		template(v-slot:top)
 			Toolbar(:total="total" :shown="shown" @readAll="readAll" @toggleLoad="loading = !loading")
-		template(v-slot:bottom v-if="selected.length")
-			Total(:selected="selected.length" @clear="clearSelected")
+		template(v-slot:bottom v-if="checked.length")
+			Total(:selected="checked.length" @clear="clearSelected")
 
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed, watchEffect } from 'vue'
 import Toolbar from '@/components/common/Toolbar.vue'
 import Total from '@/components/common/Total.vue'
 import Filter from '@/components/common/Filter.vue'
@@ -74,19 +74,38 @@ export default {
 		const grid = useGrid()
 
 		// const total = ref(null)
-		const selected = ref([])
+		const all = ref(false)
+		const checked = computed(() => {
+			return props.rows.filter((item) => item.selected)
+		})
+
 		const itemTable = ref(null)
 		const loading = ref(false)
+
+		watchEffect(() => {
+			if (
+				checked.value.length < props.rows.length &&
+				checked.value.length !== 0
+			) {
+				all.value = null
+			}
+		})
+
+		const toggleSel = () => {
+			console.log(1)
+		}
 
 		const toggle = (e) => {
 			const current = props.rows.find((b) => b.id === e)
 			current.unread = !current.unread
 		}
 		const clearSelected = () => {
-			selected.value = []
+			props.rows.map((item) => (item.selected = false))
+			all.value = false
 		}
+
 		const readAll = () => {
-			props.rows.map( (row) => row.unread = false )
+			props.rows.map((row) => (row.unread = false))
 		}
 
 		const mysort = (e, event) => {
@@ -98,20 +117,24 @@ export default {
 		const filterByIndex = ref(null)
 
 		const toggleFilter = (e) => {
-			filterByIndex.value === e ? filterByIndex.value = null : filterByIndex.value = e
+			filterByIndex.value === e
+				? (filterByIndex.value = null)
+				: (filterByIndex.value = e)
 		}
-		const showFilt = ((col) => {
+		const showFilt = (col) => {
 			if (grid.checked.length) {
-				let ids = grid.checked.map(item => item.id)
-				let id = (el) => el === col.id 
+				let ids = grid.checked.map((item) => item.id)
+				let id = (el) => el === col.id
 				return ids.some(id)
 			}
 			return false
-		} )
+		}
 
 		return {
 			pagination,
-			selected,
+			all,
+			checked,
+			toggleSel,
 			toggle,
 			mysort,
 			itemTable,
@@ -157,7 +180,7 @@ td.small {
 	position: sticky;
 	.filt {
 		position: absolute;
-		right: .5rem;
+		right: 0.5rem;
 		top: 50%;
 		transform: translateY(-50%);
 	}
@@ -176,7 +199,7 @@ td.small {
 			margin-right: 3px;
 		}
 		.q-icon {
-			transition: .3s ease all;
+			transition: 0.3s ease all;
 			&.up {
 				transform: rotate(180deg);
 			}
@@ -215,11 +238,11 @@ td.small {
 /* } */
 .list-complete-enter-from,
 .list-complete-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
+	opacity: 0;
+	transform: translateX(30px);
 }
 
 .list-complete-leave-active {
-  position: absolute;
+	position: absolute;
 }
 </style>

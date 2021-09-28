@@ -4,6 +4,7 @@
 		q-btn(flat round dense @click="grid.switchSidebar")
 			q-icon(name="mdi-backburger" v-if="grid.sidebar")
 			q-icon(name="mdi-forwardburger" v-else)
+		q-checkbox(dense v-if="lenta")
 		transition(name="slide-left")
 			.total(v-if="shown === total") Всего:
 				span {{ total }}
@@ -36,6 +37,7 @@ export default {
 	props: {
 		total: Number,
 		shown: Number,
+		lenta: Boolean,
 	},
 	emits: ['readAll'],
 	components: {
@@ -55,13 +57,15 @@ export default {
 				setTimeout(() => {
 					context.emit('toggleLoad')
 					e.spin = false
-				},3000)
+				}, 3000)
 			}
 		}
 
 		const showAll = () => {
-			let list = document.querySelectorAll('.reset > .q-checkbox__inner--truthy')
-			list.forEach( el => {
+			let list = document.querySelectorAll(
+				'.reset > .q-checkbox__inner--truthy'
+			)
+			list.forEach((el) => {
 				el.classList.remove('q-checkbox__inner--truthy')
 				el.classList.add('q-checkbox__inner--falsy')
 			})
@@ -72,7 +76,13 @@ export default {
 		const buttons = reactive([
 			// { id: 0, icon: 'sort-variant', tooltip: 'Сортировка', action: '', grid: false },
 			{ id: 1, icon: 'readAll', tooltip: 'Прочитать все', action: 'clear' },
-			{ id: 2, icon: 'refresh', tooltip: 'Обновить', action: 'refresh', spin: false },
+			{
+				id: 2,
+				icon: 'refresh',
+				tooltip: 'Обновить',
+				action: 'refresh',
+				spin: false,
+			},
 			{ id: 3, icon: 'xls-export', tooltip: 'Экспорт', action: '' },
 			{ id: 4, icon: 'sliders-reload', tooltip: 'Сброс настроек', action: '' },
 			{ id: 5, icon: 'sliders-vertical', tooltip: 'Настройки', action: '' },

@@ -7,7 +7,7 @@
 		.main(:class="{ 'fill' : !grid.sidebar }")
 			GridTable(v-if="!grid.lenta" :columns="columns" :colData="colData" :rows="filteredRows" :total="items.length" :shown="filteredRows.length" )
 			div(v-else)
-				Toolbar(:total="items.length" :shown="filteredRows.length" @readAll="readAll" @toggleLoad="loading = !loading")
+				Toolbar(:total="items.length" :lenta="grid.lenta" :shown="filteredRows.length" @readAll="readAll" @toggleLoad="loading = !loading")
 				Lenta(:items="filteredRows" :total="items.length")
 
 </template>
