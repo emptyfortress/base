@@ -16,7 +16,7 @@
 			q-tr(:props="props" v-click-away="toggleFilter")
 				q-th(auto-width :key="props.read").small
 				q-th(auto-width)
-					q-checkbox(v-model="all" @update:model-value="toggleSel")
+					q-checkbox(:model-value="all" @update:model-value="toggleSel")
 				q-th(v-for="col in props.cols" :props="props" :key="col.name").hov
 					span {{ col.label }}
 					q-icon(name="mdi-filter" color="negative" v-if="showFilt(col)").filt
@@ -91,7 +91,13 @@ export default {
 		})
 
 		const toggleSel = () => {
-			console.log(1)
+			if (all.value === true) {
+				props.rows.map((item) => (item.selected = false))
+				all.value = false
+			} else {
+				props.rows.map((item) => (item.selected = true))
+				all.value = true
+			}
 		}
 
 		const toggle = (e) => {
