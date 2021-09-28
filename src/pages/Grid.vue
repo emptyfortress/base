@@ -8,14 +8,14 @@
 			GridTable(v-if="!grid.lenta" :columns="columns" :colData="colData" :rows="filteredRows" :total="items.length" :shown="filteredRows.length" )
 			.rel(v-else)
 				Toolbar(:total="items.length" :lenta="grid.lenta" :shown="filteredRows.length" @readAll="readAll" @toggleLoad="loading = !loading" @selNone="selectNone" @selAll="selectAll")
-				Lenta(:items="filteredRows" :total="items.length")
+				Lenta(:items="filteredRows" :total="items.length" :loading="loading")
 				.total(v-show="grid.selected != 0")
 					Total(:selected="selected.length" @clear="clearSelected")
 
 </template>
 
 <script>
-import { computed, provide } from 'vue'
+import { ref, computed, provide } from 'vue'
 import { useGrid } from '@/stores/grid'
 import { items } from '@/stores/data'
 import GridTable from '@/components/common/GridTable.vue'
@@ -36,6 +36,7 @@ export default {
 		const grid = useGrid()
 		grid.items = [...items]
 		const rows = grid.items
+		const loading = ref(false)
 
 		const filteredRows = computed(() => {
 			if (grid.checked.length) {
@@ -44,7 +45,6 @@ export default {
 				for (let el of temp) {
 					filter[el.col] = el.items
 				}
-
 
 				return rows.filter((item) => {
 					for (let [key, value] of Object.entries(filter)) {
@@ -61,9 +61,8 @@ export default {
 		provide('filteredRows', filteredRows)
 
 		const selected = computed( () => {
-			return filteredRows.value.filter( item => item.selected === true)
+			return filteredRows.value.filter((item) => item.selected === true)
 		})
-
 
 		const colData = (col) => {
 			return [...new Set(filteredRows.value.map((item) => item[col.name]))]
@@ -178,6 +177,7 @@ export default {
 			selectAll,
 			selected,
 			clearSelected,
+			loading,
 		}
 	},
 }

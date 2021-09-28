@@ -1,4 +1,6 @@
 <template lang="pug">
+.ld(v-if="loading")
+	q-linear-progress(indeterminate)
 .lenta
 	q-card(v-for="item in items" flat square bordered :key="item.id" :class="{ 'unread' : item.unread}").listitem
 		.read(@click="toggle(item.id)")
@@ -32,6 +34,10 @@ export default {
 			type: Number,
 			default: 0,
 		},
+		loading: {
+			type: Boolean,
+			default: false
+		}
 	},
 
 	setup(props) {
@@ -69,6 +75,7 @@ export default {
 @import '@/assets/styles/theme.scss';
 
 .lenta {
+	position: relative;
 	height: calc(100vh - 200px);
 	overflow: auto;
 	.full & {
@@ -118,5 +125,11 @@ export default {
 	gap: 2rem;
 }
 .status {
+}
+.ld {
+	width: 100%;
+	left: 0;
+	height: 3px;
+	z-index: 2;
 }
 </style>
