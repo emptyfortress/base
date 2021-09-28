@@ -26,7 +26,7 @@ import SvgIcon from '@/components/SvgIcon.vue'
 
 export default {
 	props: ['show'],
-	components: {SvgIcon},
+	components: { SvgIcon },
 	setup() {
 		const colors = useColor()
 		const pages = [

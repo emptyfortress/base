@@ -60,7 +60,7 @@ export default {
 
 		provide('filteredRows', filteredRows)
 
-		const selected = computed( () => {
+		const selected = computed(() => {
 			return filteredRows.value.filter((item) => item.selected === true)
 		})
 
@@ -226,5 +226,5 @@ export default {
 	body.body--dark & {
 		background: var(--my-color-step-150);
 	}
- }
+}
 </style>
