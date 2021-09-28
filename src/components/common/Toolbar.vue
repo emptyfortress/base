@@ -4,7 +4,7 @@
 		q-btn(flat round dense @click="grid.switchSidebar")
 			q-icon(name="mdi-backburger" v-if="grid.sidebar")
 			q-icon(name="mdi-forwardburger" v-else)
-		q-checkbox(dense v-if="lenta" v-model="selected")
+		q-checkbox(dense v-if="lenta" :model-value="grid.selected" @update:model-value="toggleSel")
 		transition(name="slide-left")
 			.total(v-if="shown === total") Всего:
 				span {{ total }}
@@ -38,9 +38,8 @@ export default {
 		total: Number,
 		shown: Number,
 		lenta: Boolean,
-		selected: Boolean,
 	},
-	emits: ['readAll'],
+	emits: ['readAll', 'selNone', 'selAll'],
 	components: {
 		SvgIcon,
 	},
@@ -89,7 +88,17 @@ export default {
 			{ id: 5, icon: 'sliders-vertical', tooltip: 'Настройки', action: '' },
 		])
 
+		const toggleSel = () => {
+			if (grid.selected) {
+				context.emit('selNone')
+				grid.selected = false
+			} else {
+				context.emit('selAll')
+				grid.selected = true
+			}
+		}
 		return {
+			toggleSel,
 			grid,
 			buttons,
 			props,

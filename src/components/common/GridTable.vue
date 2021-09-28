@@ -84,8 +84,13 @@ export default {
 		watchEffect(() => {
 			if (selected.value.length === 0) {
 				all.value = false
+				grid.selected = false
 			} else if (selected.value.length < props.rows.length) {
 				all.value = null
+				grid.selected = null
+			} else if (selected.value.length === props.rows.length) {
+				all.value = true
+				grid.selected = true
 			}
 		})
 

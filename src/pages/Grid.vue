@@ -7,7 +7,7 @@
 		.main(:class="{ 'fill' : !grid.sidebar }")
 			GridTable(v-if="!grid.lenta" :columns="columns" :colData="colData" :rows="filteredRows" :total="items.length" :shown="filteredRows.length" )
 			div(v-else)
-				Toolbar(:total="items.length" :lenta="grid.lenta" :shown="filteredRows.length" @readAll="readAll" @toggleLoad="loading = !loading" :selected="false")
+				Toolbar(:total="items.length" :lenta="grid.lenta" :shown="filteredRows.length" @readAll="readAll" @toggleLoad="loading = !loading" @selNone="selectNone" @selAll="selectAll")
 				Lenta(:items="filteredRows" :total="items.length")
 
 </template>
@@ -144,6 +144,14 @@ export default {
 			filteredRows.value.map((row) => (row.unread = false))
 		}
 
+		const selectNone = () => {
+			filteredRows.value.map((row) => (row.selected = false))
+		}
+		const selectAll = () => {
+			filteredRows.value.map((row) => (row.selected = true))
+		}
+
+
 		return {
 			// reset,
 			colData,
@@ -154,6 +162,8 @@ export default {
 			filteredRows,
 			aggregateData,
 			readAll,
+			selectNone,
+			selectAll,
 		}
 	},
 }

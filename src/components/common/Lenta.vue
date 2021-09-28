@@ -3,7 +3,7 @@
 	q-card(v-for="item in items" flat square bordered :key="item.id" :class="{ 'unread' : item.unread}").listitem
 		.read(@click="toggle(item.id)")
 		.flex
-			q-checkbox(v-model="item.selected")
+			q-checkbox(:model-value="item.selected" @update:model-value="setItems(item)")
 			div
 				.top
 					.typ {{ item.typ}}
@@ -18,6 +18,9 @@
 </template>
 
 <script>
+ import { computed, watchEffect } from 'vue'
+ import { useGrid } from '@/stores/grid'
+
 export default {
 	components: [],
 	props: {
@@ -32,12 +35,31 @@ export default {
 	},
 
 	setup(props) {
+		const grid = useGrid()
+
 		const toggle = (e) => {
 			const current = props.items.find((b) => b.id === e)
 			current.unread = !current.unread
 		}
+		const selected = computed(() => {
+			return props.items.filter( (item) => item.selected === true)
+		})
+
+
+		const setItems = (item) => {
+			item.selected = !item.selected
+			if (selected.value.length === 0) {
+				grid.selected = false
+			} else if (selected.value.length < props.items.length) {
+				grid.selected = null
+			} else if (selected.value.length === props.items.length) {
+				grid.selected = true
+			}
+		}
+
 		return {
 			toggle,
+			setItems,
 		}
 	},
 }
