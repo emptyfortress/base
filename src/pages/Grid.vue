@@ -6,9 +6,11 @@
 			Aggregates(:data="aggregateData")
 		.main(:class="{ 'fill' : !grid.sidebar }")
 			GridTable(v-if="!grid.lenta" :columns="columns" :colData="colData" :rows="filteredRows" :total="items.length" :shown="filteredRows.length" )
-			div(v-else)
+			.rel(v-else)
 				Toolbar(:total="items.length" :lenta="grid.lenta" :shown="filteredRows.length" @readAll="readAll" @toggleLoad="loading = !loading" @selNone="selectNone" @selAll="selectAll")
 				Lenta(:items="filteredRows" :total="items.length")
+				.total(v-show="grid.selected != 0")
+					Total(:selected="selected.length" @clear="clearSelected")
 
 </template>
 
@@ -20,6 +22,7 @@ import GridTable from '@/components/common/GridTable.vue'
 import Toolbar from '@/components/common/Toolbar.vue'
 import Aggregates from '@/components/common/Aggregates.vue'
 import Lenta from '@/components/common/Lenta.vue'
+import Total from '@/components/common/Total.vue'
 
 export default {
 	components: {
@@ -27,6 +30,7 @@ export default {
 		Toolbar,
 		Aggregates,
 		Lenta,
+		Total,
 	},
 	setup() {
 		const grid = useGrid()
@@ -55,6 +59,11 @@ export default {
 		})
 
 		provide('filteredRows', filteredRows)
+
+		const selected = computed( () => {
+			return filteredRows.value.filter( item => item.selected === true)
+		})
+
 
 		const colData = (col) => {
 			return [...new Set(filteredRows.value.map((item) => item[col.name]))]
@@ -164,6 +173,7 @@ export default {
 			readAll,
 			selectNone,
 			selectAll,
+			selected,
 		}
 	},
 }
@@ -196,4 +206,20 @@ export default {
 .fill {
 	grid-column: 1/3;
 }
+.rel {
+	position: relative;
+}
+.total {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	border-radius: 12px 12px 0px 0px;
+	background: #e5e5e5;
+	transition: 0.3s ease all;
+	box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.2);
+	body.body--dark & {
+		background: var(--my-color-step-150);
+	}
+ }
 </style>
