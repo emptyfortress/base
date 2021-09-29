@@ -1,7 +1,7 @@
 <template lang="pug">
 q-drawer(v-model="show" side="left" :mini="colors.mini" :width="width" bordered :class="{ fill : colors.panel }")
 	q-list
-		q-item(clickable v-ripple :to="page.url" v-for="page in pages" :key="page.id")
+		q-item(clickable v-ripple :to="page.url" v-for="page in pages" :key="page.id" )
 			q-item-section(avatar)
 				q-icon(:name="page.icon")
 			q-item-section {{ page.title }}
