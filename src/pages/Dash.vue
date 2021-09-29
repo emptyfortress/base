@@ -51,7 +51,6 @@ export default {
 	}
 	@media screen and (max-width: 630px) {
 		grid-template-columns: auto;
-		background: green;
 	}
 	div {
 		height: 200px;

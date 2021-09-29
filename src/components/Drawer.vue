@@ -1,5 +1,5 @@
 <template lang="pug">
-q-drawer(v-model="show" side="left" :mini="colors.mini" :width="width" bordered :class="{ fill : colors.panel }")
+q-drawer(:model-value="show" side="left" :mini="colors.mini" :width="width" bordered :class="{ fill : colors.panel }" @update:model-value="$emit('toggle')")
 	q-list
 		q-item(clickable v-ripple :to="page.url" v-for="page in pages" :key="page.id" )
 			q-item-section(avatar)
@@ -15,7 +15,7 @@ q-drawer(v-model="show" side="left" :mini="colors.mini" :width="width" bordered 
 				q-icon(:name="item.icon")
 			q-item-section {{ item.title }}
 
-	q-btn(round flat dense :icon="minitoogle" @click="colors.mini = !colors.mini").mini
+	q-btn(round flat dense :icon="minitoogle" @click="colors.mini = !colors.mini").mini.gt-sm
 
 </template>
 
