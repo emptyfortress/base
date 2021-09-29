@@ -1,9 +1,9 @@
 <template lang="pug">
 #col(:class="mycolor")
-	q-layout(view="hHh LpR fFf" )
+	q-layout(view="hHh LpR fFf")
 		q-header(:reveal="colors.reveal" :class="calcHeader")
 			q-toolbar
-				q-btn(dense flat round icon="mdi-menu" @click="toggleLeftDrawer") 
+				q-btn(dense flat round icon="mdi-menu" @click="toggleLeftDrawer")
 
 				q-toolbar-title.gt-sm
 					span {{ formattedString }}
@@ -38,9 +38,9 @@
 
 		//- q-footer(bordered).head
 			q-toolbar
-				q-btn(dense flat round icon="mdi-menu" @click="toggleLeftDrawer") 
+				q-btn(dense flat round icon="mdi-menu" @click="toggleLeftDrawer")
 				q-space
-				q-btn(dense flat round icon="mdi-menu" @click="toggleRightDrawer") 
+				q-btn(dense flat round icon="mdi-menu" @click="toggleRightDrawer")
 
 </template>
 

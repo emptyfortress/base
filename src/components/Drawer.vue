@@ -1,7 +1,7 @@
 <template lang="pug">
 q-drawer(:model-value="show" side="left" :mini="colors.mini" :width="width" bordered :class="{ fill : colors.panel }" @update:model-value="$emit('toggle')")
 	q-list
-		q-item(clickable v-ripple :to="page.url" v-for="page in pages" :key="page.id")
+		q-item(clickable v-ripple :to="page.url" v-for="page in pages" :key="page.id" )
 			q-item-section(avatar)
 				q-icon(:name="page.icon")
 			q-item-section {{ page.title }}
@@ -26,7 +26,7 @@ import SvgIcon from '@/components/SvgIcon.vue'
 
 export default {
 	props: ['show'],
-	components: {SvgIcon},
+	components: { SvgIcon },
 	setup() {
 		const colors = useColor()
 		const pages = [
