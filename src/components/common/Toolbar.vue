@@ -122,6 +122,7 @@ export default {
 	justify-content: space-between;
 	align-items: center;
 }
+
 .total {
 	display: inline-block;
 	line-height: 42px;

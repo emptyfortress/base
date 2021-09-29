@@ -5,10 +5,9 @@
 			q-toolbar
 				q-btn(dense flat round icon="mdi-menu" @click="toggleLeftDrawer") 
 
-				q-toolbar-title
+				q-toolbar-title.gt-sm
 					span {{ formattedString }}
-					//- span.q-ml-lg.text-caption {{ formattedString }}
-
+				q-space
 				q-btn(dense flat round icon="mdi-magnify")
 				q-btn(dense round unelevated color="light-blue-2").q-ml-sm
 					q-avatar
@@ -17,8 +16,8 @@
 				q-btn(dense flat round icon="mdi-help-circle-outline").q-ml-sm
 				q-btn(dense flat round icon="mdi-brightness-4" @click="toggleRightDrawer").q-mx-sm
 
-			.subbar
-				.left( v-show="leftDrawer" :class="calcClass")
+			.subbar.gt-sm
+				.left( v-show="leftDrawer" :class="calcClass").gt-sm
 					q-btn(v-if="!colors.mini" dense flat round size="sm" icon="mdi-cog-outline")
 					q-btn(v-if="!colors.mini" dense flat round size="sm" icon="mdi-reload")
 					q-btn(v-if="!colors.mini" dense flat round size="sm" icon="mdi-pin-off-outline")
@@ -28,7 +27,7 @@
 					q-btn(unelevated)
 						SvgIcon(name="search-scan")
 
-		Drawer(:show="leftDrawer")
+		Drawer(:show="leftDrawer" @toggle="toggleLeftDrawer")
 		RDrawer(:show="rightDrawer")
 
 		q-page-container
@@ -119,7 +118,12 @@ export default {
 	height: 100px;
 	line-height: 64px;
 	/* border-bottom: 1px solid #fff; */
+	@media screen and (max-width: 1024px) {
+		height: 48px;
+		line-height: 48px;
+	}
 }
+
 .head {
 	/* backdrop-filter: blur(10px); */
 	/* -webkit-backdrop-filter: blur(10px); */

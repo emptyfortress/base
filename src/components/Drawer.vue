@@ -1,5 +1,5 @@
 <template lang="pug">
-q-drawer(v-model="show" side="left" :mini="colors.mini" :width="width" bordered :class="{ fill : colors.panel }")
+q-drawer(:model-value="show" side="left" :mini="colors.mini" :width="width" bordered :class="{ fill : colors.panel }" @update:model-value="$emit('toggle')")
 	q-list
 		q-item(clickable v-ripple :to="page.url" v-for="page in pages" :key="page.id")
 			q-item-section(avatar)
@@ -15,7 +15,7 @@ q-drawer(v-model="show" side="left" :mini="colors.mini" :width="width" bordered 
 				q-icon(:name="item.icon")
 			q-item-section {{ item.title }}
 
-	q-btn(round flat dense :icon="minitoogle" @click="colors.mini = !colors.mini").mini
+	q-btn(round flat dense :icon="minitoogle" @click="colors.mini = !colors.mini").mini.gt-sm
 
 </template>
 
@@ -33,7 +33,12 @@ export default {
 			{ id: 1, title: 'Цвета', icon: 'mdi-palette', url: '/' },
 			{ id: 2, title: 'Главная', icon: 'mdi-home-roof', url: '/dash' },
 			{ id: 3, title: 'Документ', icon: 'mdi-text-box-outline', url: '/doc' },
-			{ id: 4, title: 'Грид', icon: 'mdi-file-table-box-outline', url: '/grid' },
+			{
+				id: 4,
+				title: 'Грид',
+				icon: 'mdi-file-table-box-outline',
+				url: '/grid',
+			},
 		]
 		const lib = [
 			{ id: 1, title: 'Кнопки', icon: 'mdi-puzzle-outline', url: '/btn' },
