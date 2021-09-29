@@ -1,9 +1,9 @@
 <template lang="pug">
-.q-px-xl
+.q-px-md
 	h4 Палитра цветов
 	.palitra
 		div
-			q-btn(unelevated color="primary").full-width primary
+			q-btn(unelevated color="primary" ).full-width primary
 			q-btn(unelevated color="primary-selection" text-color="primary-darken-2").full-width selection
 		div
 			q-btn(unelevated color="primary-lighten-1" text-color="primary-darken-3" ).full-width lighten-1
@@ -20,7 +20,7 @@
 	p
 		q-btn(unelevated ).q-mr-sm default
 		q-btn(unelevated color="white" text-color="black").q-mr-sm flat
-		q-btn(unelevated outline color="primary" ).q-mr-sm outline
+		q-btn(unelevated outline color="primary").q-mr-sm outline
 		q-btn(unelevated outline rounded color="primary").q-mr-sm rounded
 		q-btn(unelevated push color="primary").q-mr-sm push
 	p
@@ -79,6 +79,9 @@ export default {
 	grid-template-columns: repeat(3, 200px);
 	gap: 1rem;
 	margin-bottom: 2rem;
+	@media screen and (max-width: 900px) {
+		grid-template-columns: 1fr;
+	}
 	.color {
 		height: 50px;
 		width: 100%;
@@ -88,5 +91,8 @@ export default {
 	height: 200px;
 	width: 50%;
 	padding: 1rem;
+}
+.q-btn {
+	margin-bottom: 0.5rem;
 }
 </style>
