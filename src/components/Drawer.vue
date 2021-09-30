@@ -63,10 +63,6 @@ export default {
 
 <style scoped lang="scss">
 @import '@/assets/styles/theme.scss';
-/* .pos { */
-/* 	position: relative; */
-/* 	height: 100%; */
-/* } */
 .mini {
 	position: absolute;
 	bottom: 1rem;
@@ -76,10 +72,6 @@ export default {
 .bottom {
 	border-top: 1px solid var(--my-border-color);
 	margin-top: 3rem;
-	/* position: absolute; */
-	/* bottom: 3rem; */
-	/* left: 0; */
-	/* width: 100%; */
 }
 .fill {
 	color: #fff !important;

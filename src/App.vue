@@ -29,6 +29,7 @@
 
 		Drawer(:show="leftDrawer" @toggle="toggleLeftDrawer")
 		RDrawer(:show="rightDrawer")
+		//- AggDrawer(:show="aggdr")
 
 		q-page-container
 			router-view
@@ -48,6 +49,8 @@
 import { ref, computed } from 'vue'
 import Drawer from '@/components/Drawer.vue'
 import RDrawer from '@/components/RDrawer.vue'
+// import AggDrawer from '@/components/common/AggDrawer.vue'
+
 import { date } from 'quasar'
 import { useColor } from '@/stores/colors'
 import SvgIcon from '@/components/SvgIcon.vue'
@@ -57,6 +60,7 @@ export default {
 	setup() {
 		const leftDrawer = ref(true)
 		const rightDrawer = ref(false)
+		// const aggdr = ref(true)
 
 		const mycolor = computed(() => {
 			return 'one'
@@ -105,6 +109,7 @@ export default {
 			toggleRightDrawer() {
 				rightDrawer.value = !rightDrawer.value
 			},
+			// aggdr,
 		}
 	},
 }

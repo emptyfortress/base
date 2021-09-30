@@ -294,3 +294,7 @@ a:hover:not(.q-link) {
 		}
 	}
 }
+.ztop {
+	position: relative;
+	z-index: 7000 !important;
+}

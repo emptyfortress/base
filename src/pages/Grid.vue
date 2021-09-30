@@ -12,6 +12,8 @@
 				.total(v-show="grid.selected != 0")
 					Total(:selected="selected.length" @clear="clearSelected")
 
+AggDrawer(:show="grid.aggregat")
+
 </template>
 
 <script>
@@ -23,6 +25,7 @@ import Toolbar from '@/components/common/Toolbar.vue'
 import Aggregates from '@/components/common/Aggregates.vue'
 import Lenta from '@/components/common/Lenta.vue'
 import Total from '@/components/common/Total.vue'
+import AggDrawer from '@/components/common/AggDrawer.vue'
 
 export default {
 	components: {
@@ -31,6 +34,7 @@ export default {
 		Aggregates,
 		Lenta,
 		Total,
+		AggDrawer,
 	},
 	setup() {
 		const grid = useGrid()
@@ -112,6 +116,8 @@ export default {
 			return agg
 		})
 
+		provide('aggregateData', aggregateData)
+
 		const columns = [
 			{
 				id: 0,
@@ -163,7 +169,7 @@ export default {
 			grid.selected = false
 		}
 
-		watchEffect( () => {
+		watchEffect(() => {
 			if (window.innerWidth < 1024) {
 				grid.sidebar = false
 			}
@@ -210,7 +216,7 @@ export default {
 		left: 0;
 		right: 0;
 		bottom: 0;
-		z-index: 6000;
+		z-index: 3000;
 	}
 }
 .sidebar {
@@ -235,5 +241,13 @@ export default {
 	body.body--dark & {
 		background: var(--my-color-step-150);
 	}
+}
+.temp {
+	width: 220px;
+	height: 100vh;
+	position: fixed;
+	left: 0;
+	top: 0;
+	background: green;
 }
 </style>
