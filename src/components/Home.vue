@@ -6,7 +6,7 @@
 			q-btn(unelevated color="primary" ).full-width primary
 			q-btn(unelevated color="primary-selection" text-color="primary-darken-2").full-width selection
 		div
-			q-btn(unelevated color="primary-lighten-1" text-color="primary-darken-3" ).full-width lighten-1
+			q-btn(unelevated color="primary-lighten-1" text-color="primary-darken-3").full-width lighten-1
 			q-btn(unelevated color="primary-lighten-2" text-color="primary-darken-3").full-width lighten-2
 			q-btn(unelevated color="primary-lighten-3" text-color="primary-darken-2").full-width lighten-3
 		div

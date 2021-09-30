@@ -1,5 +1,5 @@
 <template lang="pug">
-.toolbar
+.toolbar.gt-sm
 	.left
 		q-btn(flat round dense @click="grid.switchSidebar")
 			q-icon(name="mdi-backburger" v-if="grid.sidebar")
@@ -19,13 +19,51 @@
 			q-btn(:flat="!grid.lenta" dense color="btn-group" icon="mdi-format-list-bulleted" size="10px" @click="grid.showLenta")
 				q-tooltip(:delay="600") Лента
 	.right
-		q-btn(flat round dense v-for="button in buttons" @click="callback(button)" :key="button.id")
+		q-btn(flat round dense v-for="button in buttons" @click="callback(button)" :key="button.id" :class="button.class")
 			q-tooltip(:delay="600") {{ button.tooltip}}
 			SvgIcon(:name="button.icon" :spin="button.spin")
 		q-btn(flat round dense v-if="!grid.fullscreen" icon="mdi-fullscreen" @click="grid.switchFullscreen")
 			q-tooltip(:delay="600") Полный экран
 		q-btn(flat round dense v-else icon="mdi-fullscreen-exit" @click="grid.switchFullscreen")
 			q-tooltip(:delay="600") Вернуть
+
+.toolbar.lt-md
+	.left
+		q-btn(flat round dense @click="")
+			q-icon(name="mdi-backburger" v-if="grid.sidebar")
+			q-icon(name="mdi-forwardburger" v-else)
+		q-checkbox(dense v-if="lenta" :model-value="grid.selected" @update:model-value="toggleSel")
+		transition(name="slide-left")
+			.total(v-if="shown === total") Всего:
+				span {{ total }}
+			.total(v-else) Показано:
+				span {{ shown }}
+				span.iz ({{ total }})
+				q-btn(unelevated size="12px" @click="showAll").q-ml-sm Показать все
+	q-space
+	div
+		q-btn-group(unelevated).group
+			q-btn(:flat="grid.lenta" dense color="btn-group" icon="mdi-table" size="10px" @click="grid.showGrid")
+				q-tooltip(:delay="600") Грид
+			q-btn(:flat="!grid.lenta" dense color="btn-group" icon="mdi-format-list-bulleted" size="10px" @click="grid.showLenta")
+				q-tooltip(:delay="600") Лента
+		q-btn(flat round dense icon="mdi-dots-vertical")
+			q-menu(auto-close)
+				q-list
+					q-item(clickable v-for="item in buttons" :key="item.id" @click="callback(item)")
+						q-item-section(avatar)
+							SvgIcon(:name="item.icon")
+						q-item-section {{ item.tooltip }}
+
+					q-item(clickable v-if="!grid.fullscreen" @click="grid.switchFullscreen")
+						q-item-section(avatar)
+							q-icon(name="mdi-fullscreen")
+						q-item-section Развернуть
+					q-item(clickable v-if="grid.fullscreen" @click="grid.switchFullscreen")
+						q-item-section(avatar)
+							q-icon(name="mdi-fullscreen-exit")
+						q-item-section Свернуть
+
 </template>
 
 <script>
@@ -83,7 +121,12 @@ export default {
 				action: 'refresh',
 				spin: false,
 			},
-			{ id: 3, icon: 'xls-export', tooltip: 'Экспорт', action: '' },
+			{
+				id: 3,
+				icon: 'xls-export',
+				tooltip: 'Экспорт',
+				action: '',
+			},
 			{ id: 4, icon: 'sliders-reload', tooltip: 'Сброс настроек', action: '' },
 			{ id: 5, icon: 'sliders-vertical', tooltip: 'Настройки', action: '' },
 		])

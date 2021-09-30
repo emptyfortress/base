@@ -2,12 +2,12 @@
 .ld(v-if="loading")
 	q-linear-progress(indeterminate)
 .lenta
-	q-card(v-for="item in items" flat square bordered :key="item.id" :class="{ 'unread' : item.unread}").listitem
+	q-card(v-for="item in items" flat square bordered :key="item.id" :class="setClass(item)").listitem
 		.read(@click="toggle(item.id)")
 		.flex
 			q-checkbox(:model-value="item.selected" @update:model-value="setItems(item)")
 			div
-				.top
+				.top0
 					.typ {{ item.typ}}
 					.status {{ item.status}}
 				.title
@@ -20,8 +20,8 @@
 </template>
 
 <script>
- import { computed, watchEffect } from 'vue'
- import { useGrid } from '@/stores/grid'
+import { computed, watchEffect } from 'vue'
+import { useGrid } from '@/stores/grid'
 
 export default {
 	components: [],
@@ -36,8 +36,8 @@ export default {
 		},
 		loading: {
 			type: Boolean,
-			default: false
-		}
+			default: false,
+		},
 	},
 
 	setup(props) {
@@ -48,9 +48,8 @@ export default {
 			current.unread = !current.unread
 		}
 		const selected = computed(() => {
-			return props.items.filter( (item) => item.selected === true)
+			return props.items.filter((item) => item.selected === true)
 		})
-
 
 		const setItems = (item) => {
 			item.selected = !item.selected
@@ -63,9 +62,17 @@ export default {
 			}
 		}
 
+		const setClass = (row) => {
+			if (row.unread && row.selected) return 'both'
+			else if (row.selected) return 'bg-primary-selection'
+			else if (row.unread) return 'bold'
+			else return ''
+		}
+
 		return {
 			toggle,
 			setItems,
+			setClass,
 		}
 	},
 }
@@ -103,19 +110,18 @@ export default {
 	align-items: center;
 	flex-wrap: nowrap;
 	gap: 1rem;
+	@media screen and (max-width: 900px) {
+		flex-direction: column;
+		align-items: flex-start;
+	}
 }
 
-.read {
-	width: 8px;
-	height: 100%;
-	position: absolute;
-	cursor: pointer;
-	top: 0;
-	left: 0;
-	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAAXNSR0IArs4c6QAAABpJREFUGFdjZEACjCD2jh07/nt4eDCCOTAAAEsRBAT/WuYQAAAAAElFTkSuQmCC);
-	.unread & {
-		background-color: var(--q-primary);
-	}
+.top0 {
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 2rem;
 }
 .top {
 	width: 100%;
@@ -123,6 +129,11 @@ export default {
 	justify-content: flex-start;
 	align-items: center;
 	gap: 2rem;
+	@media screen and (max-width: 900px) {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.5rem;
+	}
 }
 .status {
 }
@@ -131,5 +142,30 @@ export default {
 	left: 0;
 	height: 3px;
 	z-index: 2;
+}
+.bold {
+	font-weight: bold;
+	color: var(--text-color-bright);
+}
+
+.both {
+	font-weight: bold;
+	color: var(--text-color-bright);
+	background: var(--q-primary-selection);
+	.read {
+		background-color: var(--q-primary);
+	}
+}
+.read {
+	width: 8px;
+	height: 100%;
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAAXNSR0IArs4c6QAAABpJREFUGFdjZEACjCD2jh07/nt4eDCCOTAAAEsRBAT/WuYQAAAAAElFTkSuQmCC);
+}
+.bold .read {
+	background-color: var(--q-primary);
 }
 </style>
