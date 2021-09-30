@@ -2,7 +2,7 @@
 .container
 	.zag Входящие
 	.gridtotal(:class="{ full : grid.fullscreen }")
-		.sidebar(v-show="grid.sidebar")
+		.sidebar(v-if="grid.sidebar").gt-sm
 			Aggregates(:data="aggregateData")
 		.main(:class="{ 'fill' : !grid.sidebar }")
 			GridTable(v-if="!grid.lenta" :columns="columns" :colData="colData" :rows="filteredRows" :total="items.length" :shown="filteredRows.length" )
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { ref, computed, provide } from 'vue'
+import { ref, computed, provide, watchEffect } from 'vue'
 import { useGrid } from '@/stores/grid'
 import { items } from '@/stores/data'
 import GridTable from '@/components/common/GridTable.vue'
@@ -163,6 +163,12 @@ export default {
 			grid.selected = false
 		}
 
+		watchEffect( () => {
+			if (window.innerWidth < 1024) {
+				grid.sidebar = false
+			}
+		})
+
 		return {
 			// reset,
 			colData,
@@ -195,6 +201,9 @@ export default {
 	grid-template-columns: 260px auto;
 	grid-gap: 0rem 0.5rem;
 	background: var(--main-bg);
+	@media screen and (max-width: 1023px) {
+		grid-template-columns: 1fr;
+	}
 	&.full {
 		position: fixed;
 		top: 0;

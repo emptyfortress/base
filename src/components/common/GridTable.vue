@@ -32,12 +32,12 @@
 			.ld
 				q-linear-progress(indeterminate)
 		template(v-slot:body="props")
-			q-tr(:props="props" :key="props.row.id" :class="{ 'bold' : props.row.unread }")
+			q-tr(:props="props" :key="props.row.id" :class="rowClass(props.row)")
 				q-td(key="read" :class="{ 'unread' : props.row.unread }" @click="toggle(props.row.id)").small
 				q-td(auto-width)
 					q-checkbox(v-model="props.row.selected" :val="props.row.id")
 				q-td(v-for="col in props.cols" :key="col.name") {{ props.row[col.name] }}
-		template(v-slot:top)
+		template(v-slot:top).gt-sm
 			Toolbar(:total="total" :shown="shown" @readAll="readAll" @toggleLoad="loading = !loading")
 		template(v-slot:bottom v-if="selected.length")
 			Total(:selected="selected.length" @clear="clearSelected")
@@ -139,7 +139,15 @@ export default {
 			return false
 		}
 
+		const rowClass = (row) => {
+			if (row.unread && row.selected) return 'both'
+			else if (row.selected) return 'bg-primary-selection'
+			else if (row.unread) return 'bold'
+			else return ''
+		}
+
 		return {
+			rowClass,
 			pagination,
 			all,
 			selected,
@@ -177,13 +185,15 @@ td.small {
 		background-color: var(--q-primary);
 	}
 }
-.q-table tbody td:after {
-	background: var(--q-primary-lighten-1);
-	opacity: 0.15;
-}
 .bold {
 	font-weight: bold;
 	color: var(--text-color-bright);
+}
+
+.both {
+	font-weight: bold;
+	color: var(--text-color-bright);
+	background: var(--q-primary-selection);
 }
 .hov {
 	position: sticky;

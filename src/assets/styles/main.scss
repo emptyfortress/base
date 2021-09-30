@@ -51,6 +51,9 @@ a:hover:not(.q-link) {
 		height: 32px !important;
 	}
 }
+.q-table tbody tr.both td::after {
+	background: #ccc;
+}
 
 // q-markup-table style - this is simple table
 .q-markup-table .q-table {
@@ -230,6 +233,7 @@ a:hover:not(.q-link) {
 	}
 	tbody td {
 		font-size: 0.9rem;
+		white-space: normal;
 	}
 	body.body--dark & {
 		thead tr th {
