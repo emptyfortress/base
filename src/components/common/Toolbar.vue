@@ -29,17 +29,12 @@
 
 .toolbar.lt-md
 	.left
-		q-btn(flat round dense @click="")
+		q-btn(flat round dense @click="grid.switchAggregat")
 			q-icon(name="mdi-backburger" v-if="grid.sidebar")
 			q-icon(name="mdi-forwardburger" v-else)
 		q-checkbox(dense v-if="lenta" :model-value="grid.selected" @update:model-value="toggleSel")
-		transition(name="slide-left")
-			.total(v-if="shown === total") Всего:
-				span {{ total }}
-			.total(v-else) Показано:
-				span {{ shown }}
-				span.iz ({{ total }})
-				q-btn(unelevated size="12px" @click="showAll").q-ml-sm Показать все
+		.total Всего:
+			span {{ total }}
 	q-space
 	div
 		q-btn-group(unelevated).group
@@ -63,7 +58,12 @@
 						q-item-section(avatar)
 							q-icon(name="mdi-fullscreen-exit")
 						q-item-section Свернуть
-
+.sub.lt-md
+	transition(name="slide-left")
+		.total(v-if="shown !== total") Показано:
+			span {{ shown }}
+			span.iz ({{ total }})
+			q-btn(unelevated size="12px" @click="showAll").q-ml-sm Показать все
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template lang="pug">
-.fixheight
+div
 	.zg
 		.lin(@click="reset") Сбросить все
 		.lin(@click="expand")
