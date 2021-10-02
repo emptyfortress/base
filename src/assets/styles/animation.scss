@@ -51,6 +51,17 @@
 	opacity: 0;
 }
 // this is animation for total in grid **********************************
+.sliding-enter-active,
+.sliding-leave-active {
+	transition: all 0.3s ease-in-out;
+	position: absolute;
+}
+.sliding-enter-from, .sliding-leave-to {
+	opacity: 0;
+	transform: translateY(60px);
+	position: absolute;
+}
+
 .bottom-enter-active,
 .bottom-leave-active {
 	transition: all 0.3s;

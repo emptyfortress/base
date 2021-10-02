@@ -9,7 +9,8 @@
 			.rel(v-else)
 				Toolbar(:total="items.length" :lenta="grid.lenta" :shown="filteredRows.length" @readAll="readAll" @toggleLoad="loading = !loading" @selNone="selectNone" @selAll="selectAll")
 				Lenta(:items="filteredRows" :total="items.length" :loading="loading")
-				.total(v-show="grid.selected != 0")
+			transition(name="sliding")
+				.total(v-if="grid.selected != 0")
 					Total(:selected="selected.length" @clear="clearSelected")
 
 AggDrawer(:show="grid.aggregat")
@@ -168,6 +169,12 @@ export default {
 			filteredRows.value.map((item) => (item.selected = false))
 			grid.selected = false
 		}
+		const showTotal = computed(() => {
+			if (grid.selected != 0) return true
+			else return false
+		})
+
+		const fullwidth = ref(false)
 
 		watchEffect(() => {
 			if (window.innerWidth < 1024) {
@@ -176,7 +183,8 @@ export default {
 		})
 
 		return {
-			// reset,
+			showTotal,
+			fullwidth,
 			colData,
 			grid,
 			columns,
@@ -197,9 +205,18 @@ export default {
 
 <style scoped lang="scss">
 @import '@/assets/styles/theme.scss';
+
 .main {
-	/* height: calc(100vh - 300px); */
-	/* overflow: auto; */
+	position: relative;
+	overflow: hidden;
+}
+.dia {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 50px;
+	background: red;
 }
 
 .gridtotal {
@@ -234,7 +251,9 @@ export default {
 	bottom: 0;
 	left: 0;
 	width: 100%;
+	/* height: 50px; */
 	border-radius: 12px 12px 0px 0px;
+	border-top: 3px solid var(--q-primary);
 	background: #e5e5e5;
 	transition: 0.3s ease all;
 	box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.2);

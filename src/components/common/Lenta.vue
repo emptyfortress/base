@@ -88,6 +88,9 @@ export default {
 	.full & {
 		height: calc(100vh - 42px);
 	}
+	@media screen and (max-width: 1023px) {
+		height: calc(100vh - 150px);
+	}
 }
 .listitem {
 	margin: 0.5rem 0;
