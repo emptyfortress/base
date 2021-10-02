@@ -33,7 +33,7 @@
 		q-btn(unelevated color="dark").q-mr-sm dark
 	p
 		br
-		router-link(to="/") Это пример линка, часто используемый в печати и вeб-дизайне.
+		router-link(to="/") Это пример линка, это пример линка, это пример линка.
 	p
 		q-toggle(v-model="dark" :color="colors.primary")
 
