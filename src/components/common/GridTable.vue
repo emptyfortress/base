@@ -39,8 +39,20 @@
 				q-td(v-for="col in props.cols" :key="col.name") {{ props.row[col.name] }}
 		template(v-slot:top).gt-sm
 			Toolbar(:total="total" :shown="shown" @readAll="readAll" @toggleLoad="loading = !loading")
-		template(v-slot:bottom v-if="selected.length")
-			Total(:selected="selected.length" @clear="clearSelected")
+		//- template(v-slot:bottom v-if="selected.length")
+		//- 	Total(:selected="selected.length" @clear="clearSelected")
+	//- q-dialog(v-model="showTotal" seamless position="bottom")
+		q-card
+			q-linear-progress(:value="1" color="primary")
+			q-card-section(class="row items-center no-wrap")
+				div
+					div(class="text-weight-bold") The Walker
+					div(class="text-grey") Fitz & The Tantrums
+				q-space
+				q-btn(flat round icon="mdi-play")
+				q-btn(flat round icon="mdi-pause")
+				q-btn(flat round icon="mdi-close" v-close-popup)
+
 
 </template>
 
@@ -146,7 +158,13 @@ export default {
 			else return ''
 		}
 
+		const showTotal = computed(() => {
+			if (grid.selected != 0) return true
+			else return false
+		})
+
 		return {
+			showTotal,
 			rowClass,
 			pagination,
 			all,
