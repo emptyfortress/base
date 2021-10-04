@@ -138,8 +138,6 @@ export default {
 		gap: 0.5rem;
 	}
 }
-.status {
-}
 .ld {
 	width: 100%;
 	left: 0;
