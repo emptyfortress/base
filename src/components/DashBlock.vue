@@ -27,8 +27,8 @@ export default {
 .hd {
 	font-size: 1.1rem;
 }
-.q-item .q-item__section--main {
-	/* color: var(--q-link); */
-	color: var(--q-primary-darken-2);
+.q-item__section--main {
+	color: var(--q-link);
+	// color: var(--q-primary-darken-2);
 }
 </style>
