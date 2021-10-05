@@ -13,6 +13,10 @@
 				.total(v-if="grid.selected != 0")
 					Total(:selected="selected.length" @clear="clearSelected")
 
+q-dialog(v-model="showTotal" full-width seamless position="bottom").sm
+	TotalMob(:selected="selected.length" @clear="clearSelected")
+q-dialog(v-model="showTotal" full-width seamless position="bottom").xs
+	TotalMob1(:selected="selected.length" @clear="clearSelected")
 AggDrawer(:show="grid.aggregat")
 
 </template>
@@ -26,6 +30,8 @@ import Toolbar from '@/components/common/Toolbar.vue'
 import Aggregates from '@/components/common/Aggregates.vue'
 import Lenta from '@/components/common/Lenta.vue'
 import Total from '@/components/common/Total.vue'
+import TotalMob from '@/components/common/TotalMob.vue'
+import TotalMob1 from '@/components/common/TotalMob1.vue'
 import AggDrawer from '@/components/common/AggDrawer.vue'
 
 export default {
@@ -35,6 +41,8 @@ export default {
 		Aggregates,
 		Lenta,
 		Total,
+		TotalMob,
+		TotalMob1,
 		AggDrawer,
 	},
 	setup() {
@@ -169,9 +177,9 @@ export default {
 			filteredRows.value.map((item) => (item.selected = false))
 			grid.selected = false
 		}
+
 		const showTotal = computed(() => {
-			if (grid.selected != 0) return true
-			else return false
+			return grid.selected != 0
 		})
 
 		const fullwidth = ref(false)
@@ -179,7 +187,7 @@ export default {
 		watchEffect(() => {
 			if (window.innerWidth < 1024) {
 				grid.sidebar = false
-			}
+			} else return false
 		})
 
 		return {
@@ -209,14 +217,6 @@ export default {
 .main {
 	position: relative;
 	overflow: hidden;
-}
-.dia {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	height: 50px;
-	background: red;
 }
 
 .gridtotal {
@@ -251,7 +251,6 @@ export default {
 	bottom: 0;
 	left: 0;
 	width: 100%;
-	/* height: 50px; */
 	border-radius: 12px 12px 0px 0px;
 	border-top: 3px solid var(--q-primary);
 	background: #e5e5e5;
@@ -260,13 +259,21 @@ export default {
 	body.body--dark & {
 		background: var(--my-color-step-150);
 	}
+	@media screen and (max-width: 1023px) {
+		display: none;
+	}
 }
+.dia {
+	background: #e5e5e5;
+	box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.2);
+	body.body--dark & {
+		background: var(--my-color-step-150);
+	}
+}
+
 .temp {
 	width: 220px;
-	height: 100vh;
-	position: fixed;
-	left: 0;
-	top: 0;
-	background: green;
+	height: 100px;
+	background: red;
 }
 </style>
