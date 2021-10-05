@@ -212,3 +212,10 @@ body.body--dark {
 .bg-primary-lighten-3 {
 	background: var(--q-primary-lighten-3);
 }
+.q-btn:focus {
+	outline: 2px solid orange !important;
+	outline-offset: 2px;
+}
+.q-btn:active {
+	outline: none !important;
+}
