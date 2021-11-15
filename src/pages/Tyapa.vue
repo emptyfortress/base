@@ -11,6 +11,7 @@
 	img(src="/stand3.png")
 	img(src="/sit1.png")
 	img(src="/sit2.png")
+
 </template>
 
 <script>
