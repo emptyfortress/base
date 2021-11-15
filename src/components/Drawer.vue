@@ -33,11 +33,12 @@ export default {
 			// { id: 1, title: 'Цвета', icon: 'mdi-palette', url: '/' },
 			// { id: 2, title: 'Главная', icon: 'mdi-home-roof', url: '/dash' },
 			// { id: 3, title: 'Документ', icon: 'mdi-text-box-outline', url: '/doc' },
+			// {id: 4, title: 'Грид', icon: 'mdi-file-table-box-outline', url: '/grid',},
 			{
-				id: 4,
-				title: 'Грид',
-				icon: 'mdi-file-table-box-outline',
-				url: '/grid',
+				id: 5,
+				title: 'Тяпа',
+				icon: 'mdi-dog-side',
+				url: '/tyapa',
 			},
 		]
 		const lib = [

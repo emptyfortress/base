@@ -7,7 +7,13 @@ export const router = createRouter({
 	routes: [
 		{
 			path: '/',
-			redirect: '/grid'
+			redirect: '/tyapa'
+		},
+		{
+			path: '/tyapa',
+			name: 'tyapa',
+			component: () => import('@/pages/Tyapa.vue'),
+			meta: { transition: 'slide-left' },
 		},
 		{
 			path: '/doc',
