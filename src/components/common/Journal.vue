@@ -54,8 +54,8 @@ export default {
 		const query = ref('')
 		const checked = ref([])
 
-		const filteredItems = computed( () => {
-			return props.data.filter( row => {
+		const filteredItems = computed(() => {
+			return props.data.filter((row) => {
 				if (query.value) {
 					return row.toLowerCase().includes(query.value.toLowerCase())
 				}
@@ -79,13 +79,16 @@ export default {
 			if (checked.value.length === 0) {
 				grid.clearCheckedColumn(props.col)
 			} else {
-				grid.addChecked(props.col, checked.value )
+				grid.addChecked(props.col, checked.value)
 			}
 			context.emit('close')
 		}
 
 		watchEffect(() => {
-			if (checked.value.length < props.data.length && checked.value.length !== 0) {
+			if (
+				checked.value.length < props.data.length &&
+				checked.value.length !== 0
+			) {
 				all.value = null
 			}
 			if (checked.value.length === props.data.length) {
@@ -95,10 +98,10 @@ export default {
 				all.value = false
 			}
 			if (grid.reset) {
-				checked.value = [] 
-				setTimeout( () => {
+				checked.value = []
+				setTimeout(() => {
 					grid.reset = false
-				}, 1000 )
+				}, 1000)
 			}
 		})
 
@@ -110,15 +113,12 @@ export default {
 			query,
 			checked,
 			all,
-			
 		}
 	},
-
 }
 </script>
 
 <style scoped lang="scss">
-
 .q-list {
 	max-height: 300px;
 	overflow: auto;
@@ -130,7 +130,7 @@ export default {
 	}
 }
 .empty {
-	padding: .7rem 1rem;
+	padding: 0.7rem 1rem;
 	color: grey;
 	font-size: 0.8rem;
 	min-height: 70px;
@@ -138,8 +138,8 @@ export default {
 	justify-content: center;
 	align-items: center;
 	.q-icon {
-		font-size: 1.0rem;
-		margin-right: .5rem;
+		font-size: 1rem;
+		margin-right: 0.5rem;
 	}
 }
 </style>

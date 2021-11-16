@@ -28,6 +28,11 @@ export const router = createRouter({
 			component: () => import('@/pages/Grid.vue'),
 		},
 		{
+			path: '/search',
+			name: 'search',
+			component: () => import('@/components/Search.vue'),
+		},
+		{
 			path: '/btn',
 			name: 'btn',
 			component: () => import('@/components/common/Btn.vue'),

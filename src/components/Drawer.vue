@@ -39,6 +39,12 @@ export default {
 				icon: 'mdi-file-table-box-outline',
 				url: '/grid',
 			},
+			{
+				id: 5,
+				title: 'Сервис поиска',
+				icon: 'mdi-briefcase-search-outline',
+				url: '/search',
+			},
 		]
 		const lib = [
 			{ id: 1, title: 'Кнопки', icon: 'mdi-puzzle-outline', url: '/btn' },
