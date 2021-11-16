@@ -3,36 +3,54 @@
 	.zag.q-mb-lg Настройка поисков и представлений
 	q-splitter(v-model="splitterModel" :limits="[0, 100]" :style="hei")
 		template(v-slot:before)
-			.list
+			q-scroll-area.list
 				q-form.quick
 					q-card-section.q-pt-xs
-						q-input(dense
-							v-model="query"
-							autofocus
-							clearable
-							placeholder="filter"
-							).query
-							template(v-slot:prepend)
-								q-icon(name="mdi-magnify")
-				q-expansion-item(:model-value="temp" icon="mdi-star-outline" label="Мои поиски" )
+						.fle
+							q-input(dense
+								v-model="query"
+								autofocus
+								clearable
+								placeholder="filter"
+								).query
+								template(v-slot:prepend)
+									q-icon(name="mdi-magnify")
+							q-btn(round unelevated dense icon="mdi-plus-circle-outline")
+				q-expansion-item(:model-value="firstItem" header-class="text-bold")
+					template(v-slot:header)
+						q-item-section(avatar)
+							q-icon(name="mdi-star-outline")
+						q-item-section Мои поиски
+						q-item-section(side) ({{mySearch.length}})
+
 					q-list(dense).q-mb-lg
-						q-item(v-for="(item, index) in filteredItems" :key="index" tag="label" v-ripple ).q-pa-none
-							//- q-item-section(side top)
-							//- 	q-checkbox(v-model="checked" :val="dat")
+						q-item(v-for="item in mySearch" :key="item.id" tag="label" v-ripple :active="item.active" active-class="selected" @click.prevent="setActive(item.id)" )
+							q-item-section(side top)
+								q-btn(dense unelevated round icon="mdi-star" size="10px" @click="setStar(item.id)")
 							q-item-section
 								q-item-label
 									WordHighlighter(:query="query") {{ item.label }}
-						//- q-item(tag="label" v-ripple v-for="item in mySearch")
-						//- 	q-item-section
-						//- 		q-item-label {{ item.label }}
 
-				q-expansion-item( icon="mdi-cloud-search-outline" label="Общие поиски" )
-					q-card laksjgl
+
+				q-expansion-item(:model-value="secondItem" header-class="text-bold")
+					template(v-slot:header)
+						q-item-section(avatar)
+							q-icon(name="mdi-cloud-search-outline")
+						q-item-section Другие поиски
+						q-item-section(side) ({{otherSearch.length}})
+					q-list(dense).q-mb-lg
+						q-item(v-for="item in otherSearch" :key="item.id" tag="label" v-ripple :active="item.active" active-class="selected" @click.prevent="setActive(item.id)" )
+							q-item-section(side top)
+								q-btn(dense unelevated round icon="mdi-star-outline" size="10px" @click="setStar(item.id)")
+							q-item-section
+								q-item-label
+									WordHighlighter(:query="query") {{ item.label }}
 		template(v-slot:after)
 			.main
 				q-btn(flat round dense @click="switchSidebar")
 					q-icon(name="mdi-forwardburger" v-if="splitterModel === 0")
 					q-icon(name="mdi-backburger" v-else)
+				.zg {{ sel.label }}
 </template>
 
 <script>
@@ -44,7 +62,8 @@ export default {
 		WordHighlighter,
 	},
 	setup() {
-		const temp = ref(true)
+		const firstItem = ref(true)
+		const secondItem = ref(false)
 		const sidebar = ref(true)
 		const query = ref('')
 		const splitterModel = ref(30)
@@ -57,23 +76,61 @@ export default {
 			} else splitterModel.value = 30
 		}
 
+		const setStar = (e) => {
+			allSearch[e].star = !allSearch[e].star
+		}
+
+		const setActive = (e) => {
+			allSearch.map((item) => {
+				item.active = false
+			})
+			allSearch[e].active = true
+		}
+
 		const filteredItems = computed(() => {
-			return mySearch.filter((row) => {
+			return allSearch.filter((row) => {
 				if (query.value) {
 					return row.label.toLowerCase().includes(query.value.toLowerCase())
 				}
-				return mySearch
+				return allSearch
 			})
 		})
 
-		const mySearch = [
-			{ id: 0, label: 'Договора с Алросой' },
-			{ id: 1, label: 'Документы к конференции' },
-			{ id: 2, label: 'Мои просроченные задания' },
-			{ id: 3, label: 'Отчет за 3 квартал' },
-			{ id: 4, label: 'Отчет за 2 квартал' },
-			{ id: 5, label: 'Я - автор' },
-		]
+		const mySearch = computed(() => {
+			return filteredItems.value.filter((item) => {
+				return item.star
+			})
+		})
+		const otherSearch = computed(() => {
+			return filteredItems.value.filter((item) => {
+				return !item.star
+			})
+		})
+		const sel = computed(() => {
+			return allSearch.filter( item => item.active)[0]
+		})
+
+
+		const allSearch = reactive([
+			{ id: 0, star: true, active: false, label: 'Договора с Алросой',},
+			{ id: 1, star: true, active: false, label: 'Документы к конференции' },
+			{ id: 2, star: true, active: false, label: 'Мои просроченные задания' },
+			{ id: 3, star: true, active: false, label: 'Отчет за 3 квартал' },
+			{ id: 4, star: true, active: false, label: 'Отчет за 2 квартал' },
+			{ id: 5, star: true, active: false, label: 'Я - автор' },
+			{ id: 6, star: false, active: false, label: 'Я - исполнитель' },
+			{ id: 7, star: false, active: false, label: 'Договора свыше 100 т.' },
+			{ id: 8, star: false, active: false, label: 'Договора до 100 т.' },
+			{ id: 9, star: false, active: false, label: 'Проект 1' },
+			{ id: 10, star: false, active: false, label: 'Проект 2' },
+			{ id: 11, star: false, active: false, label: 'Пример поиска 1' },
+			{ id: 12, star: false, active: false, label: 'Пример поиска 2' },
+			{ id: 13, star: false, active: false, label: 'Пример поиска 3' },
+			{ id: 14, star: false, active: false, label: 'Пример поиска 4' },
+			{ id: 15, star: false, active: false, label: 'Пример поиска 5' },
+			{ id: 16, star: false, active: false, label: 'Пример поиска 6' },
+			{ id: 17, star: false, active: false, label: 'Пример поиска 7' },
+		])
 
 		return {
 			switchSidebar,
@@ -81,9 +138,14 @@ export default {
 			hei,
 			sidebar,
 			query,
-			temp,
+			firstItem,
+			secondItem,
 			mySearch,
+			otherSearch,
 			filteredItems,
+			setActive,
+			setStar,
+			sel,
 		}
 	},
 }
@@ -96,6 +158,7 @@ export default {
 	background: var(--bg-drawer);
 	padding: 0.5rem;
 	margin-right: 0.5rem;
+	height: calc(100vh - 200px);
 }
 .main {
 	border: 1px solid var(--my-border-color);
@@ -105,9 +168,21 @@ export default {
 }
 .query {
 	font-size: 1rem;
+	flex-grow: 1;
 }
 .quick .q-field--dense .q-field__control,
 .q-field--dense .q-field__marginal {
 	height: 28px !important;
+}
+.selected {
+	color: var(--q-primary-darken-2);
+	background: var(--q-selection);
+	.q-btn {
+		color: var(--q-primary-darken-2);
+	}
+}
+.fle {
+	display: flex;
+	gap: 1rem;
 }
 </style>
