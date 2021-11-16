@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, watch } from 'vue'
 import WordHighlighter from 'vue-word-highlighter'
 
 export default {
@@ -107,12 +107,17 @@ export default {
 			})
 		})
 		const sel = computed(() => {
-			return allSearch.filter( item => item.active)[0]
+			return allSearch.filter((item) => item.active)[0]
 		})
 
+		watch(query, (newv) => {
+			if (newv.length > 0) {
+				secondItem.value = true
+			}
+		})
 
 		const allSearch = reactive([
-			{ id: 0, star: true, active: false, label: 'Договора с Алросой',},
+			{ id: 0, star: true, active: true, label: 'Договора с Алросой' },
 			{ id: 1, star: true, active: false, label: 'Документы к конференции' },
 			{ id: 2, star: true, active: false, label: 'Мои просроченные задания' },
 			{ id: 3, star: true, active: false, label: 'Отчет за 3 квартал' },
