@@ -50,9 +50,9 @@
 					q-btn(flat round dense @click="switchSidebar")
 						q-icon(name="mdi-forwardburger" v-if="splitterModel === 0")
 						q-icon(name="mdi-backburger" v-else)
-					#zg(contenteditable @blur="test") {{ sel.label }}
+					#zg(contenteditable @blur="update") {{ sel.label }}
 					.btngroup
-						q-btn(outline size="10px" color="primary").q-mr-sm Дублировать
+						q-btn(outline size="10px" color="primary" @click="duble").q-mr-sm Дублировать
 						q-btn(round unelevated color="primary" dense icon="mdi-plus" size="sm" @click="addSearch")
 </template>
 
@@ -84,11 +84,25 @@ export default {
 			allSearch[index].star = !allSearch[index].star
 		}
 
+		const duble = () => {
+			const item = allSearch.filter((item) => item.active === true)[0]
+			const oldlabel = item.label
+			const newItem = {}
+			newItem.label = oldlabel + ' (копия)'
+			newItem.star = true
+			newItem.active = true
+			newItem.id = allSearch.length + 2
+			allSearch.map((item) => (item.active = false))
+			allSearch.push(newItem)
+			document.getElementById('zg').innerHTML = newItem.label
+		}
+
 		const setActive = (e) => {
+			const index = allSearch.findIndex((item) => item.id === e)
 			allSearch.map((item) => {
 				item.active = false
 			})
-			allSearch[e].active = true
+			allSearch[index].active = true
 		}
 
 		const filteredItems = computed(() => {
@@ -125,8 +139,11 @@ export default {
 			} else return
 		})
 
-		const test = () => {
-			console.log('fuck')
+		const update = () => {
+			const zag = document.getElementById('zg')
+			const text = zag.innerHTML
+			const index = allSearch.findIndex((item) => item.active)
+			allSearch[index].label = text
 		}
 
 		const addSearch = () => {
@@ -175,7 +192,8 @@ export default {
 			setStar,
 			sel,
 			addSearch,
-			test,
+			update,
+			duble,
 			clearFilter,
 		}
 	},
