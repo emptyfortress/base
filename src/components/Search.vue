@@ -6,17 +6,16 @@
 			q-scroll-area.list
 				q-form.quick
 					q-card-section.q-pt-xs
-						.fle
-							q-input(dense
-								v-model="query"
-								autofocus
-								clearable
-								placeholder="filter"
-								).query
-								template(v-slot:prepend)
-									q-icon(name="mdi-magnify")
-							q-btn(round unelevated dense icon="mdi-plus-circle-outline")
-				q-expansion-item(:model-value="firstItem" header-class="text-bold")
+						q-input(dense
+							v-model="query"
+							autofocus
+							clearable
+							@clear="clearFilter"
+							placeholder="filter"
+							).query
+							template(v-slot:prepend)
+								q-icon(name="mdi-magnify")
+				q-expansion-item(v-model="firstItem" header-class="text-bold")
 					template(v-slot:header)
 						q-item-section(avatar)
 							q-icon(name="mdi-star-outline")
@@ -26,13 +25,13 @@
 					q-list(dense).q-mb-lg
 						q-item(v-for="item in mySearch" :key="item.id" tag="label" v-ripple :active="item.active" active-class="selected" @click.prevent="setActive(item.id)" )
 							q-item-section(side top)
-								q-btn(dense unelevated round icon="mdi-star" size="10px" @click="setStar(item.id)")
+								q-btn(dense unelevated round icon="mdi-star" size="10px" @click.stop="setStar(item.id)")
 							q-item-section
 								q-item-label
 									WordHighlighter(:query="query") {{ item.label }}
 
 
-				q-expansion-item(:model-value="secondItem" header-class="text-bold")
+				q-expansion-item(v-model="secondItem" header-class="text-bold")
 					template(v-slot:header)
 						q-item-section(avatar)
 							q-icon(name="mdi-cloud-search-outline")
@@ -41,16 +40,20 @@
 					q-list(dense).q-mb-lg
 						q-item(v-for="item in otherSearch" :key="item.id" tag="label" v-ripple :active="item.active" active-class="selected" @click.prevent="setActive(item.id)" )
 							q-item-section(side top)
-								q-btn(dense unelevated round icon="mdi-star-outline" size="10px" @click="setStar(item.id)")
+								q-btn(dense unelevated round icon="mdi-star-outline" size="10px" @click.stop="setStar(item.id)")
 							q-item-section
 								q-item-label
 									WordHighlighter(:query="query") {{ item.label }}
 		template(v-slot:after)
 			.main
-				q-btn(flat round dense @click="switchSidebar")
-					q-icon(name="mdi-forwardburger" v-if="splitterModel === 0")
-					q-icon(name="mdi-backburger" v-else)
-				.zg {{ sel.label }}
+				.row.items-center.justify-between
+					q-btn(flat round dense @click="switchSidebar")
+						q-icon(name="mdi-forwardburger" v-if="splitterModel === 0")
+						q-icon(name="mdi-backburger" v-else)
+					#zg(contenteditable @blur="test") {{ sel.label }}
+					.btngroup
+						q-btn(outline size="10px" color="primary").q-mr-sm Дублировать
+						q-btn(round unelevated color="primary" dense icon="mdi-plus" size="sm" @click="addSearch")
 </template>
 
 <script>
@@ -77,7 +80,8 @@ export default {
 		}
 
 		const setStar = (e) => {
-			allSearch[e].star = !allSearch[e].star
+			const index = allSearch.findIndex((item) => item.id === e)
+			allSearch[index].star = !allSearch[index].star
 		}
 
 		const setActive = (e) => {
@@ -110,11 +114,30 @@ export default {
 			return allSearch.filter((item) => item.active)[0]
 		})
 
-		watch(query, (newv) => {
-			if (newv.length > 0) {
+		const clearFilter = () => {
+			query.value = ''
+		}
+
+		watch(query, (val) => {
+			if (val !== null) {
 				secondItem.value = true
-			}
+				firstItem.value = true
+			} else return
 		})
+
+		const test = () => {
+			console.log('fuck')
+		}
+
+		const addSearch = () => {
+			allSearch.map((item) => (item.active = false))
+			let item = {}
+			item.id = allSearch.length + 2
+			item.star = true
+			item.active = true
+			item.label = 'Новый поиск'
+			allSearch.push(item)
+		}
 
 		const allSearch = reactive([
 			{ id: 0, star: true, active: true, label: 'Договора с Алросой' },
@@ -151,6 +174,9 @@ export default {
 			setActive,
 			setStar,
 			sel,
+			addSearch,
+			test,
+			clearFilter,
 		}
 	},
 }
@@ -170,6 +196,7 @@ export default {
 	margin-left: 0.5rem;
 	height: 200px;
 	background: var(--bg-card);
+	padding: 0.5rem;
 }
 .query {
 	font-size: 1rem;
@@ -189,5 +216,20 @@ export default {
 .fle {
 	display: flex;
 	gap: 1rem;
+}
+#zg {
+	font-size: 1rem;
+	text-transform: uppercase;
+	font-weight: 600;
+	padding: 0.5rem;
+	padding-bottom: 0;
+	&:hover {
+		background: var(--bg-light);
+	}
+	&:focus {
+		outline: none;
+		border-bottom: 1px dotted var(--q-primary);
+		background: var(--bg-light);
+	}
 }
 </style>
