@@ -54,15 +54,18 @@
 					.btngroup
 						q-btn(outline size="10px" color="primary" @click="duble").q-mr-sm Дублировать
 						q-btn(round unelevated color="primary" dense icon="mdi-plus" size="sm" @click="addSearch")
+				SearchForm
 </template>
 
 <script>
 import { ref, reactive, computed, watch } from 'vue'
 import WordHighlighter from 'vue-word-highlighter'
+import SearchForm from '@/components/SearchForm.vue'
 
 export default {
 	components: {
 		WordHighlighter,
+		SearchForm,
 	},
 	setup() {
 		const firstItem = ref(true)
@@ -212,9 +215,9 @@ export default {
 .main {
 	border: 1px solid var(--my-border-color);
 	margin-left: 0.5rem;
-	height: 200px;
 	background: var(--bg-card);
-	padding: 0.5rem;
+	padding: 1rem;
+	padding-top: 0.25rem;
 }
 .query {
 	font-size: 1rem;
