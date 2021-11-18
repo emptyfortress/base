@@ -52,8 +52,8 @@
 						q-icon(name="mdi-backburger" v-else)
 					#zg(contenteditable @blur="update") {{ sel.label }}
 					.btngroup
-						q-btn(outline size="10px" color="primary" @click="duble").q-mr-sm Дублировать
-						q-btn(round unelevated color="primary" dense icon="mdi-plus" size="sm" @click="addSearch")
+						q-btn(outline size="10px" color="primary" @click="duble").q-mr-xs Дублировать
+						q-icon(name="mdi-plus" size="sm" @click="addSearch" color="primary")
 				SearchForm
 </template>
 

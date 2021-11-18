@@ -3,7 +3,7 @@ br
 draggable(:list="list" item-key="id" @start="drag = true" @end="drag = false")
 	template(#item="{ element }")
 		div
-			QueryItem(:item="element")
+			QueryItem(:item="element" @invert="invert(element)" @add="add(element)")
 
 </template>
 
@@ -25,9 +25,29 @@ export default {
 
 		const drag = ref(false)
 
+		const itemIndex = (e) => {
+			return list.findIndex((item) => item.id === e.id)
+		}
+
+		const add = (e) => {
+			let index = itemIndex(e)
+			console.log(index)
+			let newItem = {}
+			newItem.id = list.length
+			newItem.and = true
+			list.splice(index + 1, 0, newItem)
+		}
+
+		const invert = (e) => {
+			let index = itemIndex(e)
+			list[index].and = !list[index].and
+		}
+
 		return {
 			drag,
 			list,
+			invert,
+			add,
 		}
 	},
 }
