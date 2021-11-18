@@ -53,7 +53,8 @@
 					#zg(contenteditable @blur="update") {{ sel.label }}
 					.btngroup
 						q-btn(outline size="10px" color="primary" @click="duble").q-mr-xs Дублировать
-						q-icon(name="mdi-plus" size="sm" @click="addSearch" color="primary")
+						q-btn(round flat icon="mdi-plus" dense color="primary")
+				#comment(contenteditable @blur="updatecomment") {{sel.comment}}
 				SearchForm
 </template>
 
@@ -148,6 +149,13 @@ export default {
 			const index = allSearch.findIndex((item) => item.active)
 			allSearch[index].label = text
 		}
+		const updatecomment = () => {
+			const comm = document.getElementById('comment')
+			const text = comm.innerHTML
+			const index = allSearch.findIndex((item) => item.active)
+			allSearch[index].comment = text
+			console.log(text)
+		}
 
 		const addSearch = () => {
 			allSearch.map((item) => (item.active = false))
@@ -160,24 +168,126 @@ export default {
 		}
 
 		const allSearch = reactive([
-			{ id: 0, star: true, active: true, label: 'Договора с Алросой' },
-			{ id: 1, star: true, active: false, label: 'Документы к конференции' },
-			{ id: 2, star: true, active: false, label: 'Мои просроченные задания' },
-			{ id: 3, star: true, active: false, label: 'Отчет за 3 квартал' },
-			{ id: 4, star: true, active: false, label: 'Отчет за 2 квартал' },
-			{ id: 5, star: true, active: false, label: 'Я - автор' },
-			{ id: 6, star: false, active: false, label: 'Я - исполнитель' },
-			{ id: 7, star: false, active: false, label: 'Договора свыше 100 т.' },
-			{ id: 8, star: false, active: false, label: 'Договора до 100 т.' },
-			{ id: 9, star: false, active: false, label: 'Проект 1' },
-			{ id: 10, star: false, active: false, label: 'Проект 2' },
-			{ id: 11, star: false, active: false, label: 'Пример поиска 1' },
-			{ id: 12, star: false, active: false, label: 'Пример поиска 2' },
-			{ id: 13, star: false, active: false, label: 'Пример поиска 3' },
-			{ id: 14, star: false, active: false, label: 'Пример поиска 4' },
-			{ id: 15, star: false, active: false, label: 'Пример поиска 5' },
-			{ id: 16, star: false, active: false, label: 'Пример поиска 6' },
-			{ id: 17, star: false, active: false, label: 'Пример поиска 7' },
+			{
+				id: 0,
+				comment: 'Введите комментарий к поиску',
+				star: true,
+				active: true,
+				label: 'Договора с Алросой',
+			},
+			{
+				id: 1,
+				comment: 'Введите комментарий к поиску',
+				star: true,
+				active: false,
+				label: 'Документы к конференции',
+			},
+			{
+				id: 2,
+				comment: 'Введите комментарий к поиску',
+				star: true,
+				active: false,
+				label: 'Мои просроченные задания',
+			},
+			{
+				id: 3,
+				comment: 'Введите комментарий к поиску',
+				star: true,
+				active: false,
+				label: 'Отчет за 3 квартал',
+			},
+			{
+				id: 4,
+				comment: 'Введите комментарий к поиску',
+				star: true,
+				active: false,
+				label: 'Отчет за 2 квартал',
+			},
+			{ id: 5, comment: '', star: true, active: false, label: 'Я - автор' },
+			{
+				id: 6,
+				comment: 'Введите комментарий к поиску',
+				star: false,
+				active: false,
+				label: 'Я - исполнитель',
+			},
+			{
+				id: 7,
+				comment: 'Введите комментарий к поиску',
+				star: false,
+				active: false,
+				label: 'Договора свыше 100 т.',
+			},
+			{
+				id: 8,
+				comment: 'Введите комментарий к поиску',
+				star: false,
+				active: false,
+				label: 'Договора до 100 т.',
+			},
+			{
+				id: 9,
+				comment: 'Введите комментарий к поиску',
+				star: false,
+				active: false,
+				label: 'Проект 1',
+			},
+			{
+				id: 10,
+				comment: 'Введите комментарий к поиску',
+				star: false,
+				active: false,
+				label: 'Проект 2',
+			},
+			{
+				id: 11,
+				comment: 'Введите комментарий к поиску',
+				star: false,
+				active: false,
+				label: 'Пример поиска 1',
+			},
+			{
+				id: 12,
+				comment: 'Введите комментарий к поиску',
+				star: false,
+				active: false,
+				label: 'Пример поиска 2',
+			},
+			{
+				id: 13,
+				comment: 'Введите комментарий к поиску',
+				star: false,
+				active: false,
+				label: 'Пример поиска 3',
+			},
+			{
+				id: 14,
+				comment: 'Введите комментарий к поиску',
+				star: false,
+				active: false,
+				label: 'Пример поиска 4',
+			},
+			{
+				id: 15,
+				comment: 'Введите комментарий к поиску',
+				star: false,
+				active: false,
+				label: 'Пример поиска 5',
+			},
+			{
+				id: 16,
+				comment: 'Введите комментарий к поиску',
+				star: false,
+				active: false,
+				label: 'Пример поиска 6',
+			},
+			{
+				id: 17,
+				comment: 'Введите комментарий к поиску',
+				star: false,
+				active: false,
+				label: 'Пример поиска 7',
+			},
 		])
 
 		return {
@@ -196,6 +306,7 @@ export default {
 			sel,
 			addSearch,
 			update,
+			updatecomment,
 			duble,
 			clearFilter,
 		}
@@ -242,6 +353,23 @@ export default {
 	font-size: 1rem;
 	text-transform: uppercase;
 	font-weight: 600;
+	padding: 0.5rem;
+	padding-bottom: 0;
+	&:hover {
+		background: var(--bg-light);
+	}
+	&:focus {
+		outline: none;
+		border-bottom: 1px dotted var(--q-primary);
+		background: var(--bg-light);
+	}
+}
+.btngroup {
+	margin-right: -0.5rem;
+}
+#comment {
+	margin-top: 1rem;
+	font-size: 0.9rem;
 	padding: 0.5rem;
 	padding-bottom: 0;
 	&:hover {

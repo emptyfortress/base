@@ -1,4 +1,5 @@
 <template lang="pug">
+.divide
 .group
 	.scope(@click="$emit('invert')" :class="setClass")
 		.add(@click.stop="$emit('add')")
@@ -8,7 +9,6 @@
 		q-btn(round dense unelevated icon="mdi-nut")
 		q-btn(round dense unelevated icon="mdi-trash-can-outline")
 	//- .addgroup
-.divide
 
 </template>
 

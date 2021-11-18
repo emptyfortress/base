@@ -1,5 +1,4 @@
 <template lang="pug">
-br
 draggable(:list="list" item-key="id" @start="drag = true" @end="drag = false")
 	template(#item="{ element }")
 		div
@@ -18,10 +17,7 @@ export default {
 		QueryItem,
 	},
 	setup() {
-		const list = reactive([
-			{ id: 0, and: true },
-			{ id: 1, and: false },
-		])
+		const list = reactive([{ id: 0, and: true }])
 
 		const drag = ref(false)
 
