@@ -41,6 +41,9 @@ export default {
 .all {
 	padding-left: 0.7rem;
 }
+.fuck {
+	margin-left: 110px;
+}
 .group {
 	height: 60px;
 	width: 100%;

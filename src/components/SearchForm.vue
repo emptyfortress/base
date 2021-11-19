@@ -1,10 +1,10 @@
 <template lang="pug">
-draggable(:list="list" item-key="id" @start="begin" @end="end" )
+draggable(:list="list" item-key="id" @start="begin" @end="end")
 	template(#item="{ element }")
 		div
 			QueryItem(:item="element" @invert="invert(element)" @add="add(element)")
 
-#demo demo
+//- #demo(draggable="true" v-dragged="onDragged")
 </template>
 
 <script>
@@ -40,12 +40,26 @@ export default {
 			list[index].and = !list[index].and
 		}
 
-		const begin = () => {
+		let xStart = 0
+		let distance = 0
+
+		const begin = (e) => {
 			drag.value = true
+			xStart = e.originalEvent.clientX
+			e.item.addEventListener('drag', (a) => {
+				distance = a.clientX - xStart
+			})
 		}
-		const end = () => {
+		const end = (e) => {
 			drag.value = false
-			console.log('end')
+			let elem = e.item.querySelector('.all')
+			e.item.removeEventListener('drag', () => {})
+			if (distance > 100) {
+				elem.classList.add('fuck')
+			}
+			if (distance < -50) {
+				elem.classList.remove('fuck')
+			}
 		}
 
 		return {
@@ -71,5 +85,10 @@ export default {
 	justify-content: flex-start;
 	align-items: center;
 	background: var(--bg-drawer);
+}
+#demo {
+	width: 200px;
+	height: 200px;
+	background: pink;
 }
 </style>
