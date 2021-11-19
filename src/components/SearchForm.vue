@@ -1,9 +1,10 @@
 <template lang="pug">
-draggable(:list="list" item-key="id" @start="drag = true" @end="drag = false")
+draggable(:list="list" item-key="id" @start="begin" @end="end" )
 	template(#item="{ element }")
 		div
 			QueryItem(:item="element" @invert="invert(element)" @add="add(element)")
 
+#demo demo
 </template>
 
 <script>
@@ -39,8 +40,18 @@ export default {
 			list[index].and = !list[index].and
 		}
 
+		const begin = () => {
+			drag.value = true
+		}
+		const end = () => {
+			drag.value = false
+			console.log('end')
+		}
+
 		return {
 			drag,
+			begin,
+			end,
 			list,
 			invert,
 			add,

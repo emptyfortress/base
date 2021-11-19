@@ -1,14 +1,15 @@
 <template lang="pug">
-.divide
-.group
-	.scope(@click="$emit('invert')" :class="setClass")
-		.add(@click.stop="$emit('add')")
-	.cond {{ item.id }}
-	.btngr
-		q-btn(round dense unelevated icon="mdi-content-copy")
-		q-btn(round dense unelevated icon="mdi-nut")
-		q-btn(round dense unelevated icon="mdi-trash-can-outline")
-	//- .addgroup
+.all
+	.divide
+	.group
+		.scope(@click="$emit('invert')" :class="setClass")
+			.add(@click.stop="$emit('add')")
+		.cond {{ item.id }}
+		.btngr
+			q-btn(round dense unelevated icon="mdi-content-copy")
+			q-btn(round dense unelevated icon="mdi-nut")
+			q-btn(round dense unelevated icon="mdi-trash-can-outline")
+		//- .addgroup
 
 </template>
 
@@ -37,6 +38,9 @@ export default {
 
 <style scoped lang="scss">
 @import '@/assets/styles/theme.scss';
+.all {
+	padding-left: 0.7rem;
+}
 .group {
 	height: 60px;
 	width: 100%;
@@ -62,7 +66,7 @@ export default {
 	}
 }
 .divide {
-	height: 10px;
+	height: 8px;
 	width: 3px;
 	background: #ccc;
 	margin-left: 48px;
@@ -86,12 +90,12 @@ export default {
 .add {
 	position: absolute;
 	left: -0.75rem;
-	top: 5px;
+	top: 15px;
 	width: 1.5rem;
 	height: 1.5rem;
 	border-radius: 50%;
 	background: #fff;
-	box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
+	box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.7);
 	border: 1px solid #ccc;
 	z-index: 2;
 	display: none;

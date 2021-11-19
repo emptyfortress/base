@@ -53,9 +53,22 @@
 					#zg(contenteditable @blur="update") {{ sel.label }}
 					.btngroup
 						q-btn(outline size="10px" color="primary" @click="duble").q-mr-xs Дублировать
-						q-btn(round flat icon="mdi-plus" dense color="primary")
-				#comment(contenteditable @blur="updatecomment") {{sel.comment}}
-				SearchForm
+						q-btn(round flat icon="mdi-plus" dense color="primary" @click="addSearch")
+				br
+				q-tabs(v-model="tab" align="justify" inline-label dense active-color="primary-darken-2").tabs
+					q-tab(name="query" icon="mdi-toy-brick-search-outline" label="Настройка критериев поиска")
+					q-tab(name="mail" icon="mdi-monitor-dashboard" label="Настройка представления")
+				q-tab-panels(v-model="tab" animated)
+					q-tab-panel(name="query")
+						#comment(contenteditable @blur="updatecomment") {{sel.comment}}
+						SearchForm
+					q-tab-panel(name="mail")
+						p laksjdlakj
+				.action
+					q-btn(flat icon="mdi-trash-can-outline" label="Удалить поиск" color="primary")
+					div
+						q-btn(flat icon="mdi-share-variant" label="Поделиться" color="primary")
+						q-btn(unelevated color="primary" icon="mdi-content-save-outline" label="Сохранить")
 </template>
 
 <script>
@@ -93,9 +106,10 @@ export default {
 			const oldlabel = item.label
 			const newItem = {}
 			newItem.label = oldlabel + ' (копия)'
-			newItem.star = true
+			newItem.star = item.star
 			newItem.active = true
-			newItem.id = allSearch.length + 2
+			newItem.comment = item.comment
+			newItem.id = allSearch.length
 			allSearch.map((item) => (item.active = false))
 			allSearch.push(newItem)
 			document.getElementById('zg').innerHTML = newItem.label
@@ -160,9 +174,10 @@ export default {
 		const addSearch = () => {
 			allSearch.map((item) => (item.active = false))
 			let item = {}
-			item.id = allSearch.length + 2
+			item.id = allSearch.length
 			item.star = true
 			item.active = true
+			item.comment = 'Введите комментарий к поиску'
 			item.label = 'Новый поиск'
 			allSearch.push(item)
 		}
@@ -309,6 +324,7 @@ export default {
 			updatecomment,
 			duble,
 			clearFilter,
+			tab: ref('query'),
 		}
 	},
 }
@@ -368,7 +384,6 @@ export default {
 	margin-right: -0.5rem;
 }
 #comment {
-	margin-top: 1rem;
 	font-size: 0.9rem;
 	padding: 0.5rem;
 	padding-bottom: 0;
@@ -380,5 +395,13 @@ export default {
 		border-bottom: 1px dotted var(--q-primary);
 		background: var(--bg-light);
 	}
+}
+.tabs {
+	background: #eee;
+}
+.action {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 1rem;
 }
 </style>
