@@ -1,10 +1,10 @@
 <template lang="pug">
-draggable(:list="list" item-key="id" @start="begin" @end="end")
-	template(#item="{ element }")
-		div
-			QueryItem(:item="element" @invert="invert(element)" @add="add(element)")
+.box
+	draggable(:list="list" item-key="id" @start="begin" @end="end")
+		template(#item="{ element }")
+			div
+				QueryItem(:item="element" @invert="invert(element)" @add="add(element)")
 
-//- #demo(draggable="true" v-dragged="onDragged")
 </template>
 
 <script>
@@ -28,7 +28,6 @@ export default {
 
 		const add = (e) => {
 			let index = itemIndex(e)
-			console.log(index)
 			let newItem = {}
 			newItem.id = list.length
 			newItem.and = true
@@ -86,9 +85,9 @@ export default {
 	align-items: center;
 	background: var(--bg-drawer);
 }
-#demo {
-	width: 200px;
-	height: 200px;
-	background: pink;
+.box {
+	background-image: url(@/assets/img/vert.png);
+	background-repeat: repeat-y;
+	background-position-x: 58px;
 }
 </style>

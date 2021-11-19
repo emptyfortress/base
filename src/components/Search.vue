@@ -65,7 +65,7 @@
 					q-tab-panel(name="mail")
 						p laksjdlakj
 				.action
-					q-btn(flat icon="mdi-trash-can-outline" label="Удалить поиск" color="primary")
+					q-btn(flat icon="mdi-trash-can-outline" label="Удалить поиск" color="primary" @click="deleteSearch")
 					div
 						q-btn(flat icon="mdi-share-variant" label="Поделиться" color="primary")
 						q-btn(unelevated color="primary" icon="mdi-content-save-outline" label="Сохранить")
@@ -180,6 +180,12 @@ export default {
 			item.comment = 'Введите комментарий к поиску'
 			item.label = 'Новый поиск'
 			allSearch.push(item)
+		}
+
+		const deleteSearch = () => {
+			const index = allSearch.findIndex((item) => item.active)
+			allSearch.splice(index, 1)
+			allSearch[0].active = true
 		}
 
 		const allSearch = reactive([
@@ -320,6 +326,7 @@ export default {
 			setStar,
 			sel,
 			addSearch,
+			deleteSearch,
 			update,
 			updatecomment,
 			duble,

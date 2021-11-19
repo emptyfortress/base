@@ -1,6 +1,5 @@
 <template lang="pug">
 .all
-	.divide
 	.group
 		.scope(@click="$emit('invert')" :class="setClass")
 			.add(@click.stop="$emit('add')")
@@ -9,7 +8,6 @@
 			q-btn(round dense unelevated icon="mdi-content-copy")
 			q-btn(round dense unelevated icon="mdi-nut")
 			q-btn(round dense unelevated icon="mdi-trash-can-outline")
-		//- .addgroup
 
 </template>
 
@@ -40,9 +38,11 @@ export default {
 @import '@/assets/styles/theme.scss';
 .all {
 	padding-left: 0.7rem;
-}
-.fuck {
-	margin-left: 110px;
+	margin-top: 9px;
+	&.fuck {
+		margin-left: 99px;
+		margin-top: -2px;
+	}
 }
 .group {
 	height: 60px;
@@ -68,12 +68,12 @@ export default {
 		display: block;
 	}
 }
-.divide {
-	height: 8px;
-	width: 3px;
-	background: #ccc;
-	margin-left: 48px;
-}
+/* .divide { */
+/* 	/\* height: 8px; *\/ */
+/* 	width: 3px; */
+/* 	background: #ccc; */
+/* 	margin-left: 48px; */
+/* } */
 .cond {
 	flex-grow: 1;
 }
@@ -102,16 +102,5 @@ export default {
 	border: 1px solid #ccc;
 	z-index: 2;
 	display: none;
-}
-
-.addgroup {
-	position: absolute;
-	left: 3.5rem;
-	bottom: -25px;
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-	background: red;
-	z-index: 2;
 }
 </style>
