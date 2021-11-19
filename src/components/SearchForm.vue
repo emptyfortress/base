@@ -3,7 +3,7 @@
 	draggable(:list="list" item-key="id" @start="begin" @end="end")
 		template(#item="{ element }")
 			div
-				QueryItem(:item="element" @invert="invert(element)" @add="add(element)")
+				QueryItem(:item="element" @invert="invert(element)" @add="add(element)" @delete="del(element)" )
 
 </template>
 
@@ -29,9 +29,14 @@ export default {
 		const add = (e) => {
 			let index = itemIndex(e)
 			let newItem = {}
-			newItem.id = list.length
+			newItem.id = new Date()
 			newItem.and = true
 			list.splice(index + 1, 0, newItem)
+		}
+
+		const del = (e) => {
+			let index = itemIndex(e)
+			list.splice(index, 1)
 		}
 
 		const invert = (e) => {
@@ -68,6 +73,7 @@ export default {
 			list,
 			invert,
 			add,
+			del,
 		}
 	},
 }

@@ -3,16 +3,35 @@
 	.group
 		.scope(@click="$emit('invert')" :class="setClass")
 			.add(@click.stop="$emit('add')")
-		.cond {{ item.id }}
+		.cond
+			.myrow
+				q-select(outlined dense v-model="model1" use-input input-debounce="0" :options="options1" @filter="filterFn1" ).norm
+					template(v-slot:no-option)
+						q-item
+							q-item-section(class="text-grey") No results
+				q-select(outlined dense v-model="model2" use-input input-debounce="0" :options="options2" @filter="filterFn2" ).norm
+					template(v-slot:no-option)
+						q-item
+							q-item-section(class="text-grey") No results
+				q-select(outlined dense v-model="model3" use-input input-debounce="0" :options="options3" @filter="filterFn3" ).norm
+					template(v-slot:no-option)
+						q-item
+							q-item-section(class="text-grey") No results
 		.btngr
-			q-btn(round dense unelevated icon="mdi-content-copy")
+			//- q-btn(round dense unelevated icon="mdi-content-copy")
 			q-btn(round dense unelevated icon="mdi-nut")
-			q-btn(round dense unelevated icon="mdi-trash-can-outline")
+			q-btn(round dense unelevated icon="mdi-trash-can-outline" @click="$emit('delete')")
 
 </template>
 
 <script>
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
+import { fields, conditions, values } from '@/data.js'
+
+// const stringOptions = ['Google', 'Facebook', 'Twitter', 'Apple', 'Oracle']
+const stringOptions1 = fields
+const stringOptions2 = conditions
+const stringOptions3 = values
 
 export default {
 	components: {},
@@ -22,13 +41,72 @@ export default {
 	emits: ['invert', 'add'],
 
 	setup(props) {
+		const options1 = ref(stringOptions1)
+		const options2 = ref(stringOptions2)
+		const options3 = ref(stringOptions3)
+
 		const setClass = computed(() => {
 			if (props.item.and) return 'and'
 			else return 'or'
 		})
 
+		const filterFn1 = (val, update) => {
+			if (val === '') {
+				update(() => {
+					options1.value = stringOptions1
+				})
+				return
+			}
+
+			update(() => {
+				const needle = val.toLowerCase()
+				options1.value = stringOptions1.filter(
+					(v) => v.toLowerCase().indexOf(needle) > -1
+				)
+			})
+		}
+		const filterFn2 = (val, update) => {
+			if (val === '') {
+				update(() => {
+					options2.value = stringOptions2
+				})
+				return
+			}
+
+			update(() => {
+				const needle = val.toLowerCase()
+				options2.value = stringOptions2.filter(
+					(v) => v.toLowerCase().indexOf(needle) > -1
+				)
+			})
+		}
+		const filterFn3 = (val, update) => {
+			if (val === '') {
+				update(() => {
+					options3.value = stringOptions3
+				})
+				return
+			}
+
+			update(() => {
+				const needle = val.toLowerCase()
+				options3.value = stringOptions3.filter(
+					(v) => v.toLowerCase().indexOf(needle) > -1
+				)
+			})
+		}
+
 		return {
 			setClass,
+			options1,
+			options2,
+			options3,
+			model1: ref('Поле'),
+			model2: ref('Условие'),
+			model3: ref('Значение'),
+			filterFn1,
+			filterFn2,
+			filterFn3,
 		}
 	},
 }
@@ -102,5 +180,22 @@ export default {
 	border: 1px solid #ccc;
 	z-index: 2;
 	display: none;
+}
+.myrow {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	padding-left: 1rem;
+}
+.norm {
+	/* width: 150px; */
+	background: #fff;
+	margin-left: 4px;
+}
+.btngr {
+	white-space: nowrap;
+}
+.q-field-input {
+	width: 30px;
 }
 </style>
