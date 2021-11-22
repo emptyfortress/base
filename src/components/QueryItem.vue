@@ -3,23 +3,24 @@
 	.group
 		.scope(@click="$emit('invert')" :class="setClass")
 			.add(@click.stop="$emit('add')")
+				q-icon(name="mdi-plus")
 		.cond
 			.myrow
-				q-select(outlined dense v-model="model1" use-input input-debounce="0" :options="options1" @filter="filterFn1" ).norm
+				q-select(dense v-model="model1" use-input input-debounce="0" label="Поле" :options="options1" @filter="filterFn1").norm
 					template(v-slot:no-option)
 						q-item
 							q-item-section(class="text-grey") No results
-				q-select(outlined dense v-model="model2" use-input input-debounce="0" :options="options2" @filter="filterFn2" ).norm
+				q-select(dense v-model="model2" input-debounce="0" label="Условие" :options="options2" @filter="filterFn2" ).norm
 					template(v-slot:no-option)
 						q-item
 							q-item-section(class="text-grey") No results
-				q-select(outlined dense v-model="model3" use-input input-debounce="0" :options="options3" @filter="filterFn3" ).norm
+				q-select(dense v-model="model3" use-input input-debounce="0"  label="Значение"      :options="options3" @filter="filterFn3" ).norm
 					template(v-slot:no-option)
 						q-item
 							q-item-section(class="text-grey") No results
 		.btngr
 			//- q-btn(round dense unelevated icon="mdi-content-copy")
-			q-btn(round dense unelevated icon="mdi-nut")
+			q-btn(round dense unelevated icon="mdi-autorenew")
 			q-btn(round dense unelevated icon="mdi-trash-can-outline" @click="$emit('delete')")
 
 </template>
@@ -28,7 +29,6 @@
 import { ref, computed } from 'vue'
 import { fields, conditions, values } from '@/data.js'
 
-// const stringOptions = ['Google', 'Facebook', 'Twitter', 'Apple', 'Oracle']
 const stringOptions1 = fields
 const stringOptions2 = conditions
 const stringOptions3 = values
@@ -101,9 +101,9 @@ export default {
 			options1,
 			options2,
 			options3,
-			model1: ref('Поле'),
-			model2: ref('Условие'),
-			model3: ref('Значение'),
+			model1: ref(null),
+			model2: ref(null),
+			model3: ref(null),
 			filterFn1,
 			filterFn2,
 			filterFn3,
@@ -123,25 +123,25 @@ export default {
 	}
 }
 .group {
-	height: 60px;
+	/* height: 60px; */
 	width: 100%;
 	border: 2px solid #ccc;
 	display: flex;
-	justify-content: flex-start;
+	justify-content: justify-between;
 	align-items: center;
 	background: var(--bg-drawer);
+	position: relative;
 }
 .scope {
-	width: 100px;
+	width: 80px;
+	/* height: 100%; */
 	text-align: center;
-	line-height: 56px;
 	font-size: 0.9rem;
 	font-weight: bold;
 	text-transform: uppercase;
 	color: var(--q-primary-darken-2);
 	cursor: pointer;
 	letter-spacing: 1px;
-	position: relative;
 	&:hover .add {
 		display: block;
 	}
@@ -154,14 +154,32 @@ export default {
 /* } */
 .cond {
 	flex-grow: 1;
+	padding: 0.5rem;
+	margin-left: 80px;
 }
 .and {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 80px;
 	background: var(--q-primary-lighten-3);
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	&::after {
 		content: 'and';
 	}
 }
 .or {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 80px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	background: var(--q-primary-lighten-1);
 	&::after {
 		content: 'or';
@@ -171,31 +189,30 @@ export default {
 .add {
 	position: absolute;
 	left: -0.75rem;
-	top: 15px;
+	top: 50%;
+	transform: translateY(-50%);
 	width: 1.5rem;
 	height: 1.5rem;
 	border-radius: 50%;
 	background: #fff;
-	box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.7);
-	border: 1px solid #ccc;
+	box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+	border: 1px solid var(--q-primary);
 	z-index: 2;
 	display: none;
 }
 .myrow {
 	display: flex;
-	justify-content: flex-start;
+	justify-content: space-evenly;
 	align-items: center;
 	padding-left: 1rem;
+	flex-wrap: wrap;
 }
 .norm {
-	/* width: 150px; */
-	background: #fff;
-	margin-left: 4px;
+	font-size: 0.8rem;
+	width: 30%;
+	min-width: 100px;
 }
 .btngr {
 	white-space: nowrap;
-}
-.q-field-input {
-	width: 30px;
 }
 </style>

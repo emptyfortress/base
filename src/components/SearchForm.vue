@@ -58,7 +58,7 @@ export default {
 			drag.value = false
 			let elem = e.item.querySelector('.all')
 			e.item.removeEventListener('drag', () => {})
-			if (distance > 100) {
+			if (distance > 80) {
 				elem.classList.add('fuck')
 			}
 			if (distance < -50) {
