@@ -75,7 +75,7 @@ const type = [
 	'Задание',
 ]
 
-const data = [
+const date = [
 
 ]
 

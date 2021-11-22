@@ -25,12 +25,12 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { fields, conditions, values, names } from '@/data.js'
 
 const stringOptions1 = fields
 const stringOptions2 = conditions
-const stringOptions3 = values
+let stringOptions3 = values
 
 export default {
 	components: {},
@@ -45,12 +45,29 @@ export default {
 		const model3 = ref(null)
 		const options1 = ref(stringOptions1)
 		const options2 = ref(stringOptions2)
-		// const options3 = ref(stringOptions3)
+		const options3 = ref(stringOptions3)
 
-		const options3 = computed(() => {
-			if (model1.value === 'Автор') {
-				return names
-			} else return values
+		watch(model1, (val) => {
+			if (
+				val === 'Автор' ||
+				val === 'Исполнитель' ||
+				val === 'Контролер' ||
+				val === 'Подготовил' ||
+				val === 'Согласующие' ||
+				val === 'Подписывает' ||
+				val === 'Получатели'
+			) {
+				stringOptions3 = names
+			} else if (
+				val === 'Создано' ||
+				val === 'Изменено' ||
+				val === 'Дата регистрации' ||
+				val === 'Срок исполнения'
+			) {
+				stringOptions3 = ['Выбор даты']
+			} else {
+				stringOptions3 = values
+			}
 		})
 
 		const setClass = computed(() => {
