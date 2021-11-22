@@ -6,20 +6,19 @@
 				q-icon(name="mdi-plus")
 		.cond
 			.myrow
-				q-select(dense v-model="model1" use-input input-debounce="0" label="Поле" :options="options1" @filter="filterFn1").norm
+				q-select(dense v-model="model1" use-input hide-selected fill-input input-debounce="0" label="Поле" :options="options1" @filter="filterFn1").norm
 					template(v-slot:no-option)
 						q-item
 							q-item-section(class="text-grey") No results
-				q-select(dense v-model="model2" input-debounce="0" label="Условие" :options="options2" @filter="filterFn2" ).norm
+				q-select(dense v-model="model2" use-input hide-selected fill-input input-debounce="0" label="Условие" :options="options2" @filter="filterFn2" ).norm
 					template(v-slot:no-option)
 						q-item
 							q-item-section(class="text-grey") No results
-				q-select(dense v-model="model3" use-input input-debounce="0"  label="Значение"      :options="options3" @filter="filterFn3" ).norm
+				q-select(dense v-model="model3" use-input hide-selected fill-input input-debounce="0" label="Значение" :options="options3" @filter="filterFn3" ).norm
 					template(v-slot:no-option)
 						q-item
 							q-item-section(class="text-grey") No results
 		.btngr
-			//- q-btn(round dense unelevated icon="mdi-content-copy")
 			q-btn(round dense unelevated icon="mdi-autorenew")
 			q-btn(round dense unelevated icon="mdi-trash-can-outline" @click="$emit('delete')")
 
@@ -27,7 +26,7 @@
 
 <script>
 import { ref, computed } from 'vue'
-import { fields, conditions, values } from '@/data.js'
+import { fields, conditions, values, names } from '@/data.js'
 
 const stringOptions1 = fields
 const stringOptions2 = conditions
@@ -41,9 +40,18 @@ export default {
 	emits: ['invert', 'add'],
 
 	setup(props) {
+		const model1 = ref(null)
+		const model2 = ref(null)
+		const model3 = ref(null)
 		const options1 = ref(stringOptions1)
 		const options2 = ref(stringOptions2)
-		const options3 = ref(stringOptions3)
+		// const options3 = ref(stringOptions3)
+
+		const options3 = computed(() => {
+			if (model1.value === 'Автор') {
+				return names
+			} else return values
+		})
 
 		const setClass = computed(() => {
 			if (props.item.and) return 'and'
@@ -101,9 +109,9 @@ export default {
 			options1,
 			options2,
 			options3,
-			model1: ref(null),
-			model2: ref(null),
-			model3: ref(null),
+			model1,
+			model2,
+			model3,
 			filterFn1,
 			filterFn2,
 			filterFn3,
@@ -210,7 +218,7 @@ export default {
 .norm {
 	font-size: 0.8rem;
 	width: 30%;
-	min-width: 100px;
+	min-width: 120px;
 }
 .btngr {
 	white-space: nowrap;
