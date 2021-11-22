@@ -1,5 +1,5 @@
 <template lang="pug">
-.all
+.all(:class="item.fuck")
 	.group
 		.scope(@click="$emit('invert')" :class="setClass")
 			.add(@click.stop="$emit('add')")
@@ -19,13 +19,13 @@
 						q-item
 							q-item-section(class="text-grey") No results
 		.btngr
-			q-btn(round dense unelevated icon="mdi-autorenew")
+			q-btn(round dense unelevated icon="mdi-reload" @click="reset").invert
 			q-btn(round dense unelevated icon="mdi-trash-can-outline" @click="$emit('delete')")
 
 </template>
 
 <script>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watchEffect } from 'vue'
 import { fields, conditions, values, names } from '@/data.js'
 
 const stringOptions1 = fields
@@ -40,29 +40,30 @@ export default {
 	emits: ['invert', 'add'],
 
 	setup(props) {
-		const model1 = ref(null)
-		const model2 = ref(null)
-		const model3 = ref(null)
+		const model1 = ref(props.item.mod1)
+		const model2 = ref(props.item.mod2)
+		const model3 = ref(props.item.mod3)
 		const options1 = ref(stringOptions1)
 		const options2 = ref(stringOptions2)
 		const options3 = ref(stringOptions3)
 
-		watch(model1, (val) => {
+		watchEffect(() => {
 			if (
-				val === 'Автор' ||
-				val === 'Исполнитель' ||
-				val === 'Контролер' ||
-				val === 'Подготовил' ||
-				val === 'Согласующие' ||
-				val === 'Подписывает' ||
-				val === 'Получатели'
+				model1.value === 'Автор' ||
+				model1.value === 'Исполнитель' ||
+				model1.value === 'Контролер' ||
+				model1.value === 'Подготовил' ||
+				model1.value === 'Согласующие' ||
+				model1.value === 'Подписывает' ||
+				model1.value === 'Контрагент' ||
+				model1.value === 'Получатели'
 			) {
 				stringOptions3 = names
 			} else if (
-				val === 'Создано' ||
-				val === 'Изменено' ||
-				val === 'Дата регистрации' ||
-				val === 'Срок исполнения'
+				model1.value === 'Создано' ||
+				model1.value === 'Изменено' ||
+				model1.value === 'Дата регистрации' ||
+				model1.value === 'Срок исполнения'
 			) {
 				stringOptions3 = ['Выбор даты']
 			} else {
@@ -121,6 +122,12 @@ export default {
 			})
 		}
 
+		const reset = () => {
+			model1.value = null
+			model2.value = null
+			model3.value = null
+		}
+
 		return {
 			setClass,
 			options1,
@@ -132,6 +139,7 @@ export default {
 			filterFn1,
 			filterFn2,
 			filterFn3,
+			reset,
 		}
 	},
 }
@@ -143,12 +151,11 @@ export default {
 	padding-left: 0.7rem;
 	margin-top: 9px;
 	&.fuck {
-		margin-left: 99px;
+		margin-left: 80px;
 		margin-top: -2px;
 	}
 }
 .group {
-	/* height: 60px; */
 	width: 100%;
 	border: 2px solid #ccc;
 	display: flex;
@@ -156,10 +163,13 @@ export default {
 	align-items: center;
 	background: var(--bg-drawer);
 	position: relative;
+	&:hover {
+		border: 2px solid var(--q-primary);
+		z-index: 4;
+	}
 }
 .scope {
 	width: 80px;
-	/* height: 100%; */
 	text-align: center;
 	font-size: 0.9rem;
 	font-weight: bold;
@@ -171,12 +181,6 @@ export default {
 		display: block;
 	}
 }
-/* .divide { */
-/* 	/\* height: 8px; *\/ */
-/* 	width: 3px; */
-/* 	background: #ccc; */
-/* 	margin-left: 48px; */
-/* } */
 .cond {
 	flex-grow: 1;
 	padding: 0.5rem;
@@ -239,5 +243,8 @@ export default {
 }
 .btngr {
 	white-space: nowrap;
+	.invert {
+		transform: scaleX(-1);
+	}
 }
 </style>

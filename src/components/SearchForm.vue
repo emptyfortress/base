@@ -9,21 +9,31 @@
 
 <script>
 import draggable from 'vuedraggable'
-import { reactive, ref } from 'vue'
+import { ref, computed } from 'vue'
 import QueryItem from '@/components/QueryItem.vue'
+import { useSearch } from '@/stores/search'
 
 export default {
 	components: {
 		draggable,
 		QueryItem,
 	},
-	setup() {
-		const list = reactive([{ id: 0, and: true }])
+	props: ['id'],
+	setup(props) {
+		console.log('id ' + props.id)
+
+		const search = useSearch()
+
+		const list = computed(() => {
+			const item = search.allList.find((el) => el.id === props.id)
+			console.log('item ' + item)
+			return item.list
+		})
 
 		const drag = ref(false)
 
 		const itemIndex = (e) => {
-			return list.findIndex((item) => item.id === e.id)
+			return list.value.findIndex((item) => item.id === e.id)
 		}
 
 		const add = (e) => {
@@ -31,12 +41,13 @@ export default {
 			let newItem = {}
 			newItem.id = new Date()
 			newItem.and = true
-			list.splice(index + 1, 0, newItem)
+			list.value.splice(index + 1, 0, newItem)
 		}
 
 		const del = (e) => {
+			console.log(e)
 			let index = itemIndex(e)
-			list.splice(index, 1)
+			list.value.splice(index, 1)
 		}
 
 		const invert = (e) => {
@@ -94,6 +105,6 @@ export default {
 .box {
 	background-image: url(@/assets/img/vert.png);
 	background-repeat: repeat-y;
-	background-position-x: 58px;
+	background-position-x: 48px;
 }
 </style>

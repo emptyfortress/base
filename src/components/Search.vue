@@ -54,14 +54,15 @@
 					.btngroup
 						q-btn(outline size="10px" color="primary" @click="duble").q-mr-xs Дублировать
 						q-btn(round flat icon="mdi-plus" dense color="primary" @click="addSearch")
+				#comment(contenteditable @blur="updatecomment") {{sel.comment}}
 				br
 				q-tabs(v-model="tab" align="justify" inline-label dense active-color="primary-darken-2").tabs
 					q-tab(name="query" icon="mdi-toy-brick-search-outline" label="Настройка критериев поиска")
 					q-tab(name="mail" icon="mdi-monitor-dashboard" label="Настройка представления")
 				q-tab-panels(v-model="tab" animated)
 					q-tab-panel(name="query")
-						#comment(contenteditable @blur="updatecomment") {{sel.comment}}
-						SearchForm
+						p.q-ml-md Добавляйте критерии и настраивайте условия
+						SearchForm(:id="sel.id")
 					q-tab-panel(name="mail")
 						p laksjdlakj
 				.action
@@ -75,6 +76,7 @@
 import { ref, reactive, computed, watch } from 'vue'
 import WordHighlighter from 'vue-word-highlighter'
 import SearchForm from '@/components/SearchForm.vue'
+import { useSearch } from '@/stores/search'
 
 export default {
 	components: {
@@ -82,6 +84,9 @@ export default {
 		SearchForm,
 	},
 	setup() {
+		const search = useSearch()
+		const allSearch = reactive(search.allSearch)
+
 		const firstItem = ref(true)
 		const secondItem = ref(false)
 		const sidebar = ref(true)
@@ -146,6 +151,13 @@ export default {
 			return allSearch.filter((item) => item.active)[0]
 		})
 
+		// const calcList = computed(() => {
+		// 	const index = allSearch.findIndex((item) => item.active)
+		// 	console.log(index)
+		// 	console.log(search.allList[index])
+		// 	return search.allList[index].list
+		// })
+
 		const clearFilter = () => {
 			query.value = ''
 		}
@@ -168,7 +180,6 @@ export default {
 			const text = comm.innerHTML
 			const index = allSearch.findIndex((item) => item.active)
 			allSearch[index].comment = text
-			console.log(text)
 		}
 
 		const addSearch = () => {
@@ -177,6 +188,8 @@ export default {
 			item.id = allSearch.length
 			item.star = true
 			item.active = true
+			item.list = []
+			item.list.push({ id: 0, and: false, mod1: null, mod2: null, mod3: null })
 			item.comment = 'Введите комментарий к поиску'
 			item.label = 'Новый поиск'
 			allSearch.push(item)
@@ -187,129 +200,6 @@ export default {
 			allSearch.splice(index, 1)
 			allSearch[0].active = true
 		}
-
-		const allSearch = reactive([
-			{
-				id: 0,
-				comment: 'Введите комментарий к поиску',
-				star: true,
-				active: true,
-				label: 'Договора с Алросой',
-			},
-			{
-				id: 1,
-				comment: 'Введите комментарий к поиску',
-				star: true,
-				active: false,
-				label: 'Документы к конференции',
-			},
-			{
-				id: 2,
-				comment: 'Введите комментарий к поиску',
-				star: true,
-				active: false,
-				label: 'Мои просроченные задания',
-			},
-			{
-				id: 3,
-				comment: 'Введите комментарий к поиску',
-				star: true,
-				active: false,
-				label: 'Отчет за 3 квартал',
-			},
-			{
-				id: 4,
-				comment: 'Введите комментарий к поиску',
-				star: true,
-				active: false,
-				label: 'Отчет за 2 квартал',
-			},
-			{ id: 5, comment: '', star: true, active: false, label: 'Я - автор' },
-			{
-				id: 6,
-				comment: 'Введите комментарий к поиску',
-				star: false,
-				active: false,
-				label: 'Я - исполнитель',
-			},
-			{
-				id: 7,
-				comment: 'Введите комментарий к поиску',
-				star: false,
-				active: false,
-				label: 'Договора свыше 100 т.',
-			},
-			{
-				id: 8,
-				comment: 'Введите комментарий к поиску',
-				star: false,
-				active: false,
-				label: 'Договора до 100 т.',
-			},
-			{
-				id: 9,
-				comment: 'Введите комментарий к поиску',
-				star: false,
-				active: false,
-				label: 'Проект 1',
-			},
-			{
-				id: 10,
-				comment: 'Введите комментарий к поиску',
-				star: false,
-				active: false,
-				label: 'Проект 2',
-			},
-			{
-				id: 11,
-				comment: 'Введите комментарий к поиску',
-				star: false,
-				active: false,
-				label: 'Пример поиска 1',
-			},
-			{
-				id: 12,
-				comment: 'Введите комментарий к поиску',
-				star: false,
-				active: false,
-				label: 'Пример поиска 2',
-			},
-			{
-				id: 13,
-				comment: 'Введите комментарий к поиску',
-				star: false,
-				active: false,
-				label: 'Пример поиска 3',
-			},
-			{
-				id: 14,
-				comment: 'Введите комментарий к поиску',
-				star: false,
-				active: false,
-				label: 'Пример поиска 4',
-			},
-			{
-				id: 15,
-				comment: 'Введите комментарий к поиску',
-				star: false,
-				active: false,
-				label: 'Пример поиска 5',
-			},
-			{
-				id: 16,
-				comment: 'Введите комментарий к поиску',
-				star: false,
-				active: false,
-				label: 'Пример поиска 6',
-			},
-			{
-				id: 17,
-				comment: 'Введите комментарий к поиску',
-				star: false,
-				active: false,
-				label: 'Пример поиска 7',
-			},
-		])
 
 		return {
 			switchSidebar,
@@ -332,6 +222,7 @@ export default {
 			duble,
 			clearFilter,
 			tab: ref('query'),
+			// calcList,
 		}
 	},
 }
@@ -392,8 +283,10 @@ export default {
 }
 #comment {
 	font-size: 0.9rem;
+	margin-top: 1rem;
 	padding: 0.5rem;
 	padding-bottom: 0;
+	/* text-align: center; */
 	&:hover {
 		background: var(--bg-light);
 	}
