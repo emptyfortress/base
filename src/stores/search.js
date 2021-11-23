@@ -40,7 +40,13 @@ export const useSearch = defineStore({
 				active: false,
 				label: 'Отчет за 2 квартал',
 			},
-			{ id: 5, comment: '', star: true, active: false, label: 'Я - автор' },
+			{
+				id: 5,
+				comment: 'Введите комментарий к поиску',
+				star: true,
+				active: false,
+				label: 'Я - автор',
+			},
 			{
 				id: 6,
 				comment: 'Введите комментарий к поиску',
@@ -133,7 +139,7 @@ export const useSearch = defineStore({
 					{
 						id: 0,
 						and: true,
-						mod1: 'Тип документа',
+						mod1: 'Тип',
 						mod2: 'Равно',
 						mod3: 'Документ',
 					},
@@ -163,6 +169,32 @@ export const useSearch = defineStore({
 			},
 			{
 				id: 1,
+				list: [
+					{ id: 0, and: true, mod1: 'Тип', mod2: 'Содержит', mod3: 'Документ' },
+				],
+			},
+			{
+				id: 2,
+				list: [{ id: 0, and: true, mod1: null, mod2: null, mod3: null }],
+			},
+			{
+				id: 3,
+				list: [{ id: 0, and: true, mod1: null, mod2: null, mod3: null }],
+			},
+			{
+				id: 4,
+				list: [{ id: 0, and: true, mod1: null, mod2: null, mod3: null }],
+			},
+			{
+				id: 5,
+				list: [{ id: 0, and: true, mod1: null, mod2: null, mod3: null }],
+			},
+			{
+				id: 6,
+				list: [{ id: 0, and: true, mod1: null, mod2: null, mod3: null }],
+			},
+			{
+				id: 7,
 				list: [{ id: 0, and: true, mod1: null, mod2: null, mod3: null }],
 			},
 		],

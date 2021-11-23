@@ -3,13 +3,13 @@
 	draggable(:list="list" item-key="id" @start="begin" @end="end")
 		template(#item="{ element }")
 			div
-				QueryItem(:item="element" @invert="invert(element)" @add="add(element)" @delete="del(element)" )
+				QueryItem(:item="element" @invert="invert(element)" @add="add(element)" @delete="del(element)" @reset="res" )
 
 </template>
 
 <script>
 import draggable from 'vuedraggable'
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import QueryItem from '@/components/QueryItem.vue'
 import { useSearch } from '@/stores/search'
 
@@ -20,14 +20,13 @@ export default {
 	},
 	props: ['id'],
 	setup(props) {
-		console.log('id ' + props.id)
-
 		const search = useSearch()
 
 		const list = computed(() => {
 			const item = search.allList.find((el) => el.id === props.id)
-			console.log('item ' + item)
-			return item.list
+			if (item) {
+				return item.list
+			} else return [{ id: 0, and: true, mod1: null, mod2: null, mod3: null }]
 		})
 
 		const drag = ref(false)
@@ -45,14 +44,17 @@ export default {
 		}
 
 		const del = (e) => {
-			console.log(e)
 			let index = itemIndex(e)
 			list.value.splice(index, 1)
 		}
+		const res = (e) => {
+			list.value[e].mod1 = null
+			list.value[e].mod2 = null
+			list.value[e].mod3 = null
+		}
 
 		const invert = (e) => {
-			let index = itemIndex(e)
-			list[index].and = !list[index].and
+			e.and = !e.and
 		}
 
 		let xStart = 0
@@ -79,6 +81,7 @@ export default {
 
 		return {
 			drag,
+			res,
 			begin,
 			end,
 			list,

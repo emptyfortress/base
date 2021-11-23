@@ -6,15 +6,15 @@
 				q-icon(name="mdi-plus")
 		.cond
 			.myrow
-				q-select(dense v-model="model1" use-input hide-selected fill-input input-debounce="0" label="Поле" :options="options1" @filter="filterFn1").norm
+				q-select(dense v-model="props.item.mod1" use-input hide-selected fill-input input-debounce="0" label="Поле" :options="options1" @filter="filterFn1").norm
 					template(v-slot:no-option)
 						q-item
 							q-item-section(class="text-grey") No results
-				q-select(dense v-model="model2" use-input hide-selected fill-input input-debounce="0" label="Условие" :options="options2" @filter="filterFn2" ).norm
+				q-select(dense v-model="props.item.mod2" use-input hide-selected fill-input input-debounce="0" label="Условие" :options="options2" @filter="filterFn2" ).norm
 					template(v-slot:no-option)
 						q-item
 							q-item-section(class="text-grey") No results
-				q-select(dense v-model="model3" use-input hide-selected fill-input input-debounce="0" label="Значение" :options="options3" @filter="filterFn3" ).norm
+				q-select(dense v-model="props.item.mod3" use-input hide-selected fill-input input-debounce="0" label="Значение" :options="options3" @filter="filterFn3" ).norm
 					template(v-slot:no-option)
 						q-item
 							q-item-section(class="text-grey") No results
@@ -34,36 +34,31 @@ let stringOptions3 = values
 
 export default {
 	components: {},
-	props: {
-		item: Object,
-	},
-	emits: ['invert', 'add'],
+	props: ['item'],
+	emits: ['invert', 'add', 'reset'],
 
-	setup(props) {
-		const model1 = ref(props.item.mod1)
-		const model2 = ref(props.item.mod2)
-		const model3 = ref(props.item.mod3)
+	setup(props, context) {
 		const options1 = ref(stringOptions1)
 		const options2 = ref(stringOptions2)
 		const options3 = ref(stringOptions3)
 
 		watchEffect(() => {
 			if (
-				model1.value === 'Автор' ||
-				model1.value === 'Исполнитель' ||
-				model1.value === 'Контролер' ||
-				model1.value === 'Подготовил' ||
-				model1.value === 'Согласующие' ||
-				model1.value === 'Подписывает' ||
-				model1.value === 'Контрагент' ||
-				model1.value === 'Получатели'
+				props.item.mod1 === 'Автор' ||
+				props.item.mod1 === 'Исполнитель' ||
+				props.item.mod1 === 'Контролер' ||
+				props.item.mod1 === 'Подготовил' ||
+				props.item.mod1 === 'Согласующие' ||
+				props.item.mod1 === 'Подписывает' ||
+				props.item.mod1 === 'Контрагент' ||
+				props.item.mod1 === 'Получатели'
 			) {
 				stringOptions3 = names
 			} else if (
-				model1.value === 'Создано' ||
-				model1.value === 'Изменено' ||
-				model1.value === 'Дата регистрации' ||
-				model1.value === 'Срок исполнения'
+				props.item.mod1 === 'Создано' ||
+				props.item.mod1 === 'Изменено' ||
+				props.item.mod1 === 'Дата регистрации' ||
+				props.item.mod1 === 'Срок исполнения'
 			) {
 				stringOptions3 = ['Выбор даты']
 			} else {
@@ -123,19 +118,15 @@ export default {
 		}
 
 		const reset = () => {
-			model1.value = null
-			model2.value = null
-			model3.value = null
+			context.emit('reset', props.item.id)
 		}
 
 		return {
+			props,
 			setClass,
 			options1,
 			options2,
 			options3,
-			model1,
-			model2,
-			model3,
 			filterFn1,
 			filterFn2,
 			filterFn3,
