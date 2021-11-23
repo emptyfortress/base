@@ -6,14 +6,14 @@ export const useSearch = defineStore({
 		allSearch: [
 			{
 				id: 0,
-				comment: 'Введите комментарий к поиску',
+				comment: 'Все договора с Алросой',
 				star: true,
 				active: true,
 				label: 'Договора с Алросой',
 			},
 			{
 				id: 1,
-				comment: 'Введите комментарий к поиску',
+				comment: 'конференция в октябре',
 				star: true,
 				active: false,
 				label: 'Документы к конференции',

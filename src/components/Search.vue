@@ -85,7 +85,7 @@ export default {
 	},
 	setup() {
 		const search = useSearch()
-		const allSearch = reactive(search.allSearch)
+		const allSearch = search.allSearch
 
 		const firstItem = ref(true)
 		const secondItem = ref(false)
@@ -107,6 +107,7 @@ export default {
 		}
 
 		const duble = () => {
+			const listt = search.allList[sel.value.id].list
 			const item = allSearch.filter((item) => item.active === true)[0]
 			const oldlabel = item.label
 			const newItem = {}
@@ -118,6 +119,10 @@ export default {
 			allSearch.map((item) => (item.active = false))
 			allSearch.push(newItem)
 			document.getElementById('zg').innerHTML = newItem.label
+			search.allList.push({
+				id: newItem.id,
+				list: listt,
+			})
 		}
 
 		const setActive = (e) => {
@@ -188,8 +193,8 @@ export default {
 			item.id = allSearch.length
 			item.star = true
 			item.active = true
-			item.list = []
-			item.list.push({ id: 0, and: false, mod1: null, mod2: null, mod3: null })
+			// item.list = []
+			// item.list.push({ id: 0, and: false, mod1: null, mod2: null, mod3: null })
 			item.comment = 'Введите комментарий к поиску'
 			item.label = 'Новый поиск'
 			allSearch.push(item)
