@@ -30,7 +30,7 @@
 								q-item-label
 									WordHighlighter(:query="query") {{ item.label }}
 							q-item-section(v-show="commentList")
-								div
+								div(v-if="item.comment.length !== 28")
 									WordHighlighter(:query="query") {{ item.comment }}
 
 
@@ -48,6 +48,9 @@
 							q-item-section
 								q-item-label
 									WordHighlighter(:query="query") {{ item.label }}
+							q-item-section(v-show="commentList")
+								div(v-if="item.comment.length !== 28")
+									WordHighlighter(:query="query") {{ item.comment }}
 		template(v-slot:after)
 			.main
 				.row.items-center.justify-between
