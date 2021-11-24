@@ -118,7 +118,6 @@ export default {
 			newItem.id = allSearch.length
 			allSearch.map((item) => (item.active = false))
 			allSearch.push(newItem)
-			document.getElementById('zg').innerHTML = newItem.label
 			search.allList.push({
 				id: newItem.id,
 				list: listt,
@@ -193,11 +192,13 @@ export default {
 			item.id = allSearch.length
 			item.star = true
 			item.active = true
-			// item.list = []
-			// item.list.push({ id: 0, and: false, mod1: null, mod2: null, mod3: null })
 			item.comment = 'Введите комментарий к поиску'
 			item.label = 'Новый поиск'
 			allSearch.push(item)
+			search.allList.push({
+				id: item.id,
+				list: [{ id: 0, and: true, mod1: null, mod2: null, mod3: null }],
+			})
 		}
 
 		const deleteSearch = () => {
@@ -240,7 +241,7 @@ export default {
 	background: var(--bg-drawer);
 	padding: 0.5rem;
 	margin-right: 0.5rem;
-	height: calc(100vh - 200px);
+	height: calc(100vh - 195px);
 }
 .main {
 	border: 1px solid var(--my-border-color);
