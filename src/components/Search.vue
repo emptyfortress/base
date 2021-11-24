@@ -1,7 +1,7 @@
 <template lang="pug">
 .container
 	.zag.q-mb-lg Настройка поисков и представлений
-	q-splitter(v-model="splitterModel" :limits="[0, 100]" :style="hei")
+	q-splitter(v-model="splitterModel" :limits="[0, 100]" :style="hei" @update:model-value="split")
 		template(v-slot:before)
 			q-scroll-area.list
 				q-form.quick
@@ -29,6 +29,10 @@
 							q-item-section
 								q-item-label
 									WordHighlighter(:query="query") {{ item.label }}
+							q-item-section(v-show="commentList")
+								div
+									WordHighlighter(:query="query") {{ item.comment }}
+
 
 
 				q-expansion-item(v-model="secondItem" header-class="text-bold")
@@ -135,7 +139,10 @@ export default {
 		const filteredItems = computed(() => {
 			return allSearch.filter((row) => {
 				if (query.value) {
-					return row.label.toLowerCase().includes(query.value.toLowerCase())
+					return (
+						row.label.toLowerCase().includes(query.value.toLowerCase()) ||
+						row.comment.toLowerCase().includes(query.value.toLowerCase())
+					)
 				}
 				return allSearch
 			})
@@ -154,13 +161,6 @@ export default {
 		const sel = computed(() => {
 			return allSearch.filter((item) => item.active)[0]
 		})
-
-		// const calcList = computed(() => {
-		// 	const index = allSearch.findIndex((item) => item.active)
-		// 	console.log(index)
-		// 	console.log(search.allList[index])
-		// 	return search.allList[index].list
-		// })
 
 		const clearFilter = () => {
 			query.value = ''
@@ -207,7 +207,17 @@ export default {
 			allSearch[0].active = true
 		}
 
+		const commentList = ref(false)
+		const split = (val) => {
+			console.log(val)
+			if (val > 44) {
+				commentList.value = true
+			} else commentList.value = false
+		}
+
 		return {
+			split,
+			commentList,
 			switchSidebar,
 			splitterModel,
 			hei,
