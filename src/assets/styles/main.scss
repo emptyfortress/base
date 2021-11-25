@@ -129,10 +129,19 @@ a:hover:not(.q-link) {
 	width: 2px;
 	background: transparent;
 }
-.q-splitter__separator:hover,
-.q-splitter__separator:active {
+.q-splitter--horizontal > .q-splitter__separator {
+	height: 15px;
+	// background: pink;
+	background: transparent;
+}
+.q-splitter--vertical > .q-splitter__separator:hover,
+.q-splitter--vertical > .q-splitter__separator:active {
 	border-left: 2px dotted black;
-	// background: red;
+}
+.q-splitter--horizontal > .q-splitter__separator:hover,
+.q-splitter__separator:active {
+	border-top: 2px dotted black;
+	transform: translateY(7px);
 }
 .zag {
 	color: black;
@@ -298,13 +307,3 @@ a:hover:not(.q-link) {
 	position: relative;
 	z-index: 7000 !important;
 }
-// .norm {
-// 	.q-field__native {
-// 		white-space: nowrap;
-// 	}
-// 	input {
-// 		background: #ccc;
-// 		width: 30px !important;
-// 		min-width: 30px;
-// 	}
-// }

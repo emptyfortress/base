@@ -33,8 +33,6 @@
 								div(v-if="item.comment.length !== 28")
 									WordHighlighter(:query="query") {{ item.comment }}
 
-
-
 				q-expansion-item(v-model="secondItem" header-class="text-bold")
 					template(v-slot:header)
 						q-item-section(avatar)
@@ -52,43 +50,52 @@
 								div(v-if="item.comment.length !== 28")
 									WordHighlighter(:query="query") {{ item.comment }}
 		template(v-slot:after)
-			.main
-				.row.items-center.justify-between
-					q-btn(flat round dense @click="switchSidebar")
-						q-icon(name="mdi-forwardburger" v-if="splitterModel === 0")
-						q-icon(name="mdi-backburger" v-else)
-					#zg(contenteditable @blur="update") {{ sel.label }}
-					.btngroup
-						q-btn(outline size="10px" color="primary" @click="duble").q-mr-xs Дублировать
-						q-btn(round flat icon="mdi-plus" dense color="primary" @click="addSearch")
-				#comment(contenteditable @blur="updatecomment") {{sel.comment}}
-				br
-				q-tabs(v-model="tab" align="justify" inline-label dense active-color="primary-darken-2").tabs
-					q-tab(name="query" icon="mdi-toy-brick-search-outline" label="Настройка критериев поиска")
-					q-tab(name="mail" icon="mdi-monitor-dashboard" label="Настройка представления")
-				q-tab-panels(v-model="tab" animated)
-					q-tab-panel(name="query")
-						p.q-ml-md Добавляйте критерии и настраивайте условия
-						SearchForm(:id="sel.id")
-					q-tab-panel(name="mail")
-						p laksjdlakj
-				.action
-					q-btn(flat icon="mdi-trash-can-outline" label="Удалить поиск" color="primary" @click="deleteSearch")
-					div
-						q-btn(flat icon="mdi-share-variant" label="Поделиться" color="primary")
-						q-btn(unelevated color="primary" icon="mdi-content-save-outline" label="Сохранить")
+			q-splitter(v-model="insideModel" horizontal)
+				template(v-slot:after)
+					.q-ml-sm
+						SearchPreview
+				template(v-slot:before)
+					.main
+						.row.items-center.justify-between
+							q-btn(flat round dense @click="switchSidebar")
+								q-icon(name="mdi-forwardburger" v-if="splitterModel === 0")
+								q-icon(name="mdi-backburger" v-else)
+							#zg(contenteditable @blur="update") {{ sel.label }}
+							.btngroup
+								q-btn(outline size="10px" color="primary" @click="duble").q-mr-xs Дублировать
+								q-btn(round flat icon="mdi-plus" dense color="primary" @click="addSearch")
+						#comment(contenteditable @blur="updatecomment") {{sel.comment}}
+						br
+						q-tabs(v-model="tab" align="justify" inline-label dense active-color="primary-darken-2").tabs
+							q-tab(name="query" icon="mdi-toy-brick-search-outline" label="Настройка критериев поиска")
+							q-tab(name="view" icon="mdi-monitor-dashboard" label="Настройка представления")
+						q-tab-panels(v-model="tab" animated)
+							q-tab-panel(name="query")
+								p.q-ml-md Добавляйте критерии и настраивайте условия
+								SearchForm(:id="sel.id")
+							q-tab-panel(name="view")
+								//- SearchView
+						.action
+							q-btn(flat icon="mdi-trash-can-outline" label="Удалить поиск" color="primary" @click="deleteSearch")
+							div
+								q-btn(flat icon="mdi-share-variant" label="Поделиться" color="primary")
+								q-btn(unelevated color="primary" icon="mdi-content-save-outline" label="Сохранить")
 </template>
 
 <script>
-import { ref, reactive, computed, watch } from 'vue'
+import { ref, computed, watch } from 'vue'
 import WordHighlighter from 'vue-word-highlighter'
 import SearchForm from '@/components/SearchForm.vue'
 import { useSearch } from '@/stores/search'
+import SearchView from '@/components/SearchView.vue'
+import SearchPreview from '@/components/SearchPreview.vue'
 
 export default {
 	components: {
 		WordHighlighter,
 		SearchForm,
+		SearchView,
+		SearchPreview,
 	},
 	setup() {
 		const search = useSearch()
@@ -99,6 +106,7 @@ export default {
 		const sidebar = ref(true)
 		const query = ref('')
 		const splitterModel = ref(30)
+		const insideModel = ref(50)
 		const hei = computed(() => {
 			return 'height: ' + (window.innerHeight - 190) + 'px;'
 		})
@@ -223,6 +231,7 @@ export default {
 			commentList,
 			switchSidebar,
 			splitterModel,
+			insideModel,
 			hei,
 			sidebar,
 			query,
@@ -240,8 +249,7 @@ export default {
 			updatecomment,
 			duble,
 			clearFilter,
-			tab: ref('query'),
-			// calcList,
+			tab: ref('view'),
 		}
 	},
 }

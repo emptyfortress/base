@@ -133,7 +133,7 @@ export default {
 				name: 'typ',
 				label: 'Тип',
 				field: 'typ',
-				align: 'left',
+				align: 'right',
 				sortable: true,
 			},
 			{
