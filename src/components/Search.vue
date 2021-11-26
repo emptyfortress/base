@@ -76,7 +76,7 @@
 							q-btn(flat icon="mdi-trash-can-outline" label="Удалить поиск" color="primary" @click="deleteSearch")
 							.bt
 								q-btn(flat icon="mdi-share-variant" label="Поделиться" color="primary")
-								//- q-btn(flat color="primary" label="Применить")
+								q-btn(flat color="primary" label="Применить" @click="apply")
 								q-btn(unelevated color="primary" icon="mdi-content-save-outline" label="Сохранить")
 				template(v-slot:after)
 					.q-ml-sm
@@ -231,7 +231,12 @@ export default {
 		const usecolumns = useColumns()
 		const cols = usecolumns.columns
 
+		const apply = () => {
+			usecolumns.apply()
+		}
+
 		return {
+			apply,
 			cols,
 			split,
 			commentList,

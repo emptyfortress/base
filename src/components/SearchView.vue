@@ -4,13 +4,13 @@
 	draggable(:list="list" item-key="id")
 		template(#item="{ element, index }")
 			div
-				ColumnItem(:item="element" :index="index" @add="cols.add(element)" @delete="cols.del(element)")
+				ColumnItem(:item="element" :index="index" @add="add(element, index)" @delete="del(index)" @update="updateItem")
 
 </template>
 
 <script>
 import draggable from 'vuedraggable'
-import { ref, reactive, watchEffect } from 'vue'
+import { reactive } from 'vue'
 import ColumnItem from '@/components/ColumnItem.vue'
 import { useColumns } from '@/stores/columns'
 
@@ -21,9 +21,26 @@ export default {
 	},
 	setup() {
 		const cols = useColumns()
-		const list = cols.columns
+		const list = reactive([...cols.columns])
 
-		return { cols, list }
+		const add = (e, index) => {
+			let item = {}
+			Object.assign(item, e)
+			item.id = e.id + list.length
+			list.splice(index, 0, item)
+			cols.addtemp(item, index)
+		}
+
+		const del = (index) => {
+			list.splice(index, 1)
+		}
+		const updateItem = (val, ind) => {
+			// console.log(val)
+			// console.log(ind)
+			cols.update(val, ind)
+		}
+
+		return { list, add, del, updateItem }
 	},
 }
 </script>

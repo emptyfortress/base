@@ -1,6 +1,7 @@
 const fields = [
 	'Тип',
 	'Вид карточки',
+	'Статус',
 	'Рег. номер',
 	'Дата регистрации',
 	'Автор',
@@ -17,6 +18,15 @@ const fields = [
 	'Основные файлы',
 	'Допольнительные файлы',
 	'Подпись',
+]
+
+const cols = [
+	'Название',
+	'Тип',
+	'Вид карточки',
+	'Статус',
+	'Автор',
+	'Изменено',
 ]
 
 const conditions = [
@@ -78,4 +88,4 @@ const type = [
 	'Задание',
 ]
 
-export { fields, conditions, values, names, type }
+export { fields, conditions, values, names, type, cols }

@@ -4,27 +4,49 @@ export const useColumns = defineStore({
 	id: 'columns',
 	state: () => ({
 		columns: [
-			{id: 0, name: 'title', label: 'Название', sort: false, filt: false, align: 'left' },
-			{id: 1, name: 'status', label: 'Состояние', sort: false, filt: false, align: 'left' },
-			{id: 2, name: 'vid', label: 'Вид', sort: false, filt: false, align: 'left' },
+			{id: 0, name: 'title', label: 'Название', sort: false,  align: 'left' },
+		],
+		temp: [
+			{id: 0, name: 'title', label: 'Название', sort: false,  align: 'left' },
 		]
 	}),
 	getters: {
 		itemIndex: (state) => {
 			return (e) => state.columns.findIndex((item) => item.id === e.id)
+		},
+		name: () => {
+			return (e) => {
+				switch (e) {
+					case 'Тип':
+						return 'typ'
+					case 'Название':
+						return 'title'
+					case 'Вид карточки':
+						return 'vid'
+					case 'Статус':
+						return 'status'
+					case 'Автор':
+						return 'author'
+					case 'Изменено':
+						return 'changed'
+					default:
+						return 'id'
+				}
+			}
 		}
 	},
 	actions: {
-		add(e) {
-			let index = this.itemIndex(e)
-
-			let newItem = {}
-			newItem.id = new Date()
-			this.columns.splice(index + 1, 0, newItem)
+		addtemp(item, index) {
+			this.temp.splice(index, 0, item)
 		},
-		del(e) {
-			let index = this.itemIndex(e)
-			this.columns.splice(index, 1)
+		apply() {
+			Object.assign(this.columns, this.temp)
+		},
+		update(val, ind) {
+			const name = this.name(val)
+			this.temp[ind].name = name
+			this.temp[ind].label = val
 		}
+
 	}
 })

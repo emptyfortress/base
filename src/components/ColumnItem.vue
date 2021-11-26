@@ -16,7 +16,10 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, watch, computed } from 'vue'
+import { cols } from '@/data'
+
+const stringOptions = cols
 
 export default {
 	props: {
@@ -24,16 +27,53 @@ export default {
 		index: Number,
 	},
 	components: {},
-	setup(props) {
+	setup(props, context) {
 		const field = ref(props.item.label)
 		const showExtra = ref(false)
-		const options = null
+		const options = ref(stringOptions)
+
 		const reset = () => {
 			console.log(1)
 		}
-		const filterFn = () => {
-			console.log(1)
+
+		// const name = computed(() => {
+		// 	switch (field.value) {
+		// 		case 'Название':
+		// 			return 'title'
+		// 		case 'Вид карточки':
+		// 			return 'vid'
+		// 		case 'Статус':
+		// 			return 'status'
+		// 		case 'Автор':
+		// 			return 'author'
+		// 		case 'Изменено':
+		// 			return 'changed'
+		// 		default:
+		// 			return 'id'
+		// 	}
+		// })
+
+		const filterFn = (val, update) => {
+			if (val === '') {
+				update(() => {
+					options.value = stringOptions
+				})
+				return
+			}
+
+			update(() => {
+				const needle = val.toLowerCase()
+				options.value = stringOptions.filter(
+					(v) => v.toLowerCase().indexOf(needle) > -1
+				)
+			})
 		}
+
+		watch(field, (val, old) => {
+			if (val !== old) {
+				context.emit('update', val, props.index)
+			} else return
+		})
 
 		return {
 			field,
@@ -61,7 +101,7 @@ export default {
 	position: relative;
 	margin-bottom: 2px;
 	&:hover {
-		border: 2px solid var(--q-primary);
+		border: 1px solid var(--q-primary);
 		z-index: 4;
 	}
 	&:hover .add {

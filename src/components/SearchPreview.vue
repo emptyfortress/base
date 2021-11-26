@@ -82,4 +82,7 @@ td.small {
 	text-align: center;
 	font-size: 1rem;
 }
+td {
+	white-space: normal;
+}
 </style>
