@@ -51,9 +51,6 @@
 									WordHighlighter(:query="query") {{ item.comment }}
 		template(v-slot:after)
 			q-splitter(v-model="insideModel" horizontal)
-				template(v-slot:after)
-					.q-ml-sm
-						SearchPreview
 				template(v-slot:before)
 					.main
 						.row.items-center.justify-between
@@ -74,12 +71,16 @@
 								p.q-ml-md Добавляйте критерии и настраивайте условия
 								SearchForm(:id="sel.id")
 							q-tab-panel(name="view")
-								//- SearchView
+								SearchView
 						.action
 							q-btn(flat icon="mdi-trash-can-outline" label="Удалить поиск" color="primary" @click="deleteSearch")
-							div
+							.bt
 								q-btn(flat icon="mdi-share-variant" label="Поделиться" color="primary")
+								//- q-btn(flat color="primary" label="Применить")
 								q-btn(unelevated color="primary" icon="mdi-content-save-outline" label="Сохранить")
+				template(v-slot:after)
+					.q-ml-sm
+						SearchPreview(:columns="cols")
 </template>
 
 <script>
@@ -87,6 +88,7 @@ import { ref, computed, watch } from 'vue'
 import WordHighlighter from 'vue-word-highlighter'
 import SearchForm from '@/components/SearchForm.vue'
 import { useSearch } from '@/stores/search'
+import { useColumns } from '@/stores/columns'
 import SearchView from '@/components/SearchView.vue'
 import SearchPreview from '@/components/SearchPreview.vue'
 
@@ -226,7 +228,11 @@ export default {
 			} else commentList.value = false
 		}
 
+		const usecolumns = useColumns()
+		const cols = usecolumns.columns
+
 		return {
+			cols,
 			split,
 			commentList,
 			switchSidebar,
@@ -330,5 +336,8 @@ export default {
 	display: flex;
 	justify-content: space-between;
 	margin-top: 1rem;
+}
+.bt button {
+	margin-left: 0.5rem;
 }
 </style>

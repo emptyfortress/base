@@ -1,28 +1,36 @@
 <template lang="pug">
-.myrow
-	p Настройте вывод результатов поиска.
+.all
+	p Настройте вывод результатов поиска. Какие колонки и в каком порядке выводить:
+	draggable(:list="list" item-key="id")
+		template(#item="{ element, index }")
+			div
+				ColumnItem(:item="element" :index="index" @add="cols.add(element)" @delete="cols.del(element)")
+
 </template>
 
 <script>
-import { ref, computed, watchEffect } from 'vue'
+import draggable from 'vuedraggable'
+import { ref, reactive, watchEffect } from 'vue'
+import ColumnItem from '@/components/ColumnItem.vue'
+import { useColumns } from '@/stores/columns'
 
 export default {
-	components: {},
+	components: {
+		draggable,
+		ColumnItem,
+	},
 	setup() {
-		return {}
+		const cols = useColumns()
+		const list = cols.columns
+
+		return { cols, list }
 	},
 }
 </script>
 
 <style scoped lang="scss">
 @import '@/assets/styles/theme.scss';
-.myrow {
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
-	gap: 2rem;
-	p {
-		padding-top: 1rem;
-	}
+.all {
+	padding-left: 0.7rem;
 }
 </style>

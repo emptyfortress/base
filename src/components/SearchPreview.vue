@@ -3,14 +3,14 @@
 //- Toolbar
 q-table(ref="searchTable"
 	:rows="rows"
-	:columns="columns"
+	:columns="colns"
 	row-key="id"
 	flat
 	binary-state-sort
 	:pagination="pagination"
 	:hide-pagination="true"
 	color="primary"
-	:loading="loading"
+	v-if="columns.length"
 	)
 	template(v-slot:header="props")
 		q-tr(:props="props")
@@ -20,6 +20,9 @@ q-table(ref="searchTable"
 		q-tr(:props="props" :key="props.row.id")
 			q-td(key="read" :class="{ 'unread' : props.row.unread }" @click="toggle(props.row.id)").small
 			q-td(v-for="col in props.cols" :key="col.id") {{ props.row[col.name] }}
+.nodata(v-else)
+	q-icon(name="mdi-nut")
+	div Чтобы увидеть результаты - настройте критерии поиска и задайте хотя бы одну колонку в настройках представления.
 </template>
 
 <script>
@@ -28,11 +31,15 @@ import Toolbar from '@/components/common/Toolbar.vue'
 import { items } from '@/stores/data'
 
 export default {
+	props: {
+		columns: Array,
+	},
 	components: {
 		Toolbar,
 	},
-	setup() {
+	setup(props) {
 		const rows = reactive([...items])
+		const colns = reactive(props.columns)
 		const pagination = {
 			page: 1,
 			rowsPerPage: 0,
@@ -41,26 +48,12 @@ export default {
 			const current = rows.find((b) => b.id === e)
 			current.unread = !current.unread
 		}
-		const columns = reactive([
-			{
-				id: 0,
-				name: 'typ',
-				label: 'Тип',
-				field: 'typ',
-				align: 'left',
-			},
-			{
-				id: 1,
-				name: 'title',
-				label: 'Название',
-				align: 'left',
-			},
-		])
+
 		return {
 			rows,
-			columns,
 			pagination,
 			toggle,
+			colns,
 		}
 	},
 }
@@ -82,5 +75,11 @@ td.small {
 	&.unread {
 		background-color: var(--q-primary);
 	}
+}
+.nodata {
+	width: 50%;
+	margin: 1rem auto;
+	text-align: center;
+	font-size: 1rem;
 }
 </style>
