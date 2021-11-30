@@ -8,7 +8,8 @@
 				q-toolbar-title.gt-sm
 					span {{ formattedString }}
 				q-space
-				q-btn(dense flat round icon="mdi-magnify")
+				searchComponent(:searchMode="searchMode")
+				q-btn(dense flat round icon="mdi-magnify" @click="toggleSearch")
 				q-btn(dense round unelevated color="light-blue-2").q-ml-sm
 					q-avatar
 						img(src="@/assets/img/users/user0.svg")
@@ -54,9 +55,10 @@ import RDrawer from '@/components/RDrawer.vue'
 import { date } from 'quasar'
 import { useColor } from '@/stores/colors'
 import SvgIcon from '@/components/SvgIcon.vue'
+import searchComponent from '@/components/common/searchComponent.vue'
 
 export default {
-	components: { Drawer, RDrawer, SvgIcon },
+	components: { Drawer, RDrawer, SvgIcon, searchComponent },
 	setup() {
 		const leftDrawer = ref(true)
 		const rightDrawer = ref(false)
@@ -93,7 +95,15 @@ export default {
 		const timeStamp = Date.now()
 		const formattedString = date.formatDate(timeStamp, 'dddd, D MMMM')
 
+		const searchMode = ref(false)
+		const toggleSearch = () => {
+			// this.$store.commit('toggleSearchMode')
+			searchMode.value = !searchMode.value
+		}
+
 		return {
+			toggleSearch,
+			searchMode,
 			calcClass,
 			iconColor,
 			colors,
