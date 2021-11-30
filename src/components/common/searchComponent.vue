@@ -1,8 +1,8 @@
 <template lang="pug">
 transition(name="scale-right" mode="out-in")
-	.searchbox(v-if="searchMode")
-		.where laks
-		//- 	q-select(:items="scope" dark dense value="Везде" hide-detail)
+	.searchbox(v-if="poisk.searchMode")
+		.where
+			q-select(v-model="where" :options="scope" label="Искать" dense)
 		.place
 			q-input(outlined dense autofocus).sbox
 			q-btn(unelevated color="primary" label="Найти")
@@ -38,17 +38,25 @@ transition(name="scale-right" mode="out-in")
 </template>
 
 <script>
+import { usePoisk } from '@/stores/poisk'
+import { ref } from 'vue'
 // import searchFocus from '@/components/searchFocus'
 // import axios from 'axios'
 // import items from '@/store/data.js'
 
 export default {
-	props: ['searchMode'],
+	// props: ['searchMode'],
 	components: {
 		// searchFocus,
 	},
 	setup() {
-		return {}
+		const poisk = usePoisk()
+
+		return {
+			where: 'Везде',
+			scope: ['Везде', 'В текущей папке', 'В моих папках'],
+			poisk,
+		}
 	},
 
 	// data() {
@@ -226,7 +234,7 @@ export default {
 	display: flex;
 	margin-left: 6rem;
 	align-items: center;
-	background: pink;
+	/* background: pink; */
 	.where {
 		width: 200px;
 		margin-right: 1rem;

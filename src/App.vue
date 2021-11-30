@@ -8,8 +8,8 @@
 				q-toolbar-title.gt-sm
 					span {{ formattedString }}
 				q-space
-				searchComponent(:searchMode="searchMode")
-				q-btn(dense flat round icon="mdi-magnify" @click="toggleSearch")
+				searchComponent
+				q-btn(dense flat round icon="mdi-magnify" @click="poisk.toggleSearch")
 				q-btn(dense round unelevated color="light-blue-2").q-ml-sm
 					q-avatar
 						img(src="@/assets/img/users/user0.svg")
@@ -50,6 +50,7 @@
 import { ref, computed } from 'vue'
 import Drawer from '@/components/Drawer.vue'
 import RDrawer from '@/components/RDrawer.vue'
+import { usePoisk } from '@/stores/poisk'
 // import AggDrawer from '@/components/common/AggDrawer.vue'
 
 import { date } from 'quasar'
@@ -95,15 +96,10 @@ export default {
 		const timeStamp = Date.now()
 		const formattedString = date.formatDate(timeStamp, 'dddd, D MMMM')
 
-		const searchMode = ref(false)
-		const toggleSearch = () => {
-			// this.$store.commit('toggleSearchMode')
-			searchMode.value = !searchMode.value
-		}
+		const poisk = usePoisk()
 
 		return {
-			toggleSearch,
-			searchMode,
+			poisk,
 			calcClass,
 			iconColor,
 			colors,
