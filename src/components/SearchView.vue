@@ -1,10 +1,10 @@
 <template lang="pug">
 .all
 	p Настройте вывод результатов поиска. Какие колонки и в каком порядке выводить:
-	draggable(:list="list" item-key="id")
+	draggable(:list="list" item-key="id" @end="upd")
 		template(#item="{ element, index }")
 			div
-				ColumnItem(:item="element" :index="index" @add="add(element, index)" @delete="del(index)" @update="updateItem")
+				ColumnItem(:item="element" :index="index" @add="add(index)" @delete="del(index)" @update="updateItem")
 
 </template>
 
@@ -23,24 +23,29 @@ export default {
 		const cols = useColumns()
 		const list = reactive([...cols.columns])
 
-		const add = (e, index) => {
+		const add = (index) => {
 			let item = {}
-			Object.assign(item, e)
-			item.id = e.id + list.length
-			list.splice(index, 0, item)
+			item.id = new Date()
+			item.name = null
+			item.label = null
+			item.sort = false
+			item.align = 'left'
+			list.splice(index + 1, 0, item)
 			cols.addtemp(item, index)
 		}
 
 		const del = (index) => {
 			list.splice(index, 1)
+			cols.deltemp(index)
 		}
 		const updateItem = (val, ind) => {
-			// console.log(val)
-			// console.log(ind)
 			cols.update(val, ind)
 		}
+		const upd = () => {
+			cols.updateTemp(list)
+		}
 
-		return { list, add, del, updateItem }
+		return { list, add, del, updateItem, upd }
 	},
 }
 </script>

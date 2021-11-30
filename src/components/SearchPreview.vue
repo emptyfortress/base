@@ -3,7 +3,7 @@
 //- Toolbar
 q-table(ref="searchTable"
 	:rows="rows"
-	:columns="colns"
+	:columns="cols.columns"
 	row-key="id"
 	flat
 	binary-state-sort
@@ -15,7 +15,7 @@ q-table(ref="searchTable"
 	template(v-slot:header="props")
 		q-tr(:props="props")
 			q-th(auto-width :key="props.read").small
-			q-th(v-for="col in props.cols" :props="props" :key="col.name") {{ col.label}}
+			q-th(v-for="col in cols.columns" :props="props" :key="col.name") {{ col.label}}
 	template(v-slot:body="props")
 		q-tr(:props="props" :key="props.row.id")
 			q-td(key="read" :class="{ 'unread' : props.row.unread }" @click="toggle(props.row.id)").small
@@ -29,6 +29,7 @@ q-table(ref="searchTable"
 import { reactive } from 'vue'
 import Toolbar from '@/components/common/Toolbar.vue'
 import { items } from '@/stores/data'
+import { useColumns } from '@/stores/columns'
 
 export default {
 	props: {
@@ -37,9 +38,11 @@ export default {
 	components: {
 		Toolbar,
 	},
-	setup(props) {
+	setup() {
 		const rows = reactive([...items])
-		const colns = reactive(props.columns)
+		// const colns = reactive(props.columns)
+		const cols = useColumns()
+
 		const pagination = {
 			page: 1,
 			rowsPerPage: 0,
@@ -53,7 +56,7 @@ export default {
 			rows,
 			pagination,
 			toggle,
-			colns,
+			cols,
 		}
 	},
 }

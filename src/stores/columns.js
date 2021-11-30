@@ -37,16 +37,24 @@ export const useColumns = defineStore({
 	},
 	actions: {
 		addtemp(item, index) {
-			this.temp.splice(index, 0, item)
+			this.temp.splice(index + 1, 0, item)
+		},
+		deltemp(index) {
+			this.temp.splice(index, 1)
 		},
 		apply() {
-			Object.assign(this.columns, this.temp)
+			this.columns = [...this.temp]
 		},
 		update(val, ind) {
 			const name = this.name(val)
 			this.temp[ind].name = name
 			this.temp[ind].label = val
+		},
+		updateTemp(e) {
+			this.temp = [...e]
+
 		}
+
 
 	}
 })
