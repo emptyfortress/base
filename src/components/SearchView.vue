@@ -26,8 +26,8 @@ export default {
 		const add = (index) => {
 			let item = {}
 			item.id = new Date()
-			item.name = null
-			item.label = null
+			item.name = ''
+			item.label = ''
 			item.sort = false
 			item.align = 'left'
 			list.splice(index + 1, 0, item)

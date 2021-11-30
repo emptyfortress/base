@@ -76,7 +76,7 @@
 							q-btn(flat icon="mdi-trash-can-outline" label="Удалить поиск" color="primary" @click="deleteSearch")
 							.bt
 								q-btn(flat icon="mdi-share-variant" label="Поделиться" color="primary")
-								q-btn(flat color="primary" label="Применить" @click="apply")
+								q-btn(flat color="primary" :disabled="valid" label="Применить" @click="apply")
 								q-btn(unelevated color="primary" icon="mdi-content-save-outline" label="Сохранить")
 				template(v-slot:after)
 					.q-ml-sm
@@ -222,7 +222,6 @@ export default {
 
 		const commentList = ref(false)
 		const split = (val) => {
-			console.log(val)
 			if (val > 44) {
 				commentList.value = true
 			} else commentList.value = false
@@ -234,8 +233,15 @@ export default {
 		const apply = () => {
 			usecolumns.apply()
 		}
+		const valid = computed(() => {
+			const empty = usecolumns.temp.filter((item) => item.name === '')
+			if (empty.length > 0) {
+				return true
+			} else return false
+		})
 
 		return {
+			valid,
 			apply,
 			cols,
 			split,
