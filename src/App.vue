@@ -2,10 +2,10 @@
 #col(:class="mycolor")
 	q-layout(view="hHh LpR fFf")
 		q-header(:reveal="colors.reveal" :class="calcHeader")
-			q-toolbar
+			q-toolbar.toolbar
 				q-btn(dense flat round icon="mdi-menu" @click="toggleLeftDrawer")
 
-				q-toolbar-title.gt-sm
+				q-toolbar-title.tit
 					span {{ formattedString }}
 				q-space
 				searchComponent
@@ -24,9 +24,12 @@
 					q-btn(v-if="!colors.mini" dense flat round size="sm" icon="mdi-pin-off-outline")
 					q-btn(v-if="colors.mini" flat icon="mdi-reload").full-width
 				.right
-					q-btn(unelevated icon="mdi-plus" color="primary-darken-2") Создать
-					q-btn(unelevated)
-						SvgIcon(name="search-scan")
+					transition(name="slide-top")
+						div(v-if="!poisk.searchMode")
+							q-btn(unelevated icon="mdi-plus" color="primary-darken-2") Создать
+							q-btn(unelevated)
+								SvgIcon(name="search-scan")
+						searchSubbar(v-else)
 
 		Drawer(:show="leftDrawer" @toggle="toggleLeftDrawer")
 		RDrawer(:show="rightDrawer")
@@ -57,9 +60,10 @@ import { date } from 'quasar'
 import { useColor } from '@/stores/colors'
 import SvgIcon from '@/components/SvgIcon.vue'
 import searchComponent from '@/components/common/searchComponent.vue'
+import searchSubbar from '@/components/common/searchSubbar.vue'
 
 export default {
-	components: { Drawer, RDrawer, SvgIcon, searchComponent },
+	components: { Drawer, RDrawer, SvgIcon, searchComponent, searchSubbar },
 	setup() {
 		const leftDrawer = ref(true)
 		const rightDrawer = ref(false)
@@ -94,7 +98,7 @@ export default {
 		})
 
 		const timeStamp = Date.now()
-		const formattedString = date.formatDate(timeStamp, 'dddd, D MMMM')
+		const formattedString = date.formatDate(timeStamp, 'ddd, D MMMM')
 
 		const poisk = usePoisk()
 
@@ -136,6 +140,8 @@ export default {
 }
 
 .head {
+	height: 106px;
+	line-height: 64px;
 	/* backdrop-filter: blur(10px); */
 	/* -webkit-backdrop-filter: blur(10px); */
 	/* background-color: #0000001a; */
@@ -151,9 +157,9 @@ body.body--dark .head {
 .subbar {
 	background-color: #cccccc1c;
 	color: var(--font-color);
-	height: 36px;
+	height: 42px;
 	display: flex;
-	line-height: 36px;
+	line-height: 42px;
 	.left,
 	.right {
 		padding: 0 0.5rem;
@@ -196,5 +202,11 @@ body.body--dark .head {
 	bottom: -2px;
 	background: green;
 	border: 1px solid #fff;
+}
+.q-space {
+	height: 64px;
+}
+.tit {
+	min-width: 230px;
 }
 </style>

@@ -6,6 +6,7 @@
 				q-icon(name="mdi-plus")
 		.cond
 			.myrow
+				//- mySelect(:model="props.item.mod1" label="Поле" :options="options1").norm
 				q-select(dense v-model="props.item.mod1" use-input hide-selected fill-input input-debounce="0" label="Поле" :options="options1" @filter="filterFn1").norm
 					template(v-slot:no-option)
 						q-item
@@ -27,13 +28,16 @@
 <script>
 import { ref, computed, watchEffect } from 'vue'
 import { fields, conditions, values, names } from '@/data.js'
+import mySelect from '@/components/common/mySelect.vue'
 
 const stringOptions1 = fields
 const stringOptions2 = conditions
 let stringOptions3 = values
 
 export default {
-	components: {},
+	components: {
+		mySelect,
+	},
 	props: ['item'],
 	emits: ['invert', 'add', 'reset'],
 

@@ -2,9 +2,9 @@
 transition(name="scale-right" mode="out-in")
 	.searchbox(v-if="poisk.searchMode")
 		.where
-			q-select(v-model="where" :options="scope" label="Искать" dense)
+			q-select(v-model="where" :options="scope" dense)
 		.place
-			q-input(outlined dense autofocus).sbox
+			q-input(v-model="poisk.model" outlined dense autofocus clearable ).sbox
 			q-btn(unelevated color="primary" label="Найти")
 			//- input(:placeholder="holder"
 			//- 	v-model="query"
@@ -53,178 +53,12 @@ export default {
 		const poisk = usePoisk()
 
 		return {
+			poisk,
 			where: 'Везде',
 			scope: ['Везде', 'В текущей папке', 'В моих папках'],
 			poisk,
 		}
 	},
-
-	// data() {
-	// 	return {
-	// 		scope: ['Везде', 'В текущей папке', 'В моих папках'],
-	// 		history: 1,
-	// 		holder: 'Номер, содержание, ФИО участников, текст документов и др.',
-	// 		query: '',
-	// 		searchResultsVisible: false,
-	// 		posts: [],
-	// 		items: [],
-	// 		searchResults: [],
-	// 		highlightedIndex: null,
-	// 		options: {
-	// 			shouldSort: true,
-	// 			includeMatches: true,
-	// 			threshold: 0.4,
-	// 			location: 0,
-	// 			distance: 500,
-	// 			maxPatternLength: 32,
-	// 			minMatchCharLength: 1,
-	// 			keys: ['txt'],
-	// 		},
-	// 		options1: {
-	// 			shouldSort: true,
-	// 			includeMatches: true,
-	// 			threshold: 0.1,
-	// 			location: 0,
-	// 			distance: 1000,
-	// 			tokenize: true,
-	// 			maxPatternLength: 32,
-	// 			minMatchCharLength: 1,
-	// 			keys: ['title', 'author', 'digest', 'file'],
-	// 		},
-	// 	}
-	// },
-	// created () {
-	// 	axios.get('/history.json')
-	// 		.then(response => {
-	// 			this.posts = response.data
-	// 		})
-	// 	this.setfocus()
-	// },
-	// computed: {
-	// 	searchMode() {
-	// 		return true
-	// 		// return this.$store.getters.searchMode
-	// 	},
-	// 	searchItemsResults() {
-	// 		return []
-	// 		// return this.$store.getters.searchItemsResults
-	// 	},
-	// },
-	// methods: {
-	// 	reset() {
-	// 		this.query = ''
-	// 		this.highlightedIndex = null
-	// 	},
-	// 	softReset() {
-	// 		this.searchResultsVisible = true
-	// 		this.highlightedIndex = null
-	// 	},
-	// 	setfocus() {
-	// 		let that = this
-	// 		setTimeout(function () {
-	// 			that.$refs.search.focus()
-	// 		}, 500)
-	// 	},
-	// 	focusSearch(e) {
-	// 		if (e.key === '/' || e.key === '.') {
-	// 			this.$store.commit('toggleSearchMode')
-	// 			this.query = ''
-	// 			let that = this
-	// 			setTimeout(function () {
-	// 				that.$refs.search.focus()
-	// 			}, 500)
-	// 		}
-	// 	},
-	// 	performSearch() {
-	// 		this.$search(this.query, this.posts, this.options).then((results) => {
-	// 			this.searchResults = results
-	// 		})
-	// 	},
-	// 	hightlightPrev() {
-	// 		if (this.highlightedIndex === null) {
-	// 			this.highlightedIndex = this.searchResults.length - 1
-	// 			this.scrollIntoView()
-	// 		} else if (this.highlightedIndex > 0) {
-	// 			this.highlightedIndex = this.highlightedIndex - 1
-	// 			this.scrollIntoView()
-	// 		}
-	// 	},
-	// 	hightlightNext() {
-	// 		if (this.highlightedIndex === null) {
-	// 			this.highlightedIndex = 0
-	// 		} else if (this.highlightedIndex < this.searchResults.length - 1) {
-	// 			this.highlightedIndex = this.highlightedIndex + 1
-	// 			this.scrollIntoView()
-	// 		}
-	// 	},
-	// 	scrollIntoView() {
-	// 		this.$refs.results[this.highlightedIndex].$el.scrollIntoView({
-	// 			block: 'nearest',
-	// 		})
-	// 	},
-	// 	goToLink(e) {
-	// 		let that = this
-	// 		this.$store.commit('setLoading', true)
-	// 		this.searchResultsVisible = false
-	// 		this.$store.commit('setMini', true)
-	// 		let tot = '/results/' + this.query
-	// 		if (this.query === '!!') {
-	// 			this.$store.commit('setLoading', false)
-	// 			this.$store.commit('toggleSearchMode')
-	// 			this.$router.push('/advanced')
-	// 			this.query = ''
-	// 		} else if (e === null) {
-	// 			this.$router.push(tot)
-	// 			this.$search(this.query, this.items, this.options1).then((results) => {
-	// 				this.$store.commit('setSearchItemsResults', results)
-	// 			})
-	// 		} else {
-	// 			this.query = this.searchResults[e].item.txt
-	// 			let tut = '/results/' + this.query
-	// 			this.$router.push(tut)
-	// 			this.$search(this.query, this.items, this.options1).then((results) => {
-	// 				this.$store.commit('setSearchItemsResults', results)
-	// 			})
-	// 		}
-	// 		setTimeout(function () {
-	// 			that.$store.commit('setLoading', false)
-	// 		}, 2000)
-	// 	},
-	// 	find() {
-	// 		let query = this.query.trim()
-	// 		let that = this
-	// 		this.$store.commit('setLoading', true)
-	// 		this.searchResultsVisible = false
-	// 		this.$store.commit('setMini', true)
-	// 		if (query === '!!') {
-	// 			this.$store.commit('setLoading', false)
-	// 			this.$router.push('/advanced')
-	// 			this.query = ''
-	// 		} else if (query === this.$route.params.id) {
-	// 			this.$store.commit('setLoading', false)
-	// 			return
-	// 		} else {
-	// 			let tot = '/results/' + query
-	// 			this.$router.push(tot)
-	// 			this.$search(query, this.items, this.options1).then((results) => {
-	// 				this.$store.commit('setSearchItemsResults', results)
-	// 			})
-	// 		}
-	// 		setTimeout(function () {
-	// 			that.$store.commit('setLoading', false)
-	// 		}, 2000)
-	// 	},
-	// },
-	// watch: {
-	// 	active: function () {
-	// 		if (this.active) {
-	// 			let that = this
-	// 			setTimeout(function () {
-	// 				that.$refs.search.focus()
-	// 			}, 500)
-	// 		}
-	// 	},
-	// },
 }
 </script>
 
@@ -232,23 +66,21 @@ export default {
 .searchbox {
 	width: 100%;
 	display: flex;
-	margin-left: 6rem;
 	align-items: center;
-	/* background: pink; */
 	.where {
-		width: 200px;
+		width: 150px;
 		margin-right: 1rem;
 	}
 	.place {
 		display: flex;
-		width: 80%;
-		/* position: relative; */
+		width: 100%;
+		margin-right: 1rem;
 	}
 	.sbox {
 		/* border: none; */
 		width: 100%;
 		background: #fff;
-		/* border-radius: 4px; */
+		border-radius: 4px;
 		height: 39px;
 		margin-right: 8px;
 		/* color: #000; */

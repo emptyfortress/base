@@ -4,12 +4,19 @@ export const usePoisk = defineStore({
 	id: 'poisk',
 	state: () => ({
 		searchMode: false,
+		model: '',
+		extra: '',
 	}),
 	getters: {},
 	actions: {
 		toggleSearch() {
 			this.searchMode = !this.searchMode
+		},
+		updateModel(l, m) {
+			this.model = this.model.concat(l, ': ', m, ', ')
+		},
+		updateExtra(e) {
+			this.extra = e
 		}
-
 	}
 })
