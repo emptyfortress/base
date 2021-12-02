@@ -101,7 +101,7 @@ export default {
 	},
 	setup() {
 		const search = useSearch()
-		const allSearch = search.allSearch
+		// const allSearch = search.allSearch
 
 		const firstItem = ref(true)
 		const secondItem = ref(false)
@@ -119,22 +119,22 @@ export default {
 		}
 
 		const setStar = (e) => {
-			const index = allSearch.findIndex((item) => item.id === e)
-			allSearch[index].star = !allSearch[index].star
+			const index = search.allSearch.findIndex((item) => item.id === e)
+			search.allSearch[index].star = !search.allSearch[index].star
 		}
 
 		const duble = () => {
 			const listt = search.allList[sel.value.id].list
-			const item = allSearch.filter((item) => item.active === true)[0]
+			const item = search.allSearch.filter((item) => item.active === true)[0]
 			const oldlabel = item.label
 			const newItem = {}
 			newItem.label = oldlabel + ' (копия)'
 			newItem.star = item.star
 			newItem.active = true
 			newItem.comment = item.comment
-			newItem.id = allSearch.length
-			allSearch.map((item) => (item.active = false))
-			allSearch.push(newItem)
+			newItem.id = search.allSearch.length
+			search.allSearch.map((item) => (item.active = false))
+			search.allSearch.push(newItem)
 			search.allList.push({
 				id: newItem.id,
 				list: listt,
@@ -142,22 +142,22 @@ export default {
 		}
 
 		const setActive = (e) => {
-			const index = allSearch.findIndex((item) => item.id === e)
-			allSearch.map((item) => {
+			const index = search.allSearch.findIndex((item) => item.id === e)
+			search.allSearch.map((item) => {
 				item.active = false
 			})
-			allSearch[index].active = true
+			search.allSearch[index].active = true
 		}
 
 		const filteredItems = computed(() => {
-			return allSearch.filter((row) => {
+			return search.allSearch.filter((row) => {
 				if (query.value) {
 					return (
 						row.label.toLowerCase().includes(query.value.toLowerCase()) ||
 						row.comment.toLowerCase().includes(query.value.toLowerCase())
 					)
 				}
-				return allSearch
+				return search.allSearch
 			})
 		})
 
@@ -172,7 +172,7 @@ export default {
 			})
 		})
 		const sel = computed(() => {
-			return allSearch.filter((item) => item.active)[0]
+			return search.allSearch.filter((item) => item.active)[0]
 		})
 
 		const clearFilter = () => {
@@ -189,25 +189,25 @@ export default {
 		const update = () => {
 			const zag = document.getElementById('zg')
 			const text = zag.innerHTML
-			const index = allSearch.findIndex((item) => item.active)
-			allSearch[index].label = text
+			const index = search.allSearch.findIndex((item) => item.active)
+			search.allSearch[index].label = text
 		}
 		const updatecomment = () => {
 			const comm = document.getElementById('comment')
 			const text = comm.innerHTML
-			const index = allSearch.findIndex((item) => item.active)
-			allSearch[index].comment = text
+			const index = search.allSearch.findIndex((item) => item.active)
+			search.allSearch[index].comment = text
 		}
 
 		const addSearch = () => {
-			allSearch.map((item) => (item.active = false))
+			search.allSearch.map((item) => (item.active = false))
 			let item = {}
-			item.id = allSearch.length
+			item.id = search.allSearch.length
 			item.star = true
 			item.active = true
 			item.comment = 'Введите комментарий к поиску'
 			item.label = 'Новый поиск'
-			allSearch.push(item)
+			search.allSearch.push(item)
 			search.allList.push({
 				id: item.id,
 				list: [{ id: 0, and: true, mod1: null, mod2: null, mod3: null }],
@@ -215,9 +215,9 @@ export default {
 		}
 
 		const deleteSearch = () => {
-			const index = allSearch.findIndex((item) => item.active)
-			allSearch.splice(index, 1)
-			allSearch[0].active = true
+			const index = search.allSearch.findIndex((item) => item.active)
+			search.allSearch.splice(index, 1)
+			search.allSearch[0].active = true
 		}
 
 		const commentList = ref(false)
@@ -266,7 +266,7 @@ export default {
 			updatecomment,
 			duble,
 			clearFilter,
-			tab: ref('view'),
+			tab: ref('query'),
 		}
 	},
 }

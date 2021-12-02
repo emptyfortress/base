@@ -5,10 +5,14 @@ export const router = createRouter({
 	history: createWebHashHistory(),
 
 	routes: [
+		// {
+		// 	path: '/',
+		// 	name: 'home',
+		// 	component: Home,
+		// },
 		{
 			path: '/',
-			name: 'home',
-			component: Home,
+			redirect: '/search',
 		},
 		{
 			path: '/doc',

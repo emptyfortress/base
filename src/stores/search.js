@@ -200,4 +200,16 @@ export const useSearch = defineStore({
 		],
 	}),
 	getters: {},
+	actions: {
+		saveSearch(e) {
+			this.allSearch.map((item) => (item.active = false))
+			let item = {}
+			item.id = this.allSearch.length
+			item.star = true
+			item.active = true
+			item.comment = 'Введите комментарий к поиску'
+			item.label = e
+			this.allSearch.push(item)
+		}
+	}
 })

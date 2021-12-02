@@ -4,20 +4,9 @@ transition(name="scale-right" mode="out-in")
 		.where
 			q-select(v-model="where" :options="scope" dense)
 		.place
-			q-input(v-model="poisk.model" outlined dense autofocus clearable ).sbox
+			q-btn(flat round dense size="10px" icon="mdi-star-outline" :disabled="poisk.model === ''" @click="newSearch").star
+			q-input(v-model="poisk.model" outlined dense autofocus clearable @clear="clear" ).sbox
 			q-btn(unelevated color="primary" label="Найти")
-			//- input(:placeholder="holder"
-			//- 	v-model="query"
-			//- 	@focus="searchResultsVisible = true"
-			//- 	@keydown.esc="searchResultsVisible = false"
-			//- 	@input="softReset"
-			//- 	ref="search"
-			//- 	@keyup="performSearch"
-			//- 	@keydown.up.prevent="hightlightPrev"
-			//- 	@keydown.down.prevent="hightlightNext"
-			//- 	@keydown.enter="goToLink(highlightedIndex)"
-			//- 	)
-//- 			.closeIcon(v-show="query.length > 0" @click="reset") &times;
 //- 			v-list(v-show="query.length > 0 && searchResultsVisible" v-model="history" dense elevation="1").complete
 //- 				v-list-item-group
 //- 					v-list-item(v-for="(post, index) in searchResults" :key="index"
@@ -32,31 +21,32 @@ transition(name="scale-right" mode="out-in")
 //- 						v-list-item-content {{ post.item.txt }}
 //- 				.noresult(v-show="searchResults.length === 0") Нет предыдущих поисков с '{{ query }}'
 
-			//- q-btn(outline color="#fff" label="Найти")
-				//- q-btn(outline color="#fff" @click="find" :disabled="!query.length" dark label="Найти")
-		//- searchFocus(@keyup="focusSearch")
 </template>
 
 <script>
 import { usePoisk } from '@/stores/poisk'
+import { useSearch } from '@/stores/search'
 import { ref } from 'vue'
-// import searchFocus from '@/components/searchFocus'
-// import axios from 'axios'
-// import items from '@/store/data.js'
 
 export default {
-	// props: ['searchMode'],
-	components: {
-		// searchFocus,
-	},
+	components: {},
 	setup() {
 		const poisk = usePoisk()
+		const clear = () => {
+			poisk.clearModel()
+		}
+
+		const search = useSearch()
+		const newSearch = () => {
+			search.saveSearch(poisk.model)
+		}
 
 		return {
-			poisk,
 			where: 'Везде',
 			scope: ['Везде', 'В текущей папке', 'В моих папках'],
 			poisk,
+			clear,
+			newSearch,
 		}
 	},
 }
@@ -117,5 +107,9 @@ export default {
 }
 .selection {
 	background: #efefef;
+}
+.star {
+	height: 12px;
+	margin-top: 7px;
 }
 </style>

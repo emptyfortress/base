@@ -6,11 +6,11 @@ q-drawer(:model-value="show" side="left" :mini="colors.mini" :width="width" bord
 				q-icon(:name="page.icon")
 			q-item-section {{ page.title }}
 
-		q-item.bottom
+		//- q-item.bottom
 			q-item-section(avatar)
 				q-icon(name="mdi-bookshelf")
 			q-item-section БИБЛИОТЕКА
-		q-item(v-for="item in lib" :key="item.id" :to="item.url" clickable v-ripple)
+		//- q-item(v-for="item in lib" :key="item.id" :to="item.url" clickable v-ripple)
 			q-item-section(avatar)
 				q-icon(:name="item.icon")
 			q-item-section {{ item.title }}
@@ -30,15 +30,15 @@ export default {
 	setup() {
 		const colors = useColor()
 		const pages = [
-			{ id: 1, title: 'Цвета', icon: 'mdi-palette', url: '/' },
-			{ id: 2, title: 'Главная', icon: 'mdi-home-roof', url: '/dash' },
-			{ id: 3, title: 'Документ', icon: 'mdi-text-box-outline', url: '/doc' },
-			{
-				id: 4,
-				title: 'Грид',
-				icon: 'mdi-file-table-box-outline',
-				url: '/grid',
-			},
+			// { id: 1, title: 'Цвета', icon: 'mdi-palette', url: '/' },
+			// { id: 2, title: 'Главная', icon: 'mdi-home-roof', url: '/dash' },
+			// { id: 3, title: 'Документ', icon: 'mdi-text-box-outline', url: '/doc' },
+			// {
+			// 	id: 4,
+			// 	title: 'Грид',
+			// 	icon: 'mdi-file-table-box-outline',
+			// 	url: '/grid',
+			// },
 			{
 				id: 5,
 				title: 'Сервис поиска',

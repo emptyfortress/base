@@ -11,7 +11,7 @@
 				q-item
 					q-item-section
 						q-input(dense)
-				q-item(v-for="item in list" clickable v-close-popup @click="toggleExtra(item)")
+				q-item(v-for="item in list" :key="item.id" clickable v-close-popup @click="toggleExtra(item)")
 					q-item-section {{ item.label }}
 </template>
 
