@@ -4,7 +4,7 @@
 	mySelect(label="Вид" :options="options2").sel
 	mySelect(label="Статус" :options="options3").sel
 	mySelect(label="Автор" :options="options4").sel
-	mySelect(autofocus v-if="showExtra" :label="poisk.extra" :options="options4").sel
+	mySelect(autofocus v-if="showExtra" :label="poisk.extra" :options="options5").sel
 	q-btn(v-if="!showExtra" flat dense icon="mdi-plus")
 		q-menu(persistent)
 			q-list
@@ -17,7 +17,7 @@
 
 <script>
 import { ref, computed, watchEffect } from 'vue'
-import { names, type, vid, status } from '@/data.js'
+import { names, type, vid, status, values } from '@/data.js'
 import mySelect from '@/components/common/mySelect.vue'
 import { usePoisk } from '@/stores/poisk'
 
@@ -25,6 +25,7 @@ const nameOptions = names
 const typeOptions = type
 const vidOptions = vid
 const statusOptions = status
+const valueOptions = values
 
 export default {
 	components: {
@@ -35,6 +36,7 @@ export default {
 		const options2 = ref(vidOptions)
 		const options3 = ref(statusOptions)
 		const options4 = ref(nameOptions)
+		const options5 = ref(valueOptions)
 
 		const list = [
 			{ id: 0, label: 'Рег. номер', action: '' },
@@ -67,6 +69,7 @@ export default {
 			options2,
 			options3,
 			options4,
+			options5,
 		}
 	},
 }
