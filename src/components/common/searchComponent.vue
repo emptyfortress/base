@@ -11,34 +11,32 @@ transition(name="scale-right" mode="out-in")
 				@keydown.esc="showComplete = false"
 				ref="searchBox"
 				).sbox
-				q-list(v-show="poisk.model.length > 1 && showComplete" v-click-away="closeComplete").complete
-					q-item(v-for="item in completes" :key="item.id" clickable v-ripple)
+				q-list(v-show="poisk.model.length > 0 && showComplete" v-click-away="closeComplete").complete
+					q-item(v-for="item in completes" :key="item.id" clickable v-ripple @click="setPoisk(item)")
 						q-item-section
-							q-item-label Fuck
+							q-item-label
+								q-icon(name="mdi-star" size="12px")
+								WordHighlighter(:query="poisk.model") {{ item.label }}
+					q-item(v-for="item in hist" clickable v-ripple @click="setPoisk(item)")
+						q-item-section
+							q-item-label
+								q-icon(name="mdi-magnify" size="12px")
+								WordHighlighter(:query="poisk.model") {{ item }}
 			q-btn(unelevated color="primary" label="Найти")
-//- 			v-list(v-show="query.length > 0 && searchResultsVisible" v-model="history" dense elevation="1").complete
-//- 				v-list-item-group
-//- 					v-list-item(v-for="(post, index) in searchResults" :key="index"
-//- 						href=""
-//- 						@mousedown.prevent="searchResultsVisible = true"
-//- 						:class="{'selection' : index === highlightedIndex}"
-//- 						ref="results"
-//- 						@click="goToLink(index)"
-//- 						)
-//- 						v-list-item-icon
-//- 							v-icon(size="20" color="#aaa") mdi-clock-time-two-outline
-//- 						v-list-item-content {{ post.item.txt }}
-//- 				.noresult(v-show="searchResults.length === 0") Нет предыдущих поисков с '{{ query }}'
 
 </template>
 
 <script>
+import { ref, computed } from 'vue'
 import { usePoisk } from '@/stores/poisk'
 import { useSearch } from '@/stores/search'
-import { ref } from 'vue'
+import WordHighlighter from 'vue-word-highlighter'
+import { history } from '@/data.js'
 
 export default {
-	components: {},
+	components: {
+		WordHighlighter,
+	},
 	setup() {
 		const poisk = usePoisk()
 		const clear = () => {
@@ -52,14 +50,34 @@ export default {
 
 		const showComplete = ref(true)
 
-		const completes = search.allSearch
+		const completes = computed(() => {
+			const all = search.allSearch.filter((item) => {
+				return item.label.includes(poisk.model)
+			})
+			return all
+		})
+
+		const hist = computed(() => {
+			return history.filter((item) => item.includes(poisk.model))
+		})
+
 		const closeComplete = () => {
 			if (showComplete.value) {
 				showComplete.value = false
 			}
 		}
 
+		const setPoisk = (e) => {
+			if (typeof e === 'object' && e !== null) {
+				poisk.setModel(e.label)
+			} else if (typeof e === 'string' && e !== null) {
+				poisk.setModel(e)
+			}
+		}
+
 		return {
+			setPoisk,
+			hist,
 			completes,
 			showComplete,
 			closeComplete,
@@ -107,6 +125,10 @@ export default {
 	z-index: 3;
 	box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
 	color: var(--text-color);
+	.q-icon {
+		color: #aaa;
+		margin-right: 0.5rem;
+	}
 }
 .noresult {
 	padding-left: 1rem;

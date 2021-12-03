@@ -20,6 +20,9 @@ export const usePoisk = defineStore({
 		},
 		updateExtra(e) {
 			this.extra = e
+		},
+		setModel(e) {
+			this.model = e
 		}
 	}
 })
