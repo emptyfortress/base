@@ -5,7 +5,16 @@ transition(name="scale-right" mode="out-in")
 			q-select(v-model="where" :options="scope" dense)
 		.place
 			q-btn(flat round dense size="10px" icon="mdi-star-outline" :disabled="poisk.model === ''" @click="newSearch").star
-			q-input(v-model="poisk.model" outlined dense autofocus clearable @clear="clear" ).sbox
+			q-input(v-model="poisk.model" outlined dense autofocus clearable
+				@clear="clear"
+				@keydown="showComplete = true"
+				@keydown.esc="showComplete = false"
+				ref="searchBox"
+				).sbox
+				q-list(v-show="poisk.model.length > 1 && showComplete" v-click-away="closeComplete").complete
+					q-item(v-for="item in completes" :key="item.id" clickable v-ripple)
+						q-item-section
+							q-item-label Fuck
 			q-btn(unelevated color="primary" label="Найти")
 //- 			v-list(v-show="query.length > 0 && searchResultsVisible" v-model="history" dense elevation="1").complete
 //- 				v-list-item-group
@@ -41,7 +50,19 @@ export default {
 			search.saveSearch(poisk.model)
 		}
 
+		const showComplete = ref(true)
+
+		const completes = search.allSearch
+		const closeComplete = () => {
+			if (showComplete.value) {
+				showComplete.value = false
+			}
+		}
+
 		return {
+			completes,
+			showComplete,
+			closeComplete,
 			where: 'Везде',
 			scope: ['Везде', 'В текущей папке', 'В моих папках'],
 			poisk,
@@ -67,14 +88,12 @@ export default {
 		margin-right: 1rem;
 	}
 	.sbox {
-		/* border: none; */
+		position: relative;
 		width: 100%;
 		background: #fff;
 		border-radius: 4px;
 		height: 39px;
 		margin-right: 8px;
-		/* color: #000; */
-		/* padding: 0 0.8rem; */
 	}
 }
 .complete {
@@ -82,31 +101,17 @@ export default {
 	top: 40px;
 	left: 0;
 	width: 100%;
-	max-height: 300px;
+	max-height: 70vh;
 	background: #fff;
 	overflow: auto;
+	z-index: 3;
+	box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+	color: var(--text-color);
 }
 .noresult {
 	padding-left: 1rem;
 	color: #aaa;
 	/* padding: 1rem; */
-}
-.closeIcon {
-	position: absolute;
-	top: 3px;
-	right: 1rem;
-	font-size: 1.4rem;
-	cursor: pointer;
-}
-.v-application--is-ltr .v-list-item__action:first-child,
-.v-application--is-ltr .v-list-item__icon:first-child {
-	margin-right: 1rem;
-}
-.v-list-item:hover {
-	background: #efefef;
-}
-.selection {
-	background: #efefef;
 }
 .star {
 	height: 12px;

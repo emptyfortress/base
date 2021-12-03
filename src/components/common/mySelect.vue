@@ -42,6 +42,7 @@ export default {
 			setTimeout(() => {
 				model.value = null
 				context.emit('update')
+				document.querySelector('.sbox').focus()
 			}, 100)
 		}
 
