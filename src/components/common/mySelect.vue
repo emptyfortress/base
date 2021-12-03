@@ -41,6 +41,7 @@ export default {
 			poisk.updateModel(props.label, e)
 			setTimeout(() => {
 				model.value = null
+				context.emit('update')
 			}, 100)
 		}
 

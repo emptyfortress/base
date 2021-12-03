@@ -4,7 +4,7 @@
 	mySelect(label="Вид" :options="options2").sel
 	mySelect(label="Статус" :options="options3").sel
 	mySelect(label="Автор" :options="options4").sel
-	mySelect(autofocus v-if="showExtra" :label="poisk.extra" :options="options5").sel
+	mySelect(autofocus v-if="showExtra" :label="poisk.extra" :options="options5" @update="showExtra = false").sel
 	q-btn(v-if="!showExtra" flat dense icon="mdi-plus")
 		q-menu(persistent)
 			q-list
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { ref, computed, watchEffect } from 'vue'
+import { ref } from 'vue'
 import { names, type, vid, status, values } from '@/data.js'
 import mySelect from '@/components/common/mySelect.vue'
 import { usePoisk } from '@/stores/poisk'
@@ -55,6 +55,7 @@ export default {
 		const poisk = usePoisk()
 
 		const showExtra = ref(false)
+
 		const toggleExtra = (e) => {
 			poisk.updateExtra(e.label)
 			showExtra.value = true
