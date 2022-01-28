@@ -22,10 +22,7 @@
 					span {{ col.label }}
 					q-icon(name="mdi-filter" color="negative" v-if="showFilt(col)" @click.stop="clearFilter(col)").filt
 					q-icon(name="mdi-filter-outline" @click.stop="toggleFilter(col.id)" v-if="!showFilt(col)").sort
-					.resizer
-
-					//- .sort(@click.stop)
-					//- 	q-btn(unelevated dense round size="xs" icon="mdi-filter-outline" @click.stop="toggleFilter(col.id)" v-if="!showFilt(col)")
+					.resizer(@mousedown.prevent="mouseDown")
 
 					transition(name="slide-top")
 						Filter(:filterByIndex="filterByIndex" :col="col" @close="filterByIndex = null" :data="colData(col)" :datum="col.datum")
@@ -44,16 +41,6 @@
 		//- template(v-slot:bottom v-if="selected.length")
 		//- 	Total(:selected="selected.length" @clear="clearSelected")
 	//- q-dialog(v-model="showTotal" seamless position="bottom")
-		q-card
-			q-linear-progress(:value="1" color="primary")
-			q-card-section(class="row items-center no-wrap")
-				div
-					div(class="text-weight-bold") The Walker
-					div(class="text-grey") Fitz & The Tantrums
-				q-space
-				q-btn(flat round icon="mdi-play")
-				q-btn(flat round icon="mdi-pause")
-				q-btn(flat round icon="mdi-close" v-close-popup)
 
 
 </template>
@@ -168,6 +155,32 @@ export default {
 			else return false
 		})
 
+		const x = ref(0)
+		const w = ref(0)
+		const mouseDown = (e) => {
+			console.log(e)
+			x.value = e.clientX
+			const styles = window.getComputedStyle(e.srcElement.parentNode)
+			w.value = parseInt(styles.width, 10)
+
+			document.addEventListener('mousemove', mouseMoveHandler)
+			document.addEventListener('mouseup', mouseUpHandler)
+		}
+
+		const mouseMoveHandler = (e) => {
+			const dx = e.clientX - x.value
+			// Update the width of column
+			const th = e.srcElement.parentNode
+			th.style.width = `${w.value + dx}px`
+			// e.srcElement.style.width = `${w + dx}px`
+		}
+
+		const mouseUpHandler = (el) => {
+			document.removeEventListener('mousemove', mouseMoveHandler)
+			document.removeEventListener('mouseup', mouseUpHandler)
+			console.log(el)
+		}
+
 		return {
 			showTotal,
 			rowClass,
@@ -186,6 +199,7 @@ export default {
 			toggleFilter,
 			showFilt,
 			props,
+			mouseDown,
 		}
 	},
 }
@@ -194,6 +208,9 @@ export default {
 <style scoped lang="scss">
 .full .fixhd {
 	height: 100vh;
+}
+.fixhd {
+	width: 100%;
 }
 .q-table.fixhd th {
 	padding: 4px !important;
@@ -236,9 +253,6 @@ td.small {
 		body.body--dark & {
 			background: var(--bg-dark);
 		}
-		.q-btn:first-child {
-			margin-right: 7px;
-		}
 		.q-icon {
 			transition: 0.3s ease all;
 			&.up {
@@ -257,17 +271,21 @@ td.small {
 			align-items: center;
 			padding-right: 3px;
 		}
+		.filt {
+			z-index: 2;
+		}
 	}
 	.resizer {
 		position: absolute;
 		top: 0;
 		right: 0;
-		width: 8px;
+		width: 30px;
+		height: calc(100vh - 160px);
 		cursor: col-resize;
 		user-select: none;
-		&:hover,
-		.resizing {
-			background: var(--q-primary);
+		&:hover {
+			border-right: 2px solid var(--q-primary);
+			background: #cccccc33;
 		}
 	}
 }
