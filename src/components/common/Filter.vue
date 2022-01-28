@@ -34,14 +34,13 @@ import { ref } from 'vue'
 import Journal from '@/components/common/Journal.vue'
 
 export default {
-	props: ['filterByIndex', 'col', 'data', 'datum' ],
+	props: ['filterByIndex', 'col', 'data', 'datum'],
 	emits: ['close'],
 	components: {
 		Journal,
 	},
 	setup(props) {
-
-		const mydate = ref({from: '2021/08/01', to: '2021/08/07'})
+		const mydate = ref({ from: '2021/08/01', to: '2021/08/07' })
 		const shablon = ref(['2'])
 
 		const dateView = ref('shab')
@@ -52,7 +51,7 @@ export default {
 		const clearAll = () => {
 			console.log('test')
 		}
-		
+
 		return {
 			clearAll,
 			applyFilter,
@@ -61,20 +60,18 @@ export default {
 			shablon,
 			shablonOptions: [
 				{ label: 'Прошлый месяц', value: '0' },
-				{ label: 'Текущий месяц', value: '3', },
-				{ label: 'Прошлая неделя', value: '1', },
-				{ label: 'Текущая неделя', value: '2', },
-				{ label: 'Вчера', value: '4', },
-				{ label: 'Сегодня', value: '5', },
-			]
+				{ label: 'Текущий месяц', value: '3' },
+				{ label: 'Прошлая неделя', value: '1' },
+				{ label: 'Текущая неделя', value: '2' },
+				{ label: 'Вчера', value: '4' },
+				{ label: 'Сегодня', value: '5' },
+			],
 		}
 	},
-
 }
 </script>
 
 <style scoped lang="scss">
-
 .fixhd thead tr:first-child th:last-child .quick {
 	left: initial;
 	right: 0;
@@ -84,7 +81,7 @@ export default {
 	top: 36px;
 	left: 0;
 	min-width: 230px;
-	padding: .5rem .25rem 0;
+	padding: 0.5rem 0.25rem 0;
 	border-radius: 0 0 6px 6px;
 }
 .cal {

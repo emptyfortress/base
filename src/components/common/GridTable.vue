@@ -1,6 +1,7 @@
 <template lang="pug">
 .grid
 	q-table(ref="itemTable"
+		id="table"
 		:rows="rows"
 		:columns="columns"
 		row-key="id"
@@ -19,11 +20,12 @@
 					q-checkbox(:model-value="all" @update:model-value="toggleSel")
 				q-th(v-for="col in props.cols" :props="props" :key="col.name").hov
 					span {{ col.label }}
-					q-icon(name="mdi-filter" color="negative" v-if="showFilt(col)").filt
-					.sort(@click.stop)
-						q-btn(v-if="col.sortable" unelevated dense size="sm" color="primary" round @click.stop="mysort(col.name, $event)")
-							q-icon(name="mdi-arrow-down")
-						q-btn( unelevated dense color="primary" round size="sm" icon="mdi-filter-outline" @click.stop="toggleFilter(col.id)")
+					q-icon(name="mdi-filter" color="negative" v-if="showFilt(col)" @click.stop="clearFilter(col)").filt
+					q-icon(name="mdi-filter-outline" @click.stop="toggleFilter(col.id)" v-if="!showFilt(col)").sort
+					.resizer
+
+					//- .sort(@click.stop)
+					//- 	q-btn(unelevated dense round size="xs" icon="mdi-filter-outline" @click.stop="toggleFilter(col.id)" v-if="!showFilt(col)")
 
 					transition(name="slide-top")
 						Filter(:filterByIndex="filterByIndex" :col="col" @close="filterByIndex = null" :data="colData(col)" :datum="col.datum")
@@ -142,6 +144,9 @@ export default {
 				? (filterByIndex.value = null)
 				: (filterByIndex.value = e)
 		}
+		const clearFilter = (col) => {
+			grid.clearCheckedColumn(col)
+		}
 		const showFilt = (col) => {
 			if (grid.checked.length) {
 				let ids = grid.checked.map((item) => item.id)
@@ -177,6 +182,7 @@ export default {
 			readAll,
 			loading,
 			filterByIndex,
+			clearFilter,
 			toggleFilter,
 			showFilt,
 			props,
@@ -217,23 +223,21 @@ td.small {
 	position: sticky;
 	.filt {
 		position: absolute;
-		right: 0.5rem;
+		right: 12px;
 		top: 50%;
 		transform: translateY(-50%);
 	}
 	.sort {
 		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background: #ffffffaa;
+		right: 12px;
+		top: 50%;
+		transform: translateY(-50%);
 		display: none;
 		body.body--dark & {
 			background: var(--bg-dark);
 		}
 		.q-btn:first-child {
-			margin-right: 3px;
+			margin-right: 7px;
 		}
 		.q-icon {
 			transition: 0.3s ease all;
@@ -252,6 +256,18 @@ td.small {
 			justify-content: flex-end;
 			align-items: center;
 			padding-right: 3px;
+		}
+	}
+	.resizer {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 8px;
+		cursor: col-resize;
+		user-select: none;
+		&:hover,
+		.resizing {
+			background: var(--q-primary);
 		}
 	}
 }
