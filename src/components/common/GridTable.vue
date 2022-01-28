@@ -224,10 +224,12 @@ td.small {
 	.sort {
 		position: absolute;
 		top: 0;
-		left: 0;
+		width: 60px;
+		/* left: 0; */
 		right: 0;
 		bottom: 0;
-		background: #ffffffaa;
+		background: #fefefe;
+		/* background: #ddddddaa; */
 		display: none;
 		body.body--dark & {
 			background: var(--bg-dark);
