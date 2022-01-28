@@ -279,13 +279,13 @@ td.small {
 		position: absolute;
 		top: 0;
 		right: 0;
-		width: 30px;
+		width: 20px;
 		height: calc(100vh - 160px);
 		cursor: col-resize;
 		user-select: none;
 		&:hover {
 			border-right: 2px solid var(--q-primary);
-			background: #cccccc33;
+			/* background: #cccccc33; */
 		}
 	}
 }
