@@ -26,6 +26,12 @@
 					q-btn(unelevated icon="mdi-plus" color="primary-darken-2") Создать
 					q-btn(unelevated)
 						SvgIcon(name="search-scan")
+					q-space
+					.run(v-if="api.progress.length")
+						q-circular-progress(indeterminate size="35px" :thickness=".1" color="primary").circ
+						q-icon(name="mdi-run").man
+						q-badge(color="primary").badge {{api.progress.length}}
+
 
 		Drawer(:show="leftDrawer" @toggle="toggleLeftDrawer")
 		RDrawer(:show="rightDrawer")
@@ -53,6 +59,7 @@ import RDrawer from '@/components/RDrawer.vue'
 
 import { date } from 'quasar'
 import { useColor } from '@/stores/colors'
+import { useApi } from '@/stores/api'
 import SvgIcon from '@/components/SvgIcon.vue'
 
 export default {
@@ -67,6 +74,7 @@ export default {
 		})
 
 		const colors = useColor()
+		const api = useApi()
 
 		const calcHeader = computed(() => {
 			if (colors.toolbar) {
@@ -109,7 +117,7 @@ export default {
 			toggleRightDrawer() {
 				rightDrawer.value = !rightDrawer.value
 			},
-			// aggdr,
+			api,
 		}
 	},
 }
@@ -169,6 +177,7 @@ body.body--dark .head {
 		}
 	}
 	.right {
+		display: flex;
 		flex-grow: 1;
 		padding-left: 0;
 		svg.icon {
@@ -190,5 +199,29 @@ body.body--dark .head {
 	bottom: -2px;
 	background: green;
 	border: 1px solid #fff;
+}
+.run {
+	cursor: pointer;
+	position: relative;
+	width: 2rem;
+	height: 2rem;
+	text-align: center;
+	margin-right: 2.5rem;
+	.circ {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	.man {
+		font-size: 1.6rem;
+		position: absolute;
+		top: 5px;
+		left: 5px;
+	}
+	.badge {
+		position: absolute;
+		top: 9px;
+		right: -32px;
+	}
 }
 </style>
