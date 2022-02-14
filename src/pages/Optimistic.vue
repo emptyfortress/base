@@ -2,8 +2,13 @@
 .container
 	.zag Optimistic UI
 	p Кнопки представляют различные действия пользователя, требующие взаимодействия с API.
-	q-btn(unelevated color="primary" :loading="loading[0]" @click="simulateProgress(0)") Завершить
-	span.error(v-if="api.progress.length") just test
+	.col
+		div(v-for="button in buttons" :key="button.id")
+			q-btn(unelevated color="primary" :loading="loading[button.id]" @click="simulateProgress(button)") {{button.text}}
+			span(v-if="api.err && button.id === 1").hint Произошла ошибка, попробуйте еще раз.
+		br
+		br
+		q-btn(unelevated @click="restart") Рестарт
 </template>
 
 <script>
@@ -15,20 +20,33 @@ export default {
 	setup() {
 		const api = useApi()
 		const loading = ref([false, false, false, false, false, false])
+		const buttons = [
+			{ id: 0, text: 'Завершить' },
+			{ id: 1, text: 'Делегировать' },
+			{ id: 2, text: 'В работу' },
+			{ id: 3, text: 'Согласовать' },
+			{ id: 4, text: 'Отклонить' },
+			{ id: 5, text: 'Запрос к api' },
+		]
 
 		const simulateProgress = (e) => {
 			loading.value[e] = true
 			api.addProgress(e)
-			console.log(e)
 			setTimeout(() => {
 				loading.value[e] = false
 			}, 1000)
+		}
+		const restart = () => {
+			api.err = false
+			api.progress = []
 		}
 
 		return {
 			loading,
 			simulateProgress,
 			api,
+			restart,
+			buttons,
 		}
 	},
 }
@@ -41,5 +59,15 @@ p {
 }
 .error {
 	margin-left: 2rem;
+}
+.col {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	gap: 4px;
+}
+.hint {
+	margin-left: 1rem;
+	color: var(--q-negative);
 }
 </style>

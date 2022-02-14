@@ -27,10 +27,7 @@
 					q-btn(unelevated)
 						SvgIcon(name="search-scan")
 					q-space
-					.run(v-if="api.progress.length")
-						q-circular-progress(indeterminate size="35px" :thickness=".1" color="primary").circ
-						q-icon(name="mdi-run").man
-						q-badge(color="primary").badge {{api.progress.length}}
+					Run
 
 
 		Drawer(:show="leftDrawer" @toggle="toggleLeftDrawer")
@@ -54,16 +51,16 @@
 <script>
 import { ref, computed } from 'vue'
 import Drawer from '@/components/Drawer.vue'
+import Run from '@/components/common/Run.vue'
 import RDrawer from '@/components/RDrawer.vue'
 // import AggDrawer from '@/components/common/AggDrawer.vue'
 
 import { date } from 'quasar'
 import { useColor } from '@/stores/colors'
-import { useApi } from '@/stores/api'
 import SvgIcon from '@/components/SvgIcon.vue'
 
 export default {
-	components: { Drawer, RDrawer, SvgIcon },
+	components: { Drawer, RDrawer, SvgIcon, Run },
 	setup() {
 		const leftDrawer = ref(true)
 		const rightDrawer = ref(false)
@@ -74,7 +71,6 @@ export default {
 		})
 
 		const colors = useColor()
-		const api = useApi()
 
 		const calcHeader = computed(() => {
 			if (colors.toolbar) {
@@ -117,7 +113,6 @@ export default {
 			toggleRightDrawer() {
 				rightDrawer.value = !rightDrawer.value
 			},
-			api,
 		}
 	},
 }
@@ -199,29 +194,5 @@ body.body--dark .head {
 	bottom: -2px;
 	background: green;
 	border: 1px solid #fff;
-}
-.run {
-	cursor: pointer;
-	position: relative;
-	width: 2rem;
-	height: 2rem;
-	text-align: center;
-	margin-right: 2.5rem;
-	.circ {
-		position: absolute;
-		top: 0;
-		left: 0;
-	}
-	.man {
-		font-size: 1.6rem;
-		position: absolute;
-		top: 5px;
-		left: 5px;
-	}
-	.badge {
-		position: absolute;
-		top: 9px;
-		right: -32px;
-	}
 }
 </style>
