@@ -4,7 +4,7 @@
 	q-icon(name="mdi-run" v-if="api.active").man
 	q-icon(name="mdi-human-male" v-if="check1").man
 	q-badge(color="primary" v-if="check2").badge {{api.progress.length}}
-	q-badge(color="negative" v-if="api.err").badge 1
+	q-badge(color="negative" v-if="err").badge 1
 
 	q-menu( v-model="showing" )
 		q-list
@@ -37,6 +37,10 @@ export default {
 			if (api.progress.length > 1) return true
 			else return false
 		})
+		const err = computed(() => {
+			if (api.err && api.progress.length === 1) return true
+			else return false
+		})
 		const reset = () => {
 			api.err = false
 			api.progress = []
@@ -54,6 +58,7 @@ export default {
 			showing,
 			reset,
 			repeat,
+			err,
 		}
 	},
 }
