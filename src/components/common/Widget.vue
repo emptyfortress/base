@@ -4,13 +4,14 @@
 	.charts
 		apexchart(:options="chartOptions" :series="series" v-if="index === 0" @dataPointSelection="dataPointSelection")
 
-q-dialog(v-model="alert")
+q-dialog(v-model="alert" full-width)
 	q-card
-		q-card-section.row
-			.text-h6 {{ block.title }}
+		q-card-section.row.q-pb-none
+			.text-h6 {{ block.title }} - {{ block.digit }}
 			q-space
 			q-btn(icon="mdi-close" flat round dense v-close-popup)
-		q-card-section(class="q-pt-none") {{ props.block.title }}
+		q-card-section(class="q-pt-none")
+			Chips(:chips="props.block.labels")
 		q-card-actions(align="right")
 			q-btn(flat label="OK" color="primary" v-close-popup)
 </template>
@@ -18,10 +19,12 @@ q-dialog(v-model="alert")
 <script>
 import { ref } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
+import Chips from '@/components/common/Chips.vue'
 
 export default {
 	components: {
 		apexchart: VueApexCharts,
+		Chips,
 	},
 	props: ['index', 'block'],
 	setup(props) {
@@ -73,7 +76,7 @@ export default {
 				enabled: true,
 				formatter: (val) => Math.round((props.block.digit / 100) * val),
 			},
-			labels: ['Новые', 'В работе', 'На контроле', 'Отв.исполнение'],
+			labels: props.block.labels,
 			colors: ['#2E93fA', '#66DA26', '#546E7A', '#E91E63', '#FF9800'],
 		}
 
