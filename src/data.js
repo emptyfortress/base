@@ -231,12 +231,12 @@ const items = [
 ]
 
 const bl = [
-	{ id: 0, active: false, title: 'Новые задания', digit: 7, down: true,  but: 'Прочитано', but1: 'Ознакомлен', cl: 'gr1' },
-	{ id: 1, active: false, title: 'Истекает срок', digit: 3, down: true,  but: 'Прочитать все', cl: 'gr2' },
-	{ id: 2, active: false, title: 'Задания на контроле', digit: 5, down: false,  but: 'Прочитать все', cl: 'gr3' },
+	{ id: 0, active: false, title: 'Входящие', digit: 14, down: true,  but: 'Прочитано', but1: 'Ознакомлен', cl: 'gr1' },
+	{ id: 1, active: false, title: 'Исходящие', digit: 3, down: true,  but: 'Прочитать все', cl: 'gr2' },
+	{ id: 2, active: false, title: 'Мои документы', digit: 5, down: false,  but: 'Прочитать все', cl: 'gr3' },
 	{ id: 3, active: false, title: 'Мои согласования', digit: 2, down: true,  but: 'Прочитать все', cl: 'gr4' },
-	{ id: 3, active: false, title: 'Исполнительская дисциплина', digit: 3, down: true, cl: 'gr5' },
-	{ id: 4, active: false, title: 'Задания у подчиненных', cl: 'gr6'},
+	// { id: 3, active: false, title: 'Исполнительская дисциплина', digit: 3, down: true, cl: 'gr5' },
+	// { id: 4, active: false, title: 'Задания у подчиненных', cl: 'gr6'},
 	// { id: 5, active: false, title: 'Избранное', cl: 'gr7' },
 ]
 

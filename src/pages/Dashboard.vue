@@ -2,42 +2,26 @@
 .container
 	Wave(color="#cdcdcd").fix
 	.home
-		div(v-for="(block,index) in blocks")
-			.widget(@click="toggle(index)" :class="block.active ? 'zind' : ''")
-				//- Block(:block="block" :index="index" :focused="focused" @change="toggle(index)")
+		Widget(v-for="(block,index) in blocks" :index="index" :block="block")
+
 </template>
 
 <script>
-import { ref } from 'vue'
 import Wave from '@/components/common/Wave.vue'
-import { Flipper, Flipped } from 'vue-flip-toolkit'
+import Widget from '@/components/common/Widget.vue'
 import { items, bl } from '@/data.js'
 // import Block from '@/components/common/Block.vue'
 
 export default {
 	components: {
 		Wave,
-		// Block,
-		Flipper,
-		Flipped,
+		Widget,
 	},
 	setup() {
 		const blocks = bl
-		const focused = ref(null)
-
-		const toggle = (e) => {
-			blocks.map((item) => (item.active = false))
-			blocks[e].active = true
-			if (focused.value !== null) {
-				focused.value = null
-			} else focused.value = e
-			console.log(focused.value)
-		}
 
 		return {
 			blocks,
-			toggle,
-			focused,
 		}
 	},
 }
@@ -57,20 +41,5 @@ export default {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 1rem;
-}
-.widget {
-	width: 100%;
-	background: var(--bg-card);
-	border-radius: 4px;
-	border: 1px solid (--bg-card);
-	padding: 1rem;
-	position: relative;
-	padding-bottom: 30px;
-	cursor: pointer;
-	&:hover {
-		box-shadow: 0 3px 10px #ccc;
-		border: 1px solid var(--my-border-color);
-		background: #fff;
-	}
 }
 </style>
