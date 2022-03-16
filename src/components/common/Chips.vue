@@ -1,14 +1,16 @@
 <template lang="pug">
 .row
-	q-chip(v-for="chip in chips") {{ chip }}
+	q-chip(v-for="(label,index) in props.block.labels") {{label}} - {{props.block.seria[index]}}
 </template>
 
 <script>
 export default {
-	props: ['chips'],
+	props: ['block'],
 	components: {},
-	setup() {
-		return {}
+	setup(props) {
+		return {
+			props,
+		}
 	},
 }
 </script>

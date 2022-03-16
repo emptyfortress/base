@@ -11,13 +11,13 @@ q-dialog(v-model="alert" full-width)
 			q-space
 			q-btn(icon="mdi-close" flat round dense v-close-popup)
 		q-card-section(class="q-pt-none")
-			Chips(:chips="props.block.labels")
+			Chips(:block="props.block")
 		q-card-actions(align="right")
 			q-btn(flat label="OK" color="primary" v-close-popup)
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
 import Chips from '@/components/common/Chips.vue'
 
@@ -28,7 +28,7 @@ export default {
 	},
 	props: ['index', 'block'],
 	setup(props) {
-		const series = [5, 3, 4, 2]
+		const series = reactive(props.block.seria)
 		const chartOptions = {
 			chart: {
 				type: 'donut',
