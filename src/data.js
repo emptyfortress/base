@@ -7,11 +7,11 @@ const headers = [
 		value: 'type',
 	},
 	{
-		id: 1,
-		text: 'Срок',
+		id: 3,
+		text: 'Тема',
 		align: 'start',
 		sortable: true,
-		value: 'deadline',
+		value: 'title',
 	},
 	{
 		id: 2,
@@ -21,11 +21,11 @@ const headers = [
 		value: 'executor',
 	},
 	{
-		id: 3,
-		text: 'Тема',
+		id: 1,
+		text: 'Срок',
 		align: 'start',
 		sortable: true,
-		value: 'title',
+		value: 'deadline',
 	},
 ]
 const headers1 = [
@@ -79,7 +79,7 @@ const items = [
 		id: 1,
 		number: '№ 133',
 		unread: false,
-		selected: false,
+		selected: true,
 		author: '<Я>',
 		executor: 'Воробьев К.А.',
 		status: 'В работе',
