@@ -1,5 +1,5 @@
 <template lang="pug">
-GridTable(:rows="filteredItems" :columns="headers" :colData="colData" total="12" shown="5" )
+GridTable(:rows="filteredItems" :columns="headers" :colData="colData" height="600px" :bordered="true" total="12" shown="5" )
 
 .big {{ selection }}
 </template>
@@ -39,6 +39,9 @@ export default {
 		const colData = (col) => {
 			return [...new Set(filteredItems.map((item) => item[col.name]))]
 		}
+		const popup = computed(() => {
+			return 'popup'
+		})
 
 		return {
 			headers,
@@ -49,6 +52,7 @@ export default {
 			sortUnread,
 			selection,
 			colData,
+			popup,
 		}
 	},
 }

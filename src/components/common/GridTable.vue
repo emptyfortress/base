@@ -6,11 +6,14 @@
 		row-key="id"
 		:pagination="pagination"
 		flat
+		:bordered="bordered"
 		binary-state-sort
 		:hide-pagination="true"
 		selection="multiple"
 		color="primary"
 		:loading="loading"
+		:height="height"
+		:style="calcHeight"
 		).fixhd
 		template(v-slot:header="props")
 			q-tr(:props="props" v-click-away="toggleFilter")
@@ -26,7 +29,7 @@
 						Filter(:filterByIndex="filterByIndex" :col="col" @close="filterByIndex = null" :data="colData(col)" :datum="col.datum")
 
 		template(v-slot:loading)
-			.ld
+			.ld(:class="classLoading")
 				q-linear-progress(indeterminate)
 		template(v-slot:body="props")
 			q-tr(:props="props" :key="props.row.id" :class="rowClass(props.row)")
@@ -62,6 +65,8 @@ export default {
 		colData: Function,
 		total: Number,
 		toolbar: Boolean,
+		height: String,
+		bordered: Boolean,
 	},
 	setup(props) {
 		const pagination = {
@@ -78,7 +83,14 @@ export default {
 		})
 
 		const itemTable = ref(null)
-		const loading = ref(false)
+		// const loading = ref(false)
+		const loading = ref(true)
+
+		const classLoading = computed(() => {
+			if (props.toolbar === false) {
+				return 'notoolbar'
+			} else return ''
+		})
 
 		watchEffect(() => {
 			if (selected.value.length === 0) {
@@ -152,6 +164,9 @@ export default {
 			if (grid.selected != 0) return true
 			else return false
 		})
+		const calcHeight = computed(() => {
+			return `max-height: ${props.height};`
+		})
 
 		return {
 			showTotal,
@@ -171,6 +186,8 @@ export default {
 			toggleFilter,
 			showFilt,
 			props,
+			calcHeight,
+			classLoading,
 		}
 	},
 }
@@ -179,6 +196,9 @@ export default {
 <style scoped lang="scss">
 .full .fixhd {
 	height: 100vh;
+}
+.fixhd.popup {
+	height: 500px;
 }
 .q-table.fixhd th {
 	padding: 4px !important;
@@ -248,6 +268,9 @@ td.small {
 	left: 0;
 	height: 3px;
 	z-index: 2;
+	&.notoolbar {
+		top: 32px;
+	}
 }
 /* .test-enter-active, .test-leave-active { */
 /* 	transition: all 0.3s ease; */
