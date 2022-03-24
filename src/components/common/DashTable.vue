@@ -1,28 +1,16 @@
 <template lang="pug">
-q-markup-table(flat square).shadow-0
-	thead
-		th.small.brd(@click="sortUnread")
-		th.small.center
-			q-checkbox(dense :model-value="all" @update:model-value="toggleSel")
-		th(v-for="head in headers") {{ head.text }}
-	tbody
-		tr(v-for="item in filteredItems" :class="{ 'new' : item.unread }").link
-			td(@click="item.unread = !item.unread").small
-			td
-				q-checkbox(dense v-model="item.selected" @update:model-value="sel(item.selected, item)")
-			td.nwr {{ item.type }}
-			td {{ item.title }}
-			td.nwr {{ item.executor }}
-			td.nwr {{ item.deadline }}
+GridTable(:rows="filteredItems" :columns="headers" :colData="colData" total="12" shown="5" )
+
 .big {{ selection }}
 </template>
 
 <script>
 import { headers, items } from '@/data.js'
 import { ref, reactive, computed } from 'vue'
+import GridTable from '@/components/common/GridTable.vue'
 
 export default {
-	components: {},
+	components: { GridTable },
 	setup() {
 		const filteredItems = reactive(items)
 		const all = ref(false)
@@ -48,6 +36,10 @@ export default {
 			} else return temp.length + ' из ' + filteredItems.length
 		})
 
+		const colData = (col) => {
+			return [...new Set(filteredItems.map((item) => item[col.name]))]
+		}
+
 		return {
 			headers,
 			filteredItems,
@@ -56,6 +48,7 @@ export default {
 			toggleSel,
 			sortUnread,
 			selection,
+			colData,
 		}
 	},
 }

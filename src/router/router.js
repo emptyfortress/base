@@ -14,5 +14,11 @@ export const router = createRouter({
 			component: () => import('@/pages/Dashboard.vue'),
 			meta: { transition: 'slide-left' },
 		},
+		{
+			path: '/grid',
+			name: 'grid',
+			component: () => import('@/pages/Grid.vue'),
+			meta: { transition: 'slide-left' },
+		},
 	],
 })

@@ -19,11 +19,8 @@
 					q-checkbox(:model-value="all" @update:model-value="toggleSel")
 				q-th(v-for="col in props.cols" :props="props" :key="col.name").hov
 					span {{ col.label }}
-					q-icon(name="mdi-filter" color="negative" v-if="showFilt(col)").filt
-					.sort(@click.stop)
-						q-btn(v-if="col.sortable" unelevated dense size="sm" color="primary" round @click.stop="mysort(col.name, $event)")
-							q-icon(name="mdi-arrow-down")
-						q-btn( unelevated dense color="primary" round size="sm" icon="mdi-filter-outline" @click.stop="toggleFilter(col.id)")
+					q-icon(name="mdi-filter" color="negative" v-if="showFilt(col)" @click.stop="clearFilter(col)").filt
+					q-icon(name="mdi-filter-outline" @click.stop="toggleFilter(col.id)" v-if="!showFilt(col)").sort
 
 					transition(name="slide-top")
 						Filter(:filterByIndex="filterByIndex" :col="col" @close="filterByIndex = null" :data="colData(col)" :datum="col.datum")
@@ -37,22 +34,11 @@
 				q-td(auto-width)
 					q-checkbox(v-model="props.row.selected" :val="props.row.id")
 				q-td(v-for="col in props.cols" :key="col.name") {{ props.row[col.name] }}
-		template(v-slot:top).gt-sm
+		template(v-slot:top v-if="toolbar").gt-sm
 			Toolbar(:total="total" :shown="shown" @readAll="readAll" @toggleLoad="loading = !loading")
 		//- template(v-slot:bottom v-if="selected.length")
 		//- 	Total(:selected="selected.length" @clear="clearSelected")
 	//- q-dialog(v-model="showTotal" seamless position="bottom")
-		q-card
-			q-linear-progress(:value="1" color="primary")
-			q-card-section(class="row items-center no-wrap")
-				div
-					div(class="text-weight-bold") The Walker
-					div(class="text-grey") Fitz & The Tantrums
-				q-space
-				q-btn(flat round icon="mdi-play")
-				q-btn(flat round icon="mdi-pause")
-				q-btn(flat round icon="mdi-close" v-close-popup)
-
 
 </template>
 
@@ -75,6 +61,7 @@ export default {
 		shown: Number,
 		colData: Function,
 		total: Number,
+		toolbar: Boolean,
 	},
 	setup(props) {
 		const pagination = {
@@ -137,6 +124,9 @@ export default {
 
 		const filterByIndex = ref(null)
 
+		const clearFilter = (col) => {
+			grid.clearCheckedColumn(col)
+		}
 		const toggleFilter = (e) => {
 			filterByIndex.value === e
 				? (filterByIndex.value = null)
@@ -174,6 +164,7 @@ export default {
 			mysort,
 			itemTable,
 			clearSelected,
+			clearFilter,
 			readAll,
 			loading,
 			filterByIndex,
@@ -217,25 +208,18 @@ td.small {
 	position: sticky;
 	.filt {
 		position: absolute;
-		right: 0.5rem;
+		right: 12px;
 		top: 50%;
 		transform: translateY(-50%);
 	}
 	.sort {
 		position: absolute;
-		top: 0;
-		width: 60px;
-		/* left: 0; */
-		right: 0;
-		bottom: 0;
-		background: #fefefe;
-		/* background: #ddddddaa; */
+		right: 12px;
+		top: 50%;
+		transform: translateY(-50%);
 		display: none;
 		body.body--dark & {
 			background: var(--bg-dark);
-		}
-		.q-btn:first-child {
-			margin-right: 3px;
 		}
 		.q-icon {
 			transition: 0.3s ease all;
