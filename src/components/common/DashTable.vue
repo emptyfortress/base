@@ -1,7 +1,7 @@
 <template lang="pug">
 q-markup-table(flat square).shadow-0
 	thead
-		th.small(@click="sortUnread")
+		th.small.brd(@click="sortUnread")
 		th.small.center
 			q-checkbox(dense :model-value="all" @update:model-value="toggleSel")
 		th(v-for="head in headers") {{ head.text }}
@@ -14,17 +14,16 @@ q-markup-table(flat square).shadow-0
 			td {{ item.title }}
 			td.nwr {{ item.executor }}
 			td.nwr {{ item.deadline }}
-.big 3
+.big {{ selection }}
 </template>
 
 <script>
 import { headers, items } from '@/data.js'
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 
 export default {
 	components: {},
 	setup() {
-		// const selection = ref([])
 		const filteredItems = reactive(items)
 		const all = ref(false)
 		const sel = (val, item) => {
@@ -42,14 +41,21 @@ export default {
 		const sortUnread = () => {
 			console.log(1)
 		}
+		const selection = computed(() => {
+			const temp = filteredItems.filter((item) => item.selected)
+			if (temp.length === 0) {
+				return
+			} else return temp.length + ' из ' + filteredItems.length
+		})
 
 		return {
 			headers,
 			filteredItems,
-			// selection,
 			all,
 			sel,
 			toggleSel,
+			sortUnread,
+			selection,
 		}
 	},
 }
@@ -61,6 +67,7 @@ export default {
 	white-space: nowrap;
 }
 .big {
+	min-height: 2.3rem;
 	font-size: 2.3rem;
 	line-height: 100%;
 	margin-top: 1rem;
@@ -68,5 +75,9 @@ export default {
 }
 .q-markup-table .q-table thead th.center {
 	text-align: center;
+}
+th.brd {
+	border-right: 1px solid var(--th-border-color) !important;
+	cursor: pointer;
 }
 </style>

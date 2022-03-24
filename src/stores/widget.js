@@ -10,7 +10,9 @@ export const useWidget = defineStore({
 
 	actions: {
 		select(a,e) {
-			this.selected = e
+			if (this.selected === e) {
+				this.selected = null
+			} else this.selected = e
 			this.block = a
 		}
 	},

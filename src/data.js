@@ -79,7 +79,7 @@ const items = [
 		id: 1,
 		number: '№ 133',
 		unread: false,
-		selected: true,
+		selected: false,
 		author: '<Я>',
 		executor: 'Воробьев К.А.',
 		status: 'В работе',
