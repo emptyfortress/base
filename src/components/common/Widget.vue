@@ -11,9 +11,7 @@ q-dialog(v-model="alert" full-width)
 			q-space
 			q-btn(icon="mdi-close" flat round dense v-close-popup)
 		q-card-section(class="q-pt-none")
-			Chips(:block="props.block")
-		q-card-section(class="q-pt-none")
-			DashTable
+			DashTable(:block="block")
 
 		//- q-card-actions(align="right")
 			q-btn(flat label="OK" color="primary" v-close-popup)
@@ -22,13 +20,13 @@ q-dialog(v-model="alert" full-width)
 <script>
 import { ref } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
-import Chips from '@/components/common/Chips.vue'
+// import Chips from '@/components/common/Chips.vue'
 import DashTable from '@/components/common/DashTable.vue'
 
 export default {
 	components: {
 		apexchart: VueApexCharts,
-		Chips,
+		// Chips,
 		DashTable,
 	},
 	props: ['index', 'block'],
@@ -87,9 +85,8 @@ export default {
 
 		const alert = ref(false)
 
-		const toggle = (e) => {
+		const toggle = () => {
 			alert.value = !alert.value
-			// console.log(e)
 		}
 		const dataPointSelection = (event, chartContext, config) => {
 			toggle()

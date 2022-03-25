@@ -9,7 +9,7 @@
 <script>
 import Wave from '@/components/common/Wave.vue'
 import Widget from '@/components/common/Widget.vue'
-import { items, bl } from '@/data.js'
+import { bl } from '@/data.js'
 // import Block from '@/components/common/Block.vue'
 
 export default {

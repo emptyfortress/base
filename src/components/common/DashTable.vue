@@ -1,4 +1,5 @@
 <template lang="pug">
+Chips(:block="props.block").q-mt-md.q-mb-sm
 GridTable(:rows="filteredItems" :columns="headers" :colData="colData" height="600px" :bordered="true" total="12" shown="5" )
 
 .big {{ selection }}
@@ -7,11 +8,13 @@ GridTable(:rows="filteredItems" :columns="headers" :colData="colData" height="60
 <script>
 import { headers, items } from '@/data.js'
 import { ref, reactive, computed } from 'vue'
+import Chips from '@/components/common/Chips.vue'
 import GridTable from '@/components/common/GridTable.vue'
 
 export default {
-	components: { GridTable },
-	setup() {
+	props: ['block'],
+	components: { Chips, GridTable },
+	setup(props) {
 		const filteredItems = reactive(items)
 		const all = ref(false)
 		const sel = (val, item) => {
@@ -44,6 +47,7 @@ export default {
 		})
 
 		return {
+			props,
 			headers,
 			filteredItems,
 			all,

@@ -7,7 +7,12 @@
 import { useWidget } from '@/stores/widget'
 
 export default {
-	props: ['block'],
+	props: {
+		block: {
+			type: Object,
+			default: () => ({ id: 0, labels: ['one'], seria: [3] }),
+		},
+	},
 	components: {},
 	setup(props) {
 		const widget = useWidget()

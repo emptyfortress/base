@@ -14,6 +14,7 @@
 		:loading="loading"
 		:height="height"
 		:style="calcHeight"
+		:wrap-cells="props.wrap"
 		).fixhd
 		template(v-slot:header="props")
 			q-tr(:props="props" v-click-away="toggleFilter")
@@ -67,6 +68,7 @@ export default {
 		toolbar: Boolean,
 		height: String,
 		bordered: Boolean,
+		wrap: Boolean,
 	},
 	setup(props) {
 		const pagination = {
@@ -83,8 +85,7 @@ export default {
 		})
 
 		const itemTable = ref(null)
-		// const loading = ref(false)
-		const loading = ref(true)
+		const loading = ref(false)
 
 		const classLoading = computed(() => {
 			if (props.toolbar === false) {
