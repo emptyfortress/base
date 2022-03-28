@@ -1,6 +1,6 @@
 <template lang="pug">
 Chips(:block="props.block").q-mt-md.q-mb-sm
-GridTable(:rows="filteredItems" :columns="headers" :colData="colData" height="600px" :bordered="true")
+GridTable(:rows="filteredItems" :columns="headers" :colData="colData" height="600px" :bordered="true" @sort="sort")
 
 .big {{ selection }}
 </template>
@@ -47,9 +47,6 @@ export default {
 				all.value = true
 			}
 		}
-		const sortUnread = () => {
-			console.log(1)
-		}
 		const selection = computed(() => {
 			const temp = loadedItems.filter((item) => item.selected)
 			if (temp.length === 0) {
@@ -64,6 +61,26 @@ export default {
 			return 'popup'
 		})
 
+		const sorted = ref(false)
+		const sort = () => {
+			function compare(a, b) {
+				if (a.unread < b.unread) {
+					return 1
+				}
+				if (a.unread > b.unread) {
+					return -1
+				}
+				return 0
+			}
+			if(!sorted.value) {
+				loadedItems.sort(compare)
+				sorted.value = !sorted.value
+			} else {
+				loadedItems.reverse()
+				sorted.value = !sorted.value
+			}
+		}
+
 		return {
 			props,
 			headers,
@@ -71,10 +88,10 @@ export default {
 			all,
 			sel,
 			toggleSel,
-			sortUnread,
 			selection,
 			colData,
 			popup,
+			sort,
 		}
 	},
 }

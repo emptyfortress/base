@@ -18,7 +18,7 @@
 		).fixhd
 		template(v-slot:header="props")
 			q-tr(:props="props" v-click-away="toggleFilter")
-				q-th(auto-width :key="props.read").small
+				th(@click="sort").small
 				q-th(auto-width)
 					q-checkbox(:model-value="all" @update:model-value="toggleSel")
 				q-th(v-for="col in props.cols" :props="props" :key="col.name").hov
@@ -54,6 +54,7 @@ import Filter from '@/components/common/Filter.vue'
 import { useGrid } from '@/stores/grid'
 
 export default {
+	emits: ['sort'],
 	components: {
 		Toolbar,
 		Total,
@@ -70,7 +71,7 @@ export default {
 		bordered: Boolean,
 		wrap: Boolean,
 	},
-	setup(props) {
+	setup(props, context) {
 		const pagination = {
 			page: 1,
 			rowsPerPage: 0,
@@ -168,6 +169,9 @@ export default {
 		const calcHeight = computed(() => {
 			return `max-height: ${props.height};`
 		})
+		const sort = () => {
+			context.emit('sort')
+		}
 
 		return {
 			showTotal,
@@ -177,7 +181,6 @@ export default {
 			selected,
 			toggleSel,
 			toggle,
-			mysort,
 			itemTable,
 			clearSelected,
 			clearFilter,
@@ -189,6 +192,7 @@ export default {
 			props,
 			calcHeight,
 			classLoading,
+			sort,
 		}
 	},
 }
@@ -205,7 +209,7 @@ export default {
 	padding: 4px !important;
 }
 .small {
-	min-width: 4px;
+	min-width: 7px;
 	padding: 0;
 	cursor: pointer;
 }
