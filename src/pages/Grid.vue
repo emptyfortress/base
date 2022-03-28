@@ -22,7 +22,7 @@ AggDrawer(:show="grid.aggregat")
 </template>
 
 <script>
-import { ref, computed, provide, watchEffect } from 'vue'
+import { ref, reactive, computed, provide, watchEffect } from 'vue'
 import { useGrid } from '@/stores/grid'
 import { items } from '@/stores/data'
 import GridTable from '@/components/common/GridTable.vue'
@@ -48,7 +48,7 @@ export default {
 	setup() {
 		const grid = useGrid()
 		grid.items = [...items]
-		const rows = grid.items
+		const rows = reactive(items)
 		const loading = ref(false)
 
 		const filteredRows = computed(() => {
@@ -194,7 +194,6 @@ export default {
 		const sort = () => {
 			function compare(a, b) {
 				if (a.unread < b.unread) {
-					console.log(88888)
 					return 1
 				}
 				if (a.unread > b.unread) {
@@ -203,10 +202,10 @@ export default {
 				return 0
 			}
 			if (!sorted.value) {
-				filteredRows.value.sort(compare)
+				rows.sort(compare)
 				sorted.value = !sorted.value
 			} else {
-				filteredRows.value.reverse()
+				rows.reverse()
 				sorted.value = !sorted.value
 			}
 		}
