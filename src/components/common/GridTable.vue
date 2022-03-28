@@ -130,12 +130,6 @@ export default {
 			props.rows.map((row) => (row.unread = false))
 		}
 
-		const mysort = (e, event) => {
-			itemTable.value.sort(e)
-			let classes = event.target.classList
-			classes.toggle('up')
-		}
-
 		const filterByIndex = ref(null)
 
 		const clearFilter = (col) => {
@@ -171,6 +165,7 @@ export default {
 		})
 		const sort = () => {
 			context.emit('sort')
+			itemTable.value.sort({})
 		}
 
 		return {

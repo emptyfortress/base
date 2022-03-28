@@ -8,7 +8,7 @@ const headers = [
 		sortable: true,
 	},
 	{
-		id: 3,
+		id: 1,
 		label: 'Тема',
 		field: 'title',
 		align: 'left',
@@ -24,7 +24,7 @@ const headers = [
 		name: 'executor',
 	},
 	{
-		id: 1,
+		id: 3,
 		label: 'Срок',
 		align: 'left',
 		field: 'deadline',
