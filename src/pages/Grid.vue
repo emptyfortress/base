@@ -5,7 +5,7 @@
 		.sidebar(v-if="grid.sidebar").gt-sm
 			Aggregates(:data="aggregateData")
 		.main(:class="{ 'fill' : !grid.sidebar }")
-			GridTable(v-if="!grid.lenta" :columns="columns" :colData="colData" :rows="filteredRows" :total="items.length" :shown="filteredRows.length" toolbar)
+			GridTable(v-if="!grid.lenta" :columns="columns" :colData="colData" :rows="filteredRows" :total="items.length" :shown="filteredRows.length" toolbar @sort="sort")
 			.rel(v-else)
 				Toolbar(:total="items.length" :lenta="grid.lenta" :shown="filteredRows.length" @readAll="readAll" @toggleLoad="loading = !loading" @selNone="selectNone" @selAll="selectAll")
 				Lenta(:items="filteredRows" :total="items.length" :loading="loading")
@@ -190,6 +190,26 @@ export default {
 			} else return false
 		})
 
+		const sorted = ref(false)
+		const sort = () => {
+			function compare(a, b) {
+				if (a.unread < b.unread) {
+					console.log(88888)
+					return 1
+				}
+				if (a.unread > b.unread) {
+					return -1
+				}
+				return 0
+			}
+			if (!sorted.value) {
+				filteredRows.value.sort(compare)
+				sorted.value = !sorted.value
+			} else {
+				filteredRows.value.reverse()
+				sorted.value = !sorted.value
+			}
+		}
 		return {
 			showTotal,
 			fullwidth,
@@ -206,6 +226,7 @@ export default {
 			selected,
 			clearSelected,
 			loading,
+			sort,
 		}
 	},
 }

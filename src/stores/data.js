@@ -19,7 +19,7 @@ const items = [
 		id: 1,
 		type: 'doc',
 		selected: false,
-		unread: true,
+		unread: false,
 		typ: 'Документ',
 		vid: 'Приказ',
 		status: 'На подписании',
