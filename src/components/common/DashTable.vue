@@ -1,6 +1,6 @@
 <template lang="pug">
 Chips(:block="props.block").q-mt-md.q-mb-sm
-GridTable(:rows="loadedItems" :columns="headers" :colData="colData" height="600px" :bordered="true")
+GridTable(:rows="filteredItems" :columns="headers" :colData="colData" height="600px" :bordered="true")
 
 .big {{ selection }}
 </template>
@@ -10,12 +10,30 @@ import { headers, items } from '@/data.js'
 import { ref, reactive, computed } from 'vue'
 import Chips from '@/components/common/Chips.vue'
 import GridTable from '@/components/common/GridTable.vue'
+import { useWidget } from '@/stores/widget'
 
 export default {
 	props: ['block'],
 	components: { Chips, GridTable },
 	setup(props) {
+		const widget = useWidget()
+
 		const loadedItems = reactive(items)
+
+		const filteredItems = computed(() => {
+			switch (widget.selected) {
+				case 0:
+					return loadedItems.filter((item) => item.unread)
+				case 1:
+					return loadedItems.filter((item) => item.status === 'В работе')
+				case 2:
+					return loadedItems.filter((item) => item.status === 'Делегировано')
+				case 3:
+					return loadedItems.filter((item) => item.status === 'Просрочено')
+				default:
+					return loadedItems
+			}
+		})
 		const all = ref(false)
 		const sel = (val, item) => {
 			item.selected = val
@@ -49,7 +67,7 @@ export default {
 		return {
 			props,
 			headers,
-			loadedItems,
+			filteredItems,
 			all,
 			sel,
 			toggleSel,
