@@ -2,7 +2,7 @@
 .widget
 	.hd(@click="showAll") {{ block.title }} - {{block.digit}}
 	.charts
-		apexchart(:options="chartOptions" :series="series" v-if="index === 0" @dataPointSelection="dataPointSelection")
+		apexchart(:options="chartOptions" :series="series" v-if="index === 0" @dataPointSelection="dataPointSelection" )
 
 q-dialog(v-model="alert" full-width)
 	q-card
@@ -31,6 +31,7 @@ export default {
 	props: ['index', 'block'],
 	setup(props) {
 		const series = ref(props.block.seria)
+
 		const chartOptions = {
 			chart: {
 				type: 'donut',
@@ -56,8 +57,10 @@ export default {
 							},
 							total: {
 								show: true,
-								label: 'Всего',
-								color: '#373d3f',
+								showAlways: true,
+								// label: 'Всего',
+								// color: '#373d3f',
+								// color: 'red',
 								formatter: function (w) {
 									return w.globals.seriesTotals.reduce((a, b) => {
 										return a + b
