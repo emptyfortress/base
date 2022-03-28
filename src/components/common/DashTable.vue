@@ -1,6 +1,6 @@
 <template lang="pug">
 Chips(:block="props.block").q-mt-md.q-mb-sm
-GridTable(:rows="filteredItems" :columns="headers" :colData="colData" height="600px" :bordered="true" total="12" shown="5" )
+GridTable(:rows="loadedItems" :columns="headers" :colData="colData" height="600px" :bordered="true")
 
 .big {{ selection }}
 </template>
@@ -15,17 +15,17 @@ export default {
 	props: ['block'],
 	components: { Chips, GridTable },
 	setup(props) {
-		const filteredItems = reactive(items)
+		const loadedItems = reactive(items)
 		const all = ref(false)
 		const sel = (val, item) => {
 			item.selected = val
 		}
 		const toggleSel = () => {
 			if (all.value === true) {
-				filteredItems.map((item) => (item.selected = false))
+				loadedItems.map((item) => (item.selected = false))
 				all.value = false
 			} else {
-				filteredItems.map((item) => (item.selected = true))
+				loadedItems.map((item) => (item.selected = true))
 				all.value = true
 			}
 		}
@@ -33,14 +33,14 @@ export default {
 			console.log(1)
 		}
 		const selection = computed(() => {
-			const temp = filteredItems.filter((item) => item.selected)
+			const temp = loadedItems.filter((item) => item.selected)
 			if (temp.length === 0) {
 				return
-			} else return temp.length + ' из ' + filteredItems.length
+			} else return temp.length + ' из ' + loadedItems.length
 		})
 
 		const colData = (col) => {
-			return [...new Set(filteredItems.map((item) => item[col.name]))]
+			return [...new Set(loadedItems.map((item) => item[col.name]))]
 		}
 		const popup = computed(() => {
 			return 'popup'
@@ -49,7 +49,7 @@ export default {
 		return {
 			props,
 			headers,
-			filteredItems,
+			loadedItems,
 			all,
 			sel,
 			toggleSel,

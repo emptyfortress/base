@@ -20,13 +20,12 @@ q-dialog(v-model="alert" full-width)
 <script>
 import { ref } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
-// import Chips from '@/components/common/Chips.vue'
 import DashTable from '@/components/common/DashTable.vue'
+import { useWidget } from '@/stores/widget'
 
 export default {
 	components: {
 		apexchart: VueApexCharts,
-		// Chips,
 		DashTable,
 	},
 	props: ['index', 'block'],
@@ -83,6 +82,7 @@ export default {
 			colors: ['#2E93fA', '#66DA26', '#546E7A', '#E91E63', '#FF9800'],
 		}
 
+		const widget = useWidget()
 		const alert = ref(false)
 
 		const toggle = () => {
@@ -90,8 +90,7 @@ export default {
 		}
 		const dataPointSelection = (event, chartContext, config) => {
 			toggle()
-			console.log(chartContext)
-			console.log(config)
+			widget.selected = config.dataPointIndex
 		}
 
 		return {
@@ -118,7 +117,6 @@ export default {
 	position: relative;
 	cursor: pointer;
 	&:hover {
-		/* box-shadow: 0 3px 10px #ccc; */
 		border: 1px solid var(--my-border-color);
 	}
 }
