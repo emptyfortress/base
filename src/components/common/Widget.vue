@@ -1,6 +1,6 @@
 <template lang="pug">
 .widget
-	.hd {{ block.title }} - {{block.digit}}
+	.hd(@click="showAll") {{ block.title }} - {{block.digit}}
 	.charts
 		apexchart(:options="chartOptions" :series="series" v-if="index === 0" @dataPointSelection="dataPointSelection")
 
@@ -88,12 +88,18 @@ export default {
 		const toggle = () => {
 			alert.value = !alert.value
 		}
+		const showAll = () => {
+			widget.selected = null
+			toggle()
+		}
+
 		const dataPointSelection = (event, chartContext, config) => {
 			toggle()
 			widget.selected = config.dataPointIndex
 		}
 
 		return {
+			showAll,
 			toggle,
 			alert,
 			props,
