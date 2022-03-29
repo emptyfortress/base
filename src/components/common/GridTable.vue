@@ -33,11 +33,11 @@
 			.ld(:class="classLoading")
 				q-linear-progress(indeterminate)
 		template(v-slot:body="props")
-			q-tr(:props="props" :key="props.row.id" :class="rowClass(props.row)")
+			q-tr(:props="props" :key="props.row.id" :class="rowClass(props.row)").rowslide
 				q-td(key="read" :class="{ 'unread' : props.row.unread }" @click="toggle(props.row.id)").small
 				q-td(auto-width)
 					q-checkbox(v-model="props.row.selected" :val="props.row.id")
-				q-td(v-for="col in props.cols" :key="col.name") {{ props.row[col.name] }}
+				q-td(v-for="col in props.cols" :key="col.name" :class="col.classname") {{ props.row[col.name] }}
 		template(v-slot:top v-if="toolbar").gt-sm
 			Toolbar(:total="total" :shown="shown" @readAll="readAll" @toggleLoad="loading = !loading")
 		//- template(v-slot:bottom v-if="selected.length")
@@ -47,11 +47,12 @@
 </template>
 
 <script>
-import { ref, computed, watchEffect } from 'vue'
+import { ref, computed, watchEffect, onMounted } from 'vue'
 import Toolbar from '@/components/common/Toolbar.vue'
 import Total from '@/components/common/Total.vue'
 import Filter from '@/components/common/Filter.vue'
 import { useGrid } from '@/stores/grid'
+import anime from 'animejs'
 
 export default {
 	emits: ['sort'],
@@ -86,7 +87,6 @@ export default {
 		})
 
 		const itemTable = ref(null)
-		const loading = ref(false)
 
 		const classLoading = computed(() => {
 			if (props.toolbar === false) {
@@ -167,6 +167,19 @@ export default {
 			context.emit('sort')
 			itemTable.value.sort({})
 		}
+
+		const loading = ref(true)
+		onMounted(() => {
+			setTimeout(() => {
+				loading.value = !loading.value
+			}, 1500)
+			anime({
+				targets: '.rowslide',
+				translateY: [30, 0],
+				opacity: [0, 1],
+				delay: anime.stagger(120, { start: 500, easing: 'easeInQuad' }),
+			})
+		})
 
 		return {
 			showTotal,
@@ -290,5 +303,11 @@ td.small {
 
 .list-complete-leave-active {
 	position: absolute;
+}
+.rowslide {
+	transition: transform 0.2s;
+}
+.fixhd tbody td.nowrap {
+	white-space: nowrap;
 }
 </style>

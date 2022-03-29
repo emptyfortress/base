@@ -6,6 +6,7 @@ const headers = [
 		field: 'type',
 		align: 'left',
 		sortable: true,
+		classname: 'nowrap'
 	},
 	{
 		id: 1,
@@ -22,6 +23,7 @@ const headers = [
 		field: 'executor',
 		sortable: true,
 		name: 'executor',
+		classname: 'nowrap'
 	},
 	{
 		id: 3,
@@ -30,6 +32,7 @@ const headers = [
 		field: 'deadline',
 		sortable: true,
 		name: 'deadline',
+		classname: 'nowrap'
 	},
 ]
 const headers1 = [

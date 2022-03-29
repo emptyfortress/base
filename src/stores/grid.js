@@ -12,10 +12,20 @@ export const useGrid = defineStore({
 		disable: 0,
 		selected: false,
 		aggregat: false,
+		loading: true,
 	}),
 	getters: {},
 
 	actions: {
+		loadingOn() {
+			this.loading = true
+		},
+		loadingOff() {
+			this.loading = false
+		},
+		toggleLoading() {
+			this.loading = !this.loading
+		},
 		switchAggregat() {
 			this.aggregat = !this.aggregat
 		},

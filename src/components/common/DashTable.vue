@@ -1,5 +1,5 @@
 <template lang="pug">
-Chips(:block="props.block").q-mt-md.q-mb-sm
+Chips(:block="props.block").q-mt-md.q-mb-sm.slide
 GridTable(:rows="filteredItems" :columns="headers" :colData="colData" height="600px" :bordered="true" @sort="sort")
 
 .big {{ selection }}
@@ -7,10 +7,11 @@ GridTable(:rows="filteredItems" :columns="headers" :colData="colData" height="60
 
 <script>
 import { headers, items } from '@/data.js'
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 import Chips from '@/components/common/Chips.vue'
 import GridTable from '@/components/common/GridTable.vue'
 import { useWidget } from '@/stores/widget'
+import anime from 'animejs/lib/anime.es.js';
 
 export default {
 	props: ['block'],
@@ -80,6 +81,15 @@ export default {
 				sorted.value = !sorted.value
 			}
 		}
+
+		onMounted(() => {
+			// anime({
+			// 	targets: '.slide',
+			// 	translateY: [30, 0],
+			// 	opacity: [0, 1],
+			// 	delay: 1000
+			// })
+		})
 
 		return {
 			props,
