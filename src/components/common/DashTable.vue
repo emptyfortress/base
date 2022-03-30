@@ -2,27 +2,28 @@
 Chips(:block="props.block").q-mt-md.q-mb-sm.slide
 GridTable(:rows="filteredItems" :columns="headers" :colData="colData" height="600px" :bordered="true" @sort="sort")
 
-//- q-btn(@click="play") test
-//- .tt
-//- .big
-	.txt(v-if="selection") {{ selection }}
-	.btn(v-if="selection")
-		q-btn(unelevated color="primary") test
-		q-btn(unelevated color="primary") test
 </template>
 
 <script>
+import { ref, reactive, computed, provide } from 'vue'
 import { headers, items } from '@/data.js'
-import { ref, reactive, computed } from 'vue'
 import Chips from '@/components/common/Chips.vue'
 import GridTable from '@/components/common/GridTable.vue'
 import { useWidget } from '@/stores/widget'
 // import anime from 'animejs/lib/anime.es.js'
 
 export default {
-	props: ['block'],
+	props: {
+		block: {
+			type: Object,
+			required: true,
+		},
+	},
+
 	components: { Chips, GridTable },
 	setup(props) {
+		provide('bon', props.block.buttons)
+
 		const widget = useWidget()
 
 		const loadedItems = reactive(items)

@@ -6,7 +6,7 @@ const headers = [
 		field: 'type',
 		align: 'left',
 		sortable: true,
-		classname: 'nowrap'
+		classname: 'nowrap',
 	},
 	{
 		id: 1,
@@ -23,7 +23,7 @@ const headers = [
 		field: 'executor',
 		sortable: true,
 		name: 'executor',
-		classname: 'nowrap'
+		classname: 'nowrap',
 	},
 	{
 		id: 3,
@@ -32,7 +32,7 @@ const headers = [
 		field: 'deadline',
 		sortable: true,
 		name: 'deadline',
-		classname: 'nowrap'
+		classname: 'nowrap',
 	},
 ]
 const headers1 = [
@@ -250,17 +250,28 @@ const bl = [
 		id: 0,
 		title: 'Входящие',
 		digit: 11,
-		but: 'Прочитано',
-		but1: 'Ознакомлен',
+		buttons: ['Прочитано', 'В избранное', 'Делегировать', 'Завершить'],
 		labels: ['Новые', 'В работе', 'Делегировано', 'Просрочено'],
 		seria: [2, 4, 2, 3],
 	},
-	{ id: 1, title: 'Исходящие', digit: 3, but: 'Прочитать все' },
-	{ id: 2, title: 'Мои документы', digit: 5, but: 'Прочитать все' },
+	{
+		id: 1,
+		title: 'Исходящие',
+		digit: 3,
+		buttons: ['В избранное', 'Делегировать', 'Завершить'],
+		labels: ['На контроле', 'Завершено', 'Просрочено'],
+		seria: [2, 1, 0],
+	},
 	{ id: 3, title: 'Мои согласования', digit: 2, but: 'Прочитать все' },
-	{ id: 4, active: false, title: 'Задания у подчиненных' },
-	{ id: 5, active: false, title: 'Исполнительская дисциплина', digit: 3 },
+	{ id: 5, active: false, title: 'Исполнительская дисциплина' },
+	{
+		id: 2,
+		title: 'Избранное',
+		digit: 5,
+		but: 'Прочитать все',
+		classname: 'long',
+	},
+	// { id: 4, active: false, title: 'Задания у подчиненных' },
 ]
-
 
 export { headers, headers1, items, bl }

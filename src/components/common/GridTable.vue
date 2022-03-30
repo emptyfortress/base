@@ -179,7 +179,7 @@ export default {
 				targets: '.rowslide',
 				translateY: [30, 0],
 				opacity: [0, 1],
-				delay: anime.stagger(120, { start: 500, easing: 'easeInQuad' }),
+				delay: anime.stagger(120, { start: 1000, easing: 'easeInQuad' }),
 			})
 		})
 

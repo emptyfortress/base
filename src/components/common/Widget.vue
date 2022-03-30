@@ -1,8 +1,9 @@
 <template lang="pug">
-.widget
+.widget(:class="block.classname")
 	.hd(@click="showAll") {{ block.title }} - {{block.digit}}
-	.charts
-		apexchart(:options="chartOptions" :series="series" v-if="index === 0" @dataPointSelection="dataPointSelection" )
+	.charts(v-if="index < 2")
+		apexchart(:options="chartOptions" :series="series" v-if="index === 0 || index === 1" @dataPointSelection="dataPointSelection" )
+	Mydoc(v-if="index === 4")
 
 q-dialog(v-model="alert" full-width)
 	q-card
@@ -13,20 +14,20 @@ q-dialog(v-model="alert" full-width)
 		q-card-section(class="q-pt-none")
 			DashTable(:block="block")
 
-		//- q-card-actions(align="right")
-			q-btn(flat label="OK" color="primary" v-close-popup)
 </template>
 
 <script>
 import { ref } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
 import DashTable from '@/components/common/DashTable.vue'
+import Mydoc from '@/components/Mydoc.vue'
 import { useWidget } from '@/stores/widget'
 
 export default {
 	components: {
 		apexchart: VueApexCharts,
 		DashTable,
+		Mydoc
 	},
 	props: ['index', 'block'],
 	setup(props) {
@@ -94,6 +95,7 @@ export default {
 		const showAll = () => {
 			widget.selected = null
 			toggle()
+			console.log(props.block)
 		}
 
 		const dataPointSelection = (event, chartContext, config) => {
@@ -125,6 +127,9 @@ export default {
 	padding: 0.5rem;
 	position: relative;
 	cursor: pointer;
+	&.long {
+		grid-column: 2/4;
+	}
 	&:hover {
 		border: 1px solid var(--my-border-color);
 	}
