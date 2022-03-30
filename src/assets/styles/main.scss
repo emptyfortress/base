@@ -245,15 +245,13 @@ a:hover:not(.q-link) {
 	}
 }
 .q-table__bottom {
+	background: transparent;
+	box-shadow: none;
 	width: 100%;
-	transition: 0.3s ease all;
-	background: #e5e5e5;
-	box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.2);
 	padding: 0;
-	border-radius: 12px 12px 0px 0px;
-	body.body--dark & {
-		background: var(--my-color-step-150);
-	}
+	// background: #e5e5e5;
+	// box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.2);
+	// border-radius: 12px 12px 0px 0px;
 }
 .q-table__top {
 	padding: 0;
@@ -298,6 +296,3 @@ a:hover:not(.q-link) {
 	position: relative;
 	z-index: 7000 !important;
 }
-// .q-table__bottom {
-// 	transform: translateY(100px);
-// }
