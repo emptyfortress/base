@@ -109,7 +109,13 @@ export default {
 		}
 
 		const buttons = reactive([
-			// { id: 0, icon: 'sort-variant', tooltip: 'Сортировка', action: '', grid: false },
+			{
+				id: 0,
+				icon: 'sort-variant',
+				tooltip: 'Сортировка',
+				action: '',
+				grid: false,
+			},
 			{ id: 1, icon: 'readAll', tooltip: 'Прочитать все', action: 'clear' },
 			{
 				id: 2,
@@ -124,7 +130,7 @@ export default {
 				tooltip: 'Экспорт',
 				action: '',
 			},
-			{ id: 4, icon: 'sliders-reload', tooltip: 'Сброс настроек', action: '' },
+			// { id: 4, icon: 'sliders-reload', tooltip: 'Сброс настроек', action: '' },
 			{ id: 5, icon: 'sliders-vertical', tooltip: 'Настройки', action: '' },
 		])
 

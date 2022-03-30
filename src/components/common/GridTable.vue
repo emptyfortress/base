@@ -40,8 +40,11 @@
 				q-td(v-for="col in props.cols" :key="col.name" :class="col.classname") {{ props.row[col.name] }}
 		template(v-slot:top v-if="toolbar").gt-sm
 			Toolbar(:total="total" :shown="shown" @readAll="readAll" @toggleLoad="loading = !loading")
-		template(v-slot:bottom v-if="selected.length")
-			Total(:selected="selected.length" @clear="clearSelected").total
+		template(v-slot:bottom v-if="selectedArray.length")
+			.zaglushka
+	transition(name="sliding")
+		.total(v-if="selectedArray.length")
+			Total(:selected="selectedArray.length" @clear="clearSelected")
 
 </template>
 
@@ -81,7 +84,7 @@ export default {
 
 		// const total = ref(null)
 		const all = ref(false)
-		const selected = computed(() => {
+		const selectedArray = computed(() => {
 			return props.rows.filter((item) => item.selected)
 		})
 
@@ -93,31 +96,14 @@ export default {
 			} else return ''
 		})
 
-		const bottom = computed(() => {
-			return selected.value.length
-		})
-
-		watch(bottom, (value) => {
-			if (value) {
-				setTimeout(() => {
-					console.log('watch')
-				}, 1000)
-			}
-		})
-
 		watchEffect(() => {
-			if (selected.value.length === 0) {
+			if (selectedArray.value.length === 0) {
 				all.value = false
 				grid.selected = false
-			} else if (selected.value.length < props.rows.length) {
+			} else if (selectedArray.value.length < props.rows.length) {
 				all.value = null
 				grid.selected = null
-				anime({
-					targets: '.ro',
-					translateX: 200,
-				})
-				//- show.play
-			} else if (selected.value.length === props.rows.length) {
+			} else if (selectedArray.value.length === props.rows.length) {
 				all.value = true
 				grid.selected = true
 			}
@@ -202,7 +188,7 @@ export default {
 			rowClass,
 			pagination,
 			all,
-			selected,
+			selectedArray,
 			toggleSel,
 			toggle,
 			itemTable,
@@ -223,6 +209,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.grid {
+	position: relative;
+}
 .full .fixhd {
 	height: 100vh;
 }
@@ -325,5 +314,19 @@ td.small {
 }
 .fixhd tbody td.nowrap {
 	white-space: nowrap;
+}
+.zaglushka {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 52px;
+	width: 100%;
+	background: transparent;
+}
+.total {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
 }
 </style>

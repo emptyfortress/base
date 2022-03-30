@@ -13,8 +13,6 @@
 </template>
 
 <script>
-import anime from 'animejs/lib/anime.es.js'
-
 export default {
 	props: ['selected'],
 
@@ -45,15 +43,6 @@ export default {
 			this.$emit('clear')
 		},
 	},
-	mounted() {
-		anime({
-			targets: '.multi',
-			translateY: [50, 0],
-			opacity: [0, 1],
-			duration: 200,
-			easing: 'easeInQuad',
-		})
-	},
 }
 </script>
 
@@ -64,6 +53,8 @@ export default {
 	background: #e5e5e5;
 	box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.2);
 	border-radius: 12px 12px 0px 0px;
+	transition: 0.3s ease all;
+	overflow: hidden;
 	body.body--dark & {
 		background: var(--my-color-step-150);
 	}
