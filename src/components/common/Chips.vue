@@ -22,7 +22,7 @@ export default {
 		}
 
 		const chipClass = (e) => {
-			if (widget.selected === e) {
+			if (widget.chip === e) {
 				return 'active'
 			}
 			return ''

@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { ref, computed, watchEffect, watch, onMounted } from 'vue'
+import { ref, computed, watchEffect, onMounted } from 'vue'
 import Toolbar from '@/components/common/Toolbar.vue'
 import Total from '@/components/common/Total.vue'
 import Filter from '@/components/common/Filter.vue'
@@ -84,6 +84,7 @@ export default {
 
 		// const total = ref(null)
 		const all = ref(false)
+
 		const selectedArray = computed(() => {
 			return props.rows.filter((item) => item.selected)
 		})

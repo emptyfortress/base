@@ -4,15 +4,15 @@ export const useWidget = defineStore({
 	id: 'widget',
 	state: () => ({
 		block: null,
-		selected: null,
+		chip: null,
 	}),
 	getters: {},
 
 	actions: {
 		select(a,e) {
-			if (this.selected === e) {
-				this.selected = null
-			} else this.selected = e
+			if (this.chip === e) {
+				this.chip = null
+			} else this.chip = e
 			this.block = a
 		}
 	},

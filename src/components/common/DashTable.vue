@@ -29,19 +29,26 @@ export default {
 		const loadedItems = reactive(items)
 
 		const filteredItems = computed(() => {
-			switch (widget.selected) {
-				case 0:
-					return loadedItems.filter((item) => item.unread)
-				case 1:
-					return loadedItems.filter((item) => item.status === 'В работе')
-				case 2:
-					return loadedItems.filter((item) => item.status === 'Делегировано')
-				case 3:
-					return loadedItems.filter((item) => item.status === 'Просрочено')
-				default:
-					return loadedItems
+			if (props.block.id === 0) {
+				let temp = loadedItems.filter(item => item.doc === 'in')
+				switch (widget.chip) {
+					case 0:
+						return temp.filter((item) => item.unread)
+					case 1:
+						return temp.filter((item) => item.status === 'В работе')
+					case 2:
+						return temp.filter((item) => item.status === 'Делегировано')
+					case 3:
+						return temp.filter((item) => item.status === 'Просрочено')
+					default:
+						return temp
+				}
+			} else if (props.block.id === 1) {
+				return loadedItems.filter((item) => item.doc === 'out')
 			}
+			return []
 		})
+
 		const all = ref(false)
 		const sel = (val, item) => {
 			item.selected = val
