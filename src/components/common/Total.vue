@@ -16,6 +16,8 @@
 import { ref, inject } from 'vue'
 
 export default {
+	emits: ['clear'],
+
 	props: {
 		selected: {
 			type: Number,
@@ -23,7 +25,7 @@ export default {
 			default: 0,
 		},
 	},
-	setup(context) {
+	setup(props, context) {
 		const big = ref(false)
 		const delegation = ref(false)
 

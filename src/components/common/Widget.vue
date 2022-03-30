@@ -10,8 +10,8 @@ q-dialog(v-model="alert" full-width)
 		q-card-section.row.q-pb-none
 			.text-h6 {{ block.title }} - {{ block.digit }}
 			q-space
-			q-btn(icon="mdi-close" flat round dense v-close-popup)
-		q-card-section(class="q-pt-none")
+			q-btn(icon="mdi-close" flat round dense v-close-popup @click="clear")
+		q-card-section(class="q-pt-none" style="overflow: hidden;")
 			DashTable(:block="block")
 
 </template>
@@ -97,13 +97,20 @@ export default {
 			toggle()
 			console.log(props.block)
 		}
+		const clear = () => {
+			setTimeout(() => {
+				widget.block = null
+				widget.chip = null
+			}, 500)
+		}
 
 		const dataPointSelection = (event, chartContext, config) => {
 			toggle()
-			widget.selected = config.dataPointIndex
+			widget.chip = config.dataPointIndex
 		}
 
 		return {
+			clear,
 			showAll,
 			toggle,
 			alert,

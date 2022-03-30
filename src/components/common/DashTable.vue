@@ -44,7 +44,17 @@ export default {
 						return temp
 				}
 			} else if (props.block.id === 1) {
-				return loadedItems.filter((item) => item.doc === 'out')
+				let temp = loadedItems.filter(item => item.doc === 'out')
+				switch (widget.chip) {
+					case 0:
+						return temp.filter((item) => item.status === 'На контроле')
+					case 1:
+						return temp.filter((item) => item.status === 'Завершено')
+					case 2:
+						return temp.filter((item) => item.status === 'Просрочено')
+					default:
+						return temp
+				}
 			}
 			return []
 		})
