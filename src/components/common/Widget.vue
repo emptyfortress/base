@@ -27,7 +27,7 @@ export default {
 	components: {
 		apexchart: VueApexCharts,
 		DashTable,
-		Mydoc
+		Mydoc,
 	},
 	props: ['index', 'block'],
 	setup(props) {
@@ -83,7 +83,7 @@ export default {
 				formatter: (val) => Math.round((props.block.digit / 100) * val),
 			},
 			labels: props.block.labels,
-			colors: ['#2E93fA', '#66DA26', '#546E7A', '#E91E63', '#FF9800'],
+			colors: ['#2E93fA', '#66DA26', '#E91E63', '#546E7A', '#FF9800'],
 		}
 
 		const widget = useWidget()
