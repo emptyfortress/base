@@ -40,19 +40,18 @@
 				q-td(v-for="col in props.cols" :key="col.name" :class="col.classname") {{ props.row[col.name] }}
 		template(v-slot:top v-if="toolbar").gt-sm
 			Toolbar(:total="total" :shown="shown" @readAll="readAll" @toggleLoad="loading = !loading")
-		//- template(v-slot:bottom v-if="selected.length")
-		//- 	Total(:selected="selected.length" @clear="clearSelected")
-	//- q-dialog(v-model="showTotal" seamless position="bottom")
+		template(v-slot:bottom v-if="selected.length")
+			Total(:selected="selected.length" @clear="clearSelected").total
 
 </template>
 
 <script>
-import { ref, computed, watchEffect, onMounted } from 'vue'
+import { ref, computed, watchEffect, watch, onMounted } from 'vue'
 import Toolbar from '@/components/common/Toolbar.vue'
 import Total from '@/components/common/Total.vue'
 import Filter from '@/components/common/Filter.vue'
 import { useGrid } from '@/stores/grid'
-import anime from 'animejs'
+import anime from 'animejs/lib/anime.es.js'
 
 export default {
 	emits: ['sort'],
@@ -94,6 +93,18 @@ export default {
 			} else return ''
 		})
 
+		const bottom = computed(() => {
+			return selected.value.length
+		})
+
+		watch(bottom, (value) => {
+			if (value) {
+				setTimeout(() => {
+					console.log('watch')
+				}, 1000)
+			}
+		})
+
 		watchEffect(() => {
 			if (selected.value.length === 0) {
 				all.value = false
@@ -101,6 +112,11 @@ export default {
 			} else if (selected.value.length < props.rows.length) {
 				all.value = null
 				grid.selected = null
+				anime({
+					targets: '.ro',
+					translateX: 200,
+				})
+				//- show.play
 			} else if (selected.value.length === props.rows.length) {
 				all.value = true
 				grid.selected = true

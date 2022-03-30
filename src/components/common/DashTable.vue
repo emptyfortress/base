@@ -2,16 +2,22 @@
 Chips(:block="props.block").q-mt-md.q-mb-sm.slide
 GridTable(:rows="filteredItems" :columns="headers" :colData="colData" height="600px" :bordered="true" @sort="sort")
 
-.big {{ selection }}
+//- q-btn(@click="play") test
+//- .tt
+//- .big
+	.txt(v-if="selection") {{ selection }}
+	.btn(v-if="selection")
+		q-btn(unelevated color="primary") test
+		q-btn(unelevated color="primary") test
 </template>
 
 <script>
 import { headers, items } from '@/data.js'
-import { ref, reactive, computed, onMounted } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import Chips from '@/components/common/Chips.vue'
 import GridTable from '@/components/common/GridTable.vue'
 import { useWidget } from '@/stores/widget'
-import anime from 'animejs/lib/anime.es.js';
+// import anime from 'animejs/lib/anime.es.js'
 
 export default {
 	props: ['block'],
@@ -73,7 +79,7 @@ export default {
 				}
 				return 0
 			}
-			if(!sorted.value) {
+			if (!sorted.value) {
 				loadedItems.sort(compare)
 				sorted.value = !sorted.value
 			} else {
@@ -82,16 +88,35 @@ export default {
 			}
 		}
 
-		onMounted(() => {
-			// anime({
-			// 	targets: '.slide',
-			// 	translateY: [30, 0],
-			// 	opacity: [0, 1],
-			// 	delay: 1000
-			// })
-		})
+		//- const show = anime({
+		//- 	targets: '.tt',
+		//- 	translateX: 350,
+		//- 	duration: 500,
+		//- 	delay: 500,
+		//- 	autoplay: false,
+		//- })
+
+		//- const play = () => {
+		//- 	const animation = anime({
+		//- 		targets: '.tt',
+		//- 		translateX: 200,
+		//- 		autoplay: false,
+		//- 	})
+		//- 	animation.play()
+		//- 	console.log('play')
+		//- }
+
+		// onMounted(() => {
+		// 	anime({
+		// 		targets: '.slide',
+		// 		translateY: [30, 0],
+		// 		opacity: [0, 1],
+		// 		delay: 1000
+		// 	})
+		// })
 
 		return {
+			//- play,
 			props,
 			headers,
 			filteredItems,
@@ -118,6 +143,9 @@ export default {
 	line-height: 100%;
 	margin-top: 1rem;
 	color: var(--q-primary);
+	display: flex;
+	justify-content: flex-start;
+	gap: 2rem;
 }
 .q-markup-table .q-table thead th.center {
 	text-align: center;
@@ -125,5 +153,10 @@ export default {
 th.brd {
 	border-right: 1px solid var(--th-border-color) !important;
 	cursor: pointer;
+}
+.tt {
+	width: 50px;
+	height: 50px;
+	background: #ccc;
 }
 </style>

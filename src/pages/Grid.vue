@@ -9,7 +9,7 @@
 			.rel(v-else)
 				Toolbar(:total="items.length" :lenta="grid.lenta" :shown="filteredRows.length" @readAll="readAll" @toggleLoad="loading = !loading" @selNone="selectNone" @selAll="selectAll")
 				Lenta(:items="filteredRows" :total="items.length" :loading="loading")
-			transition(name="sliding")
+			//- transition(name="sliding")
 				.total(v-if="grid.selected != 0")
 					Total(:selected="selected.length" @clear="clearSelected")
 
