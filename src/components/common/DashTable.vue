@@ -1,16 +1,15 @@
 <template lang="pug">
 Chips(:block="props.block").q-mt-md.q-mb-sm.slide
-GridTable(:rows="filteredItems" :columns="headers" :colData="colData" height="600px" :bordered="true" @sort="sort")
+GridTable(:rows="filteredItems" :columns="cols" :colData="colData" height="600px" :bordered="true" @sort="sort")
 
 </template>
 
 <script>
 import { ref, reactive, computed, provide } from 'vue'
-import { headers, items } from '@/data.js'
+import { headers, headers1, items } from '@/data.js'
 import Chips from '@/components/common/Chips.vue'
 import GridTable from '@/components/common/GridTable.vue'
 import { useWidget } from '@/stores/widget'
-// import anime from 'animejs/lib/anime.es.js'
 
 export default {
 	props: {
@@ -72,12 +71,18 @@ export default {
 				all.value = true
 			}
 		}
-		const selection = computed(() => {
-			const temp = loadedItems.filter((item) => item.selected)
-			if (temp.length === 0) {
-				return
-			} else return temp.length + ' из ' + loadedItems.length
+
+		const cols = computed(() => {
+			if (props.block.id === 0) {
+				return headers
+			} else if (props.block.id === 1) {
+				return headers1
+			}
+			return []
 		})
+
+
+
 
 		const colData = (col) => {
 			return [...new Set(loadedItems.map((item) => item[col.name]))]
@@ -134,14 +139,13 @@ export default {
 		// })
 
 		return {
-			//- play,
+			cols,
 			props,
 			headers,
 			filteredItems,
 			all,
 			sel,
 			toggleSel,
-			selection,
 			colData,
 			popup,
 			sort,

@@ -37,32 +37,30 @@ const headers = [
 ]
 const headers1 = [
 	{
-		id: 0,
-		text: 'Исполнитель',
-		align: 'start',
+		id: 2,
+		label: 'Исполнитель',
+		align: 'left',
+		field: 'executor',
 		sortable: true,
-		value: 'executor',
+		name: 'executor',
+		classname: 'nowrap',
 	},
 	{
 		id: 1,
-		text: 'Статус',
-		align: 'start',
+		label: 'Тема',
+		field: 'title',
+		align: 'left',
 		sortable: true,
-		value: 'executor',
-	},
-	{
-		id: 2,
-		text: 'Срок',
-		align: 'start',
-		sortable: true,
-		value: 'deadline',
+		name: 'title',
 	},
 	{
 		id: 3,
-		text: 'Тема',
-		align: 'start',
+		label: 'Срок',
+		align: 'left',
+		field: 'deadline',
 		sortable: true,
-		value: 'title',
+		name: 'deadline',
+		classname: 'nowrap',
 	},
 ]
 
