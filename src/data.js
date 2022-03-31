@@ -9,14 +9,6 @@ const headers = [
 		classname: 'nowrap',
 	},
 	{
-		id: 1,
-		label: 'Тема',
-		field: 'title',
-		align: 'left',
-		sortable: true,
-		name: 'title',
-	},
-	{
 		id: 2,
 		label: 'Автор',
 		align: 'left',
@@ -24,6 +16,14 @@ const headers = [
 		sortable: true,
 		name: 'executor',
 		classname: 'nowrap',
+	},
+	{
+		id: 1,
+		label: 'Тема',
+		field: 'title',
+		align: 'left',
+		sortable: true,
+		name: 'title',
 	},
 	{
 		id: 3,
@@ -46,14 +46,6 @@ const headers1 = [
 		classname: 'nowrap',
 	},
 	{
-		id: 1,
-		label: 'Тема',
-		field: 'title',
-		align: 'left',
-		sortable: true,
-		name: 'title',
-	},
-	{
 		id: 3,
 		label: 'Срок',
 		align: 'left',
@@ -61,6 +53,14 @@ const headers1 = [
 		sortable: true,
 		name: 'deadline',
 		classname: 'nowrap',
+	},
+	{
+		id: 1,
+		label: 'Тема',
+		field: 'title',
+		align: 'left',
+		sortable: true,
+		name: 'title',
 	},
 ]
 
@@ -391,10 +391,10 @@ const bl = [
 		labels: ['На контроле', 'Завершено', 'Просрочено'],
 		seria: [4, 2, 1],
 	},
+	{ id: 2, active: false, digit: 67, title: 'Исполнительская дисциплина' },
 	{ id: 3, title: 'Мои согласования', digit: 2, but: 'Прочитать все' },
-	{ id: 5, active: false, title: 'Исполнительская дисциплина' },
 	{
-		id: 2,
+		id: 4,
 		title: 'Избранное',
 		digit: 5,
 		but: 'Прочитать все',

@@ -3,24 +3,29 @@
 	.hd(@click="showAll") {{ block.title }} - {{block.digit}}
 	.charts(v-if="index < 2")
 		apexchart(:options="chartOptions" :series="series" v-if="index === 0 || index === 1" @dataPointSelection="dataPointSelection" )
+	.charts(v-if="index === 2" @click="showDisc")
+		//- apexchart(type="radialBar" :options="chartOptions1" :series="series1")
+		apexchart(type="area" :options="chartOptions2" :series="series2")
 	Mydoc(v-if="index === 4")
 
-q-dialog(v-model="alert" full-width)
+q-dialog(v-model="alert" :full-width="calcWidth")
 	q-card
 		q-card-section.row.q-pb-none
 			.text-h6 {{ block.title }} - {{ block.digit }}
 			q-space
 			q-btn(icon="mdi-close" flat round dense v-close-popup @click="clear")
 		q-card-section(class="q-pt-none" style="overflow: hidden;")
-			DashTable(:block="block")
+			DashTable(:block="block" v-if="block.id < 2")
+			Discipline(v-if="index === 2")
 
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
 import DashTable from '@/components/common/DashTable.vue'
 import Mydoc from '@/components/Mydoc.vue'
+import Discipline from '@/components/Discipline.vue'
 import { useWidget } from '@/stores/widget'
 
 export default {
@@ -28,10 +33,19 @@ export default {
 		apexchart: VueApexCharts,
 		DashTable,
 		Mydoc,
+		Discipline,
 	},
 	props: ['index', 'block'],
 	setup(props) {
 		const series = ref(props.block.seria)
+		const series1 = [67]
+
+		const series2 = [
+			{
+				name: 'Дисциплина',
+				data: [55, 57, 65, 70, 77, 80, 67]
+			},
+		]
 
 		const chartOptions = {
 			chart: {
@@ -86,8 +100,106 @@ export default {
 			colors: ['#2E93fA', '#66DA26', '#E91E63', '#546E7A', '#FF9800'],
 		}
 
+		const chartOptions1 = {
+			chart: {
+				type: 'radialBar',
+				offsetY: -32
+			},
+			plotOptions: {
+				radialBar: {
+					startAngle: -90,
+					endAngle: 90,
+					dataLabels: {
+						name: {
+							fontSize: '16px',
+							color: 'black',
+							offsetY: 30
+						},
+						value: {
+							offsetY: -31,
+							fontSize: '26px',
+							color: undefined,
+							formatter: function (val) {
+								return val + '%'
+							}
+						}
+					}
+				}
+			},
+			fill: {
+				type: 'gradient',
+				gradient: {
+					shade: 'dark',
+					shadeIntensity: 0.15,
+					inverseColors: false,
+					opacityFrom: 1,
+					opacityTo: 1,
+					stops: [0, 50, 65, 91]
+				},
+			},
+			stroke: {
+				dashArray: 2
+			},
+			labels: ['Орлов П.И.'],
+		}
+
+		const chartOptions2 = {
+			xaxis: {
+				type: 'datetime',
+				categories: [
+					'2022-03-04',
+					'2022-03-11',
+					'2022-03-18',
+					'2022-03-24',
+					'2022-04-01',
+					'2022-04-08',
+					'2022-04-14',
+				]
+			},
+			chart: {
+				type: 'area',
+				// height: 350,
+				zoom: {
+					enabled: false
+				}
+			},
+			dataLabels: {
+				enabled: false
+			},
+			stroke: {
+				curve: 'straight'
+			},
+
+			title: {
+				text: 'Орлов П.И.',
+				align: 'left'
+			},
+			subtitle: {
+				text: 'По неделям',
+				align: 'left'
+			},
+			// labels: series.monthDataSeries1.dates,
+			yaxis: {
+				opposite: true
+			},
+			legend: {
+				horizontalAlign: 'left'
+			}
+		}
+
 		const widget = useWidget()
 		const alert = ref(false)
+
+		const showDisc = () => {
+			widget.block = 2
+			alert.value = true
+		}
+
+		const calcWidth = computed(() => {
+			if (props.block.id !== 2) {
+				return true
+			} else return false
+		})
 
 		const toggle = () => {
 			alert.value = !alert.value
@@ -110,13 +222,19 @@ export default {
 		}
 
 		return {
+			showDisc,
+			calcWidth,
 			clear,
 			showAll,
 			toggle,
 			alert,
 			props,
 			series,
+			series1,
+			series2,
 			chartOptions,
+			chartOptions1,
+			chartOptions2,
 			dataPointSelection,
 		}
 	},
@@ -148,5 +266,8 @@ export default {
 .charts {
 	margin-top: 1rem;
 	width: 100%;
+}
+.q-dialog__inner--minimized>div {
+	min-width: 700px;
 }
 </style>
