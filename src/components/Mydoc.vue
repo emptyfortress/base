@@ -1,32 +1,34 @@
 <template lang="pug">
-q-table(:rows="items"
+q-table(
+	:rows="items"
 	:columns="headers2"
-	row-key="name"
-	hide-pagination="false"
 	:pagination="pagination"
-	:wrap-cells="false"
+	:filter="filter"
+	rows-per-page-label="Показывать:"
 	flat
 	dense
-	).izb
+	row-key="id").izb
+	template(v-slot:body-cell-title="props")
+		q-td(:props="props").wrap
+			.flex
+				q-icon(name="mdi-star" color="orange" size="18px")
+				.link {{ props.value }}
+
 </template>
 
 <script>
-import { ref, reactive, computed, provide } from 'vue'
 import { headers2, items } from '@/data.js'
-// import GridTable from '@/components/common/GridTable.vue'
 
 export default {
-	components: {
-		// GridTable,
-	},
+	components: {},
 	setup() {
 		const pagination = {
 			page: 1,
-			rowsPerPage: 6,
+			rowsPerPage: 7,
 		}
 		return {
-			items,
 			headers2,
+			items,
 			pagination,
 		}
 	},
@@ -37,5 +39,21 @@ export default {
 @import '@/assets/styles/theme.scss';
 .izb {
 	margin-top: 1rem;
+}
+.flex {
+	display: flex;
+	justify-content: flex-start;
+	align-items: top;
+	flex-wrap: nowrap;
+	gap: 0.5rem;
+}
+.q-table--dense .q-table td:first-child {
+	padding-left: 0;
+}
+.q-td.wrap {
+	white-space: normal;
+}
+.q-table__container>div:last-child {
+	padding-top: 1rem !important;
 }
 </style>
