@@ -23,11 +23,12 @@
 					q-checkbox(:model-value="all" @update:model-value="toggleSel")
 				q-th(v-for="col in props.cols" :props="props" :key="col.name").hov
 					span {{ col.label }}
-					q-icon(name="mdi-filter" color="negative" v-if="showFilt(col)" @click.stop="clearFilter(col)").filt
-					q-icon(name="mdi-filter-outline" @click.stop="toggleFilter(col.id)" v-if="!showFilt(col)").sort
+					span(v-if="usefilter")
+						q-icon(name="mdi-filter" color="negative" v-if="showFilt(col)" @click.stop="clearFilter(col)").filt
+						q-icon(name="mdi-filter-outline" @click.stop="toggleFilter(col.id)" v-if="!showFilt(col)").sort
 
 					transition(name="slide-top")
-						Filter(:filterByIndex="filterByIndex" :col="col" @close="filterByIndex = null" :data="colData(col)" :datum="col.datum")
+						Filter(v-if="usefilter" :filterByIndex="filterByIndex" :col="col" @close="filterByIndex = null" :data="colData(col)" :datum="col.datum")
 
 		template(v-slot:loading)
 			.ld(:class="classLoading")
@@ -73,6 +74,10 @@ export default {
 		height: String,
 		bordered: Boolean,
 		wrap: Boolean,
+		usefilter: {
+			type: Boolean,
+			default: () => false,
+		}
 	},
 	setup(props, context) {
 		const pagination = {
@@ -148,8 +153,7 @@ export default {
 				let ids = grid.checked.map((item) => item.id)
 				let id = (el) => el === col.id
 				return ids.some(id)
-			}
-			return false
+			} return false
 		}
 
 		const rowClass = (row) => {

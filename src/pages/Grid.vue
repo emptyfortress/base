@@ -5,7 +5,7 @@
 		.sidebar(v-if="grid.sidebar").gt-sm
 			Aggregates(:data="aggregateData")
 		.main(:class="{ 'fill' : !grid.sidebar }")
-			GridTable(v-if="!grid.lenta" :columns="columns" :colData="colData" :rows="filteredRows" :total="items.length" :shown="filteredRows.length" toolbar @sort="sort")
+			GridTable(v-if="!grid.lenta" :columns="columns" usefilter :colData="colData" :rows="filteredRows" :total="items.length" :shown="filteredRows.length" toolbar @sort="sort")
 			.rel(v-else)
 				Toolbar(:total="items.length" :lenta="grid.lenta" :shown="filteredRows.length" @readAll="readAll" @toggleLoad="loading = !loading" @selNone="selectNone" @selAll="selectAll")
 				Lenta(:items="filteredRows" :total="items.length" :loading="loading")

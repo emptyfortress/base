@@ -1,6 +1,6 @@
 <template lang="pug">
 Chips(:block="props.block").q-mt-md.q-mb-sm.slide
-GridTable(:rows="filteredItems" :columns="cols" :colData="colData" height="600px" :bordered="true" @sort="sort")
+GridTable(:rows="filteredItems" usefilter :columns="cols" :colData="colData" height="600px" :bordered="true" @sort="sort")
 
 </template>
 
