@@ -29,7 +29,7 @@ export default {
 
 		const filteredItems = computed(() => {
 			if (props.block.id === 0) {
-				let temp = loadedItems.filter(item => item.doc === 'in')
+				let temp = loadedItems.filter((item) => item.doc === 'in')
 				switch (widget.chip) {
 					case 0:
 						return temp.filter((item) => item.unread)
@@ -43,7 +43,7 @@ export default {
 						return temp
 				}
 			} else if (props.block.id === 1) {
-				let temp = loadedItems.filter(item => item.doc === 'out')
+				let temp = loadedItems.filter((item) => item.doc === 'out')
 				switch (widget.chip) {
 					case 0:
 						return temp.filter((item) => item.status === 'На контроле')
@@ -80,9 +80,6 @@ export default {
 			}
 			return []
 		})
-
-
-
 
 		const colData = (col) => {
 			return [...new Set(loadedItems.map((item) => item[col.name]))]
