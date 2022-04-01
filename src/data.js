@@ -63,6 +63,43 @@ const headers1 = [
 		name: 'title',
 	},
 ]
+const headers2 = [
+	{
+		id: 0,
+		name: 'type',
+		label: 'Вид',
+		field: 'type',
+		align: 'left',
+		sortable: true,
+		classname: 'nowrap',
+	},
+	{
+		id: 1,
+		name: 'title',
+		label: 'Тема',
+		align: 'left',
+		sortable: true,
+		field: 'title',
+	},
+	{
+		id: 2,
+		label: 'Исполнитель',
+		align: 'left',
+		field: 'executor',
+		sortable: true,
+		name: 'executor',
+		classname: 'nowrap',
+	},
+	// {
+	// 	id: 3,
+	// 	label: 'Срок',
+	// 	align: 'left',
+	// 	field: 'deadline',
+	// 	sortable: true,
+	// 	name: 'deadline',
+	// 	classname: 'nowrap',
+	// },
+]
 
 const items = [
 	{
@@ -392,9 +429,9 @@ const bl = [
 		seria: [4, 2, 1],
 	},
 	{ id: 2, active: false, digit: 67, title: 'Исполнительская дисциплина' },
-	{ id: 3, title: 'Мои согласования', digit: 2, but: 'Прочитать все' },
+	// { id: 3, title: 'Мои согласования', digit: 2, but: 'Прочитать все' },
 	{
-		id: 4,
+		id: 3,
 		title: 'Избранное',
 		digit: 5,
 		but: 'Прочитать все',
@@ -403,4 +440,4 @@ const bl = [
 	// { id: 4, active: false, title: 'Задания у подчиненных' },
 ]
 
-export { headers, headers1, items, bl }
+export { headers, headers1, headers2, items, bl }

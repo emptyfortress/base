@@ -1,12 +1,14 @@
 <template lang="pug">
 .widget(:class="block.classname")
-	.hd(@click="showAll") {{ block.title }} - {{block.digit}}
-	.charts(v-if="index < 2")
+	.hd(@click="showAll")
+		q-icon(v-if="index === 4" name="mdi-star-outline" size="sm").q-mr-sm
+		span {{ block.title }} - {{block.digit}}
+		.charts(v-if="index < 2")
 		apexchart(:options="chartOptions" :series="series" v-if="index === 0 || index === 1" @dataPointSelection="dataPointSelection" )
 	.charts(v-if="index === 2" @click="showDisc")
 		//- apexchart(type="radialBar" :options="chartOptions1" :series="series1")
 		apexchart(type="area" :options="chartOptions2" :series="series2")
-	Mydoc(v-if="index === 4")
+	Mydoc(v-if="index === 3")
 
 q-dialog(v-model="alert" :full-width="calcWidth")
 	q-card
@@ -43,7 +45,7 @@ export default {
 		const series2 = [
 			{
 				name: 'Дисциплина',
-				data: [55, 57, 65, 70, 77, 80, 67]
+				data: [55, 57, 65, 70, 77, 80, 67],
 			},
 		]
 
@@ -206,8 +208,9 @@ export default {
 		}
 		const showAll = () => {
 			widget.selected = null
-			toggle()
-			console.log(props.block)
+			if (props.index < 2) {
+				toggle()
+			}
 		}
 		const clear = () => {
 			setTimeout(() => {
@@ -253,7 +256,7 @@ export default {
 	position: relative;
 	cursor: pointer;
 	&.long {
-		grid-column: 2/4;
+		grid-column: 1/-1;
 	}
 	&:hover {
 		border: 1px solid var(--my-border-color);
