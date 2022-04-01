@@ -4,6 +4,7 @@ q-table(
 	:columns="headers2"
 	:pagination="pagination"
 	:filter="filter"
+	no-results-label="Ничего не найдено"
 	rows-per-page-label="Показывать:"
 	flat
 	dense
@@ -21,6 +22,13 @@ import { headers2, items } from '@/data.js'
 
 export default {
 	components: {},
+	props: {
+		filter: {
+			type: String,
+			required: false,
+		},
+	},
+
 	setup() {
 		const pagination = {
 			page: 1,
@@ -53,7 +61,7 @@ export default {
 .q-td.wrap {
 	white-space: normal;
 }
-.q-table__container>div:last-child {
+.q-table__container > div:last-child {
 	padding-top: 1rem !important;
 }
 </style>

@@ -1,14 +1,20 @@
 <template lang="pug">
 .widget(:class="block.classname")
-	.hd(@click="showAll")
-		q-icon(v-if="index === 4" name="mdi-star-outline" size="sm").q-mr-sm
-		span {{ block.title }} - {{block.digit}}
-		.charts(v-if="index < 2")
+	.row.justify-between.items-center
+		.hd(@click="showAll")
+			q-icon(v-if="index === 4" name="mdi-star-outline" size="sm").q-mr-sm
+			span {{ block.title }} - {{block.digit}}
+		.filter(v-if="index === 3")
+			q-input(v-model="filter" dense placeholder="Найти" clearable).izbfilter
+				template(v-slot:prepend)
+					q-icon(name="mdi-magnify" size="xs").q-mt-md
+
+	.charts(v-if="index < 2")
 		apexchart(:options="chartOptions" :series="series" v-if="index === 0 || index === 1" @dataPointSelection="dataPointSelection" )
 	.charts(v-if="index === 2" @click="showDisc")
-		//- apexchart(type="radialBar" :options="chartOptions1" :series="series1")
+		//- apexchart(type="radialbar" :options="chartoptions1" :series="series1")
 		apexchart(type="area" :options="chartOptions2" :series="series2")
-	Mydoc(v-if="index === 3")
+	Mydoc(v-if="index === 3" :filter="filter")
 
 q-dialog(v-model="alert" :full-width="calcWidth")
 	q-card
@@ -105,7 +111,7 @@ export default {
 		const chartOptions1 = {
 			chart: {
 				type: 'radialBar',
-				offsetY: -32
+				offsetY: -32,
 			},
 			plotOptions: {
 				radialBar: {
@@ -115,7 +121,7 @@ export default {
 						name: {
 							fontSize: '16px',
 							color: 'black',
-							offsetY: 30
+							offsetY: 30,
 						},
 						value: {
 							offsetY: -31,
@@ -123,10 +129,10 @@ export default {
 							color: undefined,
 							formatter: function (val) {
 								return val + '%'
-							}
-						}
-					}
-				}
+							},
+						},
+					},
+				},
 			},
 			fill: {
 				type: 'gradient',
@@ -136,11 +142,11 @@ export default {
 					inverseColors: false,
 					opacityFrom: 1,
 					opacityTo: 1,
-					stops: [0, 50, 65, 91]
+					stops: [0, 50, 65, 91],
 				},
 			},
 			stroke: {
-				dashArray: 2
+				dashArray: 2,
 			},
 			labels: ['Орлов П.И.'],
 		}
@@ -156,37 +162,37 @@ export default {
 					'2022-04-01',
 					'2022-04-08',
 					'2022-04-14',
-				]
+				],
 			},
 			chart: {
 				type: 'area',
 				// height: 350,
 				zoom: {
-					enabled: false
-				}
+					enabled: false,
+				},
 			},
 			dataLabels: {
-				enabled: false
+				enabled: false,
 			},
 			stroke: {
-				curve: 'straight'
+				curve: 'straight',
 			},
 
 			title: {
 				text: 'Орлов П.И.',
-				align: 'left'
+				align: 'left',
 			},
 			subtitle: {
 				text: 'По неделям',
-				align: 'left'
+				align: 'left',
 			},
 			// labels: series.monthDataSeries1.dates,
 			yaxis: {
-				opposite: true
+				opposite: true,
 			},
 			legend: {
-				horizontalAlign: 'left'
-			}
+				horizontalAlign: 'left',
+			},
 		}
 
 		const widget = useWidget()
@@ -196,6 +202,7 @@ export default {
 			widget.block = 2
 			alert.value = true
 		}
+		const filter = ref('')
 
 		const calcWidth = computed(() => {
 			if (props.block.id !== 2) {
@@ -239,6 +246,7 @@ export default {
 			chartOptions1,
 			chartOptions2,
 			dataPointSelection,
+			filter,
 		}
 	},
 }
@@ -270,7 +278,17 @@ export default {
 	margin-top: 1rem;
 	width: 100%;
 }
-.q-dialog__inner--minimized>div {
+.q-dialog__inner--minimized > div {
 	min-width: 700px;
+}
+.mdi .mdi-close-circel {
+	width: 16px;
+	height: 16px;
+	&::before {
+		font-size: 16px;
+	}
+}
+.izbfilter button {
+	transform: translateY(10px);
 }
 </style>
