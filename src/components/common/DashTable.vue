@@ -82,7 +82,7 @@ export default {
 		})
 
 		const colData = (col) => {
-			return [...new Set(loadedItems.map((item) => item[col.name]))]
+			return [...new Set(filteredItems.value.map((item) => item[col.name]))]
 		}
 		const popup = computed(() => {
 			return 'popup'
