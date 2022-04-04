@@ -5,10 +5,10 @@
 		.sidebar(v-if="grid.sidebar").gt-sm
 			Aggregates(:data="aggregateData")
 		.main(:class="{ 'fill' : !grid.sidebar }")
-			GridTable(v-if="!grid.lenta" :columns="columns" usefilter :colData="colData" :rows="filteredRows" :total="items.length" :shown="filteredRows.length" toolbar @sort="sort")
+			GridTable(v-if="!grid.lenta" :columns="columns" usefilter :colData="colData" :rows="rows" :total="items.length" :shown="rows.length" toolbar @sort="sort")
 			.rel(v-else)
-				Toolbar(:total="items.length" :lenta="grid.lenta" :shown="filteredRows.length" @readAll="readAll" @toggleLoad="loading = !loading" @selNone="selectNone" @selAll="selectAll")
-				Lenta(:items="filteredRows" :total="items.length" :loading="loading")
+				Toolbar(:total="items.length" :lenta="grid.lenta" :shown="rows.length" @readAll="readAll" @toggleLoad="loading = !loading" @selNone="selectNone" @selAll="selectAll")
+				Lenta(:items="rows" :total="items.length" :loading="loading")
 
 q-dialog(v-model="showTotal" full-width seamless position="bottom").sm
 	TotalMob(:selected="selected.length" @clear="clearSelected")
@@ -48,41 +48,21 @@ export default {
 		const rows = reactive(items)
 		const loading = ref(false)
 
-		const filteredRows = computed(() => {
-			if (grid.checked.length) {
-				let filter = {}
-				let temp = Object.values(grid.checked)
-				for (let el of temp) {
-					filter[el.col] = el.items
-				}
-
-				return rows.filter((item) => {
-					for (let [key, value] of Object.entries(filter)) {
-						const cool = (element) => element === item[key]
-						if (item[key] === undefined) return false
-						if (!value.some(cool)) return false
-					}
-					return true
-				})
-			}
-			return rows
-		})
-
-		provide('filteredRows', filteredRows)
+		provide('filteredRows', rows)
 
 		const selected = computed(() => {
-			return filteredRows.value.filter((item) => item.selected === true)
+			return rows.filter((item) => item.selected === true)
 		})
 
 		const colData = (col) => {
-			return [...new Set(filteredRows.value.map((item) => item[col.name]))]
+			return [...new Set(rows.map((item) => item[col.name]))]
 		}
 
 		const aggregateData = computed(() => {
 			let agg = []
 			const iteration = ['typ', 'vid', 'status', 'author']
 			iteration.forEach((it) => {
-				const block = [...new Set(filteredRows.value.map((item) => item[it]))]
+				const block = [...new Set(rows.map((item) => item[it]))]
 				const blockname = (it) => {
 					switch (it) {
 						case 'typ':
@@ -161,17 +141,17 @@ export default {
 		]
 
 		const readAll = () => {
-			filteredRows.value.map((row) => (row.unread = false))
+			rows.map((row) => (row.unread = false))
 		}
 
 		const selectNone = () => {
-			filteredRows.value.map((row) => (row.selected = false))
+			rows.map((row) => (row.selected = false))
 		}
 		const selectAll = () => {
-			filteredRows.value.map((row) => (row.selected = true))
+			rows.map((row) => (row.selected = true))
 		}
 		const clearSelected = () => {
-			filteredRows.value.map((item) => (item.selected = false))
+			rows.map((item) => (item.selected = false))
 			grid.selected = false
 		}
 
@@ -212,9 +192,8 @@ export default {
 			colData,
 			grid,
 			columns,
-			rows,
 			items,
-			filteredRows,
+			rows,
 			aggregateData,
 			readAll,
 			selectNone,

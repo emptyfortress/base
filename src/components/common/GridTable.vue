@@ -1,7 +1,7 @@
 <template lang="pug">
 .grid
 	q-table(ref="itemTable"
-		:rows="rows"
+		:rows="items"
 		:columns="columns"
 		row-key="id"
 		:pagination="pagination"
@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { ref, computed, watchEffect, onMounted } from 'vue'
+import { ref, computed, reactive, watchEffect, onMounted } from 'vue'
 import Toolbar from '@/components/common/Toolbar.vue'
 import Total from '@/components/common/Total.vue'
 import Filter from '@/components/common/Filter.vue'
@@ -87,11 +87,30 @@ export default {
 
 		const grid = useGrid()
 
-		// const total = ref(null)
 		const all = ref(false)
 
+		const items = computed(() => {
+			if (grid.checked.length) {
+				let filter = {}
+				let temp = Object.values(grid.checked)
+				for (let el of temp) {
+					filter[el.col] = el.items
+				}
+
+				return props.rows.filter((item) => {
+					for (let [key, value] of Object.entries(filter)) {
+						const cool = (element) => element === item[key]
+						if (item[key] === undefined) return false
+						if (!value.some(cool)) return false
+					}
+					return true
+				})
+			}
+			return props.rows
+		})
+
 		const selectedArray = computed(() => {
-			return props.rows.filter((item) => item.selected)
+			return items.value.filter((item) => item.selected)
 		})
 
 		const itemTable = ref(null)
@@ -106,10 +125,10 @@ export default {
 			if (selectedArray.value.length === 0) {
 				all.value = false
 				grid.selected = false
-			} else if (selectedArray.value.length < props.rows.length) {
+			} else if (selectedArray.value.length < items.value.length) {
 				all.value = null
 				grid.selected = null
-			} else if (selectedArray.value.length === props.rows.length) {
+			} else if (selectedArray.value.length === items.value.length) {
 				all.value = true
 				grid.selected = true
 			}
@@ -117,25 +136,25 @@ export default {
 
 		const toggleSel = () => {
 			if (all.value === true) {
-				props.rows.map((item) => (item.selected = false))
+				items.value.map((item) => (item.selected = false))
 				all.value = false
 			} else {
-				props.rows.map((item) => (item.selected = true))
+				items.value.map((item) => (item.selected = true))
 				all.value = true
 			}
 		}
 
 		const toggle = (e) => {
-			const current = props.rows.find((b) => b.id === e)
+			const current = items.value.find((b) => b.id === e)
 			current.unread = !current.unread
 		}
 		const clearSelected = () => {
-			props.rows.map((item) => (item.selected = false))
+			items.value.map((item) => (item.selected = false))
 			all.value = false
 		}
 
 		const readAll = () => {
-			props.rows.map((row) => (row.unread = false))
+			items.value.map((row) => (row.unread = false))
 		}
 
 		const filterByIndex = ref(null)
@@ -209,6 +228,7 @@ export default {
 			calcHeight,
 			classLoading,
 			sort,
+			items,
 		}
 	},
 }

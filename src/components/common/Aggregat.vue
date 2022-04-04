@@ -9,11 +9,11 @@ q-list(dense).q-mb-sm
 	.more(v-if="list.length > 4" @click="more = !more")
 		span(v-if="more") Меньше
 		span(v-else) Еще
-			
+
 </template>
 
 <script>
-import {ref, inject, watchEffect} from 'vue'
+import { ref, inject, watchEffect } from 'vue'
 import { useGrid } from '@/stores/grid'
 export default {
 	props: {
@@ -21,7 +21,6 @@ export default {
 		col: String,
 	},
 	setup(props) {
-
 		const grid = useGrid()
 		const more = ref(false)
 		const temp = ref(0)
@@ -41,18 +40,24 @@ export default {
 		}
 
 		const show = (e) => {
-			if (e < 4 && !more.value) { return true }
-			if (more.value) { return true }
+			if (e < 4 && !more.value) {
+				return true
+			}
+			if (more.value) {
+				return true
+			}
 			return false
 		}
 
 		const disable = (el) => {
-			const length = filteredRows.value.filter( item => item[props.col] === el.title ).length
-			if (length || ( grid.disable <= 1 && temp.value > 0)) return ''
+			const length = filteredRows.filter(
+				(item) => item[props.col] === el.title
+			).length
+			if (length || (grid.disable <= 1 && temp.value > 0)) return ''
 			return 'dis'
 		}
 
-		watchEffect( () => {
+		watchEffect(() => {
 			if (grid.disable === 0) {
 				temp.value = 0
 			}
@@ -67,7 +72,6 @@ export default {
 			disable,
 		}
 	},
-
 }
 </script>
 
@@ -79,6 +83,6 @@ export default {
 	margin: 4px 15px;
 }
 .dis {
-	opacity: .6;
+	opacity: 0.6;
 }
 </style>
