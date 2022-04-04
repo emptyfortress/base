@@ -77,7 +77,7 @@ export default {
 		usefilter: {
 			type: Boolean,
 			default: () => false,
-		}
+		},
 	},
 	setup(props, context) {
 		const pagination = {
@@ -153,7 +153,8 @@ export default {
 				let ids = grid.checked.map((item) => item.id)
 				let id = (el) => el === col.id
 				return ids.some(id)
-			} return false
+			}
+			return false
 		}
 
 		const rowClass = (row) => {

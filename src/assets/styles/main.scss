@@ -54,8 +54,8 @@ a:hover:not(.q-link) {
 .q-table tbody tr.both td::after {
 	background: #ccc;
 }
-.q-table__container.izb>div:last-child {
-	padding-top: .5rem;
+.q-table__container.izb > div:last-child {
+	padding-top: 0.5rem;
 }
 
 // q-markup-table style - this is simple table
