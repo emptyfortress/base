@@ -456,5 +456,38 @@ const bl = [
 		classname: 'long',
 	},
 ]
+const bl1 = [
+	{
+		id: 0,
+		title: 'Входящие',
+		digit: 9,
+		buttons: ['Прочитано', 'В избранное', 'Делегировать', 'Завершить'],
+		labels: ['Новые', 'В работе', 'Делегировано'],
+		seria: [2, 4, 3],
+	},
+	{
+		id: 1,
+		title: 'Исходящие',
+		digit: 7,
+		buttons: ['В избранное', 'Отозвать'],
+		labels: ['На контроле', 'Завершено', 'Просрочено'],
+		seria: [4, 2, 1],
+	},
+	{
+		id: 2,
+		digit: 19,
+		title: 'Просрочено',
+		labels: ['Входящие', 'Исходящие', 'Истекает срок'],
+		buttons: ['В избранное', 'Отозвать'],
+		seria: [9, 7, 3],
+	},
+	{
+		id: 3,
+		title: 'Избранное',
+		digit: 18,
+		but: 'Прочитать все',
+		classname: 'long',
+	},
+]
 
-export { headers, headers1, headers2, items, bl }
+export { headers, headers1, headers2, items, bl, bl1 }

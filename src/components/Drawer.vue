@@ -27,6 +27,12 @@ export default {
 				icon: 'mdi-home-roof',
 				url: '/dashboard',
 			},
+			{
+				id: 5,
+				title: 'Dashboard 1',
+				icon: 'mdi-home-roof',
+				url: '/dashboard1',
+			},
 		]
 		const width = 256
 

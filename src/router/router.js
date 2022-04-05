@@ -6,12 +6,18 @@ export const router = createRouter({
 	routes: [
 		{
 			path: '/',
-			redirect: '/dashboard'
+			redirect: '/dashboard',
 		},
 		{
 			path: '/dashboard',
 			name: 'dashboard',
 			component: () => import('@/pages/Dashboard.vue'),
+			meta: { transition: 'slide-left' },
+		},
+		{
+			path: '/dashboard1',
+			name: 'dashboard1',
+			component: () => import('@/pages/Dashboard1.vue'),
 			meta: { transition: 'slide-left' },
 		},
 		{

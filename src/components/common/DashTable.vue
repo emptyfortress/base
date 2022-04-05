@@ -55,7 +55,7 @@ export default {
 						return temp
 				}
 			}
-			return []
+			return loadedItems.filter((item) => item.status === 'Просрочено')
 		})
 
 		const all = ref(false)
@@ -78,7 +78,7 @@ export default {
 			} else if (props.block.id === 1) {
 				return headers1
 			}
-			return []
+			return headers
 		})
 
 		const colData = (col) => {
