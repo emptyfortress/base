@@ -31,11 +31,13 @@ export default {
 				id: 1,
 				title: 'Папка',
 				icon: 'mdi-folder-outline',
+				url: '/grid',
 			},
 			{
-				id: 2,
-				title: 'Папка',
-				icon: 'mdi-folder-outline',
+				id: 3,
+				title: 'Личный кабинет',
+				icon: 'mdi-card-account-details-outline',
+				url: '/cabinet',
 			},
 		]
 		const width = 256

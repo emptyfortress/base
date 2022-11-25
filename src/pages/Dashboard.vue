@@ -1,5 +1,5 @@
 <template lang="pug">
-.container
+q-page(padding)
 	Wave(color="#cdcdcd").fix
 	.home
 		Widget(v-for="(block,index) in blocks" :index="index" :block="block")

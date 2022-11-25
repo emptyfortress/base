@@ -1,5 +1,5 @@
 <template lang="pug">
-.container
+q-page
 	.zag Входящие
 	.gridtotal(:class="{ full : grid.fullscreen }")
 		.sidebar(v-if="grid.sidebar").gt-sm
@@ -10,11 +10,11 @@
 				Toolbar(:total="items.length" :lenta="grid.lenta" :shown="rows.length" @readAll="readAll" @toggleLoad="loading = !loading" @selNone="selectNone" @selAll="selectAll")
 				Lenta(:items="rows" :total="items.length" :loading="loading")
 
-q-dialog(v-model="showTotal" full-width seamless position="bottom").sm
-	TotalMob(:selected="selected.length" @clear="clearSelected")
-q-dialog(v-model="showTotal" full-width seamless position="bottom").xs
-	TotalMob1(:selected="selected.length" @clear="clearSelected")
-AggDrawer(:show="grid.aggregat")
+	q-dialog(v-model="showTotal" full-width seamless position="bottom").sm
+		TotalMob(:selected="selected.length" @clear="clearSelected")
+	q-dialog(v-model="showTotal" full-width seamless position="bottom").xs
+		TotalMob1(:selected="selected.length" @clear="clearSelected")
+	AggDrawer(:show="grid.aggregat")
 
 </template>
 

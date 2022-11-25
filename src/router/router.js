@@ -21,6 +21,12 @@ export const router = createRouter({
 			meta: { transition: 'slide-left' },
 		},
 		{
+			path: '/cabinet',
+			name: 'cabinet',
+			component: () => import('@/pages/Cabinet.vue'),
+			meta: { transition: 'slide-left' },
+		},
+		{
 			path: '/grid',
 			name: 'grid',
 			component: () => import('@/pages/Grid.vue'),
