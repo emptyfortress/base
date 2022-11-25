@@ -22,16 +22,20 @@ export default {
 		const colors = useColor()
 		const pages = [
 			{
-				id: 4,
+				id: 0,
 				title: 'Dashboard',
 				icon: 'mdi-home-roof',
 				url: '/dashboard',
 			},
 			{
-				id: 5,
-				title: 'Dashboard 1',
-				icon: 'mdi-home-roof',
-				url: '/dashboard1',
+				id: 1,
+				title: 'Папка',
+				icon: 'mdi-folder-outline',
+			},
+			{
+				id: 2,
+				title: 'Папка',
+				icon: 'mdi-folder-outline',
 			},
 		]
 		const width = 256
