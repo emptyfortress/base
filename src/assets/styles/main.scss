@@ -5,9 +5,6 @@ body {
 
 .container {
 	padding-top: 1rem;
-	padding-left: 1rem;
-	padding-right: 1rem;
-	// padding-bottom: 2rem;
 	@media screen and (max-width: 1900px) {
 		max-width: 1200px;
 		margin: 0 auto;
@@ -76,6 +73,9 @@ a:hover:not(.q-link) {
 			border: 1px solid var(--th-border-color);
 			border-right: none;
 			font-weight: 400;
+			&.text-right {
+				text-align: right;
+			}
 		}
 		th:first-child {
 			border-right: none;
@@ -302,4 +302,8 @@ a:hover:not(.q-link) {
 
 .izbfilter button {
 	transform: translateY(6px);
+}
+
+:deep(.q-field--dense .q-field__marginal) {
+	height: inherit !important;
 }
