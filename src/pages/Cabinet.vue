@@ -7,7 +7,7 @@ q-page(padding)
 			.zag Орлов Петр Иванович
 		.overline Таб.№ 0002l34-m&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Водитель
 	.mygrid
-		.block
+		.blo.money
 			.hd
 				|Зарплата
 				span октябрь 2022
@@ -32,35 +32,51 @@ q-page(padding)
 				.text-bold Наличные
 				.text-bold.text-right 63,452.34
 
-		.block
-			.hd Отпуск
-				q-badge(align="top") 1
-			component(:is="SvgIcon" name="beach" style="font-size:1.5rem; top:4px; right: 2px").mon
-			.q-mt-md 😀 Очередной отпуск через 23 дня.
-			//- q-btn(flat color="primary" dense) График отпусков
-			//- q-btn(flat color="primary" dense) Заявление на отпуск
-		.block
-			.hd Больничные листы
-			component(:is="SvgIcon" name="crest" style="font-size:1.4rem; top:9px; right:2px").mon
-		.block
+		.blo
+			div
+				.hd Отпуск
+					q-badge(align="top") 1
+				component(:is="SvgIcon" name="beach" style="font-size:1.5rem; top:4px; right: 2px").mon
+				.q-mt-md 😀 Очередной отпуск через 23 дня.
+				.tb
+					q-separator
+					div 12.08.22 - 24.08.22
+					.text-right отгулял
+					div 04.12.22 - 24.12.22
+					.text-right план
+					q-separator
+					div Отгулы
+					.text-right 3
+			.buttons
+				q-btn(dense flat color="primary" size="12px").q-mr-md График
+				q-btn(dense flat color="primary" size="12px").q-mr-md Заявление на отпуск
+				q-btn(dense flat color="primary" size="12px") Взять отгул
+		.blo
+			div
+				.hd Больничные листы
+				component(:is="SvgIcon" name="crest" style="font-size:1.4rem; top:9px; right:2px").mon
+				.q-mt-md Нет больничных.
+			.buttons
+				q-btn(dense flat color="primary" size="12px").q-mr-md Сообщить о болезни
+		.blo
 			.hd Командировки
 			component(:is="SvgIcon" name="plane" style="font-size:2.7rem; top: -10px").mon
-			.q-mt-sm
+			.buttons
 				q-btn(dense flat color="primary" size="12px").q-mr-md Оформить командировку
 				q-btn(dense flat color="primary" size="12px") Сдать отчет
-		.block
+		.blo
 			.hd Справки
 			component(:is="SvgIcon" name="zayav" style="font-size:1.3rem;top: 8px" ).mon
-			.q-mt-sm
+			.buttons
 				q-btn(dense flat color="primary" size="12px").q-mr-md Справка о доходах
 				q-btn(dense flat color="primary" size="12px") форма 3-НДФЛ
-		.block
+		.blo
 			.hd Замещения
 			component(:is="SvgIcon" name="zamest" style="font-size:1.3rem;top: 8px; right: 5px" ).mon
-			.q-mt-sm
+			.buttons
 				q-btn(dense flat color="primary" size="12px").q-mr-md Назначить заместителя
 				q-btn(dense flat color="primary" size="12px") Я - заместитель
-		.block.full
+		.blo.full
 			.hd Документы
 				q-badge(align="top") 3
 			component(:is="SvgIcon" name="docs" style="font-size:1.3rem;top: 8px" ).mon
@@ -88,19 +104,29 @@ const toggleMoney = () => {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 0.5rem;
-	.block {
-		// min-height: 100px;
+	.blo {
 		background: #fff;
+		min-height: 90px;
 		padding: 1rem;
-		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 		border-radius: 4px;
 		border: 1px solid transparent;
 		cursor: pointer;
+		position: relative;
+		&.money {
+			padding-bottom: 1rem;
+			display: block;
+		}
 		&.full {
 			grid-column: 1/-1;
 		}
 		&:hover {
 			border: 1px solid var(--q-primary);
+		}
+		.buttons {
+			margin-top: 1rem;
 		}
 	}
 	.hd {
@@ -108,7 +134,7 @@ const toggleMoney = () => {
 		font-size: 1.2rem;
 		color: var(--text-color);
 		span {
-			margin-left: 2rem;
+			margin-left: 1rem;
 			font-size: 0.8rem;
 			color: var(--q-link);
 		}
