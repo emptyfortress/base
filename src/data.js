@@ -102,6 +102,42 @@ const headers2 = [
 	},
 ]
 
+const items2 = [
+	{
+		id: 0,
+		number: '№ 122',
+		doc: 'in',
+		unread: true,
+		selected: false,
+		author: 'Жуков И.А.',
+		status: 'Не начато',
+		type: 'Приказ',
+		vid: 'Документ',
+		deadline: '2020-08-28',
+		urgent: true,
+		created: '2020-08-05',
+		title:
+			'Приказ (распоряжение) о предоставлении очередного отпуска водителю Орлову П.И.',
+		files: '3',
+	},
+	{
+		id: 1,
+		number: '№ 133',
+		doc: 'in',
+		unread: true,
+		selected: false,
+		author: 'Воробьев К.А.',
+		status: 'В работе',
+		type: 'На ознакомление',
+		vid: 'Документ',
+		control: true,
+		deadline: '2020-08-17',
+		created: '2020-08-07',
+		title:
+			'О вводе в действие Перечня товаров, работ, услуг закупки которых осуществляются только у субъектов малого и среднего предпринимательства',
+		files: '',
+	},
+]
 const items = [
 	{
 		id: 0,
@@ -490,4 +526,4 @@ const bl1 = [
 	},
 ]
 
-export { headers, headers1, headers2, items, bl, bl1 }
+export { headers, headers1, headers2, items, items2, bl, bl1 }

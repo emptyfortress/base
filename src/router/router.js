@@ -1,4 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import Dashboard from '@/pages/Dashboard.vue'
+import Cabinet from '@/pages/Cabinet.vue'
+import Grid from '@/pages/Grid.vue'
 
 export const router = createRouter({
 	history: createWebHashHistory(),
@@ -11,7 +14,7 @@ export const router = createRouter({
 		{
 			path: '/dashboard',
 			name: 'dashboard',
-			component: () => import('@/pages/Dashboard.vue'),
+			component: Dashboard,
 			meta: { transition: 'slide-left' },
 		},
 		{
@@ -23,13 +26,13 @@ export const router = createRouter({
 		{
 			path: '/cabinet',
 			name: 'cabinet',
-			component: () => import('@/pages/Cabinet.vue'),
+			component: Cabinet,
 			meta: { transition: 'slide-left' },
 		},
 		{
 			path: '/grid',
 			name: 'grid',
-			component: () => import('@/pages/Grid.vue'),
+			component: Grid,
 			meta: { transition: 'slide-left' },
 		},
 	],

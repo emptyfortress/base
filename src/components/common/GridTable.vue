@@ -6,6 +6,7 @@
 		row-key="id"
 		:pagination="pagination"
 		flat
+		:grid="$q.screen.lt.md"
 		:bordered="bordered"
 		binary-state-sort
 		:hide-pagination="true"
@@ -15,12 +16,13 @@
 		:height="height"
 		:style="calcHeight"
 		:wrap-cells="props.wrap"
-		).fixhd
+		:fixhd="fixhd")
+
 		template(v-slot:header="props")
 			q-tr(:props="props" v-click-away="toggleFilter")
 				th(@click="sort").small
 				q-th(auto-width)
-					q-checkbox(:model-value="all" @update:model-value="toggleSel")
+					q-checkbox(dense :model-value="all" @update:model-value="toggleSel")
 				q-th(v-for="col in props.cols" :props="props" :key="col.name").hov
 					span {{ col.label }}
 					span(v-if="usefilter")
@@ -33,14 +35,31 @@
 		template(v-slot:loading)
 			.ld(:class="classLoading")
 				q-linear-progress(indeterminate)
+
+		template(v-slot:item="props")
+			.q-pa-xs.col-xs-12.col-sm-6.col-md-4.col-lg-3.grid-style-transition(:style="props.row.selected ? 'transform: scale(0.95);' : ''")
+				q-card.item(:class="{unread : props.row.unread, selected : props.row.selected}")
+					.blu(@click="props.row.unread = !props.row.unread")
+					.check
+						q-checkbox(dense v-model="props.row.selected").q-mr-md
+						.title {{props.row.title}}
+					q-separator.q-my-sm
+					div Вид: {{props.row.vid}}
+					div Тип: {{props.row.type}}
+					div Автор: {{props.row.author}}
+					div Создано: {{props.row.created}}
+
+
 		template(v-slot:body="props")
 			q-tr(:props="props" :key="props.row.id" :class="rowClass(props.row)").rowslide
 				q-td(key="read" :class="{ 'unread' : props.row.unread }" @click="toggle(props.row.id)").small
 				q-td(auto-width)
-					q-checkbox(v-model="props.row.selected" :val="props.row.id")
+					q-checkbox(dense v-model="props.row.selected" :val="props.row.id")
 				q-td(v-for="col in props.cols" :key="col.name" :class="col.classname") {{ props.row[col.name] }}
+
 		template(v-slot:top v-if="toolbar").gt-sm
 			Toolbar(:total="total" :shown="shown" @readAll="readAll" @toggleLoad="loading = !loading")
+
 		template(v-slot:bottom v-if="selectedArray.length")
 			.zaglushka
 	transition(name="sliding")
@@ -50,7 +69,8 @@
 </template>
 
 <script>
-import { ref, computed, reactive, watchEffect, onMounted } from 'vue'
+import { ref, computed, watchEffect, onMounted } from 'vue'
+import { useQuasar } from 'quasar'
 import Toolbar from '@/components/common/Toolbar.vue'
 import Total from '@/components/common/Total.vue'
 import Filter from '@/components/common/Filter.vue'
@@ -74,12 +94,17 @@ export default {
 		height: String,
 		bordered: Boolean,
 		wrap: Boolean,
+		fixhd: {
+			type: Boolean,
+			default: () => false,
+		},
 		usefilter: {
 			type: Boolean,
 			default: () => false,
 		},
 	},
 	setup(props, context) {
+		const $q = useQuasar()
 		const pagination = {
 			page: 1,
 			rowsPerPage: 0,
@@ -229,6 +254,7 @@ export default {
 			classLoading,
 			sort,
 			items,
+			$q,
 		}
 	},
 }
@@ -338,7 +364,7 @@ td.small {
 .rowslide {
 	transition: transform 0.2s;
 }
-.fixhd tbody td.nowrap {
+tbody td.nowrap {
 	white-space: nowrap;
 }
 .zaglushka {
@@ -354,5 +380,40 @@ td.small {
 	left: 0;
 	bottom: 0;
 	width: 100%;
+}
+th {
+	white-space: nowrap;
+}
+.item {
+	padding: 1rem;
+	padding-left: 1.5rem;
+	border: 1px solid #ccc;
+	position: relative;
+	// background: #ededed;
+	.title {
+		font-size: 1rem;
+	}
+	.check {
+		display: flex;
+		align-items: flex-start;
+		flex-wrap: inherit;
+	}
+	.blu {
+		width: 7px;
+		height: 100%;
+		position: absolute;
+		left: 0;
+		top: 0;
+		background: #ededed;
+	}
+	&.unread {
+		font-weight: bold;
+		.blu {
+			background: var(--q-primary);
+		}
+	}
+	&.selected {
+		background: var(--q-primary-selection);
+	}
 }
 </style>

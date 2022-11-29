@@ -1,5 +1,11 @@
 <template lang="pug">
-.multi(:class="{ big : big }")
+.smalldiv(v-if="$q.screen.lt.md" )
+	.ro
+		q-btn(flat round dense icon="mdi-close" @click="clear")
+		.tot {{ selected }}
+		.arr &rarr;
+		q-btn(v-for="bt in btn" unelevated color="primary" size="12px" :key="bt").action {{ bt }}
+.multi(v-else :class="{ big : big }")
 	.ro
 		q-btn(flat round dense icon="mdi-close" @click="clear")
 		.tot {{ selected }}
@@ -14,6 +20,7 @@
 
 <script>
 import { ref, inject } from 'vue'
+import { useQuasar } from 'quasar'
 
 export default {
 	emits: ['clear'],
@@ -26,6 +33,7 @@ export default {
 		},
 	},
 	setup(props, context) {
+		const $q = useQuasar()
 		const big = ref(false)
 		const delegation = ref(false)
 
@@ -69,19 +77,20 @@ export default {
 	body.body--dark & {
 		background: var(--my-color-step-150);
 	}
-	.ro {
-		width: 100%;
-		padding: 0.5rem;
-		padding-bottom: 0;
-		display: flex;
-		justify-content: flex-start;
-		align-items: center;
-		&.bottom {
-			margin-left: 96px;
-		}
-	}
 	&.big {
 		height: 100px;
+	}
+}
+.ro {
+	width: 100%;
+	padding: 0.5rem;
+	padding-bottom: 0;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-wrap: wrap;
+	&.bottom {
+		margin-left: 96px;
 	}
 }
 .tot {
@@ -103,5 +112,15 @@ export default {
 	.big & {
 		transform: rotate(180deg);
 	}
+}
+.smalldiv {
+	width: 90%;
+	position: fixed;
+	bottom: 0;
+	background: #e5e5e5;
+	padding-bottom: 1rem;
+	box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.2);
+	border-radius: 12px 12px 0px 0px;
+	transition: 0.3s ease all;
 }
 </style>

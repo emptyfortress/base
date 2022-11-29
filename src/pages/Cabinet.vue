@@ -1,5 +1,6 @@
 <template lang="pug">
 q-page(padding)
+	Wave(color="#cdcdcd").fix
 	.row.justify-between.items-center
 		.flex.items-center
 			q-avatar(size="80px" color="deep-purple-3").q-mr-md
@@ -7,31 +8,12 @@ q-page(padding)
 			.zag Орлов Петр Иванович
 		.overline Таб.№ 0002l34-m&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Водитель
 	.mygrid
-		.blo.money
-			.hd
-				|Зарплата
-				span октябрь 2022
-					q-menu
-						q-list
-							q-item(clickable v-close-popup)
-								q-item-section laskj
+		.blo.money(@click="openMon")
+			.hd Зарплата
+				q-badge(align="top") 1
+			.q-mt-md 💳 Зарплата за октябрь перечислена на карту.
 			component(:is="SvgIcon" name="money" @click.stop="toggleMoney").mon
-			.tb(:class="{ blur : money}")
-				.text-bold Начислено:
-				.text-bold.text-right 75,000.45
-				q-separator
-				div Оплата по окладу:
-				.text-right 50,000.00
-				div Отпуск основной:
-				.text-right 20,000.00
-				.text-bold Удержано:
-				.text-bold.text-right 12,129.15
-				div НДФЛ:
-				.text-right 12,129.15
-				q-separator
-				.text-bold Наличные
-				.text-bold.text-right 63,452.34
-
+			component(:is="Zarplata" :money="money")
 		.blo
 			div
 				.hd Отпуск
@@ -55,7 +37,7 @@ q-page(padding)
 			div
 				.hd Больничные листы
 				component(:is="SvgIcon" name="crest" style="font-size:1.4rem; top:9px; right:2px").mon
-				.q-mt-md Нет больничных.
+				.q-mt-md 🚑 Нет больничных.
 			.buttons
 				q-btn(dense flat color="primary" size="12px").q-mr-md Сообщить о болезни
 		.blo
@@ -76,20 +58,39 @@ q-page(padding)
 			.buttons
 				q-btn(dense flat color="primary" size="12px").q-mr-md Назначить заместителя
 				q-btn(dense flat color="primary" size="12px") Я - заместитель
-		.blo.full
+		.blo.ful
 			.hd Документы
-				q-badge(align="top") 3
-			component(:is="SvgIcon" name="docs" style="font-size:1.3rem;top: 8px" ).mon
+				q-badge(align="top") 2
+			component(:is="SvgIcon" name="docs" style="font-size:1.3rem;top: 8px;right:10px" ).mon
+			.q-my-sm Вам поступили следующие документы:
+			component(:is="CabinetTable")
+
+	q-dialog(v-model="alert")
+		q-card(style="width: 1024px; max-width: 80vw;")
+			q-card-section.row.q-pb-none
+				.text-h6 Зарплата
+				q-space
+				q-btn(icon="mdi-close" flat round dense v-close-popup @click="clear")
+			q-card-section
+				component(:is="ZpList")
 
 </template>
 
 <script setup>
 import { ref, reactive } from 'vue'
 import SvgIcon from '@/components/SvgIcon.vue'
+import CabinetTable from '@/components/CabinetTable.vue'
+import Zarplata from '@/components/common/Zarplata.vue'
+import ZpList from '@/components/ZpList.vue'
+import Wave from '@/components/common/Wave.vue'
 
+const alert = ref(false)
 const money = ref(false)
 const toggleMoney = () => {
 	money.value = !money.value
+}
+const openMon = () => {
+	alert.value = true
 }
 </script>
 
@@ -106,7 +107,6 @@ const toggleMoney = () => {
 	gap: 0.5rem;
 	.blo {
 		background: #fff;
-		min-height: 90px;
 		padding: 1rem;
 		display: flex;
 		flex-direction: column;
@@ -115,12 +115,13 @@ const toggleMoney = () => {
 		border: 1px solid transparent;
 		cursor: pointer;
 		position: relative;
+		padding-bottom: 1rem;
 		&.money {
-			padding-bottom: 1rem;
 			display: block;
 		}
-		&.full {
+		&.ful {
 			grid-column: 1/-1;
+			display: block;
 		}
 		&:hover {
 			border: 1px solid var(--q-primary);
@@ -133,24 +134,6 @@ const toggleMoney = () => {
 		position: relative;
 		font-size: 1.2rem;
 		color: var(--text-color);
-		span {
-			margin-left: 1rem;
-			font-size: 0.8rem;
-			color: var(--q-link);
-		}
-	}
-}
-.tb {
-	margin-top: 1rem;
-	display: grid;
-	grid-template-columns: auto 1fr;
-	column-gap: 1rem;
-	transition: 0.2s ease all;
-	.q-separator {
-		grid-column: 1/-1;
-	}
-	&.blur {
-		filter: blur(7px);
 	}
 }
 @media screen and (max-width: 900px) {
@@ -183,5 +166,24 @@ const toggleMoney = () => {
 	right: -5px;
 	font-size: 1.8rem;
 	fill: #888;
+}
+.fix {
+	position: fixed;
+	bottom: -330px;
+	left: 0;
+	z-index: -1;
+}
+.tb {
+	margin-top: 1rem;
+	display: grid;
+	grid-template-columns: auto 1fr;
+	column-gap: 1rem;
+	transition: 0.2s ease all;
+	.q-separator {
+		grid-column: 1/-1;
+	}
+	&.blur {
+		filter: blur(7px);
+	}
 }
 </style>
