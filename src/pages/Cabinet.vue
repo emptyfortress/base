@@ -8,16 +8,24 @@ q-page(padding)
 			.zag Орлов Петр Иванович
 		.overline Таб.№ 0002l34-m&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Водитель
 	.mygrid
+		.blo.ful
+			.hd Документы для подписания
+				q-badge(align="middle").q-ml-sm 2
+			component(:is="SvgIcon" name="docs" style="font-size:1.3rem;top: 8px;right:10px" ).mon
+			.q-my-sm Вам необходимо подписать следующие документы:
+			component(:is="CabinetTable")
 		.blo.money(@click="openMon")
 			.hd Зарплата
-				q-badge(align="top") 1
+				q-badge(align="middle").q-ml-sm 1
 			.q-mt-md 💳 Зарплата за октябрь перечислена на карту.
+				span
+					q-btn(flat round dense icon="mdi-eye-off" size="sm" @click.stop="toggleMoney")
 			component(:is="SvgIcon" name="money" @click.stop="toggleMoney").mon
 			component(:is="Zarplata" :money="money")
 		.blo
 			div
 				.hd Отпуск
-					q-badge(align="top") 1
+					q-badge(align="middle").q-ml-sm 1
 				component(:is="SvgIcon" name="beach" style="font-size:1.5rem; top:4px; right: 2px").mon
 				.q-mt-md 😀 Очередной отпуск через 23 дня.
 				.tb
@@ -58,12 +66,6 @@ q-page(padding)
 			.buttons
 				q-btn(dense flat color="primary" size="12px").q-mr-md Назначить заместителя
 				q-btn(dense flat color="primary" size="12px") Я - заместитель
-		.blo.ful
-			.hd Документы
-				q-badge(align="top") 2
-			component(:is="SvgIcon" name="docs" style="font-size:1.3rem;top: 8px;right:10px" ).mon
-			.q-my-sm Вам поступили следующие документы:
-			component(:is="CabinetTable")
 
 	q-dialog(v-model="alert")
 		q-card(style="width: 1024px; max-width: 80vw;")

@@ -14,7 +14,7 @@ const filteredItems = computed(() => {
 	return loadedItems
 })
 
-provide('bon', ['Завершить', 'Делегировать', 'Открыть'])
+provide('bon', ['Открыть', 'Подписать'])
 
 const selectedArray = computed(() => {
 	return items.value.filter((item) => item.selected)

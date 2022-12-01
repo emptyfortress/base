@@ -1,19 +1,25 @@
 <template lang="pug">
-.tb(:class="{ blur : !props.money}")
+.tb
 	.text-bold Начислено:
-	.text-bold.text-right 75,000.45
+	.text-bold.text-right(v-if="props.money") 75,000.45
+	.text-right(v-else) ******
 	q-separator
 	div Оплата по окладу:
-	.text-right 50,000.00
+	.text-right(v-if="props.money") 50,000.00
+	.text-right(v-else) ******
 	div Отпуск основной:
-	.text-right 20,000.00
+	.text-right(v-if="props.money") 20,000.00
+	.text-right(v-else) ******
 	.text-bold Удержано:
-	.text-bold.text-right 12,129.15
+	.text-bold.text-right(v-if="props.money") 12,129.15
+	.text-right(v-else) ******
 	div НДФЛ:
-	.text-right 12,129.15
+	.text-right(v-if="props.money") 12,129.15
+	.text-right(v-else) ******
 	q-separator
 	.text-bold Перечислено на карту:
-	.text-bold.text-right 63,452.34
+	.text-bold.text-right(v-if="props.money") 63,452.34
+	.text-right(v-else) ******
 </template>
 
 <script setup lang="ts">

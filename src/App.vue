@@ -6,7 +6,8 @@
 				q-btn(dense flat round icon="mdi-menu" @click="toggleLeftDrawer")
 
 				q-toolbar-title.gt-sm
-					span {{ formattedString }}
+					img(src="@/assets/img/docsvision.svg" width="180")
+					//- span {{ formattedString }}
 				q-space
 				q-btn(dense flat round icon="mdi-magnify")
 				q-btn(dense round unelevated color="light-blue-2").q-ml-sm
@@ -14,7 +15,7 @@
 						img(src="@/assets/img/users/user0.svg")
 						.mybadge
 				q-btn(dense flat round icon="mdi-help-circle-outline").q-ml-sm
-				q-btn(dense flat round icon="mdi-brightness-4" @click="toggleRightDrawer").q-mx-sm
+				//- q-btn(dense flat round icon="mdi-brightness-4" @click="toggleRightDrawer").q-mx-sm
 
 			.subbar.gt-sm
 				.left( v-show="leftDrawer" :class="calcClass").gt-sm
@@ -23,9 +24,9 @@
 					q-btn(v-if="!colors.mini" dense flat round size="sm" icon="mdi-pin-off-outline")
 					q-btn(v-if="colors.mini" flat icon="mdi-reload").full-width
 				.right
-					q-btn(unelevated icon="mdi-plus" color="primary-darken-2") Создать
-					q-btn(unelevated)
-						SvgIcon(name="search-scan")
+				//- 	q-btn(unelevated icon="mdi-plus" color="primary-darken-2") Создать
+				//- 	q-btn(unelevated)
+				//- 		SvgIcon(name="search-scan")
 
 		Drawer(:show="leftDrawer" @toggle="toggleLeftDrawer")
 		RDrawer(:show="rightDrawer")
