@@ -19,7 +19,8 @@ q-page(padding)
 				q-badge(align="middle").q-ml-sm 1
 			.q-mt-md 💳 Зарплата за октябрь перечислена на карту.
 				span
-					q-btn(flat round dense icon="mdi-eye-off" size="sm" @click.stop="toggleMoney")
+					q-btn(flat round dense icon="mdi-eye-off" v-if="!money" size="sm" @click.stop="toggleMoney")
+					q-btn(flat round dense icon="mdi-eye" v-else size="sm" @click.stop="toggleMoney")
 			component(:is="SvgIcon" name="money" @click.stop="toggleMoney").mon
 			component(:is="Zarplata" :money="money")
 		.blo
